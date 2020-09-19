@@ -1,0 +1,65 @@
+\documentclass{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[main=ngerman]{babel}
+
+\usepackage[a4paper,margin=1.5cm]{geometry}
+
+\usepackage{microtype,array,mathtools,environ,sopra-listings}
+\solLoadLanguage{latex}
+
+\lstdefinelanguage{showcaseLatex}{%
+    language=lLatex,%
+    morekeywords = [5]{\\obda,\\Obda,\\LH,\\ceil,\\floor,\\limn,\\sumn,\\limk,%
+        \\sumk,\\eig,\\dif,\\dint,\\sel,\\val,\\sch,\\dom,\\grad,\\arccot,\\rg,\\diag,%
+        \\Im,\\Re}
+}
+\RegisterLanguage{slatex}{showcaseLatex}
+
+\usepackage{lecture-shortcuts}
+
+\NewEnviron{ltxshow}{%
+\noindent\rule{\linewidth}{0.65pt}\\%
+\null~\begin{minipage}[t]{0.5\linewidth-3em}
+    \BODY%    
+\end{minipage}\hfill%
+\begin{minipage}[t]{0.5\linewidth-3em}
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \bslatex\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    {\expandafter\expandafter\expandafter\detokenize\expandafter{\BODY}}
+\end{minipage}\smallskip~\null\\%
+\noindent\rule{\linewidth}{0.65pt}\\\bigskip\par%
+}
+
+\title{Showcase der Shortcuts}
+\author{Florian Sihler}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{ltxshow}
+Ich \say{spreche zu euch} von \obda und \Obda! Und so sprach der Mathematik-a, dass \(\LH\) wahrlich von freiem Geiste.
+Und zur Formel griff er wahrlich Weise:
+\begin{equation*}
+    \ceil{\frac{2}{8}} \cdot \floor{\frac{1}{9}} = \limn\abs{\frac{1}{n}}
+\end{equation*}
+\end{ltxshow}
+
+
+\begin{ltxshow}
+    Und so strebten sie zur Grenze. \(\limn\), \(\sumn\), \(\limk\) und \(\sumk\) strebte nach Unendlichkeit. Sie waren \(\eig x\) ganz normal.
+
+    \(\dif\) hingegen, sehnte sich nach Liebe. \(\dint\) hingegen, ersehnte die Scheidung.
+    \(\sel\) wollte nicht entscheiden und traf sich so mit \(\val, \sch, \dom, \grad\) und selbstredend mit dem \(\arccot\), 
+    denn er hatte keine Kinder.
+\end{ltxshow}
+
+\begin{ltxshow}
+    Doch sie alle hatten die \(\sign\) nicht gesehen. \Im und \Re waren schon lang heimgekehrt. 
+    Die \(\diag\)'s hatten Ihnen nicht gefallen und ein Wa\(\rg\) war ihnen begegnet. Kein Hasenwa\(\rg\),
+    aber der \dist{Abstand} war dennoch zu gering.
+\end{ltxshow}
+
+\end{document}
