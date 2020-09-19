@@ -35,7 +35,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -f showcase-shortcut.pdf
+          git add -f showcase-shortcuts.pdf
           git commit -m "Update PDF by workflow"
 
       - name: Push changes
