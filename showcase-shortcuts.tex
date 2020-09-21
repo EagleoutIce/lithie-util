@@ -17,9 +17,11 @@
 
 \lstdefinelanguage{myLtx}{%
     language=lLatex,%
-    morekeywords = [5]{\\obda,\\Obda,\\LH,\\ceil,\\floor,\\limn,\\sumn,\\limk,%
+    morekeywords=[5]{\\obda,\\Obda,\\LH,\\ceil,\\floor,\\limn,\\sumn,\\limk,%
         \\sumk,\\eig,\\dif,\\dint,\\sel,\\val,\\sch,\\dom,\\grad,\\arccot,\\rg,\\diag,%
-        \\Im,\\Re}
+        \\Im,\\Re,\\abs},
+    morekeywords=[3]{equation*},%
+    prebreak={}%
 }
 \RegisterLanguage{slatex}{myLtx}
 
