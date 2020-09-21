@@ -9,35 +9,64 @@
 
 \ProvidesPackage{lithie-util}[2020/09/20 v1.0 the lithie util collector]
 
-\RequirePackage{kvoptions}
+\RequirePackage{kvoptions,etoolbox}
 
 \SetupKeyvalOptions{family=LITU,prefix=LITU@}
 
-\def\lithie@empty{}
-\def\lithie@none{LITHIE@NO@OPTION@GIVEN}
+\def\lithie@util@empty{}
+\def\lithie@util@none{LITHIE@NO@OPTION@GIVEN}
 % todo: default values and such?
-\DeclareStringOption[\lithie@none]{cp}[\lithie@empty]
+\DeclareStringOption[\lithie@util@none]{cp}[\lithie@util@empty]
+
+
+% \AtBeginDocument{%
+% \ifx\LITU@cp\lithie@none None \else Got\fi
+% Got: \LITU@cp}
+
+\def\@lithie@PackageRequireHook{}
+
+\def\@lithie@all@groups{}
+
+% add to list
+\def\@lithie@util@atl#1#2{%
+    \let\@@lithie@tmp#1%
+    \edef#1{\expandafter\unexpanded\@@lithie@tmp{#2}}%
+}
+
+% #1 group id
+\def\lu@DefineGroup#1{%
+    \@namedef{@lithie@@group@#1}{}%
+    \@lithie@util@atl\@lithie@all@groups{#1}%
+}
+
+\def\lu@AddToGroup#1#2{%
+    \@lithie@util@atl{\csname@lithie@@group@#1\endcsname}{#2}%
+}
+
+\def\lu@AddToGroups#1#2{%
+    \@lithie@util@atl{\csname@lithie@@group@#1\endcsname}{#2}%
+}
+
+\lu@DefineGroup{AllModules}
+
+
+% % have a list for every group, allow group based loading
+
+% #1 internal name
+% #2 module name
+% #3 library to load
+% #4 default options for the libary
+% #5 list of groups to register (always all)
+
+\def\lu@DefineModule#1#2#3#4#5{%
+
+}
+
 
 \ProcessKeyvalOptions*
 
 \ifx\LITU@cp\lithie@none\else%
     \RequirePackage[\LITU@cp]{color-palettes}
 \fi
-
-% \AtBeginDocument{%
-% \ifx\LITU@cp\lithie@none None \else Got\fi
-% Got: \LITU@cp}
-
-
-% % have a list for every group, allow group based loading
-
-% % #1 internal name
-% % #2 module name
-% % #3 library to load
-% % #4 default options for the libary
-% % #5 list of groups to register (always all)
-
-% \def\lu@DefineModule#1#2#3#4#5{}
-
 
 \endinput
