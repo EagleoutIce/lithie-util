@@ -6,7 +6,7 @@
 %%
 %% Collection of all the other packages i have, which are requsted as needed.
 %%
-
+\errorcontextlines 999999
 \ProvidesPackage{lithie-util}[2020/09/20 v1.0 the lithie util collector]
 
 \RequirePackage{kvoptions,etoolbox}
@@ -15,58 +15,96 @@
 
 \def\lithie@util@empty{}
 \def\lithie@util@none{LITHIE@NO@OPTION@GIVEN}
-% todo: default values and such?
-\DeclareStringOption[\lithie@util@none]{cp}[\lithie@util@empty]
-
 
 % \AtBeginDocument{%
-% \ifx\LITU@cp\lithie@none None \else Got\fi
+% \ifx\LITU@cp\lithie@util@none None \else Got\fi
 % Got: \LITU@cp}
 
-\def\@lithie@PackageRequireHook{}
+\def\@lithie@hook@PackageRequire{}
 
 \def\@lithie@all@groups{}
 
 % add to list
-\def\@lithie@util@atl#1#2{%
-    \let\@@lithie@tmp#1%
-    \edef#1{\expandafter\unexpanded\@@lithie@tmp{#2}}%
-}
+\let\@lithie@util@atl\listadd
 
 % #1 group id
 \def\lu@DefineGroup#1{%
     \@namedef{@lithie@@group@#1}{}%
     \@lithie@util@atl\@lithie@all@groups{#1}%
+    \DeclareVoidOption{#1}{%
+        \protected@edef\@lithie@tmp{\noexpand\forlistloop{\noexpand\lu@LoadModule}{\@nameuse{@lithie@@group@#1}}}%
+        \@lithie@tmp%
+    }
+    % TODO: new option which will enable the whole group
 }
 
 \def\lu@AddToGroup#1#2{%
-    \@lithie@util@atl{\csname@lithie@@group@#1\endcsname}{#2}%
+    \protected@edef\@lithie@tmp{\noexpand\@lithie@util@atl{\csname @lithie@@group@#1\endcsname}{#2}}\@lithie@tmp%
 }
 
-\def\lu@AddToGroups#1#2{%
-    \@lithie@util@atl{\csname@lithie@@group@#1\endcsname}{#2}%
+\def\@@lu@atgs#1#2{\def\@lithie@tmp{\csname @lithie@@group@#2\endcsname}%
+\@lithie@util@atl{\@lithie@tmp}{#1}%
+}
+\def\@lu@AddToGroups#1#2{%
+    \forcsvlist{#1}{#1}%
+}
+\def\lu@AddToGroups#1#2{\protected@edef\@lithie@tmp{#1}%
+    \forcsvlist{\@@lu@atgs\@lithie@tmp}{#2}%
 }
 
-\lu@DefineGroup{AllModules}
+\lu@DefineGroup{all}
+\lu@DefineGroup{color}
 
+\def\lu@Get#1#2{\@nameuse{@lu@module@map@#2@#1}}
 
-% % have a list for every group, allow group based loading
+% TODO: maybe avoid duplicate loading; maybe group commands to avoid pollution?
+% TODO: extract commands (util@cur)
+\def\lu@LoadModule#1{%
+\edef\@lithie@name{\lu@Get{#1}{name}}%
+\edef\@lithie@util@cur{\@nameuse{LITU@\@lithie@name}}%
+\ifx\@lithie@util@cur\lithie@util@none\else%
+    \PassOptionsToPackage{\@lithie@util@cur}{\lu@Get{#1}{library}}%
+\fi
+\RequirePackage{\lu@Get{#1}{library}}%
+}
+
+\def\lu@LoadModuleIfGiven#1{%
+\edef\@lithie@name{\lu@Get{#1}{name}}%
+\edef\@lithie@util@cur{\@nameuse{LITU@\@lithie@name}}%
+\typeout{\@lithie@util@cur:\lithie@util@none}
+\ifx\@lithie@util@cur\lithie@util@none\else%
+    \PassOptionsToPackage{\@lithie@util@cur}{\lu@Get{#1}{library}}%
+    \RequirePackage{\lu@Get{#1}{library}}%
+\fi%
+}
 
 % #1 internal name
 % #2 module name
 % #3 library to load
 % #4 default options for the libary
 % #5 list of groups to register (always all)
-
 \def\lu@DefineModule#1#2#3#4#5{%
-
+    \@namedef{@lu@module@map@name@#1}{#2}%
+    \@namedef{@lu@module@map@library@#1}{#3}%
+    \@namedef{@lu@module@map@defaults@#1}{#4}%
+    \@namedef{@lu@module@map@groups@#1}{all,#5}%
+    \protected@edef\@lithie@tmp{\noexpand\DeclareStringOption[\lithie@util@none]{\lu@Get{#1}{name}}[\lu@Get{#1}{defaults}]}\@lithie@tmp%
+    \appto\@lithie@hook@PackageRequire{%
+        \lu@LoadModuleIfGiven{#1}%
+    }%
+    \lu@AddToGroups{\lu@Get{#1}{groups}}{#1}%
 }
+
+% TODO: cs to excaange options 
+% maybe allow loading profileS?
+% e.g
+% lithieOptions{color-palettes}{enumitem}
+
+\lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color}
 
 
 \ProcessKeyvalOptions*
 
-\ifx\LITU@cp\lithie@none\else%
-    \RequirePackage[\LITU@cp]{color-palettes}
-\fi
+\AtEndOfPackage{\@lithie@hook@PackageRequire}
 
 \endinput
