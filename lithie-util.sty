@@ -16,6 +16,8 @@
 \def\lithie@util@none{LITHIE@NO@OPTION@GIVEN}
 
 \def\@lithie@hook@PackageRequire{}
+\def\@lithie@hook@GroupRequire{}
+\def\@lithie@hook@RequirePackages{}
 
 \def\@lithie@all@groups{}
 
@@ -27,13 +29,17 @@
     \@namedef{@lithie@@group@#1}{}%
     \@lithie@util@atl\@lithie@all@groups{#1}%
     \DeclareVoidOption{#1}{%
-        \protected@edef\@lithie@tmp{\noexpand\forlistloop{\noexpand\lu@LoadModule}{\@nameuse{@lithie@@group@#1}}}%
-        \@lithie@tmp%
-    }
+        \typeout{Requested group '\CurrentOption'}\listadd\@lithie@hook@GroupRequire{#1}}
 }
 
 \def\lu@AddToGroup#1#2{\expandafter\def\expandafter\@lithie@tmp@listnam\expandafter{\csname @lithie@@group@#1\endcsname}%
-\typeout{Adding #2 to '#1'}\edef\@lithie@tmp{\noexpand\@lithie@util@atl\expandonce{\@lithie@tmp@listnam}{#2}}\@lithie@tmp%
+\edef\@lithie@tmp{\noexpand\@lithie@util@atl\expandonce{\@lithie@tmp@listnam}{#2}}\@lithie@tmp%
+}
+
+\def\lu@LoadGroup#1{%
+\typeout{Effective group load for: #1 (\@nameuse{@lithie@@group@#1})}%
+\protected@edef\@lithie@tmp@groupload{\noexpand\forlistloop{\noexpand\lu@LoadModule}{\@nameuse{@lithie@@group@#1}}}%
+\@lithie@tmp@groupload%
 }
 
 \def\@@lu@atgs#1#2{\lu@AddToGroup{#2}{#1}}
@@ -85,16 +91,21 @@
     \@lithie@tmp%
 }
 
+\def\@lu@RequirePackage#1{%
+% allow others PassOptionsToPackage to be called by other hooks:
+\appto\@lithie@hook@RequirePackages{\typeout{Loading Library \lu@Get{#1}{library} for '#1'}%
+\RequirePackage{\lu@Get{#1}{library}}}}
+
 \def\lu@LoadModule#1{%
 \@lithie@resolve@module@args{#1}{}{%
 \@lithie@util@load@curargs{#1}%
-}\RequirePackage{\lu@Get{#1}{library}}% should be outside to execute always
+}\@lu@RequirePackage{#1}% should be outside to execute always
 }
 
 \def\lu@LoadModuleIfGiven#1{%
 \@lithie@resolve@module@args{#1}{}{%
 \@lithie@util@load@curargs{#1}%
-\RequirePackage{\lu@Get{#1}{library}}% should be inside to execute only if
+\@lu@RequirePackage{#1}% should be inside to execute only if
 }}
 
 % #1 internal name
@@ -120,9 +131,23 @@
 \lu@DefineGroup{color}
 \lu@DefineGroup{util}
 \lu@DefineGroup{generic}
+\lu@DefineGroup{sopra}
+\lu@DefineGroup{uml}
+
+% TODO: configurations or profiles which will setup some general options like add them to packages
 
 \lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,generic}
 \lu@DefineModule{lsc}{lecture-shortcuts}{lecture-shortcuts}{}{util}
+
+\lu@DefineModule{sot}{sopra-tables}{sopra-tables}{}{sopra}
+% is too specialiced to load with the group
+% \lu@DefineModule{sos}{sopra-standard}{sopra-standard}{}{sopra}
+\lu@DefineModule{sor}{sopra-requirements}{sopra-requirements}{}{sopra}
+\lu@DefineModule{som}{sopra-models}{sopra-models}{}{sopra,uml}
+\lu@DefineModule{sol}{sopra-listings}{sopra-listings}{noloadlangs}{sopra}
+\lu@DefineModule{sod}{sopra-documentation}{sopra-documentation}{}{sopra}
+\lu@DefineModule{sod}{sopra-changelog}{sopra-changelog}{}{sopra}
+\lu@DefineModule{soa}{sopra-attachments}{sopra-attachments}{}{sopra}
 
 \def\@@lithie@util@status@module#1{\lu@Get{#1}{name} (#1); }
 \def\@@lithie@util@status#1{%
@@ -140,6 +165,12 @@ Recognized groups: \forlistloop{ }{\@lithie@all@groups}%
 
 
 \ProcessKeyvalOptions*
-\AtEndOfPackage{\@lithie@hook@PackageRequire}
+
+% Load individuals first to allow options
+\@lithie@hook@PackageRequire%
+% Now load the groups.
+\forlistloop{\lu@LoadGroup}{\@lithie@hook@GroupRequire}%
+
+\@lithie@hook@RequirePackages\relax
 
 \endinput

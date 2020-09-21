@@ -1,7 +1,6 @@
 \documentclass{article}
 
-\errorcontextlines 999999
-
+\errorcontextlines 9999999
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -9,18 +8,20 @@
 
 \usepackage[a4paper,margin=1.5cm]{geometry}
 
-\usepackage{microtype,array,mathtools,environ,sopra-listings}
+\usepackage{microtype,array,mathtools,environ}
+
+\usepackage{enumitem}
+\usepackage[util,sopra]{lithie-util}
+
 \solLoadLanguage{latex}
 
-\lstdefinelanguage{showcaseLatex}{%
+\lstdefinelanguage{myLtx}{%
     language=lLatex,%
     morekeywords = [5]{\\obda,\\Obda,\\LH,\\ceil,\\floor,\\limn,\\sumn,\\limk,%
         \\sumk,\\eig,\\dif,\\dint,\\sel,\\val,\\sch,\\dom,\\grad,\\arccot,\\rg,\\diag,%
         \\Im,\\Re}
 }
-\RegisterLanguage{slatex}{showcaseLatex}
-
-\usepackage{lecture-shortcuts}
+\RegisterLanguage{slatex}{myLtx}
 
 \NewEnviron{ltxshow}{%
 \noindent\rule{\linewidth}{0.65pt}\\%
@@ -38,9 +39,6 @@
 \title{Showcase der Shortcuts}
 \author{Florian Sihler}
 \date{\today}
-
-\usepackage{enumitem}
-\usepackage[color-palettes={:defaults,enumitem}]{lithie-util}
 
 \begin{document}
 \maketitle
