@@ -30,43 +30,32 @@
         \protected@edef\@lithie@tmp{\noexpand\forlistloop{\noexpand\lu@LoadModule}{\@nameuse{@lithie@@group@#1}}}%
         \@lithie@tmp%
     }
-    % TODO: new option which will enable the whole group
 }
 
-\def\lu@AddToGroup#1#2{%
-    \protected@edef\@lithie@tmp{\noexpand\@lithie@util@atl{\csname @lithie@@group@#1\endcsname}{#2}}\@lithie@tmp%
+\def\lu@AddToGroup#1#2{\expandafter\def\expandafter\@lithie@tmp@listnam\expandafter{\csname @lithie@@group@#1\endcsname}%
+\typeout{Adding #2 to '#1'}\edef\@lithie@tmp{\noexpand\@lithie@util@atl\expandonce{\@lithie@tmp@listnam}{#2}}\@lithie@tmp%
 }
 
-\def\@@lu@atgs#1#2{\def\@lithie@tmp{\csname @lithie@@group@#2\endcsname}%
-\@lithie@util@atl{\@lithie@tmp}{#1}%
-}
-\def\@lu@AddToGroups#1#2{%
-    \forcsvlist{#1}{#1}%
-}
-\def\lu@AddToGroups#1#2{\protected@edef\@lithie@tmp{#1}%
-    \forcsvlist{\@@lu@atgs\@lithie@tmp}{#2}%
-}
+\def\@@lu@atgs#1#2{\lu@AddToGroup{#2}{#1}}
 
-\lu@DefineGroup{all}
-\lu@DefineGroup{color}
+\def\lu@AddToGroups#1#2{\edef\@lithie@tmp{#2}%
+    \protected@edef\@lithie@tmp@curcsv{\noexpand\forcsvlist{\noexpand\@@lu@atgs{\@lithie@tmp}}{#1}}\@lithie@tmp@curcsv%
+}
 
 \def\lu@Get#1#2{\@nameuse{@lu@module@map@#2@#1}}
 
 % TODO: maybe avoid duplicate loading; maybe group commands to avoid pollution?
-% TODO: extract commands (util@cur)
 \def\@lithie@resolve@module@args#1#2#3{%
 \edef\@lithie@name{\lu@Get{#1}{name}}% todo only expand once
 \edef\@lithie@util@cur{\@nameuse{LITU@\@lithie@name}}%
-\ifx\@lithie@util@cur\lithie@util@none#2\else#3\fi
-}
+\ifx\@lithie@util@cur\lithie@util@none#2\else#3\fi}
 
 \def\@@lithie@util{:}
 \def\@@lithie@util@load@consume@arg@ifcmd#1#2->#3#4{%
     \ifstrempty{#1#2}{}{%
         \def\@@lithie@first@chk{#1}%
         \ifx\@@lithie@first@chk\@@lithie@util% is command
-            #3{#2}%
-        \else#4{#2}\fi%
+            #3{#2}\else#4{#2}\fi%
     }%
 }
 
@@ -126,10 +115,31 @@
 }
 
 
-\lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color}
+
+\lu@DefineGroup{all}
+\lu@DefineGroup{color}
+\lu@DefineGroup{util}
+\lu@DefineGroup{generic}
+
+\lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,generic}
+\lu@DefineModule{lsc}{lecture-shortcuts}{lecture-shortcuts}{}{util}
+
+\def\@@lithie@util@status@module#1{\lu@Get{#1}{name} (#1); }
+\def\@@lithie@util@status#1{%
+\edef\@lithie@tmploop{\noexpand\forlistloop{\noexpand\@@lithie@util@status@module}{\@nameuse{@lithie@@group@#1}}}
+ \item[#1] \@lithie@tmploop%
+}
+\def\@lithie@util@status{%
+Recognized groups: \forlistloop{ }{\@lithie@all@groups}%
+% will always be 'all' list :D
+\begin{description}\item\forlistloop{\@@lithie@util@status}{\@lithie@all@groups}\end{description}
+}
+
+
+\let\lustatus\@lithie@util@status
+
 
 \ProcessKeyvalOptions*
-
 \AtEndOfPackage{\@lithie@hook@PackageRequire}
 
 \endinput
