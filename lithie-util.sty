@@ -16,83 +16,83 @@
 \def\@litu@none{LITHIE@NOOPTS@GIVEN}
 
 % hooks
-\def\@lithie@hook@PackageRequire{} \def\@lithie@hook@GroupRequire{} \def\@lithie@hook@RequirePackages{}
-\def\@lithie@all@groups{}
+\def\@litu@hook@PackageRequire{} \def\@litu@hook@GroupRequire{} \def\@litu@hook@RequirePackages{}
+\def\@litu@all@groups{}
 
 % add to list
 \let\@litu@atl\listadd
 
 % #1 group id
 \def\lu@DefineGroup#1{%
-    \@namedef{@lithie@@group@#1}{}%
-    \@litu@atl\@lithie@all@groups{#1}%
-    \DeclareVoidOption{#1}{\typeout{Req. group '\CurrentOption'}\listadd\@lithie@hook@GroupRequire{#1}}
+    \@namedef{@litu@@group@#1}{}%
+    \@litu@atl\@litu@all@groups{#1}%
+    \DeclareVoidOption{#1}{\typeout{Req. group '\CurrentOption'}\listadd\@litu@hook@GroupRequire{#1}}
 }
 
-\def\lu@AddToGroup#1#2{\expandafter\def\expandafter\@lithie@tmp@listnam\expandafter{\csname @lithie@@group@#1\endcsname}%
-\edef\@lithie@tmp{\noexpand\@litu@atl\expandonce{\@lithie@tmp@listnam}{#2}}\@lithie@tmp}
+\def\lu@AddToGroup#1#2{\expandafter\def\expandafter\@litu@tmp@listnam\expandafter{\csname @litu@@group@#1\endcsname}%
+\edef\@litu@tmp{\noexpand\@litu@atl\expandonce{\@litu@tmp@listnam}{#2}}\@litu@tmp}
 
-\def\lu@LoadGroup#1{\typeout{Load Group: #1 (\@nameuse{@lithie@@group@#1})}%
-\protected@edef\@lithie@tmp@groupload{\noexpand\forlistloop{\noexpand\lu@LoadModule}{\@nameuse{@lithie@@group@#1}}}%
-\@lithie@tmp@groupload}
+\def\lu@LoadGroup#1{\typeout{Load Group: #1 (\@nameuse{@litu@@group@#1})}%
+\protected@edef\@litu@tmp@groupload{\noexpand\forlistloop{\noexpand\lu@LoadModule}{\@nameuse{@litu@@group@#1}}}%
+\@litu@tmp@groupload}
 
 \def\@@lu@atgs#1#2{\lu@AddToGroup{#2}{#1}}
 
-\def\lu@AddToGroups#1#2{\edef\@lithie@tmp{#2}%
-    \protected@edef\@lithie@tmp@curcsv{\noexpand\forcsvlist{\noexpand\@@lu@atgs{\@lithie@tmp}}{#1}}\@lithie@tmp@curcsv%
+\def\lu@AddToGroups#1#2{\edef\@litu@tmp{#2}%
+    \protected@edef\@litu@tmp@curcsv{\noexpand\forcsvlist{\noexpand\@@lu@atgs{\@litu@tmp}}{#1}}\@litu@tmp@curcsv%
 }
 
 \def\lu@Get#1#2{\@nameuse{@lu@module@map@#2@#1}}
 
 % TODO: maybe avoid duplicate loading; maybe group commands to avoid pollution?
-\def\@lithie@resolve@module@args#1#2#3{%
-\edef\@lithie@name{\lu@Get{#1}{name}}% todo only expand once
-\edef\@litu@cur{\@nameuse{LITU@\@lithie@name}}%
+\def\@litu@resolve@module@args#1#2#3{%
+\edef\@litu@name{\lu@Get{#1}{name}}% todo only expand once
+\edef\@litu@cur{\@nameuse{LITU@\@litu@name}}%
 \ifx\@litu@cur\@litu@none#2\else#3\fi}
 
-\def\@@lithie@util{:}
+\def\@@litu@util{:}
 \def\@@litu@load@consume@arg@ifcmd#1#2->#3#4{%
-    \ifstrempty{#1#2}{}{\def\@@lithie@first@chk{#1}%
-        \ifx\@@lithie@first@chk\@@lithie@util% is command
+    \ifstrempty{#1#2}{}{\def\@@litu@first@chk{#1}%
+        \ifx\@@litu@first@chk\@@litu@util% is command
             #3{#2}\else#4{#2}\fi%
 }}
 
-\def\@lithie@cmd@defaults{defaults}
-\def\@@lithie@passopt@fp#1#2{\PassOptionsToPackage{#1}{#2}}
-% #1 id of current module, #2 command
+\def\@litu@cmd@defaults{defaults}
+\def\@@litu@passopt@fp#1#2{\PassOptionsToPackage{#1}{#2}}
+% #1 module id, #2 command
 \def\@litu@execute@command#1#2{%
-    \def\@@lithie@cmd@chk{#2}%
-    \ifx\@@lithie@cmd@chk\@lithie@cmd@defaults%
-        \edef\@lithie@tmp{\noexpand\@@lithie@passopt@fp{\lu@Get{#1}{defaults}}{\lu@Get{#1}{package}}}%
-        \@lithie@tmp\fi%
+\def\@@litu@cmd@chk{#2}%
+\ifx\@@litu@cmd@chk\@litu@cmd@defaults%
+    \edef\@litu@tmp{\noexpand\@@litu@passopt@fp{\lu@Get{#1}{defaults}}{\lu@Get{#1}{package}}}%
+    \@litu@tmp\fi%
 }
 
-\def\@lithie@gobble#1{}
+\def\@litu@gobble#1{}
 % allow ':defaults' to be used for defaults
 \def\@@litu@load@consume@arg#1#2#3{%
 \@@litu@load@consume@arg@ifcmd#3->{%
 \@litu@execute@command{#2}% is command
 }{ % is no command
-\PassOptionsToPackage{#3}{#1}\@lithie@gobble%
+\PassOptionsToPackage{#3}{#1}\@litu@gobble%
 }}
 
 \def\@litu@load@curargs#1{%
-    \edef\@lithie@tmp{\noexpand\forcsvlist{\noexpand\@@litu@load@consume@arg{%
-            \lu@Get{#1}{package}}{#1}}{\@litu@cur}}%
-    \@lithie@tmp}
+\edef\@litu@tmp{\noexpand\forcsvlist{\noexpand\@@litu@load@consume@arg{%
+        \lu@Get{#1}{package}}{#1}}{\@litu@cur}}%
+\@litu@tmp}
 
 \def\@lu@RequirePackage#1{%
 % allow others PassOptionsToPackage to be called by other hooks:
-\appto\@lithie@hook@RequirePackages{\typeout{Loadlib \lu@Get{#1}{package} for '#1'}%
+\appto\@litu@hook@RequirePackages{\typeout{Loadlib \lu@Get{#1}{package} for '#1'}%
 \RequirePackage{\lu@Get{#1}{package}}}}
 
 \def\lu@LoadModule#1{%
-\@lithie@resolve@module@args{#1}{}{%
+\@litu@resolve@module@args{#1}{}{%
 \@litu@load@curargs{#1}}\@lu@RequirePackage{#1}% outside, execute always
 }
 
 \def\lu@LoadModuleIfGiven#1{%
-\@lithie@resolve@module@args{#1}{}{%
+\@litu@resolve@module@args{#1}{}{%
 \@litu@load@curargs{#1}\@lu@RequirePackage{#1}% inside, execute only if
 }}
 
@@ -102,8 +102,8 @@
     \@namedef{@lu@module@map@package@#1}{#3}%
     \@namedef{@lu@module@map@defaults@#1}{#4}%
     \@namedef{@lu@module@map@groups@#1}{all,#5}%
-    \protected@edef\@lithie@tmp{\noexpand\DeclareStringOption[\@litu@none]{\lu@Get{#1}{name}}[\lu@Get{#1}{defaults}]}\@lithie@tmp%
-    \appto\@lithie@hook@PackageRequire{\lu@LoadModuleIfGiven{#1}}%
+    \protected@edef\@litu@tmp{\noexpand\DeclareStringOption[\@litu@none]{\lu@Get{#1}{name}}[\lu@Get{#1}{defaults}]}\@litu@tmp%
+    \appto\@litu@hook@PackageRequire{\lu@LoadModuleIfGiven{#1}}%
     \lu@AddToGroups{\lu@Get{#1}{groups}}{#1}%
 }
 
@@ -111,7 +111,6 @@
 \forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,uml}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
-
 \lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,generic}
 \lu@DefineModule{lsc}{lecture-shortcuts}{lecture-shortcuts}{}{util}
 
@@ -128,10 +127,10 @@
 \ProcessKeyvalOptions*
 
 % Load individuals first to allow options
-\@lithie@hook@PackageRequire%
+\@litu@hook@PackageRequire%
 % Now load the groups.
-\forlistloop{\lu@LoadGroup}{\@lithie@hook@GroupRequire}%
+\forlistloop{\lu@LoadGroup}{\@litu@hook@GroupRequire}%
 % Require the packages
-\@lithie@hook@RequirePackages\relax
+\@litu@hook@RequirePackages\relax
 
 \endinput
