@@ -12,35 +12,29 @@
 
 \SetupKeyvalOptions{family=LITU,prefix=LITU@}
 
-\def\lithie@util@empty{}
-\def\lithie@util@none{LITHIE@NO@OPTION@GIVEN}
+% general
+\def\@litu@none{LITHIE@NOOPTS@GIVEN}
 
-\def\@lithie@hook@PackageRequire{}
-\def\@lithie@hook@GroupRequire{}
-\def\@lithie@hook@RequirePackages{}
-
+% hooks
+\def\@lithie@hook@PackageRequire{} \def\@lithie@hook@GroupRequire{} \def\@lithie@hook@RequirePackages{}
 \def\@lithie@all@groups{}
 
 % add to list
-\let\@lithie@util@atl\listadd
+\let\@litu@atl\listadd
 
 % #1 group id
 \def\lu@DefineGroup#1{%
     \@namedef{@lithie@@group@#1}{}%
-    \@lithie@util@atl\@lithie@all@groups{#1}%
-    \DeclareVoidOption{#1}{%
-        \typeout{Requested group '\CurrentOption'}\listadd\@lithie@hook@GroupRequire{#1}}
+    \@litu@atl\@lithie@all@groups{#1}%
+    \DeclareVoidOption{#1}{\typeout{Req. group '\CurrentOption'}\listadd\@lithie@hook@GroupRequire{#1}}
 }
 
 \def\lu@AddToGroup#1#2{\expandafter\def\expandafter\@lithie@tmp@listnam\expandafter{\csname @lithie@@group@#1\endcsname}%
-\edef\@lithie@tmp{\noexpand\@lithie@util@atl\expandonce{\@lithie@tmp@listnam}{#2}}\@lithie@tmp%
-}
+\edef\@lithie@tmp{\noexpand\@litu@atl\expandonce{\@lithie@tmp@listnam}{#2}}\@lithie@tmp}
 
-\def\lu@LoadGroup#1{%
-\typeout{Effective group load for: #1 (\@nameuse{@lithie@@group@#1})}%
+\def\lu@LoadGroup#1{\typeout{Load Group: #1 (\@nameuse{@lithie@@group@#1})}%
 \protected@edef\@lithie@tmp@groupload{\noexpand\forlistloop{\noexpand\lu@LoadModule}{\@nameuse{@lithie@@group@#1}}}%
-\@lithie@tmp@groupload%
-}
+\@lithie@tmp@groupload}
 
 \def\@@lu@atgs#1#2{\lu@AddToGroup{#2}{#1}}
 
@@ -53,58 +47,54 @@
 % TODO: maybe avoid duplicate loading; maybe group commands to avoid pollution?
 \def\@lithie@resolve@module@args#1#2#3{%
 \edef\@lithie@name{\lu@Get{#1}{name}}% todo only expand once
-\edef\@lithie@util@cur{\@nameuse{LITU@\@lithie@name}}%
-\ifx\@lithie@util@cur\lithie@util@none#2\else#3\fi}
+\edef\@litu@cur{\@nameuse{LITU@\@lithie@name}}%
+\ifx\@litu@cur\@litu@none#2\else#3\fi}
 
 \def\@@lithie@util{:}
-\def\@@lithie@util@load@consume@arg@ifcmd#1#2->#3#4{%
-    \ifstrempty{#1#2}{}{%
-        \def\@@lithie@first@chk{#1}%
+\def\@@litu@load@consume@arg@ifcmd#1#2->#3#4{%
+    \ifstrempty{#1#2}{}{\def\@@lithie@first@chk{#1}%
         \ifx\@@lithie@first@chk\@@lithie@util% is command
             #3{#2}\else#4{#2}\fi%
-    }%
-}
+}}
 
 \def\@lithie@cmd@defaults{defaults}
 \def\@@lithie@passopt@fp#1#2{\PassOptionsToPackage{#1}{#2}}
 % #1 id of current module, #2 command
-\def\@lithie@util@execute@command#1#2{%
+\def\@litu@execute@command#1#2{%
     \def\@@lithie@cmd@chk{#2}%
     \ifx\@@lithie@cmd@chk\@lithie@cmd@defaults%
         \edef\@lithie@tmp{\noexpand\@@lithie@passopt@fp{\lu@Get{#1}{defaults}}{\lu@Get{#1}{library}}}%
-        \@lithie@tmp%
-    \fi%
+        \@lithie@tmp\fi%
 }
 
 \def\@lithie@gobble#1{}
 % allow ':defaults' to be used for defaults
-\def\@@lithie@util@load@consume@arg#1#2#3{%
-\@@lithie@util@load@consume@arg@ifcmd#3->{%
-\@lithie@util@execute@command{#2}% is command
+\def\@@litu@load@consume@arg#1#2#3{%
+\@@litu@load@consume@arg@ifcmd#3->{%
+\@litu@execute@command{#2}% is command
 }{ % is no command
 \PassOptionsToPackage{#3}{#1}\@lithie@gobble%
 }}
 
-\def\@lithie@util@load@curargs#1{%
-    \edef\@lithie@tmp{\noexpand\forcsvlist{\noexpand\@@lithie@util@load@consume@arg{%
-            \lu@Get{#1}{library}}{#1}}{\@lithie@util@cur}}%
-    \@lithie@tmp%
-}
+\def\@litu@load@curargs#1{%
+    \edef\@lithie@tmp{\noexpand\forcsvlist{\noexpand\@@litu@load@consume@arg{%
+            \lu@Get{#1}{library}}{#1}}{\@litu@cur}}%
+    \@lithie@tmp}
 
 \def\@lu@RequirePackage#1{%
 % allow others PassOptionsToPackage to be called by other hooks:
-\appto\@lithie@hook@RequirePackages{\typeout{Loading Library \lu@Get{#1}{library} for '#1'}%
+\appto\@lithie@hook@RequirePackages{\typeout{Loadlib \lu@Get{#1}{library} for '#1'}%
 \RequirePackage{\lu@Get{#1}{library}}}}
 
 \def\lu@LoadModule#1{%
 \@lithie@resolve@module@args{#1}{}{%
-\@lithie@util@load@curargs{#1}%
+\@litu@load@curargs{#1}%
 }\@lu@RequirePackage{#1}% should be outside to execute always
 }
 
 \def\lu@LoadModuleIfGiven#1{%
 \@lithie@resolve@module@args{#1}{}{%
-\@lithie@util@load@curargs{#1}%
+\@litu@load@curargs{#1}%
 \@lu@RequirePackage{#1}% should be inside to execute only if
 }}
 
@@ -118,20 +108,13 @@
     \@namedef{@lu@module@map@library@#1}{#3}%
     \@namedef{@lu@module@map@defaults@#1}{#4}%
     \@namedef{@lu@module@map@groups@#1}{all,#5}%
-    \protected@edef\@lithie@tmp{\noexpand\DeclareStringOption[\lithie@util@none]{\lu@Get{#1}{name}}[\lu@Get{#1}{defaults}]}\@lithie@tmp%
-    \appto\@lithie@hook@PackageRequire{%
-        \lu@LoadModuleIfGiven{#1}%
-    }%
+    \protected@edef\@lithie@tmp{\noexpand\DeclareStringOption[\@litu@none]{\lu@Get{#1}{name}}[\lu@Get{#1}{defaults}]}\@lithie@tmp%
+    \appto\@lithie@hook@PackageRequire{\lu@LoadModuleIfGiven{#1}}%
     \lu@AddToGroups{\lu@Get{#1}{groups}}{#1}%
 }
 
-
-\lu@DefineGroup{all}
-\lu@DefineGroup{color}
-\lu@DefineGroup{util}
-\lu@DefineGroup{generic}
-\lu@DefineGroup{sopra}
-\lu@DefineGroup{uml}
+% define the groups
+\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,uml}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
 
@@ -148,19 +131,19 @@
 \lu@DefineModule{sod}{sopra-changelog}{sopra-changelog}{}{sopra}
 \lu@DefineModule{soa}{sopra-attachments}{sopra-attachments}{}{sopra}
 
-\def\@@lithie@util@status@module#1{\lu@Get{#1}{name} (#1); }
-\def\@@lithie@util@status#1{%
-\edef\@lithie@tmploop{\noexpand\forlistloop{\noexpand\@@lithie@util@status@module}{\@nameuse{@lithie@@group@#1}}}
+\def\@@litu@status@module#1{\lu@Get{#1}{name} (#1); }
+\def\@@litu@status#1{%
+\edef\@lithie@tmploop{\noexpand\forlistloop{\noexpand\@@litu@status@module}{\@nameuse{@lithie@@group@#1}}}
  \item[#1] \@lithie@tmploop%
 }
-\def\@lithie@util@status{%
+\def\@litu@status{%
 Recognized groups: \forlistloop{ }{\@lithie@all@groups}%
 % will always be 'all' list :D
-\begin{description}\item\forlistloop{\@@lithie@util@status}{\@lithie@all@groups}\end{description}
+\begin{description}\item\forlistloop{\@@litu@status}{\@lithie@all@groups}\end{description}
 }
 
 
-\let\lustatus\@lithie@util@status
+\let\lustatus\@litu@status
 
 
 \ProcessKeyvalOptions*
