@@ -131,28 +131,13 @@
 \lu@DefineModule{sod}{sopra-changelog}{sopra-changelog}{}{sopra}
 \lu@DefineModule{soa}{sopra-attachments}{sopra-attachments}{}{sopra}
 
-\def\@@litu@status@module#1{\lu@Get{#1}{name} (#1); }
-\def\@@litu@status#1{%
-\edef\@lithie@tmploop{\noexpand\forlistloop{\noexpand\@@litu@status@module}{\@nameuse{@lithie@@group@#1}}}
- \item[#1] \@lithie@tmploop%
-}
-\def\@litu@status{%
-Recognized groups: \forlistloop{ }{\@lithie@all@groups}%
-% will always be 'all' list :D
-\begin{description}\item\forlistloop{\@@litu@status}{\@lithie@all@groups}\end{description}
-}
-
-
-\let\lustatus\@litu@status
-
-
 \ProcessKeyvalOptions*
 
 % Load individuals first to allow options
 \@lithie@hook@PackageRequire%
 % Now load the groups.
 \forlistloop{\lu@LoadGroup}{\@lithie@hook@GroupRequire}%
-
+% Require the packages
 \@lithie@hook@RequirePackages\relax
 
 \endinput
