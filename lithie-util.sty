@@ -6,7 +6,6 @@
 %%
 %% Collection of all the other packages i have, which are requsted as needed.
 %%
-\errorcontextlines 999999
 \ProvidesPackage{lithie-util}[2020/09/20 v1.0 the lithie util collector]
 
 \RequirePackage{kvoptions,etoolbox}
@@ -15,10 +14,6 @@
 
 \def\lithie@util@empty{}
 \def\lithie@util@none{LITHIE@NO@OPTION@GIVEN}
-
-% \AtBeginDocument{%
-% \ifx\LITU@cp\lithie@util@none None \else Got\fi
-% Got: \LITU@cp}
 
 \def\@lithie@hook@PackageRequire{}
 
@@ -59,24 +54,59 @@
 
 % TODO: maybe avoid duplicate loading; maybe group commands to avoid pollution?
 % TODO: extract commands (util@cur)
-\def\lu@LoadModule#1{%
-\edef\@lithie@name{\lu@Get{#1}{name}}%
+\def\@lithie@resolve@module@args#1#2#3{%
+\edef\@lithie@name{\lu@Get{#1}{name}}% todo only expand once
 \edef\@lithie@util@cur{\@nameuse{LITU@\@lithie@name}}%
-\ifx\@lithie@util@cur\lithie@util@none\else%
-    \PassOptionsToPackage{\@lithie@util@cur}{\lu@Get{#1}{library}}%
-\fi
-\RequirePackage{\lu@Get{#1}{library}}%
+\ifx\@lithie@util@cur\lithie@util@none#2\else#3\fi
+}
+
+\def\@@lithie@util{:}
+\def\@@lithie@util@load@consume@arg@ifcmd#1#2->#3#4{%
+    \ifstrempty{#1#2}{}{%
+        \def\@@lithie@first@chk{#1}%
+        \ifx\@@lithie@first@chk\@@lithie@util% is command
+            #3{#2}%
+        \else#4{#2}\fi%
+    }%
+}
+
+\def\@lithie@cmd@defaults{defaults}
+\def\@@lithie@passopt@fp#1#2{\PassOptionsToPackage{#1}{#2}}
+% #1 id of current module, #2 command
+\def\@lithie@util@execute@command#1#2{%
+    \def\@@lithie@cmd@chk{#2}%
+    \ifx\@@lithie@cmd@chk\@lithie@cmd@defaults%
+        \edef\@lithie@tmp{\noexpand\@@lithie@passopt@fp{\lu@Get{#1}{defaults}}{\lu@Get{#1}{library}}}%
+        \@lithie@tmp%
+    \fi%
+}
+
+\def\@lithie@gobble#1{}
+% allow ':defaults' to be used for defaults
+\def\@@lithie@util@load@consume@arg#1#2#3{%
+\@@lithie@util@load@consume@arg@ifcmd#3->{%
+\@lithie@util@execute@command{#2}% is command
+}{ % is no command
+\PassOptionsToPackage{#3}{#1}\@lithie@gobble%
+}}
+
+\def\@lithie@util@load@curargs#1{%
+    \edef\@lithie@tmp{\noexpand\forcsvlist{\noexpand\@@lithie@util@load@consume@arg{%
+            \lu@Get{#1}{library}}{#1}}{\@lithie@util@cur}}%
+    \@lithie@tmp%
+}
+
+\def\lu@LoadModule#1{%
+\@lithie@resolve@module@args{#1}{}{%
+\@lithie@util@load@curargs{#1}%
+}\RequirePackage{\lu@Get{#1}{library}}% should be outside to execute always
 }
 
 \def\lu@LoadModuleIfGiven#1{%
-\edef\@lithie@name{\lu@Get{#1}{name}}%
-\edef\@lithie@util@cur{\@nameuse{LITU@\@lithie@name}}%
-\typeout{\@lithie@util@cur:\lithie@util@none}
-\ifx\@lithie@util@cur\lithie@util@none\else%
-    \PassOptionsToPackage{\@lithie@util@cur}{\lu@Get{#1}{library}}%
-    \RequirePackage{\lu@Get{#1}{library}}%
-\fi%
-}
+\@lithie@resolve@module@args{#1}{}{%
+\@lithie@util@load@curargs{#1}%
+\RequirePackage{\lu@Get{#1}{library}}% should be inside to execute only if
+}}
 
 % #1 internal name
 % #2 module name
@@ -95,13 +125,8 @@
     \lu@AddToGroups{\lu@Get{#1}{groups}}{#1}%
 }
 
-% TODO: cs to excaange options 
-% maybe allow loading profileS?
-% e.g
-% lithieOptions{color-palettes}{enumitem}
 
 \lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color}
-
 
 \ProcessKeyvalOptions*
 
