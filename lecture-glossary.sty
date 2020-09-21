@@ -17,36 +17,13 @@
 % this is a hack. i check if 'delimN' or 'delimR' are in the page def
 % therefore i execute the page-commands but gobble all of their outputs
 \newsavebox{\@lglos@la@void}
-\def\@lglos@hide@in@da@void#1{%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \@lglos@gobble#1%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
-    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\@nil%
-}
+\def\@lglos@hide@in@da@void#1{\sbox{\@lglos@la@void}{#1}}
 \def\lglos@spage{Seite}\def\lglos@ppage{Seiten}
 
 \newif\iflglos@thispage@issingle@
 
 % TODO: protect against re-definition
-\def\delimN{\lglos@thispage@issingle@false, } \def\delimR{ \lglos@thispage@issingle@false-- }
+\def\delimN{\global\lglos@thispage@issingle@false, } \def\delimR{ \global\lglos@thispage@issingle@false-- }
 
 \def\@lglos@printpages#1{%
 % think it is single (like me; :cry:)
