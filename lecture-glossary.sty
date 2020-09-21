@@ -10,9 +10,52 @@
 \ProvidesPackage{lecture-glossary}[2020/09/22 v1.0 Glossary Styling]
 
 \RequirePackage[acronym,nopostdot,numberedsection,section]{glossaries-accsupp}% style=super, nonumberlist
-\RequirePackage{glossary-longragged}
+\RequirePackage{glossary-longragged,xstring}
 
 \newif\ifatinitglossary
+% single- and plural-page
+% this is a hack. i check if 'delimN' or 'delimR' are in the page def
+% therefore i execute the page-commands but gobble all of their outputs
+\newsavebox{\@lglos@la@void}
+\def\@lglos@hide@in@da@void#1{%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \@lglos@gobble#1%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter%
+    \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\@nil%
+}
+\def\lglos@spage{Seite}\def\lglos@ppage{Seiten}
+
+\newif\iflglos@thispage@issingle@
+
+% TODO: protect against re-definition
+\def\delimN{\lglos@thispage@issingle@false, } \def\delimR{ \lglos@thispage@issingle@false-- }
+
+\def\@lglos@printpages#1{%
+% think it is single (like me; :cry:)
+\quad\textit{\iflglos@thispage@issingle@\lglos@spage\else\lglos@ppage\fi: #1}%
+}
+\def\lglos@printpages#1{%
+\lglos@thispage@issingle@true\@lglos@hide@in@da@void{#1}%
+\@lglos@printpages{#1}%
+}
 \newglossarystyle{lecture@glossary}{%
     \setglossarystyle{tree}%
 
@@ -25,13 +68,14 @@
         }{\end{description}}%#
 
     \renewcommand{\glossentry}[2]{%reset of tree to pad pagenumbers
-        \hangindent0pt\relax
-        \parindent0pt\relax
+        \hangindent0pt\relax \parindent0pt\relax
         \item[\glsentryitem{##1}\glstreenamefmt{\glstarget{##1}{\glossentryname{##1}}}]%
         \ifglshassymbol{##1}{\space(\glossentrysymbol{##1})}{}%
-        \glstreepredesc\glossentrydesc{##1}\glspostdescription\quad\hbox{}\textit{(Seite(n): ##2)}\par
+        \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\lglos@printpages{##2}\par
     }%
 }
 \setglossarystyle{lecture@glossary}
 \makeglossaries
+% TODO: glossary link style; translate pages and remove n if only one
+% TODO: generate latexmkrc?
 \endinput

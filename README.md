@@ -2,4 +2,4 @@
 ![Compile the showcase](https://github.com/EagleoutIce/lithie-util/workflows/Compile%20the%20showcase/badge.svg)
 
 # lithie-util
-Util packages for lithie, not directly coupled with the documentclasses. 
+Util packages for lithie, not directly coupled with the documentclasses.

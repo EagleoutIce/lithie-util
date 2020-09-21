@@ -108,21 +108,28 @@
 }
 
 % define the groups
-\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,uml}
+\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,lecture,uml}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
 \lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,generic}
-\lu@DefineModule{lsc}{lecture-shortcuts}{lecture-shortcuts}{}{util}
+\lu@DefineModule{lsc}{lecture-shortcuts}{lecture-shortcuts}{}{util,lecture}
+\lu@DefineModule{lgs}{lecture-glossary}{lecture-glossary}{}{lecture}
 
 \lu@DefineModule{sot}{sopra-tables}{sopra-tables}{}{sopra}
-% is too specialiced to load with the group
-% \lu@DefineModule{sos}{sopra-standard}{sopra-standard}{}{sopra}
 \lu@DefineModule{sor}{sopra-requirements}{sopra-requirements}{}{sopra}
 \lu@DefineModule{som}{sopra-models}{sopra-models}{}{sopra,uml}
 \lu@DefineModule{sol}{sopra-listings}{sopra-listings}{noloadlangs}{sopra}
 \lu@DefineModule{sod}{sopra-documentation}{sopra-documentation}{}{sopra}
 \lu@DefineModule{sod}{sopra-changelog}{sopra-changelog}{}{sopra}
 \lu@DefineModule{soa}{sopra-attachments}{sopra-attachments}{}{sopra}
+
+% TODO: eagle maps, etc. more but shorter groups... like 'maps', 'istings' etc...
+% TODO: alias functionality?
+% TODO: encoding
+% TODO: maybe 'standard mode' loading some default packages for a given language?
+% TODO: siunitx
+% TODO: bibliography
+% TODO: index
 
 \ProcessKeyvalOptions*
 
