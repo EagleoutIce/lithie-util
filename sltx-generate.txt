@@ -8,4 +8,4 @@ sltx-dep.yml
 showcase-shortcuts.tex,showcase-glossary.tex
 zrue
 showcase-shortcuts.pdf,showcase-glossary.pdf
-gh-pages
+build-action
