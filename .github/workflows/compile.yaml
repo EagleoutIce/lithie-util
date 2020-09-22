@@ -27,8 +27,8 @@ jobs:
       with:
         run: |
           tlmgr conf texmf TEXMFHOME "~/Library/texmf:./texmf"
-          latexmk -pdf -file-line-error -halt-on-error -interaction=nonstopmode "showcase-shortcuts.tex"
-          latexmk -pdf -file-line-error -halt-on-error -interaction=nonstopmode "showcase-glossary.tex"
+          latexmk -pdf -file-line-error -halt-on-error -interaction=nonstopmode "examples/showcase-shortcuts.tex"
+          latexmk -pdf -file-line-error -halt-on-error -interaction=nonstopmode "examples/showcase-glossary.tex"
     - name: Commit
       run: |
         git config --local user.email "action@github.com"
