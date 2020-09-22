@@ -15,6 +15,10 @@
 \DeclareOption{enumitem}{\lglos@setup@enumitem@true}
 \DeclareOption{noenumitem}{\lglos@setup@enumitem@false}
 
+\newif\iflglos@setup@automake@
+\DeclareOption{automake}{\lglos@setup@automake@true}
+\DeclareOption{noautomake}{\lglos@setup@automake@false}
+% requires shell escape D:
 \ProcessOptions*%
 
 \RequirePackage[acronym,nopostdot,numberedsection,section]{glossaries-accsupp}% style=super
@@ -34,7 +38,8 @@
 
 \newif\iflglos@thispage@issingle@
 
-\def\lglos@delimN{\global\lglos@thispage@issingle@false, } \def\lglos@delimR{ \global\lglos@thispage@issingle@false-- }
+\let\lglos@legacy@delimN\delimN \let\lglos@legacy@delimR\delimR
+\def\lglos@delimN{\global\lglos@thispage@issingle@false\lglos@legacy@delimN} \def\lglos@delimR{\global\lglos@thispage@issingle@false\lglos@legacy@delimN}
 
 \def\@lglos@printpages#1{%
     \quad\textit{\iflglos@thispage@issingle@\lglos@spage\else\lglos@ppage\fi:~#1}%
@@ -77,4 +82,8 @@
 }
 \setglossarystyle{lecture@glossary}
 \makeglossaries
+
+
+
+
 \endinput

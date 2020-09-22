@@ -1,4 +1,4 @@
-name: Compile the showcase
+name: Compile the showcases
 'on':
   push:
     branches:
@@ -18,10 +18,10 @@ jobs:
       with:
         python-version: '3.8'
     - name: Setup and run sltx-install
-      run: |
-        pip install pyyaml
-        echo "tex_home: ./texmf/tex/latex/sltxinst" > ".sltx-gh-conf.yaml"
-        python3 ./dep-helper//sltxinst --config ".sltx-gh-conf.yaml" --dependencies "sltx-dep.yml"
+      run: |+
+        pip install sltx
+        echo "tex_home: ./texmf/tex/latex/sltx" > ".sltx-gh-conf.yaml"
+
     - name: Setup Texlive and compile the documents
       uses: xu-cheng/texlive-action/full@v1
       with:
@@ -29,12 +29,11 @@ jobs:
           tlmgr conf texmf TEXMFHOME "~/Library/texmf:./texmf"
           latexmk -pdf -file-line-error -halt-on-error -interaction=nonstopmode "showcase-shortcuts.tex"
           latexmk -pdf -file-line-error -halt-on-error -interaction=nonstopmode "showcase-glossary.tex"
-
     - name: Commit
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add -f "showcase-shortcuts.pdf"
+        git add -f "showcase-shortcuts.pdf" "showcase-glossary.pdf"
         git commit -m "Newly compiled data"
     - name: Push changes
       uses: ad-m/github-push-action@master
