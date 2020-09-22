@@ -3,3 +3,6 @@
 
 # lithie-util
 Util packages for lithie, not directly coupled with the documentclasses.
+
+TODO: document :D
+TODO: generate latexmkrc? for other projects?

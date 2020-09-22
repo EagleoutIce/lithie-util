@@ -45,8 +45,13 @@
     \lglos@thispage@issingle@true\@lglos@hide@in@da@void{#1}%
     \@lglos@printpages{#1}}
 
-\def\lglos@headingstyle#1{\begin{center}\strut\emph{#1}\end{center}}
-\def\lglos@desc@options{}
+\def\LithieSetGlossaryStyle#1{\gdef\lglos@headingstyle##1{#1{##1}}}
+
+\def\lglos@default@headingstyle#1{\begin{center}\strut\emph{#1}\end{center}}
+\LithieSetGlossaryStyle{\lglos@default@headingstyle}
+
+\def\LithieSetGlossaryOpts#1{\gdef\lglos@desc@options{#1}}
+\LithieSetGlossaryOpts{}
 
 \newglossarystyle{lecture@glossary}{%
     \setglossarystyle{tree}%
@@ -72,6 +77,4 @@
 }
 \setglossarystyle{lecture@glossary}
 \makeglossaries
-% TODO: glossary link style; translate pages and remove n if only one
-% TODO: generate latexmkrc?
 \endinput
