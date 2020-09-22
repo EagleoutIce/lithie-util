@@ -1,12 +1,11 @@
 .github/workflows/compile.yaml
-True
+true
 Compile the showcases
-True
-True
-False
-sltx-dep.yml
+true
+true
 
+sltx-dep.yml
 showcase-shortcuts.tex,showcase-glossary.tex
-True
+zrue
 showcase-shortcuts.pdf,showcase-glossary.pdf
 gh-pages
