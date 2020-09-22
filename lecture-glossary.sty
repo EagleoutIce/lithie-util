@@ -69,7 +69,7 @@
         }{\end{description}}%#
 
     \renewcommand{\glossentry}[2]{%reset of tree to pad pagenumbers
-        \parindent0pt\relax % \hangindent0pt\relax
+        \hangindent0pt\relax \parindent0pt\relax
         \item[\glsentryitem{##1}\glstreenamefmt{\glstarget{##1}{\glossentryname{##1}}}]%
         \ifglshassymbol{##1}{\space(\glossentrysymbol{##1})}{}%
         \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\lglos@printpages{##2}\par
