@@ -10,7 +10,7 @@
 \ProvidesPackage{lecture-glossary}[2020/09/22 v1.0 Glossary Styling]
 
 \RequirePackage[acronym,nopostdot,numberedsection,section]{glossaries-accsupp}% style=super, nonumberlist
-\RequirePackage{glossary-longragged,xstring}
+\RequirePackage{glossary-longragged,enumitem}
 
 \newif\ifatinitglossary
 % single- and plural-page
@@ -22,22 +22,26 @@
 
 \newif\iflglos@thispage@issingle@
 
-% TODO: protect against re-definition
-\def\delimN{\global\lglos@thispage@issingle@false, } \def\delimR{ \global\lglos@thispage@issingle@false-- }
+\def\lglos@delimN{\global\lglos@thispage@issingle@false, } \def\lglos@delimR{ \global\lglos@thispage@issingle@false-- }
 
 \def\@lglos@printpages#1{%
-% think it is single (like me; :cry:)
-\quad\textit{\iflglos@thispage@issingle@\lglos@spage\else\lglos@ppage\fi: #1}%
+    \quad\textit{\iflglos@thispage@issingle@\lglos@spage\else\lglos@ppage\fi: #1}%
 }
 \def\lglos@printpages#1{%
-\lglos@thispage@issingle@true\@lglos@hide@in@da@void{#1}%
-\@lglos@printpages{#1}%
-}
+    \let\delimN\lglos@delimN\let\delimR\lglos@delimR
+    % think it is single (like me; :cry:)
+    \lglos@thispage@issingle@true\@lglos@hide@in@da@void{#1}%
+    \@lglos@printpages{#1}}
+
+\def\lglos@headingstyle#1{\begin{center}\strut\emph{#1}\end{center}}
+\def\lglos@desc@options{}
+
 \newglossarystyle{lecture@glossary}{%
     \setglossarystyle{tree}%
 
-    \renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\end{description}\fi\global\atinitglossaryfalse\begin{center}\strut\emph{\glsgetgrouptitle{##1}}\end{center}
-        \begin{description}}%
+    \renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\end{description}\fi\global\atinitglossaryfalse%
+        \lglos@headingstyle{\glsgetgrouptitle{##1}}%
+        \edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\lglos@curdesc}%
 
     \renewenvironment{theglossary}{\setlength{\parindent}{0pt}%
         \setlength{\parskip}{0pt plus 0.3pt}%
