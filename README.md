@@ -3,6 +3,6 @@
 
 # lithie-util
 Util packages for lithie, not directly coupled with the documentclasses.
-I hope i can make the documentation soon :D For the showcases, look [here](https://github.com/EagleoutIce/sltx/tree/build-action).
+I hope i can make the documentation soon :D For the showcases, look [here](https://github.com/EagleoutIce/lithie-util/tree/gh-pages).
 
 It also serves as an example of [sltx](https://github.com/EagleoutIce/sltx).

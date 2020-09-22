@@ -38,6 +38,6 @@ jobs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        branch: build-action
+        branch: gh-pages
         github_token: ${{ secrets.GITHUB_TOKEN }}
         force: true
