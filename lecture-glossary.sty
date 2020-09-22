@@ -9,8 +9,20 @@
 
 \ProvidesPackage{lecture-glossary}[2020/09/22 v1.0 Glossary Styling]
 
-\RequirePackage[acronym,nopostdot,numberedsection,section]{glossaries-accsupp}% style=super, nonumberlist
-\RequirePackage{glossary-longragged,enumitem}
+% enumitem support
+
+\newif\iflglos@setup@enumitem@
+\DeclareOption{enumitem}{\lglos@setup@enumitem@true}
+\DeclareOption{noenumitem}{\lglos@setup@enumitem@false}
+
+\ProcessOptions*%
+
+\RequirePackage[acronym,nopostdot,numberedsection,section]{glossaries-accsupp}% style=super
+\RequirePackage{glossary-longragged}
+
+\iflglos@setup@enumitem@
+\RequirePackage{enumitem}
+\fi
 
 \newif\ifatinitglossary
 % single- and plural-page
@@ -41,7 +53,10 @@
 
     \renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\end{description}\fi\global\atinitglossaryfalse%
         \lglos@headingstyle{\glsgetgrouptitle{##1}}%
-        \edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\lglos@curdesc}%
+        \iflglos@setup@enumitem@%
+        \edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\lglos@curdesc%
+        \else% no enumitem
+        \begin{description}\fi}%
 
     \renewenvironment{theglossary}{\setlength{\parindent}{0pt}%
         \setlength{\parskip}{0pt plus 0.3pt}%
