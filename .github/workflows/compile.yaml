@@ -29,7 +29,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add -f "examples/showcase-shortcuts.pdf" "examples/showcase-glossary.pdf"
+        git add -f "showcase-shortcuts.pdf" "showcase-glossary.pdf"
         git commit -m "Newly compiled data"
     - name: Push changes
       uses: ad-m/github-push-action@master
