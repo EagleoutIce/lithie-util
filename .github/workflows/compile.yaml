@@ -23,20 +23,14 @@ jobs:
         echo "tx-default" | sltx docker
     - name: Compile the Documents
       run: |
-        echo $(pwd)
         sltx compile --root --profile "tx-default" "examples/showcase-shortcuts.tex"
-        find .
         sltx compile --root --profile "tx-default" "examples/showcase-glossary.tex"
-        find .
-        echo $(pwd)
     - name: Commit
       run: |
-        echo $(pwd)
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add -f "showcase-shortcuts.pdf" "showcase-glossary.pdf"
         git commit -m "Newly compiled data"
-        echo $(pwd)
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
