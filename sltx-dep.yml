@@ -2,5 +2,6 @@ target: lecture-digital-example
 dependencies:
     sopra-collection:
       url: https://github.com/EagleoutIce/sopra-collection
-      grab-files: ["**/*.sty"]
-      grab-dirs: ["sopra-listings/Languages"]
+      grab-files: ["**/*.sty=>./"]
+      grab-dirs: ["sopra-listings/Languages=>Languages/"]
+      dep: sltx-dep.yml
