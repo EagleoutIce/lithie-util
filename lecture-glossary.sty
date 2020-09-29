@@ -10,15 +10,10 @@
 \ProvidesPackage{lecture-glossary}[2020/09/22 v1.0 Glossary Styling]
 
 % enumitem support
-
 \newif\iflglos@setup@enumitem@
 \DeclareOption{enumitem}{\lglos@setup@enumitem@true}
 \DeclareOption{noenumitem}{\lglos@setup@enumitem@false}
 
-\newif\iflglos@setup@automake@
-\DeclareOption{automake}{\lglos@setup@automake@true}
-\DeclareOption{noautomake}{\lglos@setup@automake@false}
-% requires shell escape D:
 \ProcessOptions*%
 
 \RequirePackage[acronym,nopostdot,numberedsection,section]{glossaries-accsupp}% style=super

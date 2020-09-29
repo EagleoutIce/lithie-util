@@ -108,12 +108,13 @@
 }
 
 % define the groups
-\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,lecture,uml}
+\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,lecture,uml,listof}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
 \lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,generic}
 \lu@DefineModule{lsc}{lecture-shortcuts}{lecture-shortcuts}{}{util,lecture}
-\lu@DefineModule{lgs}{lecture-glossary}{lecture-glossary}{enumitem}{lecture}
+\lu@DefineModule{lgs}{lecture-glossary}{lecture-glossary}{enumitem}{lecture,listof}
+\lu@DefineModule{lgs}{lecture-bibliography}{lecture-bibliography}{}{lecture,listof}
 
 \lu@DefineModule{sot}{sopra-tables}{sopra-tables}{}{sopra}
 \lu@DefineModule{sor}{sopra-requirements}{sopra-requirements}{}{sopra}
@@ -128,7 +129,6 @@
 % TODO: encoding
 % TODO: maybe 'standard mode' loading some default packages for a given language?
 % TODO: siunitx
-% TODO: bibliography
 % TODO: index
 
 \ProcessKeyvalOptions*
