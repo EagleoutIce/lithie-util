@@ -5,3 +5,6 @@ dependencies:
       grab-files: ["**/*.sty=>./"]
       grab-dirs: ["sopra-listings/Languages=>Languages/"]
       dep: sltx-dep.yml
+    lithie-boxes:
+      url: https://github.com/EagleoutIce/lithie-boxes
+      grab-files: ["*.sty", "*.style"]

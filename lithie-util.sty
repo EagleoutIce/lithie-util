@@ -108,13 +108,15 @@
 }
 
 % define the groups
-\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,lecture,uml,listof}
+\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,lecture,uml,listof,boxes}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
-\lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,generic}
+\lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,generic,boxes}
 \lu@DefineModule{lsc}{lecture-shortcuts}{lecture-shortcuts}{}{util,lecture}
 \lu@DefineModule{lgs}{lecture-glossary}{lecture-glossary}{enumitem}{lecture,listof}
 \lu@DefineModule{lbg}{lecture-bibliography}{lecture-bibliography}{}{lecture,listof}
+
+\lu@DefineModule{lbx}{lithie-boxes}{lithie-boxes}{autoenv}{lecture,util,boxes}
 
 \lu@DefineModule{sot}{sopra-tables}{sopra-tables}{}{sopra}
 \lu@DefineModule{sor}{sopra-requirements}{sopra-requirements}{}{sopra}
