@@ -1,0 +1,58 @@
+%% lithie-profiles.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 7.10.2020
+%%
+%% This package allows to setup combined profiles for all packages that
+%% live in lithie-util.
+
+\ProvidesPackage{lithie-profiles}[2020/10/07 v1.0 profiles]
+
+% #1 name #2 commands
+\def\lip@RegisterProfile#1#2{%
+    \ifcsname lip@profile@#1\endcsname%
+        \PackageWarning{lithie-profiles}{Profile '#1' already exists. Appending.}
+        \lip@AppendToProfile{#1}{#2}%
+    \else%
+    \expandafter\def\csname lip@profile@#1\endcsname{#2}%
+    \xdef\lip@allprofiles{\@ifundefined{lip@allprofiles}{}{\lip@allprofiles,}#1}%
+    \fi%
+}
+
+\def\lip@AppendToProfile#1#2{%
+    \expandafter\edef\csname lip@profile@#1\endcsname{\expandafter\expandafter\expandafter\unexpanded{\csname lip@profile@#1\endcsname}\unexpanded{#2}}%
+}
+
+\def\lip@UseProfile#1{%
+    \ifcsname lip@profile@#1\endcsname%
+        \@nameuse{lip@profile@#1}%
+    \else%
+        \PackageError{lithie-profiles}{The Profile '#1' is unknown. Choose one of: \lip@allprofiles}%
+    \fi%
+}
+
+\providecommand{\lectureprofile}{}
+
+\AtEndPreamble{%
+    \expandafter\ifx\expandafter!\lectureprofile!\else%
+        \lip@UseProfile{\lectureprofile}%
+    \fi%
+}
+
+
+\lip@RegisterProfile{default}{%
+%
+}
+
+\lip@RegisterProfile{print}{%
+%
+}
+
+
+\let\RegisterProfile\lip@RegisterProfile%
+\let\AppendToProfile\lip@AppendToProfile%
+
+
+% TODO: styling of emptyset
+\endinput
