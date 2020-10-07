@@ -21,7 +21,7 @@
 }
 
 \def\lip@AppendToProfile#1#2{%
-    \expandafter\edef\csname lip@profile@#1\endcsname{\expandafter\expandafter\expandafter\unexpanded{\csname lip@profile@#1\endcsname}\unexpanded{#2}}%
+    \expandafter\edef\csname lip@profile@#1\endcsname{\expandafter\expandafter\expandafter\expandafter\expandafter\unexpanded{\csname lip@profile@#1\endcsname}\unexpanded{#2}}%
 }
 
 \def\lip@UseProfile#1{%
@@ -32,7 +32,7 @@
     \fi%
 }
 
-\providecommand{\lectureprofile}{}
+\providecommand{\lectureprofile}{default}
 
 \AtEndPreamble{%
     \expandafter\ifx\expandafter!\lectureprofile!\else%
