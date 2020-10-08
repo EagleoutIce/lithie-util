@@ -11,17 +11,14 @@
 
 \RequirePackage{multicol}
 
-\newenvironment{libf@nomc}[1]{}{}
 \newenvironment{multicolshint}[1]{}{}
 
 \def\libf@DisableMulticolHint{%
-\let\multicolshint\libf@nomc%
-\let\endmulticolshint\endlibf@nomc%
+\renewenvironment{multicolshint}[1]{}{}
 }
 
 \def\libf@EnableMulticolHint{%
-\let\multicolshint\multicol%
-\let\endmulticolshint\endmulticol%
+\renewenvironment{multicolshint}[1]{\begin{multicols}{##1}}{\end{multicols}}%
 }
 
 \libf@EnableMulticolHint
