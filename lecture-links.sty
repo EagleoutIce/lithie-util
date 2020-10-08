@@ -1,0 +1,59 @@
+%% lecture-links.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 8.10.2020
+%%
+%% Controls the styling cross references. This Package requires hyperref.
+%%
+\ProvidesPackage{lecture-links}[2020/10/08 v1.0 Cross-References]
+
+\RequirePackage{etoolbox}
+
+\newcommand*{SetAllLinkStyle}[1]{%
+    \gdef\leclink@autoref@linkstyle{#1}%
+    \gdef\leclink@nameref@linkstyle{#1}%
+    \gdef\leclink@hyperref@linkstyle{#1}%
+    \gdef\leclink@hyperlink@linkstyle{#1}%
+    \gdef\leclink@url@linkstyle{#1}%
+    \gdef\leclink@href@linkstyle{#1}%
+}
+
+\AtBeginDocument{%
+% autoref
+    \let\leclink@autoref\autoref%
+    \DeclareRobustCommand*{\autoref}{%
+        \@ifstar\leclink@star@autoref\leclink@nostar@autoref%
+    }%
+    \def\leclink@star@autoref{\leclink@autoref@linkstyle{\leclink@autoref*{#1}}}
+    \def\leclink@nostar@autoref{\leclink@autoref@linkstyle{\leclink@autoref{#1}}}
+    \let\leclink@nameref\nameref%
+    \DeclareRobustCommand*{\nameref}{%
+        \@ifstar\leclink@star@nameref\leclink@nostar@autoref%
+    }%
+    \def\leclink@star@nameref{\leclink@nameref@linkstyle{\leclink@nameref*{#1}}}
+    \def\leclink@nostar@nameref{\leclink@nameref@linkstyle{\leclink@nameref{#1}}}
+    \let\leclink@hyperref\hyperref%
+    % what if no label?
+    \DeclareRobustCommand**{\hyperref}{%
+        \@ifnextchar[{\Hy@babelnormalise\leclink@label@hyperref}\leclink@full@hyperref%
+    }
+    \def\leclink@label@hyperref[#1]#2{%
+        \leclink@hyperref@linkstyle{\leclink@hyperref[#1]{#2}}%
+    }%
+    \def\leclink@full@hyperref#1#2#3{%
+        \leclink@hyperref@linkstyle{\leclink@hyperref{#1}{#2}{#3}}%
+    }%
+    \let\leclink@url\url%
+    \DeclareRobustCommand*{\url}{\hyper@normalise\leclink@read@url}%
+    \def\leclink@read@url#1{\leclink@url@linkstyle{\leclink@url{#1}}}
+    \let\leclink@href\href%
+    \DeclareRobustCommand*{\href}[1][]{
+        \begingroup
+        \setkeys{href}{#1}%
+        \@ifnextchar\bgroup\Hy@href{\hyper@normalise\href@}%
+    }
+}
+
+
+\endinput
