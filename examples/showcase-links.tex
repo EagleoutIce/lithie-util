@@ -9,18 +9,35 @@
 
 \usepackage{microtype,array,mathtools,environ,hyperref}
 
-\usepackage{hyperref}
-\usepackage[links]{lithie-util}
+\usepackage{hyperref,xcolor}
+\usepackage[lecture-links={defaults}]{lithie-util}
 
 \title{Showcase der Links}
 \author{Florian Sihler}
 \date{\today}
 
+\def\linkdump{%
+Ich linke mit autoref: \autoref{link}. Mit Stern: \autoref*{link}
+Ich mit nameref: \nameref{link}. Mit Stern: \nameref*{link}.
+Ich mit hyperref: \hyperref[link]{linkmarker}.
+Ich bin eine url: \url{https://duckduckgo.com/}.
+Ich verwende hyperlink: \hyperlink{hlink}{Linksprung}.
+Ich bin eine url mit href: \href{https://duckduckgo.com/}{duckduckgo.com}
+}
+% If wanted same for font: TODO: package option
+
 \begin{document}
 \maketitle
 \section{A}
-\label{link}
+\label{link}\hypertarget{hlink}{Linkziel}
 
-Ich linke zu \autoref{link}.
+\linkdump{}
+
+\section{B}
+
+\SetAllLinkStyle{\textcolor{magenta}{\textsf{\textbf{#1}}}}
+
+\linkdump
+
 
 \end{document}

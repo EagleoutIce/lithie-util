@@ -7,6 +7,21 @@
 %% Controls the styling cross references. This Package requires hyperref.
 %%
 \ProvidesPackage{lecture-links}[2020/10/08 v1.0 Cross-References]
+\newif\ifleclink@defaults@
+\DeclareOption{defaults}{\leclink@defaults@true}
+\DeclareOption{nodefaults}{\leclink@defaults@false}
+\newif\ifleclink@patchurl@
+\DeclareOption{patchurl}{\leclink@patchurl@true}
+\DeclareOption{nopatchurl}{\leclink@patchurl@false}
+\ProcessOptions*
+
+\ifleclink@defaults@
+    \AtBeginDocument{\hypersetup{pdfborder={0 0 0}}}%
+\fi
+
+\ifleclink@patchurl@
+    \AtBeginDocument{\urlstyle{same}}%
+\fi
 
 \RequirePackage{etoolbox}
 
@@ -19,6 +34,13 @@
     \def\leclink@href@linkstyle##1{#1}%
 }
 
+\newcommand*\SetAutorefLinkStyle[1]{\def\leclink@autoref@linkstyle##1{#1}}
+\newcommand*\SetNamerefLinkStyle[1]{\def\leclink@nameref@linkstyle##1{#1}}
+\newcommand*\SetHyperrefLinkStyle[1]{\def\leclink@hyperref@linkstyle##1{#1}}
+\newcommand*\SetHyperlinkLinkStyle[1]{\def\leclink@hyperlink@linkstyle##1{#1}}
+\newcommand*\SetUrlLinkStyle[1]{\def\leclink@url@linkstyle##1{#1}}
+\newcommand*\SetHrefLinkStyle[1]{\def\leclink@href@linkstyle##1{#1}}
+
 \SetAllLinkStyle{\texttt{#1}}
 
 \AtBeginDocument{% robust not needed as let persists
@@ -27,30 +49,48 @@
     \renewcommand*{\autoref}{%
         \@ifstar\leclink@star@autoref\leclink@nostar@autoref%
     }%
-    \def\leclink@star@autoref#1{\leclink@autoref@linkstyle{\leclink@autoref*{#1}}}
-    \def\leclink@nostar@autoref#1{\leclink@autoref@linkstyle{\leclink@autoref{#1}}}
+    \def\leclink@star@autoref#1{\leclink@autoref*{#1}}
+    \def\leclink@nostar@autoref#1{\leclink@autoref@linkstyle{\leclink@autoref{#1}}}%
 % nameref
     \let\leclink@nameref\nameref%
     \renewcommand*{\nameref}{%
         \@ifstar\leclink@star@nameref\leclink@nostar@autoref%
     }%
-    \def\leclink@star@nameref#1{\leclink@nameref@linkstyle{\leclink@nameref*{#1}}}
-    \def\leclink@nostar@nameref#1{\leclink@nameref@linkstyle{\leclink@nameref{#1}}}
+    \def\leclink@star@nameref#1{\leclink@nameref*{#1}}%
+    \def\leclink@nostar@nameref#1{\leclink@nameref@linkstyle{\leclink@nameref{#1}}}%
     \let\leclink@hyperref\hyperref%
+% hyperref
     % what if no label?
     \renewcommand*{\hyperref}{%
         \@ifnextchar[{\Hy@babelnormalise\leclink@label@hyperref}\leclink@full@hyperref%
-    }
+    }%
     \def\leclink@label@hyperref[#1]#2{%
         \leclink@hyperref@linkstyle{\leclink@hyperref[#1]{#2}}%
     }%
     \def\leclink@full@hyperref#1#2#3{%
         \leclink@hyperref@linkstyle{\leclink@hyperref{#1}{#2}{#3}}%
     }%
+% url
     \let\leclink@url\url%
     \renewcommand*{\url}{\hyper@normalise\leclink@read@url}%
-    \def\leclink@read@url#1{\leclink@url@linkstyle{\leclink@url{#1}}}
+    \def\leclink@read@url#1{\leclink@url@linkstyle{\leclink@url{#1}}}%
+    % hyperlink
+    \let\leclink@hyperlink\hyperlink%
+    \renewcommand*{\hyperlink}[2]{\leclink@hyperlink@linkstyle{\leclink@hyperlink{#1}{#2}}}%
+% href
+    % We do not modify href as it depends on the href-keys we redef the split-call
+    \leclink@overwrite@hrefsplit%
 }
 
+\begingroup
+\catcode`\$=6 %
+\catcode`\#=12 %
+\gdef\leclink@overwrite@hrefsplit{%
+\def\href@split$$1#$$2#$$3\\$$4{%
+  \leclink@href@linkstyle{\hyper@@link{$$1}{$$2}{$$4}}%
+  \endgroup
+}%
+}
+\endgroup
 
 \endinput
