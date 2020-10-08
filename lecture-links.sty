@@ -10,32 +10,35 @@
 
 \RequirePackage{etoolbox}
 
-\newcommand*{SetAllLinkStyle}[1]{%
-    \gdef\leclink@autoref@linkstyle{#1}%
-    \gdef\leclink@nameref@linkstyle{#1}%
-    \gdef\leclink@hyperref@linkstyle{#1}%
-    \gdef\leclink@hyperlink@linkstyle{#1}%
-    \gdef\leclink@url@linkstyle{#1}%
-    \gdef\leclink@href@linkstyle{#1}%
+\newcommand*\SetAllLinkStyle[1]{%
+    \def\leclink@autoref@linkstyle##1{#1}%
+    \def\leclink@nameref@linkstyle##1{#1}%
+    \def\leclink@hyperref@linkstyle##1{#1}%
+    \def\leclink@hyperlink@linkstyle##1{#1}%
+    \def\leclink@url@linkstyle##1{#1}%
+    \def\leclink@href@linkstyle##1{#1}%
 }
 
-\AtBeginDocument{%
+\SetAllLinkStyle{\texttt{#1}}
+
+\AtBeginDocument{% robust not needed as let persists
 % autoref
     \let\leclink@autoref\autoref%
-    \DeclareRobustCommand*{\autoref}{%
+    \renewcommand*{\autoref}{%
         \@ifstar\leclink@star@autoref\leclink@nostar@autoref%
     }%
-    \def\leclink@star@autoref{\leclink@autoref@linkstyle{\leclink@autoref*{#1}}}
-    \def\leclink@nostar@autoref{\leclink@autoref@linkstyle{\leclink@autoref{#1}}}
+    \def\leclink@star@autoref#1{\leclink@autoref@linkstyle{\leclink@autoref*{#1}}}
+    \def\leclink@nostar@autoref#1{\leclink@autoref@linkstyle{\leclink@autoref{#1}}}
+% nameref
     \let\leclink@nameref\nameref%
-    \DeclareRobustCommand*{\nameref}{%
+    \renewcommand*{\nameref}{%
         \@ifstar\leclink@star@nameref\leclink@nostar@autoref%
     }%
-    \def\leclink@star@nameref{\leclink@nameref@linkstyle{\leclink@nameref*{#1}}}
-    \def\leclink@nostar@nameref{\leclink@nameref@linkstyle{\leclink@nameref{#1}}}
+    \def\leclink@star@nameref#1{\leclink@nameref@linkstyle{\leclink@nameref*{#1}}}
+    \def\leclink@nostar@nameref#1{\leclink@nameref@linkstyle{\leclink@nameref{#1}}}
     \let\leclink@hyperref\hyperref%
     % what if no label?
-    \DeclareRobustCommand**{\hyperref}{%
+    \renewcommand*{\hyperref}{%
         \@ifnextchar[{\Hy@babelnormalise\leclink@label@hyperref}\leclink@full@hyperref%
     }
     \def\leclink@label@hyperref[#1]#2{%
@@ -45,14 +48,8 @@
         \leclink@hyperref@linkstyle{\leclink@hyperref{#1}{#2}{#3}}%
     }%
     \let\leclink@url\url%
-    \DeclareRobustCommand*{\url}{\hyper@normalise\leclink@read@url}%
+    \renewcommand*{\url}{\hyper@normalise\leclink@read@url}%
     \def\leclink@read@url#1{\leclink@url@linkstyle{\leclink@url{#1}}}
-    \let\leclink@href\href%
-    \DeclareRobustCommand*{\href}[1][]{
-        \begingroup
-        \setkeys{href}{#1}%
-        \@ifnextchar\bgroup\Hy@href{\hyper@normalise\href@}%
-    }
 }
 
 
