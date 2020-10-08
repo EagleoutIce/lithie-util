@@ -1,0 +1,32 @@
+%% lecture-format.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 8.10.2020
+%%
+%% Allows multiple styling variants for e.g. multicols, which allows hints
+%% for different environments.
+
+\ProvidesPackage{lecture-format}[2020/10/08 v1.0 Format and Environment hints]
+
+\RequirePackage{multicol}
+
+\newenvironment{libf@nomc}[1]{}{}
+\newenvironment{multicolshint}[1]{}{}
+
+\def\libf@DisableMulticolHint{%
+\let\multicolshint\libf@nomc%
+\let\endmulticolshint\endlibf@nomc%
+}
+
+\def\libf@EnableMulticolHint{%
+\let\multicolshint\multicol%
+\let\endmulticolshint\endmulticol%
+}
+
+\libf@EnableMulticolHint
+
+\let\DisableMulticolHint\libf@DisableMulticolHint
+\let\EnableMulticolHint\libf@EnableMulticolHint
+
+\endinput
