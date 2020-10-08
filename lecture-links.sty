@@ -15,6 +15,8 @@
 \DeclareOption{nopatchurl}{\leclink@patchurl@false}
 \ProcessOptions*
 
+% TODO: reference like 'see page ->'
+
 \ifleclink@defaults@
     \AtBeginDocument{\hypersetup{pdfborder={0 0 0}}}%
 \fi
@@ -41,7 +43,12 @@
 \newcommand*\SetUrlLinkStyle[1]{\def\leclink@url@linkstyle##1{#1}}
 \newcommand*\SetHrefLinkStyle[1]{\def\leclink@href@linkstyle##1{#1}}
 
+\newif\ifleclink@enabled@
+\newcommand*{\DisableLinkStyle}{\leclink@enabled@false}
+\newcommand*{\EnableLinkStyle}{\leclink@enabled@true}
+
 \SetAllLinkStyle{\texttt{#1}}
+\EnableLinkStyle
 
 \AtBeginDocument{% robust not needed as let persists
 % autoref
@@ -50,14 +57,14 @@
         \@ifstar\leclink@star@autoref\leclink@nostar@autoref%
     }%
     \def\leclink@star@autoref#1{\leclink@autoref*{#1}}
-    \def\leclink@nostar@autoref#1{\leclink@autoref@linkstyle{\leclink@autoref{#1}}}%
+    \def\leclink@nostar@autoref#1{\ifleclink@enabled@\expandafter\leclink@autoref@linkstyle\fi{\leclink@autoref{#1}}}%
 % nameref
     \let\leclink@nameref\nameref%
     \renewcommand*{\nameref}{%
         \@ifstar\leclink@star@nameref\leclink@nostar@autoref%
     }%
     \def\leclink@star@nameref#1{\leclink@nameref*{#1}}%
-    \def\leclink@nostar@nameref#1{\leclink@nameref@linkstyle{\leclink@nameref{#1}}}%
+    \def\leclink@nostar@nameref#1{\ifleclink@enabled@\expandafter\leclink@nameref@linkstyle\fi{\leclink@nameref{#1}}}%
     \let\leclink@hyperref\hyperref%
 % hyperref
     % what if no label?
@@ -65,18 +72,18 @@
         \@ifnextchar[{\Hy@babelnormalise\leclink@label@hyperref}\leclink@full@hyperref%
     }%
     \def\leclink@label@hyperref[#1]#2{%
-        \leclink@hyperref@linkstyle{\leclink@hyperref[#1]{#2}}%
+        \ifleclink@enabled@\expandafter\leclink@hyperref@linkstyle\fi{\leclink@hyperref[#1]{#2}}%
     }%
     \def\leclink@full@hyperref#1#2#3{%
-        \leclink@hyperref@linkstyle{\leclink@hyperref{#1}{#2}{#3}}%
+        \ifleclink@enabled@\expandafter\leclink@hyperref@linkstyle\fi{\leclink@hyperref{#1}{#2}{#3}}%
     }%
 % url
     \let\leclink@url\url%
     \renewcommand*{\url}{\hyper@normalise\leclink@read@url}%
-    \def\leclink@read@url#1{\leclink@url@linkstyle{\leclink@url{#1}}}%
+    \def\leclink@read@url#1{\ifleclink@enabled@\expandafter\leclink@url@linkstyle\fi{\leclink@url{#1}}}%
     % hyperlink
     \let\leclink@hyperlink\hyperlink%
-    \renewcommand*{\hyperlink}[2]{\leclink@hyperlink@linkstyle{\leclink@hyperlink{#1}{#2}}}%
+    \renewcommand*{\hyperlink}[2]{\ifleclink@enabled@\expandafter\leclink@hyperlink@linkstyle\fi{\leclink@hyperlink{#1}{#2}}}%
 % href
     % We do not modify href as it depends on the href-keys we redef the split-call
     \leclink@overwrite@hrefsplit%
@@ -87,7 +94,7 @@
 \catcode`\#=12 %
 \gdef\leclink@overwrite@hrefsplit{%
 \def\href@split$$1#$$2#$$3\\$$4{%
-  \leclink@href@linkstyle{\hyper@@link{$$1}{$$2}{$$4}}%
+  \ifleclink@enabled@\expandafter\leclink@href@linkstyle\fi{\hyper@@link{$$1}{$$2}{$$4}}%
   \endgroup
 }%
 }
