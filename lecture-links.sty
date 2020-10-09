@@ -50,6 +50,10 @@
 \SetAllLinkStyle{\texttt{#1}}
 \EnableLinkStyle
 
+\def\leclink@pnextlinkstyle#1{%
+    \def\leclink@nxtst##1{\ifleclink@enabled@\expandafter#1\fi{##1}}%
+}
+
 \AtBeginDocument{% robust not needed as let persists
 % autoref
     \let\leclink@autoref\autoref%
@@ -57,14 +61,14 @@
         \@ifstar\leclink@star@autoref\leclink@nostar@autoref%
     }%
     \def\leclink@star@autoref#1{\leclink@autoref*{#1}}
-    \def\leclink@nostar@autoref#1{\ifleclink@enabled@\expandafter\leclink@autoref@linkstyle\fi{\leclink@autoref{#1}}}%
+    \def\leclink@nostar@autoref#1{\leclink@pnextlinkstyle{\leclink@autoref@linkstyle}\leclink@autoref{#1}}%
 % nameref
     \let\leclink@nameref\nameref%
     \renewcommand*{\nameref}{%
         \@ifstar\leclink@star@nameref\leclink@nostar@autoref%
     }%
     \def\leclink@star@nameref#1{\leclink@nameref*{#1}}%
-    \def\leclink@nostar@nameref#1{\ifleclink@enabled@\expandafter\leclink@nameref@linkstyle\fi{\leclink@nameref{#1}}}%
+    \def\leclink@nostar@nameref#1{\leclink@pnextlinkstyle{\leclink@nameref@linkstyle}\leclink@nameref{#1}}%
     \let\leclink@hyperref\hyperref%
 % hyperref
     % what if no label?
@@ -72,21 +76,26 @@
         \@ifnextchar[{\Hy@babelnormalise\leclink@label@hyperref}\leclink@full@hyperref%
     }%
     \def\leclink@label@hyperref[#1]#2{%
-        \ifleclink@enabled@\expandafter\leclink@hyperref@linkstyle\fi{\leclink@hyperref[#1]{#2}}%
+        \leclink@pnextlinkstyle{\leclink@hyperref@linkstyle}\leclink@hyperref[#1]{#2}%
     }%
     \def\leclink@full@hyperref#1#2#3{%
-        \ifleclink@enabled@\expandafter\leclink@hyperref@linkstyle\fi{\leclink@hyperref{#1}{#2}{#3}}%
+        \leclink@pnextlinkstyle{\leclink@hyperref@linkstyle}\leclink@hyperref{#1}{#2}{#3}%
     }%
-% url
+% url Note: url may be handled differently
     \let\leclink@url\url%
     \renewcommand*{\url}{\hyper@normalise\leclink@read@url}%
-    \def\leclink@read@url#1{\ifleclink@enabled@\expandafter\leclink@url@linkstyle\fi{\leclink@url{#1}}}%
+    \def\leclink@read@url#1{\leclink@pnextlinkstyle{\leclink@url@linkstyle}\leclink@nxtst{\leclink@url{#1}}}%
     % hyperlink
     \let\leclink@hyperlink\hyperlink%
-    \renewcommand*{\hyperlink}[2]{\ifleclink@enabled@\expandafter\leclink@hyperlink@linkstyle\fi{\leclink@hyperlink{#1}{#2}}}%
+    \renewcommand*{\hyperlink}[2]{\leclink@pnextlinkstyle{\leclink@hyperlink@linkstyle}\leclink@hyperlink{#1}{#2}}%
 % href
     % We do not modify href as it depends on the href-keys we redef the split-call
     \leclink@overwrite@hrefsplit%
+% modify the core
+    \let\leclink@hl@@\hyper@link@%
+    \def\hyper@link@[#1]#2#3#4{%
+        \leclink@nxtst{\leclink@hl@@[#1]{#2}{#3}{#4}}%
+    }
 }
 
 \begingroup
@@ -94,7 +103,7 @@
 \catcode`\#=12 %
 \gdef\leclink@overwrite@hrefsplit{%
 \def\href@split$$1#$$2#$$3\\$$4{%
-  \ifleclink@enabled@\expandafter\leclink@href@linkstyle\fi{\hyper@@link{$$1}{$$2}{$$4}}%
+    \leclink@pnextlinkstyle{\leclink@href@linkstyle}\hyper@@link{$$1}{$$2}{$$4}%
   \endgroup
 }%
 }
