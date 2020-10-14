@@ -34,6 +34,7 @@
     \def\leclink@hyperlink@linkstyle##1{#1}%
     \def\leclink@url@linkstyle##1{#1}%
     \def\leclink@href@linkstyle##1{#1}%
+    \def\leclink@footnote@linkstyle##1{#1}%
 }
 
 \newcommand*\SetAutorefLinkStyle[1]{\def\leclink@autoref@linkstyle##1{#1}}
@@ -42,6 +43,7 @@
 \newcommand*\SetHyperlinkLinkStyle[1]{\def\leclink@hyperlink@linkstyle##1{#1}}
 \newcommand*\SetUrlLinkStyle[1]{\def\leclink@url@linkstyle##1{#1}}
 \newcommand*\SetHrefLinkStyle[1]{\def\leclink@href@linkstyle##1{#1}}
+\newcommand*\SetFootnoteLinkStyle[1]{\def\leclink@footnote@linkstyle##1{#1}}
 
 \newif\ifleclink@enabled@
 \newcommand*{\DisableLinkStyle}{\leclink@enabled@false}
@@ -85,7 +87,10 @@
     \let\leclink@url\url%
     \renewcommand*{\url}{\hyper@normalise\leclink@read@url}%
     \def\leclink@read@url#1{\leclink@pnextlinkstyle{\leclink@url@linkstyle}\leclink@nxtst{\leclink@url{#1}}}%
-    % hyperlink
+% footnote (direct)
+    \let\leclink@footnotemark\@footnotemark%
+    \renewcommand*{\@footnotemark}{\ifleclink@enabled@\expandafter\leclink@footnote@linkstyle\fi{\leclink@footnotemark}}%
+% hyperlink
     \let\leclink@hyperlink\hyperlink%
     \renewcommand*{\hyperlink}[2]{\leclink@pnextlinkstyle{\leclink@hyperlink@linkstyle}\leclink@hyperlink{#1}{#2}}%
 % href
