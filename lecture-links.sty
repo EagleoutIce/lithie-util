@@ -93,7 +93,7 @@
     \def\leclink@read@url#1{\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@url@linkstyle}\leclink@nxtst{\leclink@url{#1}}{#1}{}}%
 % footnote (direct - guard?)
     \let\leclink@footnotemark\@footnotemark%
-    \renewcommand*{\@footnotemark}{\ifleclink@enabled@\expandafter\leclink@footnote@linkstyle\fi{\leclink@footnotemark}}%
+    \renewcommand*{\@footnotemark}{\ifleclink@enabled@\expandafter\leclink@footnote@linkstyle\else\expandafter\leclink@firstofthree\fi{\leclink@footnotemark}{}{}}%
 % hyperlink
     \let\leclink@hyperlink\hyperlink%
     \renewcommand*{\hyperlink}[2]{\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@hyperlink@linkstyle}\leclink@hyperlink{#1}{#2}}%
