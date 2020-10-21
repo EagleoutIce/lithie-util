@@ -9,6 +9,8 @@
 
 \ProvidesPackage{lithie-profiles}[2020/10/07 v1.0 profiles]
 
+\RequirePackage{lithie-version}
+
 % #1 name #2 commands
 \def\lip@RegisterProfile#1#2{%
     \ifcsname lip@profile@#1\endcsname%

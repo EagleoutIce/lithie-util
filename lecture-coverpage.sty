@@ -9,15 +9,20 @@
 \ProvidesPackage{lecture-coverpage}[2020/10/21 v1.0 coverpages]
 
 \RequirePackage{lecture-registers}
-% ghost requires: tikz & geometry & color-paletts <- this should be optional
+% ghost requires: tikz & geometry & tikz-palettes <- this should be optional
+\AtEndPreamble{%
+    \RequirePackage{tikz,geometry,tikz-palettes}%
+    \usetikzlibrary{decorations.text}%
+}
 
+\def\lecturecp@emblemcolor{gray}
+\def\lecturecp@emblemcolor@symbol{gray}
 % Emblem
-
 \def\lecture@emblem{}
 
  % #1: university #2 Text, #3 Symbol centered
 \newcommand*\emblem[3][ulm university]{\def\@@university@name{#1}%
- \gdef\lecture@emblem{\lecture@generate@emblem{#2}{\hspace*{-0.025em}#3}{gray}{gray}{gray}{50pt}{\lecture@font@eulerSmall}{0.125}{0.05}}%
+ \gdef\lecture@emblem{\lecture@generate@emblem{#2}{\hspace*{-0.025em}#3}{\lecturecp@emblemcolor}{\lecturecp@emblemcolor@symbol}{\lecturecp@emblemcolor}{51pt}{\lecture@font@eulerSmall}{0.125}{0.05}}%
 }
 
 \DeclareFixedFont{\lecture@font@eulerNormal}{U}{eur}{b}{n}{\f@size}
@@ -57,12 +62,12 @@
      % Draw the inner 'dot' circle in #3
      \draw[thin, color=#3] circle (1.2);
      % Draw the dots on the inner 'dot' circle in #3
-     \foreach \r in {0,20,...,360} {
-         \filldraw[#3] (\r:1.2) circle (0.01) node (\r) {};
+     \foreach \r in {0,24,...,360} {
+         \filldraw[#3] (\r:1.2) circle (0.01) node[circle,inner sep=0.222em] (\r) {};
      }
      % Draw the connection-lines in the main color of the tikzpicture
-     \foreach \r in {0,20,...,360}  {
-         \foreach \rr in {0,20,...,\r}{
+     \foreach \r in {0,24,...,360}  {
+         \foreach \rr in {0,24,...,\r}{
              \draw[very thin] (\r) -- (\rr);
          }
      }
@@ -79,8 +84,9 @@
 }
 % maybe insert guards if not found?
 \def\selectcoverpage#1{\gdef\lecturecp@activecoverpage{#1}}
-\selectcoverpage{plain}%
-\AtEndPreamble{\@nameuse{lecturecp@style@\lecturecp@activecoverpage @}}
+\selectcoverpage{}
+
+\AtEndPreamble{\expandafter\ifx\expandafter!\lecturecp@activecoverpage!\else\@nameuse{lecturecp@style@\lecturecp@activecoverpage @}\fi}
 
 \lecturecp@coverpagestyle{plain}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=0.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
@@ -123,4 +129,51 @@
 \end{titlepage}%
 \restoregeometry{}\clearpage}%
 }
+
+\lecturecp@coverpagestyle{fancy}{%
+\def\lecture@coverpage@geometry{\newgeometry{margin=0pt}}
+
+\def\lecturecp@emblemcolor{white}
+\def\lecturecp@emblemcolor@symbol{paletteA}
+\def\lecturecp@height{3}
+\def\lecturecp@leftwidth{2cm}%
+
+\renewcommand{\maketitle}{\bgroup%
+\setlength\parindent{0pt}%
+\thispagestyle{empty}\thispdfpagelabel{Cover}%
+%
+\lecture@coverpage@geometry%
+%
+\begin{titlepage}%
+%
+%
+%
+% At last we place the bannerblock%
+\null\vfill%
+\begin{tikzpicture}%
+    \draw[thick,paletteA]
+        (0,\lecturecp@height+0.1) -- ++(0.6\paperwidth-0.1,0)
+        -- ++(0.1\paperwidth, 1)  -- ++(0.1\paperwidth+0.1,0)
+        -- ++(0.1\paperwidth,-1)  -- ++(0.1\paperwidth,0) ;
+    \draw[thin,paletteA]
+        (0,\lecturecp@height+0.175) -- ++ (0.6\paperwidth-0.175,0)
+        -- ++(0.1\paperwidth,1)     -- ++(0.1\paperwidth+0.175,0)
+        --  ++(0.1\paperwidth,-1)   -- ++(0.1\paperwidth,0);
+    \filldraw[paletteA]
+        (0,0) -- ++(\paperwidth,0) -- ++(0,\lecturecp@height)
+        -- ++(-0.1\paperwidth,0)   -- ++(-0.1\paperwidth,1)
+        -- ++(-0.1\paperwidth,0)   --  ++(-0.1\paperwidth,-1)
+        -- ++(-0.6\paperwidth,0) -- cycle;%
+    \begin{scope}[every node/.style={color=\lecturecp@emblemcolor!60!paletteA}]%
+        \node at(0.75\paperwidth,2) {\lecture@emblem};
+        \node[right] at(\lecturecp@leftwidth,1.5)% Text: TODO: METAINFOS
+        {\parbox{9.9cm}{\footnotesize\bfseries{\par}}};
+        \node[above left] at(\paperwidth,0.5) {\tiny\textsf{Ver. \lithie@version}};%
+        \node[above left] at(\paperwidth,0.02) {\begingroup\hypersetup{urlcolor=\lecturecp@emblemcolor}\href{https://github.com/EagleoutIce/lithie-util}{\Lithie}\endgroup};%
+    \end{scope}%
+\end{tikzpicture}%
+\end{titlepage}%
+\restoregeometry{}\clearpage\egroup}
+}
+
 \endinput
