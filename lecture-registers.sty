@@ -53,7 +53,7 @@
         {\expandafter\ifx\expandafter\\\@tmp\\\else%
             \stepcounter{lecture@counter@tmp@a}\fi}%
     \edef\lecture@author@totallength{\arabic{lecture@counter@tmp@a}}%
-    \setcounter{lecture@counter@tmp@a}{0} % stored the length of the list
+    \setcounter{lecture@counter@tmp@a}{0}% stored the length of the list
     \foreach \lecture@@tmp@curauthor in {#1} {%
         \expandafter\ifx\expandafter\\\lecture@@tmp@curauthor\\%empty => ignore
         \else\stepcounter{lecture@counter@tmp@a}%
