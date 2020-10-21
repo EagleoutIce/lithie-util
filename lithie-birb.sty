@@ -1,0 +1,47 @@
+%% lecture-birb.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 21.10.2020
+%%
+%% Provides the lithie-bird
+%%
+\ProvidesPackage{lecture-birb}[2020/10/21 v1.0 the lithie birb]
+
+ % place the bird
+% 1.5 line => 2.12132034 hyp
+\def\lithiebirb{\bgroup%
+\def\hyp{2.12132034}%
+\def\hhyp{2.12132034/2}%
+\begin{scope}[overlay]% xshift=0.74\paperwidth,yshift=-2.75cm,scale=1,
+    % upper left _|
+    \fill[shadeD] (0,0) -| (1.5,1.5) -- cycle;
+    \fill[shadeD!90!black] (.75,.75) -- (1.5,0) -- (0,0) -- cycle;
+    % right of upper
+    \path(1.5,1.5) ++ (0.1,0) coordinate (start-ut);
+    \fill[shadeC] (start-ut) -- ++(0,-\hyp) -- ++(\hhyp,\hhyp) -- ++(-\hhyp,\hhyp) -- cycle;
+    \fill[shadeC!90!black] (start-ut)++(0,-\hhyp) -- ++(\hhyp,0) -- ++(-\hhyp,-\hhyp) -- cycle;
+    % middle square of doubles middle triangle upper
+    \path(start-ut) ++ (0.1,-\hyp) coordinate (start-mtu);
+    \fill[shadeB] (start-mtu) -- ++(\hhyp,\hhyp) -- ++(\hhyp,-\hhyp) -- cycle;
+    \fill[shadeB!90!black] (start-mtu)++(\hhyp,0) -- ++(0,\hhyp) -- ++(\hhyp,-\hhyp) -- cycle;
+    % --- lower
+    \path(start-ut) ++ (0.1,-\hyp-0.1/1.25) coordinate (start-mtl);
+    \fill[shadeB] (start-mtl) -- ++(\hhyp,-\hhyp) -- ++(\hhyp,\hhyp) -- cycle;
+    \fill[shadeB!90!black] (start-mtl)++(\hhyp,0) -- ++(0,-\hhyp) -- ++(-\hhyp,\hhyp) -- cycle;
+    % last lower
+    \path(start-mtl) ++ (\hyp+0.05,-0.05) coordinate (start-ll);
+    % last upper
+    \path(start-mtu) ++ (\hyp+0.1,0) coordinate (start-lu);
+    % shadow for the bird
+    \path(start-ll) ++ (-\hhyp,-\hhyp) coordinate (shade-lower);
+    \fill[lightgray!45!white!95!shadeA,opacity=0.75] (start-lu)++(\hyp+0.1+2*\hhyp,-2*\hhyp) -- ++(-3*\hhyp, 3*\hhyp) -- (shade-lower) -- ++(3*\hhyp,-3*\hhyp) -- cycle;
+    % last upper and lower draw above shadow (no layer)
+    \fill[shadeA] (start-ll) -- ++(-\hhyp,-\hhyp) -- ++(\hhyp,-\hhyp) -- cycle;
+    \fill[shadeA!90!black] (start-ll)++(0,-\hhyp) -- ++(-\hhyp,0) -- ++(\hhyp,-\hhyp) -- cycle;
+    % upper
+    \fill[shadeA] (start-lu) -- ++(-\hhyp,\hhyp) -- ++(\hyp,0) -- cycle;
+    \fill[shadeA!90!black] (start-lu) -- ++(0,\hhyp) -- ++(\hhyp,0) -- cycle;
+\end{scope}%
+\egroup}
+\endinput
