@@ -9,9 +9,9 @@
 \ProvidesPackage{lecture-coverpage}[2020/10/21 v1.0 coverpages]
 
 \RequirePackage{lecture-registers}
-% ghost requires: tikz & geometry & tikz-palettes <- this should be optional
+% ghost requires: tikz & geometry & pbox & tikz-palettes <- this should be optional
 \AtEndPreamble{%
-    \RequirePackage{tikz,geometry,tikz-palettes}%
+    \RequirePackage{tikz,geometry,tikz-palettes,pbox}%
     \usetikzlibrary{decorations.text}%
 }
 
@@ -91,7 +91,8 @@
 \lecturecp@coverpagestyle{plain}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=0.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
-\renewcommand{\maketitle}{%
+\renewcommand{\maketitle}{\bgroup%
+\setlength\parindent{0pt}%
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry%
 \begin{titlepage}%
@@ -106,13 +107,14 @@
 \fontsize{17pt}{17pt}\selectfont\sffamily\color{gray}\lecture@r{brief}%
 }\hfill\parbox[c]{0.2\linewidth}{\lecture@emblem}%
 \end{titlepage}%
-\restoregeometry{}\clearpage}
+\restoregeometry{}\clearpage\egroup}
 }
 
 \lecturecp@coverpagestyle{plain-small}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=0.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
-\renewcommand{\maketitle}{%
+\renewcommand{\maketitle}{\bgroup%
+\setlength\parindent{0pt}%
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry%
 \begin{titlepage}%
@@ -127,7 +129,7 @@
 \fontsize{15pt}{15pt}\selectfont\sffamily\color{gray}\lecture@r{brief}%
 }%
 \end{titlepage}%
-\restoregeometry{}\clearpage}%
+\restoregeometry{}\clearpage\egroup}%
 }
 
 \lecturecp@coverpagestyle{fancy}{%
@@ -136,8 +138,10 @@
 \def\lecturecp@emblemcolor{white}
 \def\lecturecp@emblemcolor@symbol{paletteA}
 \def\lecturecp@height{3}
-\def\lecturecp@leftwidth{2cm}%
+\def\lecturecp@leftwidth{1.5cm}%
 
+\newsavebox{\lecturecp@title@widthbox}
+\newlength{\lecture@tmp@titlewidth}
 \renewcommand{\maketitle}{\bgroup%
 \setlength\parindent{0pt}%
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
@@ -145,31 +149,52 @@
 \lecture@coverpage@geometry%
 %
 \begin{titlepage}%
-%
-%
-%
-% At last we place the bannerblock%
-\null\vfill%
+% upper fancies
 \begin{tikzpicture}%
-    \draw[thick,paletteA]
-        (0,\lecturecp@height+0.1) -- ++(0.6\paperwidth-0.1,0)
-        -- ++(0.1\paperwidth, 1)  -- ++(0.1\paperwidth+0.1,0)
-        -- ++(0.1\paperwidth,-1)  -- ++(0.1\paperwidth,0) ;
-    \draw[thin,paletteA]
-        (0,\lecturecp@height+0.175) -- ++ (0.6\paperwidth-0.175,0)
+    \filldraw[\lecturecp@emblemcolor@symbol]
+        (0,0) -- ++(0,-1) -- ++(1.25cm,0.75)
+        -- ++(\paperwidth-2.5cm,0) -- ++(1.25cm,-0.75)
+        |- cycle;%
+\end{tikzpicture}\\*[0.066\paperheight]%
+% title:
+\hspace*{\lecturecp@leftwidth}\parbox{0.85\linewidth}{%
+    \raggedright\fontsize{35pt}{35pt}\selectfont\sffamily%
+    \savebox{\lecturecp@title@widthbox}{\pbox{\linewidth}{\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}~~\null}}%
+    \usebox{\lecturecp@title@widthbox}\strut%
+    \global\lecture@tmp@titlewidth=\wd\lecturecp@title@widthbox}%
+    \leavevmode\\*[0.5em]%
+    \paletteA{\rule{\lecture@tmp@titlewidth+\lecturecp@leftwidth}{1.33pt}}%
+    \\*[0.25em]%
+\hspace*{\lecturecp@leftwidth}\parbox{0.75\linewidth}{%
+    \fontsize{15pt}{15pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\%
+\vfill% set the titleimage
+\parbox[c][0.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
+    \lecture@r{titleimage}%
+\vfill\hbox{}}\leavevmode\\%
+% At last we place the bannerblock%
+\vfill%
+\begin{tikzpicture}[line join=round,rounded corners=0.25pt]%
+    \draw[semithick,\lecturecp@emblemcolor@symbol]
+        (0,\lecturecp@height+0.15) -- ++(0.6\paperwidth-0.175,0)
         -- ++(0.1\paperwidth,1)     -- ++(0.1\paperwidth+0.175,0)
-        --  ++(0.1\paperwidth,-1)   -- ++(0.1\paperwidth,0);
-    \filldraw[paletteA]
+        -- ++(0.1\paperwidth,-1)    -- ++(0.1\paperwidth,0);
+    \draw[thick,\lecturecp@emblemcolor@symbol]
+        (0,\lecturecp@height+0.075) -- ++(0.6\paperwidth-0.1,0)
+        -- ++(0.1\paperwidth, 1)  -- ++(0.1\paperwidth+0.1,0)
+        -- ++(0.1\paperwidth,-1)  -- ++(0.1\paperwidth,0);
+    \filldraw[\lecturecp@emblemcolor@symbol]
         (0,0) -- ++(\paperwidth,0) -- ++(0,\lecturecp@height)
         -- ++(-0.1\paperwidth,0)   -- ++(-0.1\paperwidth,1)
-        -- ++(-0.1\paperwidth,0)   --  ++(-0.1\paperwidth,-1)
-        -- ++(-0.6\paperwidth,0) -- cycle;%
-    \begin{scope}[every node/.style={color=\lecturecp@emblemcolor!60!paletteA}]%
-        \node at(0.75\paperwidth,2) {\lecture@emblem};
-        \node[right] at(\lecturecp@leftwidth,1.5)% Text: TODO: METAINFOS
-        {\parbox{9.9cm}{\footnotesize\bfseries{\par}}};
-        \node[above left] at(\paperwidth,0.5) {\tiny\textsf{Ver. \lithie@version}};%
-        \node[above left] at(\paperwidth,0.02) {\begingroup\hypersetup{urlcolor=\lecturecp@emblemcolor}\href{https://github.com/EagleoutIce/lithie-util}{\Lithie}\endgroup};%
+        -- ++(-0.1\paperwidth,0)   -- ++(-0.1\paperwidth,-1)
+        -- ++(-0.6\paperwidth,0)   -- cycle;%
+    \begin{scope}[every node/.style={color=\lecturecp@emblemcolor}]%
+        \node[scale=0.89] at(0.75\paperwidth,\lecturecp@height/2+0.5) {\lecture@emblem};
+        \node[right] at(\lecturecp@leftwidth,\lecturecp@height/2)% Text: TODO: METAINFOS
+        {\parbox[t]{9.9cm}{%
+            \fontsize{15pt}{15pt}\selectfont\sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
+            \par%
+        }};
+        \node[align=right,font=\normalsize] at(0.95\paperwidth,\lecturecp@height/2) {\Lithie\\\scriptsize\textsf{Ver. \lithie@version}};%
     \end{scope}%
 \end{tikzpicture}%
 \end{titlepage}%
