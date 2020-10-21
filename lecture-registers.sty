@@ -40,10 +40,11 @@
 \def\lecture@mail#1{\href{mailto:#1}{#1}}
 \let\mail\lecture@mail%
 
-\def\lecture@@parse@author#1 (#2)\@nil{\bgroup\href{mailto:#2}{#1}\egroup}
-\def\lecture@@parse@author@getmail#1 (#2)\@nil{#2}
+\def\lecture@@mail@unknown{??}
+\def\lecture@@parse@author#1 (#2)#3\@nil{%
+    \def\@tmpa{#2}\ifx\@tmpa\lecture@@mail@unknown#1\else\href{mailto:#2}{#1}\fi}
 
-\def\LinkAuthor#1{\protected@edef\@tmp{#1}\expandafter\lecture@@parse@author\@tmp\@nil}
+\def\LinkAuthor#1{\protected@edef\@tmp{#1}\expandafter\lecture@@parse@author\@tmp{} (??)??\@nil}
 
 \newcounter{lecture@counter@tmp@a}
 \def\lecture@@typeset@author#1{%
@@ -59,7 +60,7 @@
             \ifnum\thelecture@counter@tmp@a>1%
             \ifnum\thelecture@counter@tmp@a=\lecture@author@totallength%
                 ~und \else,\space\fi\fi
-            \expandafter\lecture@@parse@author\lecture@@tmp@curauthor\@nil%
+            \expandafter\lecture@@parse@author\lecture@@tmp@curauthor{} (??)??\@nil%
         \fi%
     }%
 }

@@ -11,7 +11,7 @@
 
 \ProvidesPackage{lecture-shortcuts}[2020/09/19 v1.0 shortcuts]
 
-\RequirePackage{xspace,mathtools,amssymb}
+\RequirePackage{xspace,mathtools,amssymb,datetime}
 
 \providecommand\say[1]{\glqq{}#1\grqq{}}
 \providecommand\engl[2][]{#1(engl. \textit{#2})#1}
@@ -53,6 +53,8 @@
 \DeclareMathOperator{\grad}{Grad}
 
 \DeclareMathOperator{\arccot}{arccot}
+
+\def\timestamp{\today, \currenttime}
 
 % TODO: styling of emptyset
 \endinput
