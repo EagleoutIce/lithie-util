@@ -37,7 +37,7 @@
     \path(start-mtu) ++ (\hyp+0.1,0) coordinate (start-lu);
     % shadow for the bird
     \path(start-ll) ++ (-\hhyp,-\hhyp) coordinate (shade-lower);
-    \fill[lightgray!45!white!95!shadeA,opacity=0.75] (start-lu)++(\hyp+0.1+2*\hhyp,-2*\hhyp) -- ++(-3*\hhyp, 3*\hhyp) -- (shade-lower) -- ++(3*\hhyp,-3*\hhyp) -- cycle;
+    \fill[lightgray!45!white!95!shadeA,opacity=0.75] (start-lu)++(\hyp+0.1+3*\hhyp,-3*\hhyp) -- ++(-4*\hhyp, 4*\hhyp) -- (shade-lower) -- ++(4*\hhyp,-4*\hhyp) -- cycle;
     % last upper and lower draw above shadow (no layer)
     \fill[shadeA] (start-ll) -- ++(-\hhyp,-\hhyp) -- ++(\hhyp,-\hhyp) -- cycle;
     \fill[shadeA!90!black] (start-ll)++(0,-\hhyp) -- ++(-\hhyp,0) -- ++(\hhyp,-\hhyp) -- cycle;
