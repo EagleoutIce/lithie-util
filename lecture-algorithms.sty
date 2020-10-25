@@ -1,0 +1,38 @@
+%% lecture-algorithms.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 25.10.2020
+%%
+%% algorithms2e Support for lectures
+%%
+\ProvidesPackage{lecture-algorithms}[2020/10/25 v1.0 algorithms2e]
+
+\RequirePackage{etoolbox}
+\RequirePackage[linesnumbered,algoruled]{algorithm2e}
+
+\setlength{\algoheightrule}{1.15pt}
+\setlength{\algotitleheightrule}{0.8pt}
+
+\let\Comment\tcp
+\long\def\@lithie@algo@cmtfrmt#1{\color{Charcoal}\T{#1}}
+\SetCommentSty{@lithie@algo@cmtfrmt}
+\SetNoFillComment
+
+\def\PreCode{\Indm}
+\def\StartCode{\Indp}
+\def\EndCode{\Indm}
+
+\SetKw{KwOr}{or}
+\SetKw{KwAnd}{and}
+
+\def\@lithie@algo@def@style{\rmfamily\upshape}
+\def\@lithiealgo@init{%\def\alabel##1{\gdef\@alabel{#1}}%
+  \IncMargin{1em}\def\Int{{\@lithie@algo@def@style int}}\def\Matrix{{\@lithie@algo@def@style 2DMatrix}}\def\True{{\@lithie@algo@def@style true}}\def\False{{\@lithie@algo@def@style false}}%
+}
+\def\@lithiealgo@exit{\DecMargin{1em}}
+
+\preto\algocf@algorithm{\@lithiealgo@init}
+\preto\endalgocf@algorithm{\@lithiealgo@exit}
+
+\endinput
