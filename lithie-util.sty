@@ -108,11 +108,12 @@
 }
 
 % define the groups
-\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,lecture,uml,listof,boxes,links}
+\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,lecture,listings,uml,listof,boxes,links}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
 \lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,generic,boxes}
 \lu@DefineModule{tps}{tikz-palettes}{tikz-palettes}{}{color,util}
+
 \lu@DefineModule{lsc}{lecture-shortcuts}{lecture-shortcuts}{}{util,lecture}
 \lu@DefineModule{lgs}{lecture-glossary}{lecture-glossary}{enumitem}{lecture,listof}
 \lu@DefineModule{lbg}{lecture-bibliography}{lecture-bibliography}{}{lecture,listof}
@@ -121,6 +122,8 @@
 \lu@DefineModule{lcp}{lecture-coverpage}{lecture-coverpage}{}{lecture}
 \lu@DefineModule{lre}{lecture-registers}{lecture-registers}{}{lecture,util,generic}
 \lu@DefineModule{lar}{lecture-algorithms}{lecture-algorithms}{}{lecture,util,generic}
+\lu@DefineModule{lre}{lecture-runtimes}{lecture-runtimes}{}{lecture,listings}
+
 \lu@DefineModule{lbx}{lithie-boxes}{lithie-boxes}{autoenv}{lecture,util,boxes}
 \lu@DefineModule{lts}{lithie-task-boxes}{lithie-task-boxes}{}{lecture,util,boxes}
 
@@ -129,7 +132,7 @@
 \lu@DefineModule{sot}{sopra-tables}{sopra-tables}{}{sopra}
 \lu@DefineModule{sor}{sopra-requirements}{sopra-requirements}{}{sopra}
 \lu@DefineModule{som}{sopra-models}{sopra-models}{}{sopra,uml}
-\lu@DefineModule{sol}{sopra-listings}{sopra-listings}{noloadlangs}{sopra}
+\lu@DefineModule{sol}{sopra-listings}{sopra-listings}{noloadlangs}{sopra,listings}
 \lu@DefineModule{sod}{sopra-documentation}{sopra-documentation}{}{sopra}
 \lu@DefineModule{soc}{sopra-changelog}{sopra-changelog}{}{sopra}
 \lu@DefineModule{soa}{sopra-attachments}{sopra-attachments}{}{sopra}
