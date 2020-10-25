@@ -8,6 +8,14 @@
 %%
 \ProvidesPackage{lecture-registers}[2020/10/21 v1.0 registers]
 
+\newif\iflecture@registers@disable@
+\DeclareOption{disable}{\lecture@registers@disable@true}
+\DeclareOption{enable}{\lecture@registers@disable@false}
+\ProcessOptions*
+
+\iflecture@registers@disable@
+\expandafter\endinput\fi
+
 \RequirePackage{etoolbox}
 
 \def\@lecture@definereg#1{
