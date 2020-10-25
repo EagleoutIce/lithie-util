@@ -12,7 +12,8 @@
 
 % place the bird
 % 1.5 line => 2.12132034 hyp
-\def\lithiebirb{\bgroup%
+\newcommand*\lithiebirb[1][\Lithie]{%
+\bgroup%
 \def\hyp{2.12132034}%
 \def\hhyp{2.12132034/2}%
 \begin{scope}[overlay]% xshift=0.74\paperwidth,yshift=-2.75cm,scale=1,
@@ -42,7 +43,7 @@
     \fill[shadeA] (start-ll) -- ++(-\hhyp,-\hhyp) -- ++(\hhyp,-\hhyp) -- cycle;
     \fill[shadeA!90!black] (start-ll)++(0,-\hhyp) -- ++(-\hhyp,0) -- ++(\hhyp,-\hhyp) -- cycle;
     % upper (place the lithie sign on the wing t-upper)
-    \fill[shadeA] (start-lu) -- ++(-\hhyp,\hhyp) to[edge node={node[above=-1.75pt,shadeA!90!black,font=\footnotesize] {\Lithie}}] ++(\hyp,0) -- cycle;
+    \fill[shadeA] (start-lu) -- ++(-\hhyp,\hhyp) to[edge node={node[above=-1.75pt,shadeA!90!black,font=\footnotesize] {#1}}] ++(\hyp,0) -- cycle;
     \fill[shadeA!90!black] (start-lu) -- ++(0,\hhyp) -- ++(\hhyp,0) -- cycle;
 
 \end{scope}%
