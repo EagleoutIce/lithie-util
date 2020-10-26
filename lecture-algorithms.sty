@@ -15,7 +15,7 @@
 \setlength{\algotitleheightrule}{0.8pt}
 
 \let\Comment\tcp
-\long\def\@lithie@algo@cmtfrmt#1{\color{black}\T{#1}}
+\long\def\@lithie@algo@cmtfrmt#1{\color{gray!90!black}\T{#1}}
 \SetCommentSty{@lithie@algo@cmtfrmt}
 \SetNoFillComment
 
@@ -25,6 +25,8 @@
 
 \SetKw{KwOr}{or}
 \SetKw{KwAnd}{and}
+\SetKw{KwBreak}{break}
+\SetKw{KwNot}{not}
 
 \def\@lithie@algo@def@style{\rmfamily\upshape}
 \def\@lithiealgo@init{%\def\alabel##1{\gdef\@alabel{#1}}%
