@@ -36,11 +36,21 @@
 
 \def\rbash{\@ifnextchar[{\rbash@opt}{\rbash@opt[\,:]}}
 \def\rbash@opt[#1]#2{%
-  \cbash{#2}#1%
-  \lecture@runtimes@getBashFileExecutionOutput{#2}%
+  \cbash{#2}#1\@ifnextchar({\rbash@ccommand}{\rbash@ccommand(#2)}%
 }
+\def\rbash@ccommand(#1){%
+  \lecture@runtimes@getBashFileExecutionOutput{#1}%
+}
+
+\gdef\Rbash{\@ifnextchar[{\Rbash@opt}{\Rbash@opt[\,:]}}
+\gdef\Rbash@opt[#1]#2#3{%
+  \cbash{#2}#1%
+  \getBashFileExecutionOutput{#3}%
+}
+
 \ifcsname robustify\endcsname%
-\robustify\rbash\fi
+\robustify\rbash \robustify\Rbash\fi
+
 
 \def\rbashcurrentinject{}
 \def\lecture@runtimes@getBashFileExecutionOutput#1{%
