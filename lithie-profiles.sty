@@ -17,8 +17,9 @@
         \PackageWarning{lithie-profiles}{Profile '#1' already exists. Appending.}
         \lip@AppendToProfile{#1}{#2}%
     \else%
-    \expandafter\def\csname lip@profile@#1\endcsname{#2}%
+    \expandafter\def\csname lip@profile@#1\endcsname{}%
     \xdef\lip@allprofiles{\@ifundefined{lip@allprofiles}{}{\lip@allprofiles,}#1}%
+    \lip@AppendToProfile{#1}{#2}%
     \fi%
 }
 
@@ -35,6 +36,16 @@
 }
 
 \providecommand{\lithieprofile}{default}
+
+\def\lip@firstoftwo#1#2{#1}
+\def\lip@secondoftwo#1#2{#2}
+
+\long\def\ifprofile#1{%
+    \def\@tmpa{#1}%
+    \ifx\@tmpa\lithieprofile%
+        \expandafter\lip@firstoftwo%
+    \else\expandafter\lip@secondoftwo\fi%
+}
 
 \AtEndPreamble{%
     \expandafter\ifx\expandafter!\lithieprofile!\else%
