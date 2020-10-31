@@ -108,7 +108,7 @@
 }
 
 % define the groups
-\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,lecture,listings,uml,listof,boxes,links}
+\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,lecture,listings,uml,listof,boxes,links,beamer-extra}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
 \lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,generic,boxes}
@@ -126,6 +126,9 @@
 
 \lu@DefineModule{lbx}{lithie-boxes}{lithie-boxes}{autoenv}{lecture,util,boxes}
 \lu@DefineModule{lts}{lithie-task-boxes}{lithie-task-boxes}{}{lecture,util,boxes}
+
+\lu@DefineModule{blp}{beamer-latex-preview}{beamer-latex-preview}{}{beamer-extra}
+\lu@DefineModule{bls}{beamer-latex-shortcuts}{beamer-latex-shortcuts}{}{beamer-extra}
 
 \lu@DefineModule{lib}{lithie-birb}{lithie-birb}{}{util}
 
