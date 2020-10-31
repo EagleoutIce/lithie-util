@@ -15,8 +15,6 @@
 \DeclareOption{nopatchurl}{\leclink@patchurl@false}
 \ProcessOptions*
 
-% TODO: reference like 'see page ->'
-
 \ifleclink@defaults@
     \AtBeginDocument{\hypersetup{pdfborder={0 0 0}}}%
 \fi
@@ -26,6 +24,7 @@
 \fi
 
 \RequirePackage{etoolbox}
+\interfootnotelinepenalty=10000
 
 \newcommand*\SetAllLinkStyle[1]{%
     \def\leclink@autoref@linkstyle##1##2##3{#1}%
@@ -123,5 +122,4 @@
 }%
 }
 \endgroup
-
 \endinput
