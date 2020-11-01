@@ -189,8 +189,8 @@
         -- ++(-0.6\paperwidth,0)   -- cycle;%
     \begin{scope}[every node/.style={color=\lecturecp@emblemcolor}]%
         \node[scale=0.89] at(0.75\paperwidth,\lecturecp@height/2+0.5) {\lecture@emblem};
-        \node[right] at(\lecturecp@leftwidth,\lecturecp@height/2)
-            {\parbox[t]{9.9cm}{%
+        \node[right,text width=0.6\paperwidth-\lecturecp@leftwidth] at(\lecturecp@leftwidth,\lecturecp@height/2)
+            {\parbox[t]{\linewidth}{%
                 \fontsize{15pt}{15pt}\selectfont\sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
                 \par%
             }};
