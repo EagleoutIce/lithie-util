@@ -261,4 +261,18 @@
 \restoregeometry{}\clearpage\egroup}
 }
 
+
+
+\lecturecp@coverpagestyle{simple}{%
+\def\lecture@coverpage@geometry{}
+
+\renewcommand{\maketitle}{\bgroup%
+\setlength\parindent{0pt}%
+\begin{center}%
+    \sffamily{\bfseries\Huge\lecture@r{title}}\medskip\leavevmode\\
+    \normalsize\lecture@r{subtitle}\vspace*{3em}%
+\end{center}%
+\egroup}%
+}
+
 \endinput

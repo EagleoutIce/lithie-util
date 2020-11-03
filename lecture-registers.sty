@@ -74,8 +74,9 @@
 }
 
 \newcommand*\lecture@typeset@authors{%
-    \edef\@tmp{\noexpand\lecture@@typeset@author{\lecture@register@author}}\@tmp}
+    \protected@edef\@tmp{\noexpand\lecture@@typeset@author{\lecture@register@author}}\@tmp}
 \let\typesetAuthor\lecture@typeset@authors
+\let\typesetAuthors\lecture@typeset@authors
 
 \def\lecture@firstoftwo#1#2{#1}
 \def\lecture@secondoftwo#1#2{#2}
