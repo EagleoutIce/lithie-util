@@ -38,8 +38,8 @@
 }
 
 \AppendToProfile{default}{%
-  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command\endcsname[2][1]{\centering\includegraphics[width=#1\linewidth]{\LPP@imgprefix#2-print-compressed}}% -compressed
-  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command Raw\endcsname[2][]{\includegraphics{\LPP@imgprefix#2-print-compressed}}%
+  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command\endcsname[2][1]{\centering\includegraphics[width=#1\linewidth]{\LPP@imgprefix#2-compressed}}% -compressed
+  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command Raw\endcsname[2][]{\includegraphics{\LPP@imgprefix#2-compressed}}%
   \DisableMulticolHint%
   \scolfalse%
   \newenvironment{ltabular}%
