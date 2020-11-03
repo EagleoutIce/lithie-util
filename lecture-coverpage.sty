@@ -118,7 +118,7 @@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry%
 \begin{titlepage}%
-\parbox{0.99\linewidth}{\raggedright\fontsize{35pt}{35pt}\selectfont\sffamily\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}\leavevmode\bigskip\\*}\par
+\parbox{0.99\linewidth}{\raggedright\fontsize{39pt}{39pt}\selectfont\sffamily\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}\leavevmode\bigskip\\*}\par
 \parbox{0.99\linewidth}{\fontsize{15pt}{15pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\%
 \vfill% set the titleimage
 \parbox[c][0.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
@@ -158,7 +158,7 @@
 \end{tikzpicture}\\*[0.1\paperheight]%
 % title:
 \hspace*{\lecturecp@leftwidth}\parbox{0.75\linewidth}{%
-    \raggedright\fontsize{35pt}{35pt}\selectfont\sffamily%
+    \raggedright\fontsize{39pt}{39pt}\selectfont\sffamily%
     \savebox{\lecturecp@title@widthbox}{\pbox{\linewidth}{\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}~~\null}}%
     \usebox{\lecturecp@title@widthbox}\strut%
     \global\lecture@tmp@titlewidth=\wd\lecturecp@title@widthbox}%
@@ -194,7 +194,7 @@
                 \fontsize{15pt}{15pt}\selectfont\sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
                 \par%
             }};
-        \node[align=right,font=\normalsize] at(0.95\paperwidth,\lecturecp@height/2) {\Lithie\\\scriptsize\textsf{Ver. \lithie@version}};%
+        \node[align=left,right=0pt,outer sep=0pt,font=\normalsize\sffamily] at(0.9*\paperwidth,\lecturecp@height/2) {\Lithie\smallskip\\\resizebox{\widthof{\Lithie}}{!}{\textsf{Ver. \lithie@version}}};%
     \end{scope}%
 \end{tikzpicture}%
 \end{titlepage}%
