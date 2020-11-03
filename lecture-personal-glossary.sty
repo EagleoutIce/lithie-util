@@ -1,0 +1,22 @@
+%% lecture-personal-glossary.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 3.11.2020
+%%
+%% glossary modifications i use in my scripts
+
+\ProvidesPackage{lecture-personal-glossary}[2020/11/03 v1.0 Personal glossary stuff]
+
+\RequirePackage{needspace}
+
+\def\exampleglosstyle#1{\par\needspace{2.25\baselineskip}\strut\paletteA{\textsf{#1}}\par}
+\LithieSetGlossaryStyle{\exampleglosstyle}
+\def\glstreenamefmt#1{#1}
+
+% TODO: important fix for glossarymark
+\let\glossarymark\sectionmark
+\renewcommand{\glossarysection}[2][]{\section{#1}}
+% \renewcommand*{\glstextformat}[1]{\lecture@fig@style@nonbold{#1}}
+
+\endinput

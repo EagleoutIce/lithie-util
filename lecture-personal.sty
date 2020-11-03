@@ -1,0 +1,32 @@
+%% lecture-personal.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 3.11.2020
+%%
+%% Float modifications i use in my scripts
+
+\ProvidesPackage{lecture-personal}[2020/11/03 v1.0 Personal collection]
+
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=LPM,prefix=LPM@}
+
+\DeclareStringOption{imgprefix}
+\DeclareStringOption{command}
+
+\ProcessKeyvalOptions*\relax%
+
+\RequirePackage{lecture-personal-float,lecture-personal-general,lecture-personal-tikz,lecture-personal-glossary}
+\RequirePackage[imgprefix=\LPM@imgprefix,command=\LPM@command]{lecture-personal-profiles}
+
+% TODO: move them to generic => lithie float
+\RequirePackage{newfloat,subcaption,supertabular}
+\addto\captionsngerman{\renewcommand{\equationautorefname}{Formel}}
+\addto\captionsenglish{\renewcommand{\equationautorefname}{Equation}}
+
+\DeclareFloatingEnvironment[%
+    fileext=loc,listname={Alle Listings},name=Listing,%
+    placement=tbhp,within=chapter,%
+]{code}
+
+\endinput

@@ -1,0 +1,30 @@
+%% lecture-personal-tikz.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 3.11.2020
+%%
+%% tikz modifications i use in my scripts
+
+\ProvidesPackage{lecture-personal-tikz}[2020/11/03 v1.0 Personal tikz]
+
+\RequirePackage{forest,cancel,pgfplots}
+
+\def\fillfont{\def\mdseries@sf{medium}\sffamily}
+
+\AtEndPreamble{%
+  \tikzumlset{fill usecase=white, fill template=white, fill package=white,fill system=white, fill state=white,fill object=white, fill class=white,
+  fill port=white, fill component=white,fill note=gray!6!white, font=\small\ttfamily}%
+  \tikzset{%
+      every node/.append style={font=\sffamily},%
+      lblock/.style={block,#1,writ,font=\fillfont}, %
+      block/.style={rectangle,draw, align=center, minimum height=1.9em,rounded corners=1.65pt},%
+      line join=round,%
+      concept/.append style={fill={none}}%
+  }
+}
+% mindmap and trees for overview
+\usetikzlibrary{graphs,arrows.meta,calc,mindmap,trees}
+\pgfplotsset{compat=1.16}
+
+\endinput

@@ -1,0 +1,85 @@
+%% lecture-personal-profiles.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 3.11.2020
+%%
+%% Profiles i use in my scripts
+
+\ProvidesPackage{lecture-personal-profiles}[2020/11/03 v1.0 Personal profiles]
+
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=LPP,prefix=LPP@}
+
+\DeclareStringOption{imgprefix}
+\DeclareStringOption{command}
+
+\ProcessKeyvalOptions*\relax%
+
+\usepackage{lettrine}
+\setcounter{DefaultLines}{3}%
+\LettrineOnGridfalse
+\LettrineRealHeighttrue
+
+\newif\ifscol%
+\AppendToProfile{print}{%
+  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command\endcsname[2][1]{\centering\includegraphics[width=#1\linewidth]{\LPP@imgprefix#2-print-compressed}}% -compressed
+  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command Raw\endcsname[2][]{\includegraphics{\LPP@imgprefix#2-print-compressed}}%
+  \DisableMulticolHint%
+  \scolfalse%
+  \newenvironment{ltabular}%
+      {\@nameuse{tabular}}%
+      {\@nameuse{endtabular}}%
+  \usepackage{Romantik}% Romantik for cfr initials?
+  \renewcommand\LettrineFontHook{\Romantik}%
+  \AtBeginDocument{%
+    \hypersetup{pdftitle={\lecture@r{title} (Druckversion)}}%
+  }
+}
+
+\AppendToProfile{default}{%
+  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command\endcsname[2][1]{\centering\includegraphics[width=#1\linewidth]{\LPP@imgprefix#2-print-compressed}}% -compressed
+  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command Raw\endcsname[2][]{\includegraphics{\LPP@imgprefix#2-print-compressed}}%
+  \DisableMulticolHint%
+  \scolfalse%
+  \newenvironment{ltabular}%
+      {\@nameuse{tabular}}%
+      {\@nameuse{endtabular}}%
+  % we color it
+  \renewcommand\LettrineFontHook{\color{paletteA}}%
+  \def\DefaultLoversize{0.095}%
+  \AtBeginDocument{%
+    \hypersetup{pdftitle={\lecture@r{title} (Digitale-Version)}}%
+  }
+}
+
+\RegisterProfile{mobile}{%
+  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command\endcsname[2][1]{\centering\includegraphics[width=#1\linewidth,height=0.9\textheight,keepaspectratio]{\LPP@imgprefix#2-print-compressed}}% -compressed
+  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command Raw\endcsname[2][]{\includegraphics{\LPP@imgprefix#2-print-compressed}}%
+  \DisableMulticolHint%\EnableMulticolHint%
+  \scoltrue%
+  \makeatletter
+  \renewcommand\fps@figure{tbp}%
+  \renewcommand\fps@table{tbp}%
+  \def\floatpagefraction{0.5}%
+  \def\topfraction{0.7}%
+  \def\bottomfraction{0}%
+  \setcounter{topnumber}{3}%2
+  \setcounter{bottomnumber}{0}%
+  \setcounter{totalnumber}{3}%
+  \newenvironment{ltabular}%
+    {\bgroup\small\@nameuse{supertabular}}%
+    {\@nameuse{endsupertabular}\egroup}%
+  \setcounter{DefaultLines}{2}%
+  % we color it
+  \renewcommand\LettrineFontHook{\color{paletteA}}%
+  \LettrineOnGridfalse%
+  \def\DefaultLoversize{0.095}%
+  \AtBeginDocument{%
+    \hypersetup{pdftitle={\lecture@r{title} (Mobilversion)}}%
+  }
+}
+
+\renewcommand*{\LettrineTextFont}{}%
+
+\endinput

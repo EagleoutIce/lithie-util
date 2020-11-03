@@ -108,7 +108,7 @@
 }
 
 % define the groups
-\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,lecture,listings,uml,listof,boxes,links,beamer-extra}
+\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,lecture,listings,uml,listof,boxes,links,personal,beamer-extra}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
 \lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,generic,boxes}
@@ -139,6 +139,9 @@
 \lu@DefineModule{sod}{sopra-documentation}{sopra-documentation}{}{sopra}
 \lu@DefineModule{soc}{sopra-changelog}{sopra-changelog}{}{sopra}
 \lu@DefineModule{soa}{sopra-attachments}{sopra-attachments}{}{sopra}
+
+% personal
+\lu@DefineModule{lper}{lecture-personal}{lecture-personal}{}{personal}
 
 % TODO: eagle maps, etc. more but shorter groups... like 'maps', 'istings' etc...
 % TODO: alias functionality?
