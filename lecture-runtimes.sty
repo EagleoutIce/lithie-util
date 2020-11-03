@@ -12,11 +12,12 @@
 \RequirePackage{ifplatform}
 
 \@ifpackageloaded{sopra-listings}{}{%
-  \PackageError{lecture-runtimes}{%
-    The 'sopra-listings'-package wasn't loaded.}{%
-      Please load it before this package as it is necessary %
-      for this package.%
-    }%
+  \PackageWarning{lecture-runtimes}{%
+    The 'sopra-listings'-package wasn't loaded.%
+    Please load it before this package as it is necessary %
+    for this package.%
+  }%
+  \expandafter\endinput
 }
 
 \lstdefinestyle{lecture@BashOutput}{%
