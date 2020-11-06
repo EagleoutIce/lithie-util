@@ -1,0 +1,33 @@
+%% lecture-t-diagrams.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 25.10.2020
+%%
+%% tikz extension for t-diagrams
+%%
+\ProvidesPackage{lecture-t-diagrams}[2020/11/06 v1.0 t-diagrams]
+
+% two hours wasted to do it with shapes. Lets do it simpler
+
+\newlength\lecture@tblock@size
+\setlength\lecture@tblock@size{0.85cm}
+
+\tikzset{%
+  lecture@tblock@part/.style={text width=\lecture@tblock@size,inner sep=0pt,outer sep=0.33em,align=center,minimum height=\lecture@tblock@size}%
+}
+% #1 name
+% #2 position
+% #3 left
+% #4 right
+% #5 down
+\newcommand*\tblock[5][]{%
+  \draw (#2) -| ++(3*\lecture@tblock@size,-\lecture@tblock@size) -| ++(-\lecture@tblock@size,-\lecture@tblock@size) -| ++(-\lecture@tblock@size,\lecture@tblock@size) -| cycle;
+  \path (#2)++(\lecture@tblock@size/2,-\lecture@tblock@size/2) node[lecture@tblock@part] (#1-left) {\(#3\)};
+  \path (#2)++(\lecture@tblock@size/2+\lecture@tblock@size,-\lecture@tblock@size/2) node[lecture@tblock@part] (#1-mid) {\(\longrightarrow\)};
+  \path (#2)++(\lecture@tblock@size/2+2*\lecture@tblock@size,-\lecture@tblock@size/2) node[lecture@tblock@part] (#1-right) {\(#4\)};
+  \path (#2)++(\lecture@tblock@size/2+\lecture@tblock@size,-\lecture@tblock@size/2-\lecture@tblock@size) node[lecture@tblock@part] (#1-down) {\(#5\)};
+}
+
+
+\endinput
