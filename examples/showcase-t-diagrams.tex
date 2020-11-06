@@ -7,8 +7,11 @@
 
 \begin{tikzpicture}
     \tblock[a]{0,0}{SL}{ML}{C}
-    \tblock[b]{a-mid.south east}{C}{ML}{ML}
-    \tblock[c]{0.85*4cm+0.66em,0}{C}{ML}{ML}
+    \tblock[b]{2*\tblocksize+\tblockoffset,-\tblocksize-\tblockoffset}{C}{ML}{ML}
+    \tblock[c]{\tblocksize*4+\tblockoffset*2,0}{SL}{ML}{ML}
+    \node[above] at(a-mid.north) {to be developed};
+    \node[above] at(c-mid.north) {by translation};
+    \node[below] at(b-down.south) {existing};
 \end{tikzpicture}
 
 \end{document}

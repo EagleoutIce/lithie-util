@@ -10,11 +10,14 @@
 
 % two hours wasted to do it with shapes. Lets do it simpler
 
-\newlength\lecture@tblock@size
-\setlength\lecture@tblock@size{0.85cm}
+\newlength\tblocksize
+\setlength\tblocksize{0.9cm}
 
+\newlength\tblockoffset
+\setlength\tblockoffset{0.33em}
 \tikzset{%
-  lecture@tblock@part/.style={text width=\lecture@tblock@size,inner sep=0pt,outer sep=0.33em,align=center,minimum height=\lecture@tblock@size}%
+  tblock/.style={text width=\tblocksize,inner sep=0pt,align=center,minimum height=\tblocksize},%
+  tborder/.style={semithick},%
 }
 % #1 name
 % #2 position
@@ -22,11 +25,11 @@
 % #4 right
 % #5 down
 \newcommand*\tblock[5][]{%
-  \draw (#2) -| ++(3*\lecture@tblock@size,-\lecture@tblock@size) -| ++(-\lecture@tblock@size,-\lecture@tblock@size) -| ++(-\lecture@tblock@size,\lecture@tblock@size) -| cycle;
-  \path (#2)++(\lecture@tblock@size/2,-\lecture@tblock@size/2) node[lecture@tblock@part] (#1-left) {\(#3\)};
-  \path (#2)++(\lecture@tblock@size/2+\lecture@tblock@size,-\lecture@tblock@size/2) node[lecture@tblock@part] (#1-mid) {\(\longrightarrow\)};
-  \path (#2)++(\lecture@tblock@size/2+2*\lecture@tblock@size,-\lecture@tblock@size/2) node[lecture@tblock@part] (#1-right) {\(#4\)};
-  \path (#2)++(\lecture@tblock@size/2+\lecture@tblock@size,-\lecture@tblock@size/2-\lecture@tblock@size) node[lecture@tblock@part] (#1-down) {\(#5\)};
+  \draw[tborder] (#2) -| ++(3*\tblocksize,-\tblocksize) -| ++(-\tblocksize,-\tblocksize) -| ++(-\tblocksize,\tblocksize) -| cycle;
+  \path (#2)++(\tblocksize/2,-\tblocksize/2) node[tblock] (#1-left) {\textit{#3}};
+  \path (#2)++(\tblocksize/2+\tblocksize,-\tblocksize/2) node[tblock] (#1-mid) {\(\longrightarrow\)};
+  \path (#2)++(\tblocksize/2+2*\tblocksize,-\tblocksize/2) node[tblock] (#1-right) {\textit{#4}};
+  \path (#2)++(\tblocksize/2+\tblocksize,-\tblocksize/2-\tblocksize) node[tblock] (#1-down) {\textit{#5}};
 }
 
 
