@@ -56,10 +56,10 @@
 \newglossarystyle{lecture@glossary}{%
     \setglossarystyle{tree}%
 
-    \renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\end{description}\fi\global\atinitglossaryfalse%
+    \renewcommand{\glsgroupheading}[1]{\ifatinitglossary=10000\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse%
         \lglos@headingstyle{\glsgetgrouptitle{##1}}%
         \iflglos@setup@enumitem@%
-        \edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\lglos@curdesc%
+        \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc%
         \else% no enumitem
         \begin{description}\fi}%
 
@@ -72,13 +72,14 @@
         \hangindent0pt\relax \parindent0pt\relax
         \item[\glsentryitem{##1}\glstreenamefmt{\glstarget{##1}{\glossentryname{##1}}}]%
         \ifglshassymbol{##1}{\space(\glossentrysymbol{##1})}{}%
-        \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\lglos@printpages{##2}\par
+        \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\lglos@printpages{##2}\par%
     }%
 }
 \setglossarystyle{lecture@glossary}
 \makeglossaries
 
-
+\preto\printglossaries{\bgroup\interlinepenalty=1000}
+\appto\printglossaries{\egroup}
 
 
 \endinput
