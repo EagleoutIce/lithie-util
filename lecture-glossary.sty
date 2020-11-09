@@ -56,7 +56,7 @@
 \newglossarystyle{lecture@glossary}{%
     \setglossarystyle{tree}%
 
-    \renewcommand{\glsgroupheading}[1]{\ifatinitglossary=10000\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse%
+    \renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse%
         \lglos@headingstyle{\glsgetgrouptitle{##1}}%
         \iflglos@setup@enumitem@%
         \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc%
