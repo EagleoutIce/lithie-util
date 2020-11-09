@@ -78,6 +78,8 @@
 \end{tikzpicture}%
 }
 
+\def\lecture@eff@titlewidth{\lecture@tmp@titlewidth}
+\def\lecturetitlewidth#1{\def\lecture@eff@titlewidth{#1}}
 
 \long\def\lecturecp@coverpagestyle#1#2{%
     \expandafter\gdef\csname lecturecp@style@#1@\endcsname{#2}%
@@ -157,13 +159,13 @@
         |- cycle;%
 \end{tikzpicture}\\*[0.1\paperheight]%
 % title:
-\hspace*{\lecturecp@leftwidth}\parbox{0.75\linewidth}{%
+\hspace*{\lecturecp@leftwidth}\parbox{0.85\linewidth}{%
     \raggedright\fontsize{39pt}{39pt}\selectfont\sffamily%
     \savebox{\lecturecp@title@widthbox}{\pbox{\linewidth}{\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}~~\null}}%
     \usebox{\lecturecp@title@widthbox}\strut%
     \global\lecture@tmp@titlewidth=\wd\lecturecp@title@widthbox}%
     \leavevmode\\*[0.5em]%
-    \paletteA{\rule{\lecture@tmp@titlewidth+\lecturecp@leftwidth}{1.33pt}}%
+    \paletteA{\rule{\lecture@eff@titlewidth+\lecturecp@leftwidth}{1.33pt}}%
     \\*[0.25em]%
 \hspace*{\lecturecp@leftwidth}\parbox{0.75\linewidth}{%
     \fontsize{15pt}{15pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\%
@@ -232,7 +234,7 @@
     \usebox{\lecturecp@title@widthbox}\strut%
     \global\lecture@tmp@titlewidth=\wd\lecturecp@title@widthbox}%
     \leavevmode\\*[0.25em]%
-    \paletteA{\rule{\lecture@tmp@titlewidth+\lecturecp@leftwidth}{1.33pt}}%
+    \paletteA{\rule{\lecture@eff@titlewidth+\lecturecp@leftwidth}{1.33pt}}%
     \\*[0.25em]%
 \hspace*{\lecturecp@leftwidth}\parbox{0.75\linewidth}{%
     \fontsize{14pt}{14pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\%
