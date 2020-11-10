@@ -8,3 +8,7 @@ dependencies:
     lithie-boxes:
       url: https://github.com/EagleoutIce/lithie-boxes
       grab-files: ["*.sty", "*.style"]
+    eagle-maps:
+      url: https://github.com/EagleoutIce/eagle-maps
+      grab-files: ["*.sty"]
+      grab-dirs: ["eagle-maps-images/"]
