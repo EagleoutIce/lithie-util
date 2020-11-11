@@ -24,7 +24,18 @@
   }
 }
 % mindmap and trees for overview
-\usetikzlibrary{graphs,arrows.meta,calc,mindmap,trees}
+\usetikzlibrary{graphs,arrows.meta,calc,mindmap,trees,rdf,matrix}
 \pgfplotsset{compat=1.16}
+
+% state diagram
+
+\tikzset{
+  state/.style={circle, draw, minimum size = 0.65cm},
+  final/.style={double,double distance=1.33pt,outer sep=1.1pt},
+  initial/.style={},
+  transition/.style={edge label={$#1$}}
+}
+
+\newcommand*{\automata}[2][]{\graph[math nodes,grow right=1.5cm,edges={-Kite},#1]{#2};}
 
 \endinput
