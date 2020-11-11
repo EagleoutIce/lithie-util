@@ -23,10 +23,15 @@
 \setlength{\DefaultSlope}{0pt}
 \renewcommand*{\LettrineTextFont}{}%
 
+% #1 name #2 prefix #3 print #4 default scale #5 ex args
+\def\lecture@profiles@MakeImageCommands#1#2#3#4#5{%
+\expandafter\newcommand\expandafter*\csname Get#1\endcsname[2][#4]{\centering\includegraphics[width=##1\linewidth,#5]{#2##2-#3compressed}}% -compressed
+\expandafter\newcommand\expandafter*\csname Get#1Raw\endcsname[2][]{\includegraphics[##1]{#2##2-#3compressed}}%
+}
+
 \newif\ifscol%
 \AppendToProfile{print}{%
-  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command\endcsname[2][1]{\centering\includegraphics[width=#1\linewidth]{\LPP@imgprefix#2-print-compressed}}% -compressed
-  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command Raw\endcsname[2][]{\includegraphics{\LPP@imgprefix#2-print-compressed}}%
+  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{print-}{1}{}}\@mkcommands
   \DisableMulticolHint%
   \scolfalse%
   \newenvironment{ltabular}%
@@ -43,8 +48,7 @@
 }
 
 \AppendToProfile{default}{%
-  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command\endcsname[2][1]{\centering\includegraphics[width=#1\linewidth]{\LPP@imgprefix#2-compressed}}% -compressed
-  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command Raw\endcsname[2][]{\includegraphics{\LPP@imgprefix#2-compressed}}%
+  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{1}{}}\@mkcommands
   \DisableMulticolHint%
   \scolfalse%
   \newenvironment{ltabular}%
@@ -61,8 +65,7 @@
 }
 
 \RegisterProfile{mobile}{%
-  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command\endcsname[2][0.935]{\centering\includegraphics[width=#1\linewidth,height=0.87\textheight,keepaspectratio]{\LPP@imgprefix#2-compressed}}% -compressed
-  \expandafter\expandafter\expandafter\newcommand\expandafter\expandafter\expandafter*\expandafter\csname Get\LPP@command Raw\endcsname[2][]{\includegraphics{\LPP@imgprefix#2-compressed}}%
+  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{0.935}{height=0.87\noexpand\textheight,keepaspectratio}}\@mkcommands
   \DisableMulticolHint%\EnableMulticolHint%
   \scoltrue%
   \makeatletter
