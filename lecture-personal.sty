@@ -16,7 +16,7 @@
 
 \ProcessKeyvalOptions*\relax%
 
-\RequirePackage{lecture-personal-float,lecture-personal-general,lecture-personal-tikz,lecture-personal-glossary,lecture-personal-tabular}
+\RequirePackage{lecture-personal-float,lecture-personal-general,lecture-personal-tikz,lecture-personal-glossary,lecture-personal-tabular,lecture-personal-resize}
 \RequirePackage[imgprefix=\LPM@imgprefix,command=\LPM@command]{lecture-personal-profiles}
 
 % if supertabular is loaded, they would conflict :)))
@@ -33,5 +33,13 @@
     fileext=loc,listname={Alle Listings},name=Listing,%
     placement=tbp,within=chapter,%
 ]{code}
+
+\AppendToProfile{mobile}{%
+    \AtBeginEnvironment{code}{\lstfs{10}}%
+    \AtBeginEnvironment{code*}{\lstfs{10}}%
+    \colorlet{sol@colors@border}{white!0}
+    \colorlet{sol@colors@background}{white!0}
+    \lstset{lineskip=3.25pt}
+}
 
 \endinput
