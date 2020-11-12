@@ -9,10 +9,10 @@
 \ProvidesPackage{lecture-personal-resize}[2020/11/12 v1.0 Downsize hack]
 
 \newsavebox\lecture@personal@downsize@box
-\newcommand\downsize[2]{%
-  \savebox{\lecture@personal@downsize@box}{#2}%
-  \ifdim\wd\lecture@personal@downsize@box>#1 %
-    \resizebox{#1}{!}{\usebox\lecture@personal@downsize@box}%
+\newcommand\downsize[3][!]{%
+  \savebox{\lecture@personal@downsize@box}{#3}%
+  \ifdim\wd\lecture@personal@downsize@box>#2 %
+    \resizebox{#2}{#1}{\usebox\lecture@personal@downsize@box}%
   \else\usebox\lecture@personal@downsize@box\fi%
 }
 
