@@ -32,7 +32,13 @@
 \tikzset{
   state/.style={circle,font=\Large\sffamily, draw, minimum size = 1cm,minimum height=1cm},
   wstate/.style={shape=rounded rectangle,font=\Large\sffamily, draw, minimum size = 1cm,minimum height=1cm},
-  final/.style={double,double distance=1.33pt,outer sep=1.1pt},
+  final/.style={thick,inner sep=2pt,%
+    append after command={%
+      \pgfextra{%
+        \node[fit=(\tikzlastnode),draw,scale=0.485] {};
+      }%
+    }%
+  },
   initial/.style={},
   transition/.style={edge node={node[auto,sloped]{\statetransitionfont$#1$}}},%
   transition'/.style={edge node={node[auto,swap,sloped]{\statetransitionfont$#1$}}},%
