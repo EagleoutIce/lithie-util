@@ -34,6 +34,15 @@
     placement=tbp,within=chapter,%
 ]{code}
 
+% patch to bridge for lithie boxe
+\def\listofcodes{\bgroup%
+\def\contentsname{Alle Listings}% may?
+\libx@listof@heading{\contentsname}%
+\libx@starttoc{loc}%
+\egroup}
+
+
+
 \AppendToProfile{mobile}{%
     \AtBeginEnvironment{code}{\lstfs{10}}%
     \AtBeginEnvironment{code*}{\lstfs{10}}%
