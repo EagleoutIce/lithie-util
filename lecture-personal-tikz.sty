@@ -30,24 +30,9 @@
 % state diagram
 \def\statetransitionfont{\large}
 \tikzset{
-  state/.style={circle,font=\Large\sffamily, draw, minimum size = 1cm},
-  wstate/.style={shape=rounded rectangle,font=\Large\sffamily, draw, minimum width = 1cm,minimum height=1cm},
-  final state/.style={state,thick,inner sep=2pt,%
-    append after command={%
-      \pgfextra{%
-        \node[state,fit=(\tikzlastnode),draw,scale=0.485] {};
-      }%
-    }%
-  },
-  final wstate/.style={wstate, thick,inner ysep=9pt,inner xsep=9pt,%
-    append after command={%
-      \pgfextra{%
-        \coordinate (\tikzlastnode-e) at ($(\tikzlastnode.east)+(-0.225cm,0)$);
-        \coordinate (\tikzlastnode-w) at ($(\tikzlastnode.west)+(0.225cm,0)$);
-        \node[wstate,fit=(\tikzlastnode-e) (\tikzlastnode-w),yscale=0.9,draw] {};
-      }%
-    }%
-  },
+  state/.style={circle,font=\Large\sffamily, draw, minimum size = 1cm,minimum height=1cm},
+  wstate/.style={shape=rounded rectangle,font=\Large\sffamily, draw, minimum size = 1cm,minimum height=1cm},
+  final/.style={double,double distance=1.33pt,outer ysep=1pt,outer xsep=1.65pt},
   initial/.style={},
   transition/.style={edge node={node[auto,sloped]{\statetransitionfont$#1$}}},%
   transition'/.style={edge node={node[auto,swap,sloped]{\statetransitionfont$#1$}}},%
