@@ -10,7 +10,11 @@
 
 \RequirePackage{needspace}
 
-\def\exampleglosstyle#1{\par\needspace{2.25\baselineskip}\strut\paletteA{\textsf{#1}}\par}
+\ifprofile{mobile}{
+    \def\exampleglosstyle#1{\par\needspace{2.25\baselineskip}{\centering\strut\paletteA{\rule{1.5cm}{0.5pt}\,\textsf{#1}\,\rule{1.5cm}{0.5pt}}\par}}
+}{
+    \def\exampleglosstyle#1{\par\needspace{2.25\baselineskip}\strut\paletteA{\textsf{#1}}\par}
+}
 \LithieSetGlossaryStyle{\exampleglosstyle}
 \def\glstreenamefmt#1{#1}
 
