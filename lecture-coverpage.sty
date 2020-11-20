@@ -244,13 +244,13 @@
 \vfill\hbox{}}\leavevmode\\%
 % At last we place the bannerblock%
 \vfill%
-\begin{tikzpicture}[line join=round,rounded corners=0.25pt]%
+\noindent\hspace*{-2pt}\begin{tikzpicture}[line join=round]%
     \draw[semithick,\lecturecp@emblemcolor@symbol]
-        (0,\lecturecp@height+0.15) -- ++(\paperwidth,0);
+        (0,\lecturecp@height+0.15) -- ++(\paperwidth+2pt,0);
     \draw[thick,\lecturecp@emblemcolor@symbol]
-        (0,\lecturecp@height+0.075) -- ++(\paperwidth,0);
+        (0,\lecturecp@height+0.075) -- ++(\paperwidth+2pt,0);
     \filldraw[\lecturecp@emblemcolor@symbol]
-        (0,0) rectangle ++(\paperwidth,\lecturecp@height);%
+        (0,0) rectangle ++(\paperwidth+2pt,\lecturecp@height);%
     \begin{scope}[every node/.style={color=\lecturecp@emblemcolor}]%
         \node[right,scale=0.95] at(\lecturecp@leftwidth,\lecturecp@height/2)
             {\parbox[t]{\linewidth}{%
