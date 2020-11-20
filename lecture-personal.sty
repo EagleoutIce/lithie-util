@@ -41,6 +41,12 @@
 \libx@starttoc{loc}%
 \egroup}
 
+\AppendToProfile{print}{%
+    \AtBeginEnvironment{code}{\lstfs{10}}%
+    \AtBeginEnvironment{code*}{\lstfs{10}}%
+    \lstset{lineskip=3pt}
+}
+
 \AppendToProfile{mobile}{%
     \AtBeginEnvironment{code}{\lstfs{10}}%
     \AtBeginEnvironment{code*}{\lstfs{10}}%
