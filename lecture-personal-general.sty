@@ -19,7 +19,9 @@
 
 \RequirePackage{eucal}
 \let\oldO\O
-\def\O{\ensuremath{\EuScript{O}}}
 \def\emptyset{\text{\oldO}}
+\AtBeginDocument{
+\def\O{\ensuremath{\EuScript{O}}}
+}
 
 \endinput
