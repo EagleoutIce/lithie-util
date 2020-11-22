@@ -26,8 +26,7 @@
 \let\ST@trace\undefined  \let\shrinkheight\undefined
 \let\setSTheight\undefined
 \PassOptionsToPackage{chapterlistsgap=\medskipamount}{newfloat}
-\RequirePackage{newfloat}
-\RequirePackage{subcaption,xtab}
+\RequirePackage{newfloat,subcaption,xtab}
 \addto\captionsngerman{\renewcommand{\equationautorefname}{Formel}}
 \addto\captionsenglish{\renewcommand{\equationautorefname}{Equation}}
 
@@ -53,15 +52,15 @@
 \AppendToProfile{print}{%
     \AtBeginEnvironment{code}{\lstfs{10}}%
     \AtBeginEnvironment{code*}{\lstfs{10}}%
-    \lstset{lineskip=3pt}
+    \lstset{lineskip=3pt}%
 }
 
 \AppendToProfile{mobile}{%
     \AtBeginEnvironment{code}{\lstfs{11}}%
     \AtBeginEnvironment{code*}{\lstfs{11}}%
-    \colorlet{sol@colors@border}{white!0}
-    \colorlet{sol@colors@background}{white!0}
-    \lstset{lineskip=3.25pt}
+    \colorlet{sol@colors@border}{white!0}%
+    \colorlet{sol@colors@background}{white!0}%
+    \lstset{lineskip=3.25pt}%
 }
 
 \endinput
