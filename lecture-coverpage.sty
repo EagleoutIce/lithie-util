@@ -176,28 +176,28 @@
 % At last we place the bannerblock%
 \vfill%
 \begin{tikzpicture}[line join=round,rounded corners=0.25pt]%
-    \draw[semithick,\lecturecp@emblemcolor@symbol]
-        (0,\lecturecp@height+0.15) -- ++(0.6\paperwidth-0.175,0)
-        -- ++(0.1\paperwidth,1)     -- ++(0.1\paperwidth+0.175,0)
-        -- ++(0.1\paperwidth,-1)    -- ++(0.1\paperwidth,0);
-    \draw[thick,\lecturecp@emblemcolor@symbol]
-        (0,\lecturecp@height+0.075) -- ++(0.6\paperwidth-0.1,0)
-        -- ++(0.1\paperwidth, 1)  -- ++(0.1\paperwidth+0.1,0)
-        -- ++(0.1\paperwidth,-1)  -- ++(0.1\paperwidth,0);
-    \filldraw[\lecturecp@emblemcolor@symbol]
-        (0,0) -- ++(\paperwidth,0) -- ++(0,\lecturecp@height)
-        -- ++(-0.1\paperwidth,0)   -- ++(-0.1\paperwidth,1)
-        -- ++(-0.1\paperwidth,0)   -- ++(-0.1\paperwidth,-1)
-        -- ++(-0.6\paperwidth,0)   -- cycle;%
-    \begin{scope}[every node/.style={color=\lecturecp@emblemcolor}]%
-        \node[scale=0.89] at(0.75\paperwidth,\lecturecp@height/2+0.5) {\lecture@emblem};
-        \node[right,text width=0.6\paperwidth-\lecturecp@leftwidth] at(\lecturecp@leftwidth,\lecturecp@height/2)
-            {\parbox[t]{\linewidth}{%
-                \fontsize{15pt}{15pt}\selectfont\sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
-                \par%
-            }};
-        \node[align=left,right=0pt,outer sep=0pt,font=\normalsize\sffamily] at(0.9*\paperwidth,\lecturecp@height/2) {\Lithie\smallskip\\\resizebox{\widthof{\Lithie}}{!}{\textsf{Ver. \lithie@version}}};%
-    \end{scope}%
+\draw[semithick,\lecturecp@emblemcolor@symbol]
+    (0,\lecturecp@height+0.15) -- ++(0.6\paperwidth-0.175,0)
+    -- ++(0.1\paperwidth,1)     -- ++(0.1\paperwidth+0.175,0)
+    -- ++(0.1\paperwidth,-1)    -- ++(0.1\paperwidth,0);
+\draw[thick,\lecturecp@emblemcolor@symbol]
+    (0,\lecturecp@height+0.075) -- ++(0.6\paperwidth-0.1,0)
+    -- ++(0.1\paperwidth, 1)  -- ++(0.1\paperwidth+0.1,0)
+    -- ++(0.1\paperwidth,-1)  -- ++(0.1\paperwidth,0);
+\filldraw[\lecturecp@emblemcolor@symbol]
+    (0,0) -- ++(\paperwidth,0) -- ++(0,\lecturecp@height)
+    -- ++(-0.1\paperwidth,0)   -- ++(-0.1\paperwidth,1)
+    -- ++(-0.1\paperwidth,0)   -- ++(-0.1\paperwidth,-1)
+    -- ++(-0.6\paperwidth,0)   -- cycle;%
+\begin{scope}[every node/.style={color=\lecturecp@emblemcolor}]%
+    \node[scale=0.89] at(0.75\paperwidth,\lecturecp@height/2+0.5) {\lecture@emblem};
+    \node[right,text width=0.6\paperwidth-\lecturecp@leftwidth] at(\lecturecp@leftwidth,\lecturecp@height/2)
+        {\parbox[t]{\linewidth}{%
+            \fontsize{15pt}{15pt}\selectfont\sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
+            \par%
+        }};
+    \node[align=left,right=0pt,outer sep=0pt,font=\normalsize\sffamily] at(0.9*\paperwidth,\lecturecp@height/2) {\Lithie\smallskip\\\resizebox{\widthof{\Lithie}}{!}{\textsf{Ver. \lithie@version}}};%
+\end{scope}%
 \end{tikzpicture}%
 \end{titlepage}%
 \restoregeometry{}\clearpage\egroup}
@@ -245,19 +245,19 @@
 % At last we place the bannerblock%
 \vfill%
 \noindent\hspace*{-2pt}\begin{tikzpicture}[line join=round]%
-    \draw[semithick,\lecturecp@emblemcolor@symbol]
-        (0,\lecturecp@height+0.15) -- ++(\paperwidth+2pt,0);
-    \draw[thick,\lecturecp@emblemcolor@symbol]
-        (0,\lecturecp@height+0.075) -- ++(\paperwidth+2pt,0);
-    \filldraw[\lecturecp@emblemcolor@symbol]
-        (0,0) rectangle ++(\paperwidth+2pt,\lecturecp@height);%
-    \begin{scope}[every node/.style={color=\lecturecp@emblemcolor}]%
-        \node[right,scale=0.95] at(\lecturecp@leftwidth,\lecturecp@height/2)
-            {\parbox[t]{\linewidth}{%
-                \sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
-                \par%
-            }};
-    \end{scope}%
+\draw[semithick,\lecturecp@emblemcolor@symbol]
+    (0,\lecturecp@height+0.15) -- ++(\paperwidth+2pt,0);
+\draw[thick,\lecturecp@emblemcolor@symbol]
+    (0,\lecturecp@height+0.075) -- ++(\paperwidth+2pt,0);
+\filldraw[\lecturecp@emblemcolor@symbol]
+    (0,0) rectangle ++(\paperwidth+2pt,\lecturecp@height);%
+\begin{scope}[every node/.style={color=\lecturecp@emblemcolor}]%
+\node[right,scale=0.95] at(\lecturecp@leftwidth,\lecturecp@height/2)
+    {\parbox[t]{\linewidth}{%
+        \sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
+        \par%
+    }};
+\end{scope}%
 \end{tikzpicture}%
 \end{titlepage}%
 \restoregeometry{}\clearpage\egroup}

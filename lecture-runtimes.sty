@@ -17,22 +17,22 @@
     Please load it before this package as it is necessary %
     for this package.%
   }%
-  \expandafter\endinput
+  \expandafter\endinput%
 }
 
 \lstdefinestyle{lecture@BashOutput}{%
-  basicstyle          = \sol@style@get{basic},
-  frame               = single,
-  breaklines          = true,
-  extendedchars       = true,
-  prebreak            = {\sol@lst@prebreak{}},
-  framerule           = \sol@length@lst@famerule,
-  numbers             = none,
-  keepspaces          = false,%
-  xleftmargin         = 3pt,
-  xrightmargin        = 3pt,% detached as no numbers
-  backgroundcolor     = \color{black!0},
-  rulecolor           = \color{sol@colors@border}%
+  basicstyle      = \sol@style@get{basic},%
+  frame           = single,%
+  breaklines      = true,%
+  extendedchars   = true,%
+  prebreak        = {\sol@lst@prebreak{}},
+  framerule       = \sol@length@lst@famerule,%
+  numbers         = none,%
+  keepspaces      = false,%
+  xleftmargin     = 3pt,%
+  xrightmargin    = 3pt,% detached as no numbers
+  backgroundcolor = \color{black!0},
+  rulecolor       = \color{sol@colors@border}%
 }
 
 \def\rbash{\@ifnextchar[{\rbash@opt}{\rbash@opt[\,:]}}
@@ -68,7 +68,7 @@
 
 \def\lecture@runtimes@Execute#1{\immediate\write18{#1}}
 \ifshellescape\else%
-\def\lecture@runtimes@error{\textbf{Achtung: Shell escape/write-18 ist nicht aktiv! Kann nichts anzeigen!}}
+\def\lecture@runtimes@error{\textbf{Achtung: Shell escape/write-18 ist nicht aktiv! Kann nichts anzeigen!}}%
 % Definiere die Befehle mit einer entsprechenden Fehlermeldung
 % overwrite 'lecture@runtimes@getBashFileExecutionOutput':
 \def\lecture@runtimes@getBashFileExecutionOutput#1{\lecture@runtimes@error}%
