@@ -52,7 +52,7 @@
     wstate shape arc length/.initial=180,%
     wstate shape arc factor/.initial=1%
 }%
-
+\newlength\lecture@personal@tikz@a
 
 \pgfdeclareshape{wstate shape}{%
     \savedmacro\westarc{%
@@ -102,8 +102,8 @@
         \pgf@ya=\pgfmathresult\pgf@y%
         \edef\yradius{\the\pgf@ya}%
         \pgfmathmultiply@{\pgf@xa}{\pgfkeysvalueof{/pgf/wstate shape arc factor}}
-        \pgf@xa=\pgfmathresult pt%
-        \edef\xradius{\the\pgf@xa}%
+        \lecture@personal@tikz@a=\pgfmathresult pt%
+        \edef\xradius{\the\lecture@personal@tikz@a}%
         \addtosavedmacro\yradius%
         \addtosavedmacro\xradius%
         %
@@ -171,6 +171,8 @@
         \edef\halfwidth{\the\pgf@x}%
         \addtosavedmacro\halfwidth%
         %
+        \pgfmathmultiply@{\pgf@xa}{\pgfkeysvalueof{/pgf/wstate shape arc factor}}
+        \pgf@xa=\pgfmathresult pt%
         \edef\arcwidth{\the\pgf@xa}%
         \addtosavedmacro\arcwidth%
         %
