@@ -42,6 +42,7 @@
 
 
 % Rounded rectangle => wstate shape
+% based on pgf
 
 \pgfkeys{/pgf/.cd,
     wstate shape west arc/.initial=convex,%
@@ -409,7 +410,7 @@
                 % Between south west and north west.
                 \ifx\westarc\pgf@lib@sh@misc@rr@text@convex%
                     \pgfextract@process\arccenter{%
-                        \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\xradius and +\yradius}{+0pt}}%
+                        \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\xradius}{+0pt}}%
                     }%
                     \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
                         {\arccenter}{180-\halfarcangle}{180+\halfarcangle}{\xradius+\outerxsep and \yradius+\outerysep}%
