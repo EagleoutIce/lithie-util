@@ -30,7 +30,7 @@
 \def\statetransitionfont{\large}
 \tikzset{
   state/.style={circle,font=\Large\sffamily, draw, minimum size = 1cm,minimum height=1cm},
-  wstate/.style={wstate shape,wstate shape arc factor=0.5,font=\Large\sffamily, draw, minimum size = 1cm,minimum height=1cm},
+  wstate/.style={wstate shape,wstate shape arc factor=0.6,font=\Large\sffamily, draw, minimum size = 1cm,minimum height=1cm},
   final/.style={double,double distance=1.33pt,outer ysep=1pt,outer xsep=1.65pt},
   initial/.style={},
   transition/.style={edge node={node[auto,sloped]{\statetransitionfont$#1$}}},%
@@ -101,7 +101,7 @@
         \pgfmathcosec@{\halfarcangle}%
         \pgf@ya=\pgfmathresult\pgf@y%
         \edef\yradius{\the\pgf@ya}%
-        \pgfmathmultiply@{\pgf@xa}{\pgfkeysvalueof{/pgf/wstate shape arc factor}}
+        \pgfmathmultiply@{\pgf@xa}{\pgfkeysvalueof{/pgf/wstate shape arc factor}}%
         \lecture@personal@tikz@a=\pgfmathresult pt%
         \edef\xradius{\the\lecture@personal@tikz@a}%
         \addtosavedmacro\yradius%
@@ -111,7 +111,7 @@
         %
         \pgfmathcos@{\halfarcangle}%
         \pgf@xa=\lecture@personal@tikz@a%
-        \advance\pgf@xa by-\pgfmathresult\pgf@ya%
+        \advance\pgf@xa by-\pgfmathresult\lecture@personal@tikz@a%
         %
         % When the node contents are pushed inside a convex arc,
         % the resulting chord has a height r - r*cos(asin(0.5*h/r)).
@@ -119,8 +119,8 @@
         \pgfmathdivide{\halftextheight}{\yradius}%
         \pgfmathasin@{\pgfmathresult}%
         \pgfmathcos@{\pgfmathresult}%
-        \pgf@xb=\pgf@ya%
-        \advance\pgf@xb by-\pgfmathresult\pgf@ya%
+        \pgf@xb=\lecture@personal@tikz@a%
+        \advance\pgf@xb by-\pgfmathresult\lecture@personal@tikz@a%
         %
         % Adjust for minimum width.
         %
