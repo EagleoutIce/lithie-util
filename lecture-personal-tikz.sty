@@ -377,75 +377,75 @@
         \pgfextract@process\externalpoint{}%
             \pgfpointadd{\centerpoint}{\externalpoint}%
         }%
-        \roundedrectanglepoints%
-        %
-        \pgfmathanglebetweenpoints{\centerpoint}{\externalpoint}%
-        \let\externalangle=\pgfmathresult%
-        \pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@north west\endcsname}%
+    \roundedrectanglepoints%
+    %
+    \pgfmathanglebetweenpoints{\centerpoint}{\externalpoint}%
+    \let\externalangle=\pgfmathresult%
+    \pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@north west\endcsname}%
+    \ifdim\externalangle pt<\pgfmathresult pt\relax%
+        \pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@north east\endcsname}%
         \ifdim\externalangle pt<\pgfmathresult pt\relax%
-            \pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@north east\endcsname}%
+            % Between north east and east.
+            \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex%
+                \pgfextract@process\arccenter{%
+                    \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\xradius}{+0pt}}%
+                }%
+                \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
+                    {\arccenter}{0}{\halfarcangle}{\xradius+\outerxsep and \yradius+\outerysep}%
+            \else%
+                \pgfpointintersectionoflines%
+                    {\csname pgf@anchor@wstate shape@north east\endcsname}%
+                    {\csname pgf@anchor@wstate shape@south east\endcsname}%
+                    {\externalpoint}{\centerpoint}%
+            \fi%
+        \else%
+            % Between north west and north east.
+            \pgfpointintersectionoflines%
+                {\csname pgf@anchor@wstate shape@north east\endcsname}%
+                {\csname pgf@anchor@wstate shape@north west\endcsname}%
+                {\externalpoint}{\centerpoint}%
+        \fi%
+    \else%
+        \pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@south west\endcsname}%
+        \ifdim\externalangle pt<\pgfmathresult pt\relax%
+            % Between south west and north west.
+            \ifx\westarc\pgf@lib@sh@misc@rr@text@convex%
+                \pgfextract@process\arccenter{%
+                    \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\xradius}{+0pt}}%
+                }%
+                \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
+                    {\arccenter}{180-\halfarcangle}{180+\halfarcangle}{\xradius+\outerxsep and \yradius+\outerysep}%
+            \else%
+                \pgfpointintersectionoflines%
+                    {\csname pgf@anchor@wstate shape@north west\endcsname}%
+                    {\csname pgf@anchor@wstate shape@south west\endcsname}%
+                    {\externalpoint}{\centerpoint}%
+            \fi%
+        \else%
+            \pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@south east\endcsname}%
             \ifdim\externalangle pt<\pgfmathresult pt\relax%
-                % Between north east and east.
+                % Between south east and south west.
+                \pgfpointintersectionoflines%
+                    {\csname pgf@anchor@wstate shape@south east\endcsname}%
+                    {\csname pgf@anchor@wstate shape@south west\endcsname}%
+                    {\externalpoint}{\centerpoint}%
+            \else%
+                % Between east and south east.
                 \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex%
                     \pgfextract@process\arccenter{%
                         \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\xradius}{+0pt}}%
                     }%
                     \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
-                        {\arccenter}{0}{\halfarcangle}{\xradius+\outerxsep and \yradius+\outerysep}%
+                        {\arccenter}{360-\halfarcangle}{360}{\xradius+\outerxsep and \yradius+\outerysep}%
                 \else%
                     \pgfpointintersectionoflines%
                         {\csname pgf@anchor@wstate shape@north east\endcsname}%
                         {\csname pgf@anchor@wstate shape@south east\endcsname}%
                         {\externalpoint}{\centerpoint}%
                 \fi%
-            \else%
-                % Between north west and north east.
-                \pgfpointintersectionoflines%
-                    {\csname pgf@anchor@wstate shape@north east\endcsname}%
-                    {\csname pgf@anchor@wstate shape@north west\endcsname}%
-                    {\externalpoint}{\centerpoint}%
-            \fi%
-        \else%
-            \pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@south west\endcsname}%
-            \ifdim\externalangle pt<\pgfmathresult pt\relax%
-                % Between south west and north west.
-                \ifx\westarc\pgf@lib@sh@misc@rr@text@convex%
-                    \pgfextract@process\arccenter{%
-                        \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\xradius}{+0pt}}%
-                    }%
-                    \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
-                        {\arccenter}{180-\halfarcangle}{180+\halfarcangle}{\xradius+\outerxsep and \yradius+\outerysep}%
-                \else%
-                    \pgfpointintersectionoflines%
-                        {\csname pgf@anchor@wstate shape@north west\endcsname}%
-                        {\csname pgf@anchor@wstate shape@south west\endcsname}%
-                        {\externalpoint}{\centerpoint}%
-                \fi%
-            \else%
-                \pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@south east\endcsname}%
-                \ifdim\externalangle pt<\pgfmathresult pt\relax%
-                    % Between south east and south west.
-                    \pgfpointintersectionoflines%
-                        {\csname pgf@anchor@wstate shape@south east\endcsname}%
-                        {\csname pgf@anchor@wstate shape@south west\endcsname}%
-                        {\externalpoint}{\centerpoint}%
-                \else%
-                    % Between east and south east.
-                    \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex%
-                        \pgfextract@process\arccenter{%
-                            \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\xradius}{+0pt}}%
-                        }%
-                        \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
-                            {\arccenter}{360-\halfarcangle}{360}{\xradius+\outerxsep and \yradius+\outerysep}%
-                    \else%
-                        \pgfpointintersectionoflines%
-                            {\csname pgf@anchor@wstate shape@north east\endcsname}%
-                            {\csname pgf@anchor@wstate shape@south east\endcsname}%
-                            {\externalpoint}{\centerpoint}%
-                    \fi%
-                \fi%
             \fi%
         \fi%
+    \fi%
     }%
 }%
 
