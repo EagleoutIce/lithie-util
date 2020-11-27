@@ -30,7 +30,7 @@
 \def\statetransitionfont{\large}
 \tikzset{
   state/.style={circle,font=\Large\sffamily, draw, minimum size = 1cm,minimum height=1cm},
-  wstate/.style={wstate shape,wstate shape arc factor=0.55,font=\Large\sffamily, draw, minimum size = 1cm,minimum height=1cm},
+  wstate/.style={wstate shape,wstate shape arc factor=0.45,font=\Large\sffamily, draw, minimum size = 1cm,minimum height=1cm},
   final/.style={double,double distance=1.33pt,outer ysep=1pt,outer xsep=1.65pt},
   initial/.style={},
   transition/.style={edge node={node[auto,sloped]{\statetransitionfont$#1$}}},%
@@ -50,7 +50,8 @@
     wstate shape left arc/.style={/pgf/wstate shape west arc=#1},%
     wstate shape right arc/.style={/pgf/wstate shape east arc=#1},%
     wstate shape arc length/.initial=180,%
-    wstate shape arc factor/.initial=1%
+    wstate shape arc factor/.initial=1,%
+    wstate shape arc width/.initial=33pt%
 }%
 \newlength\lecture@personal@tikz@a
 
@@ -101,7 +102,7 @@
         \pgfmathcosec@{\halfarcangle}%
         \pgf@ya=\pgfmathresult\pgf@y%
         \edef\yradius{\the\pgf@ya}%
-        \pgfmathmultiply@{\pgfnodeparttextbox}{\pgfkeysvalueof{/pgf/wstate shape arc factor}}%
+        \pgfmathmultiply@{\pgfkeysvalueof{/pgf/wstate shape arc width}}{\pgfkeysvalueof{/pgf/wstate shape arc factor}}%
         \lecture@personal@tikz@a=\pgfmathresult pt%
         \edef\xradius{\the\lecture@personal@tikz@a}%
         \addtosavedmacro\yradius%
