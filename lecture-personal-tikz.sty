@@ -30,7 +30,7 @@
 \def\statetransitionfont{\large}
 \tikzset{
   state/.style={circle,font=\Large\sffamily, draw, minimum size = 1cm,minimum height=1cm},
-  wstate/.style={wstate shape,wstate shape arc factor=0.6,inner xsep=11pt, font=\Large\sffamily, draw, minimum size = 1cm,minimum height=1cm},
+  wstate/.style={wstate shape,wstate shape arc factor=0.5,inner xsep=11pt, font=\Large\sffamily, draw, minimum size = 1cm,minimum height=1cm},
   final/.style={double,double distance=1.33pt,outer ysep=1pt,outer xsep=1.65pt},
   initial/.style={},
   transition/.style={edge node={node[auto,sloped]{\statetransitionfont$#1$}}},%
@@ -110,7 +110,7 @@
         % Arc width = r - r*cos(a/2).
         %
         \pgfmathcos@{\halfarcangle}%
-        \pgf@xa=\pgf@ya%
+        \pgf@xa=\lecture@personal@tikz@a%
         \advance\pgf@xa by-\pgfmathresult\pgf@ya%
         %
         % When the node contents are pushed inside a convex arc,
@@ -171,8 +171,6 @@
         \edef\halfwidth{\the\pgf@x}%
         \addtosavedmacro\halfwidth%
         %
-        \pgfmathmultiply@{\pgf@xa}{\pgfkeysvalueof{/pgf/wstate shape arc factor}}
-        \pgf@xa=\pgfmathresult pt%
         \edef\arcwidth{\the\pgf@xa}%
         \addtosavedmacro\arcwidth%
         %
