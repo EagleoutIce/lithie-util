@@ -39,7 +39,7 @@
 \def\listofcodes{\bgroup%
 \def\contentsname{Alle Listings}% may?
 \libx@listof@heading{\contentsname}%
-\def\numberline##1{\hb@xt@\@tempdima{\null\hfil##1~~}}% right align
+\let\numberline\libx@list@numberformat% right align by boxes
 \libx@starttoc{loc}%
 \egroup}
 % modifx code styles to match box
