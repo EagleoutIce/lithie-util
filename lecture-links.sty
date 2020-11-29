@@ -57,6 +57,9 @@
     \def\leclink@nxtst##1##2##3{\ifleclink@enabled@\expandafter#1\else\expandafter\leclink@firstofthree\fi{##1}{##2}{##3}}%
 }
 
+% set a default
+\leclink@pnextlinkstyle{\leclink@href@linkstyle}
+
 \newif\iflecstar
 
 \AtBeginDocument{% robust not needed as let persists
