@@ -23,7 +23,7 @@
     \AtBeginDocument{\urlstyle{same}}%
 \fi
 
-\RequirePackage{etoolbox,letltxmacro}
+\RequirePackage{etoolbox,letltxmacro,xstring}
 \interfootnotelinepenalty=10000
 
 \newcommand*\SetAllLinkStyle[1]{%
@@ -44,7 +44,7 @@
 \newcommand*\SetUrlLinkStyle[1]{\def\leclink@url@linkstyle##1##2##3{#1}}
 \newcommand*\SetHrefLinkStyle[1]{\def\leclink@href@linkstyle##1##2##3{#1}}
 \newcommand*\SetFootnoteLinkStyle[1]{\def\leclink@footnote@linkstyle##1##2##3{#1}}
-\newcommand*\SeGlossaryLinkStyle[1]{\def\leclink@glossary@linkstyle##1##2##3{#1}}
+\newcommand*\SetGlossaryLinkStyle[1]{\def\leclink@glossary@linkstyle##1##2##3{#1}}
 
 \newif\ifleclink@enabled@
 \newcommand*{\DisableLinkStyle}{\leclink@enabled@false}
@@ -114,6 +114,7 @@
     % #1 typem #2 url #3 destination name #4 text
     \LetLtxMacro\leclink@hl@@\hyper@link@%
     \def\hyper@link@[#1]#2#3#4{%
+        \IfBeginWith{#3}{glo:}{\leclink@pnextlinkstyle{\leclink@glossary@linkstyle}}{}%
         \leclink@nxtst{\leclink@hl@@[#1]{#2}{#3}{#4}}{#2}{#3}%
     }
 }
