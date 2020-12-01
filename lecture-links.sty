@@ -23,7 +23,7 @@
     \AtBeginDocument{\urlstyle{same}}%
 \fi
 
-\RequirePackage{etoolbox}
+\RequirePackage{etoolbox,letltxmacro}
 \interfootnotelinepenalty=10000
 
 \newcommand*\SetAllLinkStyle[1]{%
@@ -34,6 +34,7 @@
     \def\leclink@url@linkstyle##1##2##3{#1}%
     \def\leclink@href@linkstyle##1##2##3{#1}%
     \def\leclink@footnote@linkstyle##1##2##3{#1}%
+    \def\leclink@glossary@linkstyle##1##2##3{#1}%
 }
 
 \newcommand*\SetAutorefLinkStyle[1]{\def\leclink@autoref@linkstyle##1##2##3{#1}}
@@ -43,6 +44,7 @@
 \newcommand*\SetUrlLinkStyle[1]{\def\leclink@url@linkstyle##1##2##3{#1}}
 \newcommand*\SetHrefLinkStyle[1]{\def\leclink@href@linkstyle##1##2##3{#1}}
 \newcommand*\SetFootnoteLinkStyle[1]{\def\leclink@footnote@linkstyle##1##2##3{#1}}
+\newcommand*\SeGlossaryLinkStyle[1]{\def\leclink@glossary@linkstyle##1##2##3{#1}}
 
 \newif\ifleclink@enabled@
 \newcommand*{\DisableLinkStyle}{\leclink@enabled@false}
@@ -65,20 +67,20 @@
 
 \AtBeginDocument{% robust not needed as let persists
 % autoref
-    \let\leclink@autoref\autoref%
+    \LetLtxMacro\leclink@autoref\autoref%
     \renewcommand*{\autoref}{%
         \@ifstar\leclink@star@autoref\leclink@nostar@autoref%
     }%
     \def\leclink@star@autoref#1{\lecstartrue\def\lecmrk{#1}\leclink@autoref*{#1}}
     \def\leclink@nostar@autoref#1{\lecstarfalse\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@autoref@linkstyle}\leclink@autoref{#1}}%
 % nameref
-    \let\leclink@nameref\nameref%
+    \LetLtxMacro\leclink@nameref\nameref%
     \renewcommand*{\nameref}{%
         \@ifstar\leclink@star@nameref\leclink@nostar@autoref%
     }%
     \def\leclink@star@nameref#1{\lecstartrue\def\lecmrk{#1}\leclink@nameref*{#1}}%
     \def\leclink@nostar@nameref#1{\lecstarfalse\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@nameref@linkstyle}\leclink@nameref{#1}}%
-    \let\leclink@hyperref\hyperref%
+    \LetLtxMacro\leclink@hyperref\hyperref%
 % hyperref
     % what if no label?
     \renewcommand*{\hyperref}{%
@@ -91,26 +93,26 @@
         \def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@hyperref@linkstyle}\leclink@hyperref{#1}{#2}{#3}%
     }%
 % url Note: url may be handled differently
-    \let\leclink@url\url%
+    \LetLtxMacro\leclink@url\url%
     \renewcommand*{\url}{\hyper@normalise\leclink@read@url}%
     \def\leclink@read@url#1{\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@url@linkstyle}\leclink@nxtst{\leclink@url{#1}}{#1}{}}%
 % footnote (direct - guard?)
-    \let\leclink@footnotemark\@footnotemark%
+    \LetLtxMacro\leclink@footnotemark\@footnotemark%
     \renewcommand*{\@footnotemark}{\ifleclink@enabled@\expandafter\leclink@footnote@linkstyle\else\expandafter\leclink@firstofthree\fi{\leclink@footnotemark}{}{}}%
 % hyperlink
-    \let\leclink@hyperlink\hyperlink%
+    \LetLtxMacro\leclink@hyperlink\hyperlink%
     \renewcommand*{\hyperlink}[2]{\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@hyperlink@linkstyle}\leclink@hyperlink{#1}{#2}}%
 % href
     % We do not modify href as it depends on the href-keys we redef the split-call
     \leclink@overwrite@hrefsplit%
 % simple ref
-    \let\leclink@ref\ref%
+    \LetLtxMacro\leclink@ref\ref%
     \def\ref{\@ifstar\leclink@star@ref\leclink@nostar@ref}%
     \def\leclink@star@ref#1{\lecstartrue\def\lecmrk{#1}\leclink@ref*{#1}}%
     \def\leclink@nostar@ref#1{\lecstarfalse\def\lecmrk{#1}\leclink@ref{#1}}%
 % modify the core
     % #1 typem #2 url #3 destination name #4 text
-    \let\leclink@hl@@\hyper@link@%
+    \LetLtxMacro\leclink@hl@@\hyper@link@%
     \def\hyper@link@[#1]#2#3#4{%
         \leclink@nxtst{\leclink@hl@@[#1]{#2}{#3}{#4}}{#2}{#3}%
     }
