@@ -16,7 +16,7 @@
 
 \ProcessKeyvalOptions*\relax%
 
-\usepackage{lettrine}
+\RequirePackage{lettrine}
 \setcounter{DefaultLines}{3}%
 \LettrineOnGridfalse
 \LettrineRealHeighttrue
@@ -37,7 +37,7 @@
   \newenvironment{ltabular}%
       {\@nameuse{tabular}}%
       {\@nameuse{endtabular}}%
-  \usepackage{Romantik}% Romantik for cfr initials?
+  \RequirePackage{Romantik}% Romantik for cfr initials?
   \setlength{\DefaultFindent}{5.15pt}%
   \setlength{\DefaultNindent}{0.489pt}% compensate for offsets
   \renewcommand\LettrineFontHook{\Romantik}%
@@ -58,7 +58,7 @@
   \renewcommand\LettrineFontHook{\color{paletteA}}%
   \setlength{\DefaultFindent}{1.85pt}%
   \setlength{\DefaultNindent}{0.25em}%
-  \def\DefaultLoversize{0.07}%
+  \def\DefaultLoversize{0.05}%
   \AtBeginDocument{%
     \hypersetup{pdftitle={\lecture@r{title} (Digitale-Version)}}%
   }
