@@ -52,15 +52,17 @@
 \AppendToProfile{print}{%
     \AtBeginEnvironment{code}{\lstfs{10}}%
     \AtBeginEnvironment{code*}{\lstfs{10}}%
-    \lstset{lineskip=3pt}%
+    \@ifpackageloaded{sopra-listings}{\lstset{lineskip=3pt}}{}%
 }
 
 \AppendToProfile{mobile}{%
     \AtBeginEnvironment{code}{\lstfs{11}}%
     \AtBeginEnvironment{code*}{\lstfs{11}}%
-    \colorlet{sol@colors@border}{sol@colors@background}
-    %\colorlet{sol@colors@background}{white!0}%
-    \lstset{lineskip=3.25pt}%
+    \@ifpackageloaded{sopra-listings}{%
+        \colorlet{sol@colors@border}{sol@colors@background}%
+        %\colorlet{sol@colors@background}{white!0}%
+        \lstset{lineskip=3.25pt}%
+    }{}%
 }
 
 \endinput
