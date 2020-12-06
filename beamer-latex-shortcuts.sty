@@ -20,10 +20,10 @@
 \def\info#1{\bgroup\scriptsize\textcolor{gray}{(#1)}\egroup}
 \def\say#1{\glqq{#1}\grqq{}}
 
-\long\def\parallelcontent#1#2{
+\long\def\parallelcontent#1#2{%
   \begin{columns}
-    \column{0.48\textwidth} #1
-    \column{0.48\textwidth} #2
+    \column{0.48\textwidth} #1%
+    \column{0.48\textwidth} #2%
   \end{columns}
 }
 

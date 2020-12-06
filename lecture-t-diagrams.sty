@@ -10,13 +10,11 @@
 
 % two hours wasted to do it with shapes. Lets do it simpler
 
-\newlength\tblocksize
-\setlength\tblocksize{0.9cm}
+\newlength\tblocksize \tblocksize=0.9cm
 
-\newlength\tblockoffset
-\setlength\tblockoffset{0.33em}
+\newlength\tblockoffset \tblockoffset=0.33em
 \tikzset{%
-  tblock/.style={text width=\tblocksize,inner sep=0pt,align=center,minimum height=\tblocksize},%
+  tblock/.style={text width=\tblocksize,inner sep=\z@,align=center,minimum height=\tblocksize},%
   tborder/.style={semithick},%
 }
 % #1 name

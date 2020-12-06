@@ -55,19 +55,16 @@
 
 \newglossarystyle{lecture@glossary}{%
     \setglossarystyle{tree}%
-
     \renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse%
         \lglos@headingstyle{\glsgetgrouptitle{##1}}%
         \iflglos@setup@enumitem@%
         \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc%
         \else% no enumitem
         \begin{description}\fi}%
-
-    \renewenvironment{theglossary}{\setlength{\parindent}{0pt}%
-        \setlength{\parskip}{0pt plus 0.3pt}%
+    \renewenvironment{theglossary}{%
+        \parindent=\z@ \parskip=\z@ plus 0.3pt%
         \global\atinitglossarytrue\relax
         }{\end{description}}%#
-
     \renewcommand{\glossentry}[2]{%reset of tree to pad pagenumbers
         \hangindent0pt\relax \parindent0pt\relax
         \item[\glsentryitem{##1}\glstreenamefmt{\glstarget{##1}{\glossentryname{##1}}}]%
@@ -79,7 +76,5 @@
 \makeglossaries
 
 \preto\printglossaries{\bgroup\interlinepenalty=1000}
-\appto\printglossaries{\egroup}
-
-
+\g@addto@macro\printglossaries{\egroup}
 \endinput

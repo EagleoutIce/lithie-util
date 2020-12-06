@@ -13,8 +13,10 @@
 \def\fillfont{\def\mdseries@sf{medium}\sffamily}
 
 \AtEndPreamble{%
-  \tikzumlset{fill usecase=white, fill template=white, fill package=white,fill system=white, fill state=white,fill object=white, fill class=white,
-  fill port=white, fill component=white,fill note=gray!6!white, font=\small\ttfamily}%
+  \ifcsname tikzumlset\endcsname%
+    \tikzumlset{fill usecase=white, fill template=white, fill package=white,fill system=white, fill state=white,fill object=white, fill class=white,
+    fill port=white, fill component=white,fill note=gray!6!white, font=\small\ttfamily}%
+  \fi%
   \tikzset{%
       every node/.append style={font=\sffamily},%
       lblock/.style={block,#1,writ,font=\fillfont}, %
@@ -23,7 +25,7 @@
   }
 }
 % mindmap and trees for overview
-\usetikzlibrary{graphs,arrows.meta,calc,mindmap,trees,rdf,matrix,topaths}
+\usetikzlibrary{graphs,arrows.meta,calc,mindmap,trees,matrix,topaths}
 \pgfplotsset{compat=1.16,every axis/.append style={legend cell align={left}}}
 
 % state diagram
@@ -274,7 +276,7 @@
   }%
   \savedanchor\basepoint{%
     \pgf@x=.5\wd\pgfnodeparttextbox%
-    \pgf@y=0pt\relax%
+    \pgf@y\z@\relax%
   }%
   \anchor{center}{\centerpoint}%
   \anchor{mid}{\midpoint}%

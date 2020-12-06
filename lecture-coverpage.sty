@@ -94,7 +94,7 @@
 \def\lecture@coverpage@geometry{\newgeometry{width=0.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
 \renewcommand{\maketitle}{\bgroup%
-\setlength\parindent{0pt}%
+\parindent=\z@%
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry%
 \begin{titlepage}%
@@ -116,7 +116,7 @@
 \def\lecture@coverpage@geometry{\newgeometry{width=0.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
 \renewcommand{\maketitle}{\bgroup%
-\setlength\parindent{0pt}%
+\parindent=\z@%
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry%
 \begin{titlepage}%
@@ -135,7 +135,7 @@
 }
 
 \lecturecp@coverpagestyle{fancy}{%
-\def\lecture@coverpage@geometry{\newgeometry{margin=0pt}}
+\def\lecture@coverpage@geometry{\newgeometry{margin=\z@}}
 
 \def\lecturecp@emblemcolor{white}
 \def\lecturecp@emblemcolor@symbol{paletteA}
@@ -145,7 +145,7 @@
 \newsavebox{\lecturecp@title@widthbox}
 \newlength{\lecture@tmp@titlewidth}
 \renewcommand{\maketitle}{\bgroup%
-\setlength\parindent{0pt}%
+\parindent=\z@%
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 %
 \lecture@coverpage@geometry%
@@ -196,7 +196,7 @@
             \fontsize{15pt}{15pt}\selectfont\sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
             \par%
         }};
-    \node[align=left,right=0pt,outer sep=0pt,font=\normalsize\sffamily] at(0.9*\paperwidth,\lecturecp@height/2) {\Lithie\smallskip\\\resizebox{\widthof{\Lithie}}{!}{\textsf{Ver. \lithie@version}}};%
+    \node[align=left,right=\z@,outer sep=\z@,font=\normalsize\sffamily] at(0.9*\paperwidth,\lecturecp@height/2) {\Lithie\smallskip\\\resizebox{\widthof{\Lithie}}{!}{\textsf{Ver. \lithie@version}}};%
 \end{scope}%
 \end{tikzpicture}%
 \end{titlepage}%
@@ -204,7 +204,7 @@
 }
 
 \lecturecp@coverpagestyle{fancy-small}{%
-\def\lecture@coverpage@geometry{\newgeometry{margin=0pt}}
+\def\lecture@coverpage@geometry{\newgeometry{margin=\z@}}
 
 \def\lecturecp@emblemcolor{white}
 \def\lecturecp@emblemcolor@symbol{paletteA}
@@ -214,7 +214,7 @@
 \newsavebox{\lecturecp@title@widthbox}
 \newlength{\lecture@tmp@titlewidth}
 \renewcommand{\maketitle}{\bgroup%
-\setlength\parindent{0pt}%
+\parindent=\z@%
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 %
 \lecture@coverpage@geometry%
@@ -269,7 +269,7 @@
 \def\lecture@coverpage@geometry{}
 
 \renewcommand{\maketitle}{\bgroup%
-\setlength\parindent{0pt}%
+\parindent=\z@%
 \begin{center}%
     \sffamily{\bfseries\Huge\lecture@r{title}}\medskip\leavevmode\\
     \normalsize\lecture@r{subtitle}\vspace*{3em}%

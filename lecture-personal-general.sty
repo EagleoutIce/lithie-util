@@ -12,16 +12,14 @@
 % avoid splits with '-' or in '-,'
 \newunicodechar{‑}{{\fontencoding{T1}\selectfont\symbol{'177}}\nolinebreak\hspace{0pt}}
 
-
 % mathbreaks
 \allowdisplaybreaks[2]
-
 
 \RequirePackage{eucal}
 \let\oldO\O
 \let\emptyset\varnothing
-\AtBeginDocument{
-\def\O{\ensuremath{\EuScript{O}}}
+\AtBeginDocument{%
+\def\O{\ensuremath{\EuScript{O}}}%
 }
 
 \endinput
