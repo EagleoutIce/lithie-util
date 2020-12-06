@@ -14,8 +14,8 @@
 % 1.5 line => 2.12132034 hyp
 \newcommand*\lithiebirb[1][\Lithie]{%
 \bgroup%
-\def\hyp{2.12132034}%
-\def\hhyp{2.12132034/2}%
+\edef\hyp{2.12132034}%
+\pgfmathsetmacro\hhyp{2.12132034/2}%
 \begin{scope}[overlay]% xshift=0.74\paperwidth,yshift=-2.75cm,scale=1,
     % upper left _|
     \fill[shadeD] (0,0) -| (1.5,1.5) -- cycle;

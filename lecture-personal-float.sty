@@ -19,13 +19,11 @@
 \g@addto@macro\end@float{%
   \ifnum\@floatpenalty<\z@
     \ifnum\@floatpenalty<-\@Mii
-    \else
-      \ifhmode
-        \if@ignore
-          \penalty\@M
-          \hskip\z@skip
-        \fi
-      \fi
+    \else\ifhmode
+      \if@ignore
+        \penalty\@M%
+        \hskip\z@skip%
+      \fi\fi
     \fi
   \fi
 }
