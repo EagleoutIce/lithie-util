@@ -13,7 +13,7 @@
 
 \RequirePackage{xspace,mathtools,amssymb,datetime}
 
-\providecommand\say[1]{\glqq{}#1\grqq{}}
+\providecommand\say[1]{\glqq#1\grqq{}}
 \robustify\say
 \providecommand\engl[2][]{#1(engl. \textit{#2})#1}
 \robustify\engl
@@ -23,7 +23,7 @@
 
 \newcommand*\ceil[1]{\ensuremath{\left\lceil#1\right\rceil}}
 \newcommand*\floor[1]{\ensuremath{\left\lfloor#1\right\rfloor}}
-\newcommand*\abs[1]{\ensuremath{\left|\,#1\,\right|}}
+\newcommand*\abs[1]{\ensuremath{\left|\mskip\thinmuskip#1\mskip\thinmuskip\right|}}
 
 \newcommand*\limn{\ensuremath{\lim_{n \to \infty}}}
 \newcommand*\sumn[1][0]{\ensuremath{\sum_{n = #1}^\infty}}
