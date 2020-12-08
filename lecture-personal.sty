@@ -8,11 +8,14 @@
 
 \ProvidesPackage{lecture-personal}[2020/11/03 v1.0 Personal collection]
 
-\RequirePackage{kvoptions}
+\RequirePackage{kvoptions,etoolbox}
 \SetupKeyvalOptions{family=LPM,prefix=LPM@}
+
+\edef\@lecture@personal@noextra{LECTURE@PERSONAL@NOEXTRA}
 
 \DeclareStringOption{imgprefix}
 \DeclareStringOption{command}
+\DeclareStringOption[\@lecture@personal@noextra]{extras}[\@lecture@personal@noextra]
 
 \ProcessKeyvalOptions*\relax%
 
@@ -30,39 +33,10 @@
 \addto\captionsngerman{\renewcommand{\equationautorefname}{Formel}}
 \addto\captionsenglish{\renewcommand{\equationautorefname}{Equation}}
 
-\DeclareFloatingEnvironment[%
-    fileext=loc,listname={Alle Listings},name=Listing,%
-    placement=tbp,within=none,%
-]{code}
-
-% patch to bridge for lithie boxe
-\def\listofcodes{\bgroup%
-\def\contentsname{Alle Listings}% may?
-\libx@listof@heading{\contentsname}%
-\let\numberline\libx@list@numberformat% right align by boxes
-\libx@starttoc{loc}%
-\egroup}
-% modifx code styles to match box
-
-\newlength\cftcodenumwidth
-\setlength\cftcodenumwidth{\libx@numwidth+\libx@numwidth@offset}
-
-\gdef\l@code#1#2{\@dottedtocline{1}{\cftcodenumwidth}{\cftcodenumwidth}{#1}{#2}}%
-
-\AppendToProfile{print}{%
-    \AtBeginEnvironment{code}{\lstfs{10}}%
-    \AtBeginEnvironment{code*}{\lstfs{10}}%
-    \@ifpackageloaded{sopra-listings}{\lstset{lineskip=3pt}}{}%
-}
-
-\AppendToProfile{mobile}{%
-    \AtBeginEnvironment{code}{\lstfs{11}}%
-    \AtBeginEnvironment{code*}{\lstfs{11}}%
-    \@ifpackageloaded{sopra-listings}{%
-        \colorlet{sol@colors@border}{sol@colors@background}%
-        %\colorlet{sol@colors@background}{white!0}%
-        \lstset{lineskip=3.25pt}%
-    }{}%
-}
+\edef\@lecture@personal@tmp{\LPM@extras}
+\ifx\@lecture@personal@tmp\@lecture@personal@noextra\else
+\def\@lecture@personal@loadextras#1{\AtEndPreamble{\RequirePackage{lecture-personal-extra-#1}}}
+\expandafter\forcsvlist\expandafter\@lecture@personal@loadextras\expandafter{\@lecture@personal@tmp}
+\fi
 
 \endinput

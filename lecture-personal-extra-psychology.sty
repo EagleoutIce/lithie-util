@@ -1,0 +1,25 @@
+%% lecture-personal-extra-psychology.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 3.11.2020
+%%
+%% stuff i use in my psychology scripts
+
+\ProvidesPackage{lecture-personal-extra-psychology}[2020/12/08 v1.0 Personal psychology]
+
+% Liste aller Studien
+\libx@RegisterNewDefaultStyle{Studie}{float*=t,width=\textwidth}
+
+\libx@RegisterBoxPair%
+% List definition and emblem:
+{studies}{lstud}{Alle Studien}{\faStar}%
+% color, style, id:
+{paletteC}{Studie}{stu}%
+% environment name and Prefix:
+{studie}{Studie}
+\libx@RefreshBoxStyle
+
+\newcommand*{\studyref}[1]{\label{#1}\lectureref{m#1}{\faBook}\space}
+
+\endinput
