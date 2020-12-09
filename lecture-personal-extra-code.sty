@@ -8,6 +8,9 @@
 
 \ProvidesPackage{lecture-personal-extra-code}[2020/12/08 v1.0 Personal code]
 
+\PassOptionsToPackage{chapterlistsgap=\medskipamount}{newfloat}
+\RequirePackage{newfloat}
+
 \DeclareFloatingEnvironment[%
     fileext=loc,listname={Alle Listings},name=Listing,%
     placement=tbp,within=none,%

@@ -98,32 +98,32 @@
 
 % #1 id, #2 module, #3 package-name, #4 defaults, #5 groups (all is forced)
 \def\lu@DefineModule#1#2#3#4#5{%
-    \@namedef{@lu@module@map@name@#1}{#2}%
-    \@namedef{@lu@module@map@package@#1}{#3}%
-    \@namedef{@lu@module@map@defaults@#1}{#4}%
-    \@namedef{@lu@module@map@groups@#1}{all,#5}%
+    \expandafter\def\csname @lu@module@map@name@#1\endcsname{#2}%
+    \expandafter\def\csname @lu@module@map@package@#1\endcsname{#3}%
+    \expandafter\def\csname @lu@module@map@defaults@#1\endcsname{#4}%
+    \expandafter\def\csname @lu@module@map@groups@#1\endcsname{all,#5}%
     \protected@edef\@litu@tmp{\noexpand\DeclareStringOption[\@litu@none]{\lu@Get{#1}{name}}[\lu@Get{#1}{defaults}]}\@litu@tmp%
     \appto\@litu@hook@PackageRequire{\lu@LoadModuleIfGiven{#1}}%
     \lu@AddToGroups{\lu@Get{#1}{groups}}{#1}%
 }
 
 % define the groups
-\forcsvlist{\lu@DefineGroup}{all,color,util,generic,sopra,lecture,listings,uml,listof,boxes,links,personal,beamer-extra,graphics}
+\forcsvlist{\lu@DefineGroup}{all,util,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
-\lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,generic,boxes}
-\lu@DefineModule{tps}{tikz-palettes}{tikz-palettes}{}{color,util}
+\lu@DefineModule{cps}{color-palettes}{color-palettes}{}{util,boxes}
+\lu@DefineModule{tps}{tikz-palettes}{tikz-palettes}{}{util}
 
-\lu@DefineModule{lsc}{lecture-shortcuts}{lecture-shortcuts}{}{util,lecture}
-\lu@DefineModule{lgs}{lecture-glossary}{lecture-glossary}{enumitem}{lecture,listof}
-\lu@DefineModule{lbg}{lecture-bibliography}{lecture-bibliography}{}{lecture,listof}
-\lu@DefineModule{lfr}{lecture-format}{lecture-format}{}{lecture,util,generic}
-\lu@DefineModule{lli}{lecture-links}{lecture-links}{}{lecture,links}
-\lu@DefineModule{lcp}{lecture-coverpage}{lecture-coverpage}{}{lecture}
-\lu@DefineModule{lre}{lecture-registers}{lecture-registers}{}{lecture,util,generic}
-\lu@DefineModule{lar}{lecture-algorithms}{lecture-algorithms}{}{lecture,util,generic}
-\lu@DefineModule{lre}{lecture-runtimes}{lecture-runtimes}{}{lecture,listings}
-\lu@DefineModule{lca}{lecture-cancel}{lecture-cancel}{}{lecture,util}
+\lu@DefineModule{lsc}{lecture-shortcuts}{lecture-shortcuts}{}{util,lecture,lecture-base}
+\lu@DefineModule{lgs}{lecture-glossary}{lecture-glossary}{enumitem}{lecture,lecture-base}
+\lu@DefineModule{lbg}{lecture-bibliography}{lecture-bibliography}{}{lecture,lecture-base}
+\lu@DefineModule{lfr}{lecture-format}{lecture-format}{}{lecture,util,lecture-base}
+\lu@DefineModule{lli}{lecture-links}{lecture-links}{}{lecture,lecture-base}
+\lu@DefineModule{lcp}{lecture-coverpage}{lecture-coverpage}{}{lecture,lecture-base}
+\lu@DefineModule{lre}{lecture-registers}{lecture-registers}{}{lecture,util,lecture-base}
+\lu@DefineModule{lar}{lecture-algorithms}{lecture-algorithms}{}{lecture,util}
+\lu@DefineModule{lre}{lecture-runtimes}{lecture-runtimes}{}{lecture}
+\lu@DefineModule{lca}{lecture-cancel}{lecture-cancel}{}{lecture,util,lecture-base}
 
 \lu@DefineModule{lbx}{lithie-boxes}{lithie-boxes}{autoenv}{lecture,util,boxes}
 \lu@DefineModule{lts}{lithie-task-boxes}{lithie-task-boxes}{}{lecture,util,boxes}
@@ -135,8 +135,8 @@
 
 \lu@DefineModule{sot}{sopra-tables}{sopra-tables}{}{sopra}
 \lu@DefineModule{sor}{sopra-requirements}{sopra-requirements}{}{sopra}
-\lu@DefineModule{som}{sopra-models}{sopra-models}{}{sopra,uml,graphics}
-\lu@DefineModule{sol}{sopra-listings}{sopra-listings}{noloadlangs}{sopra,listings}
+\lu@DefineModule{som}{sopra-models}{sopra-models}{}{sopra,graphics}
+\lu@DefineModule{sol}{sopra-listings}{sopra-listings}{noloadlangs}{sopra}
 \lu@DefineModule{sod}{sopra-documentation}{sopra-documentation}{}{sopra}
 \lu@DefineModule{soc}{sopra-changelog}{sopra-changelog}{}{sopra}
 \lu@DefineModule{soa}{sopra-attachments}{sopra-attachments}{}{sopra}
@@ -148,10 +148,8 @@
 % personal
 \lu@DefineModule{lper}{lecture-personal}{lecture-personal}{}{personal}
 
-% TODO: eagle maps, etc. more but shorter groups... like 'maps', 'istings' etc...
 % TODO: alias functionality?
 % TODO: encoding
-% TODO: maybe 'standard mode' loading some default packages for a given language?
 % TODO: siunitx
 % TODO: index
 

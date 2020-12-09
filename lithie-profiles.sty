@@ -14,7 +14,7 @@
 % #1 name #2 commands
 \def\lip@RegisterProfile#1#2{%
     \ifcsname lip@profile@#1\endcsname%
-        \PackageWarning{lithie-profiles}{Profile '#1' already exists. Appending.}
+        \PackageWarning{lithie-profiles}{Profile '#1' already exists. Appending.}%
         \lip@AppendToProfile{#1}{#2}%
     \else%
     \expandafter\def\csname lip@profile@#1\endcsname{}%
