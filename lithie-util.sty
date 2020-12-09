@@ -108,11 +108,11 @@
 }
 
 % define the groups
-\forcsvlist{\lu@DefineGroup}{all,util,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics}
+\forcsvlist{\lu@DefineGroup}{all,util,color,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
-\lu@DefineModule{cps}{color-palettes}{color-palettes}{}{util,boxes}
-\lu@DefineModule{tps}{tikz-palettes}{tikz-palettes}{}{util}
+\lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,boxes}
+\lu@DefineModule{tps}{tikz-palettes}{tikz-palettes}{}{color,util}
 
 \lu@DefineModule{lsc}{lecture-shortcuts}{lecture-shortcuts}{}{util,lecture,lecture-base}
 \lu@DefineModule{lgs}{lecture-glossary}{lecture-glossary}{enumitem}{lecture,lecture-base}
