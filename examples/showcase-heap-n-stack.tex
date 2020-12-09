@@ -1,0 +1,73 @@
+\errorcontextlines 999999
+\documentclass{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[main=ngerman]{babel}
+
+\usepackage[a4paper,margin=1.5cm]{geometry}
+\usepackage{microtype,array,mathtools,environ,hyperref,tikz}
+
+\usepackage[lecture]{lithie-util}
+
+\title{Showcase der Heap und Stack Darstellung}
+\author{Florian Sihler}
+\date{\today}
+
+\makeatletter
+
+\begin{document}
+\maketitle
+\def\lhnselementformat#1{\texttt{#1}}
+\def\lhnsielementformat#1{\textbf{#1}}
+\begin{tikzpicture}
+\begin{heap-n-stack}{1}
+\iheap{Hallo}
+% \heap{Jay}
+\heap{Mehrzeiliges Mega-Element}
+\iheap{auch wichtig}
+\heap[green]{Mega Element}
+\renderheap
+
+\stack{MegaStack}
+\istack{zweiter stack}
+\stack{a}
+\renderstack
+
+\draw[lhns] (stack-1.east) -- (heap-0.west);
+
+
+\end{heap-n-stack}
+\end{tikzpicture}
+\bigskip
+
+\begin{tikzpicture}
+\begin{heap-n-stack}{2}
+\iheap{Hallo}
+\renderheap
+
+\renderstack% empty stack
+\end{heap-n-stack}
+\end{tikzpicture}
+
+
+\begin{tikzpicture}
+\begin{heap-n-stack}{3}
+\iheap{Hallo}
+
+\renderstack% empty stack
+\end{heap-n-stack}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{heap-n-stack}{4}
+\renderstack% empty stack
+\end{heap-n-stack}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{heap-n-stack}{5}
+\end{heap-n-stack}
+\end{tikzpicture}
+
+\end{document}
