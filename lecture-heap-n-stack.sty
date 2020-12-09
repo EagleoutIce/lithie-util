@@ -18,10 +18,10 @@
 \newif\iflhns@renderstack
 
 \newlength\lhns@elemwidth
-\lhns@elemwidth=3cm
+\lhns@elemwidth=2.75cm
 
 \newlength\lhns@innersep
-\lhns@innersep=0.333em
+\lhns@innersep=0.15em
 
 \newlength\lhns@borderbuff
 \lhns@borderbuff=1em
@@ -30,7 +30,7 @@
 \lhns@captionsep=1em
 
 \newlength\lhns@minborderheight
-\lhns@minborderheight=5cm
+\lhns@minborderheight=4cm
 
 \def\lhns@stackroot{0,0}
 \def\lhns@heaproot{\lhns@elemwidth+4*\lhns@borderbuff,0}
@@ -44,7 +44,7 @@
     lhns@impstyle/.style={thick},%
     lhns@basestyle/.style={rectangle,outer sep=0pt,inner sep=\lhns@innersep},
     lhns@border/.style={rectangle,rounded corners=2pt,dashed,draw},%
-    lhns/.style={{Circle[length=4.5pt]}-Kite}
+    lhns/.style={{Circle[length=4.5pt]}-Kite}%
 }
 
 \def\lhns@heap@element@#1#2#3{%
@@ -168,11 +168,11 @@
 }{%
     \iflhns@renderheap\iflhns@renderstack%
         % both present
-        \path(stack-border.north west) -- (heap-border.north east) node[midway,above=\lhns@borderbuff] {\lhns@thisnumber};
+        \path(stack-border.north west) -- (heap-border.north east) node[midway,above=\lhns@innersep] {\lhns@thisnumber};
     \else% only heap
-    \node[above=\lhns@borderbuff] at (heap-border.north) {\lhns@thisnumber};
+    \node[above=\lhns@innersep] at (heap-border.north) {\lhns@thisnumber};
     \fi\else\iflhns@renderstack% only stack
-    \node[above=\lhns@borderbuff] at (stack-border.north) {\lhns@thisnumber};
+    \node[above=\lhns@innersep] at (stack-border.north) {\lhns@thisnumber};
     % other else case dropped as no heap or stack => no number
     \fi\fi
 \egroup}
