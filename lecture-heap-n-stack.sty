@@ -18,7 +18,7 @@
 \newif\iflhns@renderstack
 
 \newlength\lhns@elemwidth
-\lhns@elemwidth=2.75cm
+\lhns@elemwidth=3cm
 
 \newlength\lhns@innersep
 \lhns@innersep=0.15em
@@ -37,8 +37,10 @@
 
 \def\lhnselementformat#1{#1}
 \def\lhnsielementformat#1{#1}
+\def\lhnselementalign{\centering}
+\long\def\lhnselementbox#1#2{\pbox#1{#2}}
 % width calculated in render routine
-\def\@lhns@format@elem#1{\pbox{\lhns@elemtextwidth pt}{\centering#1}}
+\def\@lhns@format@elem#1{\lhnselementbox{\lhns@elemtextwidth pt}{\lhnselementalign#1}}
 
 \tikzset{%
     lhns@impstyle/.style={thick},%
@@ -93,7 +95,7 @@
 % name | text | extras | position
 \def\lhns@render@elem@important#1#2#3#4{%
 \typeout{ -[#1,i]> '#2'}%
-\node[lhns@basestyle,below=\lhns@innersep,#3] (#1) at(#4) {\@lhns@format@elem{\lhnselementformat{\lhnsielementformat{#2}}}}; % content
+\node[lhns@basestyle,below=\lhns@innersep,#3] (#1) at(#4) {\@lhns@format@elem{\lhnsielementformat{#2}}}; % content
 \node[lhns@basestyle,draw,minimum width=\lhns@elemwidth,fit={(#1.north) (#1.south)},lhns@impstyle] (#1-box) {};% box
 }
 
