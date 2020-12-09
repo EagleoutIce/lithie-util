@@ -18,13 +18,16 @@
     fill port=white, fill component=white,fill note=gray!6!white, font=\small\ttfamily}%
   \fi%
   \tikzset{%
-      every node/.append style={font=\sffamily},%
-      lblock/.style={block,#1,writ,font=\fillfont}, %
-      block/.style={rectangle,draw, align=center, minimum height=1.9em,rounded corners=1.65pt}%
+    every node/.append style={font=\sffamily},%
+    lblock/.style={block,#1,writ,font=\fillfont}, %
+    lblock/.default={tikzA},
+    block/.style={rectangle,draw, align=center, minimum height=1.9em,rounded corners=1.65pt},%
+    desc/.style={scale=0.85,font=\itshape\sffamily,fill=lightgray!42!white,inner sep=1.15ex,align=left},%
+    every picture/.append style={line join=round,line cap=round}%
   }
 }
 % mindmap and trees for overview
-\usetikzlibrary{graphs,arrows.meta,calc,mindmap}
+\usetikzlibrary{graphs,arrows.meta,calc}
 \pgfplotsset{compat=1.16,every axis/.append style={legend cell align={left}}}
 
 \endinput
