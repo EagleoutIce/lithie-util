@@ -70,4 +70,56 @@
 \end{heap-n-stack}
 \end{tikzpicture}
 
+\clearpage
+\section{Left aligned}
+\begin{tikzpicture}
+\begin{heap-n-stack}{1}
+\iheap{Hallo}
+% \heap{Jay}
+\heap{Mehrzeiliges Mega-Element}
+\iheap{auch wichtig}
+\heap[green]{Mega Element}
+\renderheap
+
+\stack{MegaStack}
+\istack{zweiter stack}
+\stack{a}
+\renderstack
+
+\draw[lhns] (stack-1.east) -- (heap-0.west);
+
+
+\end{heap-n-stack}
+\end{tikzpicture}
+\bigskip
+
+\begin{tikzpicture}
+\begin{heap-n-stack}{2}
+\iheap{Hallo}
+\renderheap
+
+\renderstack% empty stack
+\end{heap-n-stack}
+\end{tikzpicture}
+
+
+\begin{tikzpicture}
+\begin{heap-n-stack}{3}
+\iheap{Hallo}
+
+\renderstack% empty stack
+\end{heap-n-stack}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{heap-n-stack}{4}
+\renderstack% empty stack
+\end{heap-n-stack}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\begin{heap-n-stack}{5}
+\end{heap-n-stack}
+\end{tikzpicture}
+
 \end{document}
