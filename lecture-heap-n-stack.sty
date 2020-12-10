@@ -16,7 +16,7 @@
 \iflhns@debug@\let\lhns@debug\typeout%
 \else\let\lhns@debug\@gobble\fi%
 
-\RequirePackage{pbox}
+\RequirePackage{pbox,tikz}
 
 \usetikzlibrary{fit,arrows.meta}
 
@@ -46,7 +46,7 @@
 \def\lhnselementformat#1{#1}
 \def\lhnsielementformat#1{#1}
 \def\lhnselementalign{\centering}
-\long\def\lhnselementbox#1#2{\pbox#1{#2}}
+\long\def\lhnselementbox#1#2{\pbox{#1}{#2}}
 % width calculated in render routine
 \def\@lhns@format@elem#1{\lhnselementbox{\lhns@elemtextwidth pt}{\lhnselementalign#1}}
 
