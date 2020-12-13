@@ -26,14 +26,13 @@
 \def\lu@DefineGroup#1{%
     \@namedef{@litu@@group@#1}{}%
     \@litu@atl\@litu@all@groups{#1}%
-    \DeclareVoidOption{#1}{\typeout{Req. group '\CurrentOption'}\listadd\@litu@hook@GroupRequire{#1}}
+    \DeclareVoidOption{#1}{\listadd\@litu@hook@GroupRequire{#1}}%
 }
 
 \def\lu@AddToGroup#1#2{\expandafter\def\expandafter\@litu@tmp@listnam\expandafter{\csname @litu@@group@#1\endcsname}%
 \edef\@litu@tmp{\noexpand\@litu@atl\expandonce{\@litu@tmp@listnam}{#2}}\@litu@tmp}
 
-\def\lu@LoadGroup#1{\typeout{Load Group: #1 (\@nameuse{@litu@@group@#1})}%
-\protected@edef\@litu@tmp@groupload{\noexpand\forlistloop{\noexpand\lu@LoadModule}{\@nameuse{@litu@@group@#1}}}%
+\def\lu@LoadGroup#1{\protected@edef\@litu@tmp@groupload{\noexpand\forlistloop{\noexpand\lu@LoadModule}{\@nameuse{@litu@@group@#1}}}%
 \@litu@tmp@groupload}
 
 \def\@@lu@atgs#1#2{\lu@AddToGroup{#2}{#1}}
@@ -98,13 +97,13 @@
 
 % #1 id, #2 module, #3 package-name, #4 defaults, #5 groups (all is forced)
 \def\lu@DefineModule#1#2#3#4#5{%
-    \expandafter\def\csname @lu@module@map@name@#1\endcsname{#2}%
-    \expandafter\def\csname @lu@module@map@package@#1\endcsname{#3}%
-    \expandafter\def\csname @lu@module@map@defaults@#1\endcsname{#4}%
-    \expandafter\def\csname @lu@module@map@groups@#1\endcsname{all,#5}%
-    \protected@edef\@litu@tmp{\noexpand\DeclareStringOption[\@litu@none]{\lu@Get{#1}{name}}[\lu@Get{#1}{defaults}]}\@litu@tmp%
-    \appto\@litu@hook@PackageRequire{\lu@LoadModuleIfGiven{#1}}%
-    \lu@AddToGroups{\lu@Get{#1}{groups}}{#1}%
+  \expandafter\def\csname @lu@module@map@name@#1\endcsname{#2}%
+  \expandafter\def\csname @lu@module@map@package@#1\endcsname{#3}%
+  \expandafter\def\csname @lu@module@map@defaults@#1\endcsname{#4}%
+  \expandafter\def\csname @lu@module@map@groups@#1\endcsname{all,#5}%
+  \protected@edef\@litu@tmp{\noexpand\DeclareStringOption[\@litu@none]{\lu@Get{#1}{name}}[\lu@Get{#1}{defaults}]}\@litu@tmp%
+  \appto\@litu@hook@PackageRequire{\lu@LoadModuleIfGiven{#1}}%
+  \lu@AddToGroups{\lu@Get{#1}{groups}}{#1}%
 }
 
 % define the groups

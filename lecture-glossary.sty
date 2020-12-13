@@ -40,7 +40,7 @@
     \quad\textit{\iflglos@thispage@issingle@\lglos@spage\else\lglos@ppage\fi:~#1}%
 }
 \def\lglos@printpages#1{%
-    \let\delimN\lglos@delimN\let\delimR\lglos@delimR
+    \let\delimN\lglos@delimN\let\delimR\lglos@delimR%
     % think it is single (like me; :cry:)
     \lglos@thispage@issingle@true\@lglos@hide@in@da@void{#1}%
     \@lglos@printpages{#1}}

@@ -25,7 +25,7 @@
 \newcommand*\tblock[5][]{%
   \draw[tborder] (#2) -| ++(3*\tblocksize,-\tblocksize) -| ++(-\tblocksize,-\tblocksize) -| ++(-\tblocksize,\tblocksize) -| cycle;
   \path (#2)++(\tblocksize/2,-\tblocksize/2) node[tblock] (#1-left) {\textit{#3}};
-  \path (#2)++(\tblocksize/2+\tblocksize,-\tblocksize/2) node[tblock] (#1-mid) {\(\longrightarrow\)};
+  \path (#2)++(\tblocksize/2+\tblocksize,-\tblocksize/2) node[tblock] (#1-mid) {$\longrightarrow$};
   \path (#2)++(\tblocksize/2+2*\tblocksize,-\tblocksize/2) node[tblock] (#1-right) {\textit{#4}};
   \path (#2)++(\tblocksize/2+\tblocksize,-\tblocksize/2-\tblocksize) node[tblock] (#1-down) {\textit{#5}};
 }
