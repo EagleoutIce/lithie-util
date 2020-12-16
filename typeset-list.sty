@@ -1,0 +1,71 @@
+%% typeset-list.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 1.12.2020
+%%
+%% More customizeable typeset-list command
+%%
+\ProvidesPackage{typeset-list}[2020/10/12 v1.0 typeset-lists]
+
+\RequirePackage{pgffor}
+
+\newcommand*{\getListLength}[1]{%
+    \def\@tmpl{#1}%
+    \gdef\@c@tmp{0}%
+    \foreach \@tmp[count=\@@c@tmp] in \@tmpl {\xdef\@c@tmp{\@@c@tmp}}%
+}
+
+\newcommand*{\TypesetList}[3][typesetVoid]{\bgroup%
+    \edef\@typeset@list@and{#3}\edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp%
+    \egroup%
+}
+
+\newcommand*{\typesetList}[2][typesetVoid]{%
+    \edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp%
+}
+
+%% this will typeset a List in German List-Notation
+\newcommand*{\@@typesetList}[2][typesetVoid]{%
+    \def\@tmpl{#2}%
+    \getListLength{#2}%
+    \foreach \x[count=\i] in \@tmpl {%
+        \ifnum\i>1 \ifnum\i=\@c@tmp%
+        ~und \else%
+        ,\space\fi%
+        \fi%
+        \@nameuse{#1}{\x}%
+    }\ignorespaces%
+}
+
+\let\@ltu@ttl@TextBfFormat\textbf
+\def\NoFormatChar{|}
+
+\def\@ltu@ttl@format@step#1#2{%
+    \xdef\tmp@@ltu@ttl@first{\@car #2\@empty\@nil}\ifx\tmp@@ltu@ttl@first\NoFormatChar\@gobble{\@car #2\@empty\@nil}\else%
+    \expandafter#1\expandafter{\@car #2\@empty\@nil}% % car => (LISP) list head => \def\@car#1#2\@nil{#1}
+    \fi%
+    \@cdr #2\@empty\@nil%                             % cdr => (LISP) list body => \def\@cdr#1#2\@nil{#2}
+}
+
+\long\def\@ltu@ttl@jump@fi#1\fi{\fi#1}                   % Leaving the \if :D
+\def\@ltu@ttl@formatter@current{\empty}
+
+\def\@ltu@ttl@format@iter#1 #2\@nil{%
+    \@ltu@ttl@format@step{\@ltu@ttl@formatter@current}{#1}%
+    \ifx!#2!\else%
+    \@ltu@ttl@jump@fi{%
+        \space%
+        \@ltu@ttl@format@iter#2\@nil%
+    }%
+    \fi%
+}
+
+%% Routine to highlight the First Character in Acronyms
+% \Acronym{Hallo Welt} will yield '\textbf{H}allo \textbf{W}elt'
+\def\Acronym#1{% Not Nested
+    \def\@ltu@ttl@formatter@current{\@ltu@ttl@TextBfFormat}%
+    \def\@Acronym{\@ltu@ttl@format@iter#1 \@nil}{\ignorespaces\@Acronym}%
+}
+
+\endinput
