@@ -89,12 +89,12 @@
 \def\iflecture@ers#1{\protected@edef\@@lecture@tmp{\lecture@rs{#1}}\lecture@@chkempty}
 
 \AtBeginDocument{%
-    \@ifpackageloaded{hyperref}{%
-    \hypersetup{pdftitle={\lecture@r{title}},%
-        pdfsubject={\lecture@r{subtitle}},%
-        pdfauthor={\lecture@r{author}},%
-        pdfkeywords={\lecture@r{keywords}}}%
-    }{}%
+\@ifpackageloaded{hyperref}{%
+\hypersetup{pdftitle={\lecture@r{title}},%
+    pdfsubject={\lecture@r{subtitle}},%
+    pdfauthor={\lecture@r{author}},%
+    pdfkeywords={\lecture@r{keywords}}}%
+}{}%
 }
 
 % link the defaults:

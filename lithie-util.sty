@@ -52,8 +52,8 @@
 \def\@@litu@util{:}
 \def\@@litu@load@consume@arg@ifcmd#1#2->#3#4{%
     \ifstrempty{#1#2}{}{\def\@@litu@first@chk{#1}%
-        \ifx\@@litu@first@chk\@@litu@util% is command
-            #3{#2}\else#4{#2}\fi%
+    \ifx\@@litu@first@chk\@@litu@util% is command
+        #3{#2}\else#4{#2}\fi%
 }}
 
 \def\@litu@cmd@defaults{defaults}
