@@ -17,11 +17,10 @@
 
 \RequirePackage{csquotes}
 \iflbib@setup@biber@%
-\PassOptionsToPackage{backend=biber}{biblatex}%
+\RequirePackage[backend=biber,style=alphabetic]{biblatex}
 \else%
-\PassOptionsToPackage{backend=biblatex}{biblatex}%
+\RequirePackage[backend=bibtex8,style=alphabetic]{biblatex}
 \fi
-\RequirePackage[style=alphabetic]{biblatex}
 
 \defbibheading{bibliography}[\bibname]{\section{#1}}
 % currently nothing more :D
