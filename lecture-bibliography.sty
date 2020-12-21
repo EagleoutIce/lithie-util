@@ -9,10 +9,19 @@
 
 \ProvidesPackage{lecture-bibliography}[2020/09/22 v1.0 Bibliography Styling]
 
+\newif\iflbib@setup@biber@
+\DeclareOption{biber}{\lbib@setup@biber@true}
+\DeclareOption{nobiber}{\lbib@setup@biber@false}
+
 \ProcessOptions*%
 
 \RequirePackage{csquotes}
-\RequirePackage[backend=bibtex8,style=alphabetic]{biblatex}
+\iflbib@setup@biber@%
+\PassOptionsToPackage{backend=biber}{biblatex}%
+\else%
+\PassOptionsToPackage{backend=biblatex}{biblatex}%
+\fi
+\RequirePackage[style=alphabetic]{biblatex}
 
 \defbibheading{bibliography}[\bibname]{\section{#1}}
 % currently nothing more :D
