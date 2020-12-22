@@ -35,7 +35,25 @@
     \Box{\downsizeBoth{\Height}{\Width}{\Content}}
 }
 
-\title{Showcase der Links}
+\def\CasesB{%
+    \subsection{Normal}
+
+    \Box{\Content}
+    \vspace*{3cm}
+    \subsection{width}
+
+    \Box{\resizebox*{\Width}{!}{\Content}}
+    \vspace*{3cm}
+    \subsection{height}
+
+    \Box{\resizebox*{!}{\Height}{\Content}}
+    \vspace*{3cm}
+    \subsection{both}
+
+    \Box{\resizebox*{\Height}{\Width}{\Content}}
+}
+
+\title{Showcase Resize}
 \author{Florian Sihler}
 \date{\today}
 \begin{document}
@@ -43,7 +61,9 @@
 
 \tableofcontents
 
-Note: vertical spacing was inserted to clarify overfull boxes.
+\begin{center}
+    Note: vertical spacing was inserted to clarify overfull boxes.
+\end{center}
 
 \newpage\section{Fits into box}
 \def\Content{Hallo Welt}
@@ -59,9 +79,21 @@ Note: vertical spacing was inserted to clarify overfull boxes.
 \def\Content{\begin{tabular}{cc} \toprule 1 & 2 \\\midrule 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\\bottomrule\end{tabular}}
 \Cases
 
-\newpage\section{Too wide and too high}
-(table will overscale if not downsized by height)
+\newpage\section{Too wide and too high (higher)}
 \def\Content{\begin{tabular}{lclr} \toprule This table & should be & higher than & 5cm for sure\\\midrule 1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\\bottomrule\end{tabular}}
 \Cases
 
+
+
+\newpage\section{Too wide and too high (wider)}
+\def\Content{\begin{tabular}{lclrr} \toprule This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\\midrule 1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\\bottomrule\end{tabular}}
+\Cases
+
+\newpage\appendix
+\section{Resizebox -- Fits into box}
+\def\Content{Hallo Welt}
+\CasesB
+
+\section{Resizebox -- Too large}
+\def\Content{\begin{tabular}{lclrr} \toprule This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\\midrule 1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure but this one & is considerable wider than higher\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure but this one & is considerable wider than higher\\\bottomrule\end{tabular}}\CasesB
 \end{document}
