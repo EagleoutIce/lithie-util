@@ -32,6 +32,7 @@
   \else\usebox\lecture@personal@downsize@box\fi%
 }
 
+\def\leecpd@to@pt#1{\strip@pt\dimexpr #1*65536/\number\dimexpr 1pt}
 % height | width | content
 % TODO: this might be reduced to use one/two dimens less
 \newcommand\downsizeBoth[3]{%
@@ -43,7 +44,7 @@
     \ifdim\lecture@personal@downsize@box@height>#1 %
       % both -> we want to keep aspect ratio!
       % box data: r_box = w_box/h_box
-      \lecpd@downsize@a=\lecture@personal@downsize@box@width%
+      \lecpd@downsize@a=\leecpd@to@pt{\lecture@personal@downsize@box@width%
       \divide\lecpd@downsize@a by \lecture@personal@downsize@box@height%
       % target data: r_target = w_target/h_target
       \lecpd@downsize@b=#2%
