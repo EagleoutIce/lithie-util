@@ -10,6 +10,10 @@
 
 \newsavebox\lecture@personal@downsize@box
 \newdimen\lecture@personal@downsize@box@height
+\newdimen\lecture@personal@downsize@box@width
+\newdimen\lecpd@downsize@a
+\newdimen\lecpd@downsize@b
+
 % [height] | width | content
 \newcommand\downsize[3][!]{%
   \savebox{\lecture@personal@downsize@box}{#3}%
@@ -29,14 +33,37 @@
 }
 
 % height | width | content
+% TODO: this might be reduced to use one/two dimens less
 \newcommand\downsizeBoth[3]{%
   \savebox{\lecture@personal@downsize@box}{#3}%
   \lecture@personal@downsize@box@height=\ht\lecture@personal@downsize@box%
   \advance\lecture@personal@downsize@box@height by \dp\lecture@personal@downsize@box%
-  \ifdim\wd\lecture@personal@downsize@box>#2 %
+  \lecture@personal@downsize@box@width=\wd\lecture@personal@downsize@box
+  \ifdim\lecture@personal@downsize@box@width>#2 %
     \ifdim\lecture@personal@downsize@box@height>#1 %
-      % both
-      \resizebox*{#2}{#1}{\usebox\lecture@personal@downsize@box}%
+      % both -> we want to keep aspect ratio!
+      % box data: r_box = w_box/h_box
+      \lecpd@downsize@a=\lecture@personal@downsize@box@width%
+      \divide\lecpd@downsize@a by \lecture@personal@downsize@box@height%
+      % target data: r_target = w_target/h_target
+      \lecpd@downsize@b=#2%
+      \divide\lecpd@downsize@b by #1%
+      % r_box > r_target ?
+      \ifdim\lecpd@downsize@a>\lecpd@downsize@b%
+        % then scale to w: w_box * h_target/h_box, h: h_box
+        \lecpd@downsize@a=\lecture@personal@downsize@box@width%
+        \lecpd@downsize@b=#1%
+        \divide\lecpd@downsize@b by \lecture@personal@downsize@box@height% h_target/h_box
+        \multiply\lecpd@downsize@a by \lecpd@downsize@b % w_box * h_target/h_box
+        \resizebox*{\lecpd@downsize@a}{#1}{\usebox\lecture@personal@downsize@box}%
+      \else % r_box <= r_target
+        % then scale to w: w_target, h: h_box * w_target/w_box
+        \lecpd@downsize@a=\lecture@personal@downsize@box@height%
+        \lecpd@downsize@b=#2% w_target
+        \divide\lecpd@downsize@b by \lecture@personal@downsize@box@width% w_target/w_box
+        \multiply\lecpd@downsize@a by \lecpd@downsize@b % h_box * w_target/w_box
+        \resizebox*{#2}{\lecpd@downsize@a}{\usebox\lecture@personal@downsize@box}%
+      \fi%
     \else%
       % only width
       \resizebox{#2}{!}{\usebox\lecture@personal@downsize@box}%

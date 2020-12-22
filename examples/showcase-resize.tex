@@ -1,0 +1,67 @@
+\errorcontextlines 99999
+\documentclass[twocolumn]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[main=ngerman]{babel}
+
+\usepackage[a4paper,margin=1.5cm]{geometry}
+
+\usepackage{microtype,array,mathtools,environ,hyperref}
+
+\usepackage{hyperref,xcolor,graphicx,booktabs}
+\usepackage{lecture-personal-resize}
+
+\def\Width{5cm}
+\def\Height{5cm}
+\def\Box#1{\fbox{\parbox[c][\Height]{\Width}{#1}}}
+
+
+\def\Cases{%
+    \subsection{Normal}
+
+    \Box{\Content}
+    \vspace*{3cm}
+    \subsection{downsize}
+
+    \Box{\downsize{\Width}{\Content}}
+    \vspace*{3cm}
+    \subsection{downsize height}
+
+    \Box{\downsizeHeight{\Height}{\Content}}
+    \vspace*{3cm}
+    \subsection{downsize both}
+
+    \Box{\downsizeBoth{\Height}{\Width}{\Content}}
+}
+
+\title{Showcase der Links}
+\author{Florian Sihler}
+\date{\today}
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+Note: vertical spacing was inserted to clarify overfull boxes.
+
+\newpage\section{Fits into box}
+\def\Content{Hallo Welt}
+\Cases
+
+\newpage\section{Too wide}
+(Line made unbreakable using \verb|\mbox|)
+\def\Content{\mbox{Isch bin auf jeden Fall zu lang für 5cm aber escht.}}
+\Cases
+
+\newpage\section{Too high}
+(table will overscale if not downsized by height)
+\def\Content{\begin{tabular}{cc} \toprule 1 & 2 \\\midrule 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\1 & 2 \\ 3 & 4 \\\bottomrule\end{tabular}}
+\Cases
+
+\newpage\section{Too wide and too high}
+(table will overscale if not downsized by height)
+\def\Content{\begin{tabular}{lclr} \toprule This table & should be & higher than & 5cm for sure\\\midrule 1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & higher than & 5cm for sure\\1 & 2 & 3 & 4 \\This table & should be & wider than & 5cm for sure\\\bottomrule\end{tabular}}
+\Cases
+
+\end{document}
