@@ -1,7 +1,5 @@
 %% lecture-shortcuts.sty
-%%
 %% --------------------------------------------------------------------------
-%%
 %% Autor: Florian Sihler, 19.09.2020
 %%
 %% Commands i use oftenly and that speedup typing. They do not offer
@@ -10,11 +8,12 @@
 %% generic-lib
 
 \ProvidesPackage{lecture-shortcuts}[2020/09/19 v1.0 shortcuts]
-
 \RequirePackage{xspace,mathtools,amssymb,datetime}
 
+\ifcsname enquote\endcsname
+\let\say\enquote\else% use legacy
 \providecommand\say[1]{\glqq#1\grqq{}}
-\robustify\say
+\robustify\say\fi
 \providecommand*\engl[2][]{#1(engl. \textit{#2})#1}
 \robustify\engl
 
@@ -25,17 +24,15 @@
 \newcommand*\floor[1]{\ensuremath{\left\lfloor#1\right\rfloor}}
 \newcommand*\abs[1]{\ensuremath{\left|\mskip\thinmuskip#1\mskip\thinmuskip\right|}}
 
-\newcommand*\limn{\ensuremath{\lim_{n \to \infty}}}
-\newcommand*\sumn[1][0]{\ensuremath{\sum_{n = #1}^\infty}}
-\newcommand*\limk{\ensuremath{\lim_{k \to \infty}}}
-\newcommand*\sumk[1][0]{\ensuremath{\sum_{k = #1}^\infty}}
+\newcommand*\limn{\ensuremath{\lim_{n\to\infty}}}
+\newcommand*\sumn[1][0]{\ensuremath{\sum_{n=#1}^\infty}}
+\newcommand*\limk{\ensuremath{\lim_{k\to\infty}}}
+\newcommand*\sumk[1][0]{\ensuremath{\sum_{k=#1}^\infty}}
 
 \DeclareMathOperator\adj{adj}
-
 \DeclareMathOperator\LH{\mathcal{LH}}
 \DeclareMathOperator\eig{Eig}
 \DeclareMathOperator\dif{\mathop{}\!\mathrm{d}}
-
 \DeclareMathOperator\hamming{d}
 
 \newcommand*\dint[1][x]{\mathop{}\!\frac{\mathrm{d}}{\mathrm{d}#1}}
@@ -79,7 +76,5 @@
 \providecommand*{\shouldeq}{\stackrel{!}{=}}
 
 \let\uc\textsc
-
 \newenvironment{erkenntnis}{\begin{center}}{\end{center}}
-
 \endinput
