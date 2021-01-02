@@ -98,8 +98,12 @@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry%
 \begin{titlepage}%
-\parbox{0.96\linewidth}{\raggedright\fontsize{49pt}{49pt}\selectfont\sffamily\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}\leavevmode\bigskip\\*}\par
-\parbox{0.96\linewidth}{\fontsize{17pt}{17pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\%
+\begin{center}
+    \hyphenpenalty=10000 \exhyphenpenalty=10000 %
+    \fontsize{46pt}{46pt}\selectfont\sffamily\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}\leavevmode\medskip\par
+    \parbox{0.96\linewidth}{\centering\fontsize{17pt}{17pt}\selectfont\sffamily\lecture@r{subtitle}}
+\end{center}
+\leavevmode\\%
 \vfill% set the titleimage
 \parbox[c][0.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
     \lecture@r{titleimage}%
@@ -162,7 +166,7 @@
 \hspace*{\lecturecp@leftwidth}\parbox{0.925\linewidth}{%
     \raggedright\fontsize{39pt}{39pt}\selectfont\sffamily%
     \savebox{\lecturecp@title@widthbox}{\pbox{\linewidth}{\raggedright\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}~~\null}}%
-    \usebox{\lecturecp@title@widthbox}\strut%
+    \usebox{\lecturecp@title@widthbox}\strut\medskip%
     \global\lecture@tmp@titlewidth=\wd\lecturecp@title@widthbox}%
     \leavevmode\\*[0.125cm]%
     \paletteA{\rule{\lecture@eff@titlewidth+\lecturecp@leftwidth}{1.33pt}}%
