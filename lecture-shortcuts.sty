@@ -36,10 +36,13 @@
 \DeclareMathOperator\hamming{d_H}
 \DeclareMathOperator\hammingCode{d}
 
-
 \newcommand*\dint[1][x]{\mathop{}\!\frac{\mathrm{d}}{\mathrm{d}#1}}
-
-\def\N{\mathbb{N}} \def\Z{\mathbb{Z}} \def\R{\mathbb{R}} \def\Q{\mathbb{Q}} \def\C{\mathbb{C}}
+\AtBeginDocument{%
+\def\N{\mathbb{N}}%
+\def\Z{\mathbb{Z}}%
+\def\R{\mathbb{R}}%
+\def\Q{\mathbb{Q}}%
+\def\C{\mathbb{C}}}
 
 \DeclareMathOperator\sel{\textsc{sel}}
 \DeclareMathOperator\sign{sign}
@@ -76,7 +79,6 @@
 \providecommand*{\qesad}
     {\Leftrightarrow\nolinebreak\mkern-1mu\nolinebreak\vcentcolon}
 \providecommand*{\shouldeq}{\stackrel{!}{=}}
-
 
 \AtBeginDocument{%
 \@ifpackageloaded{enumitem}{%
