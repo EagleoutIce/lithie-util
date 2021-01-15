@@ -22,6 +22,6 @@
     }%
 }%
 
-\DeclareRobustCommand{\cancel}[1]{\lecture@cancel{#1}{-1.33pt}{1.75pt}{1.33pt}{-1.75pt}}
-
+\DeclareRobustCommand*\cancel[1]{\lecture@cancel{#1}{-1.33pt}{1.75pt}{1.33pt}{-1.75pt}}
+\DeclareRobustCommand*\mcancel[1]{\lecture@cancel{\ensuremath{#1}}{-1.33pt}{1.75pt}{1.33pt}{-1.75pt}}
 \endinput
