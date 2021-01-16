@@ -45,20 +45,20 @@
     \xdef\tmp@@ltu@ttl@first{\@car #2\@empty\@nil}\ifx\tmp@@ltu@ttl@first\NoFormatChar\@gobble{\@car #2\@empty\@nil}\else%
     \expandafter#1\expandafter{\@car #2\@empty\@nil}% % car => (LISP) list head => \def\@car#1#2\@nil{#1}
     \fi%
-    \@cdr #2\@empty\@nil%                             % cdr => (LISP) list body => \def\@cdr#1#2\@nil{#2}
+    \@cdr #2\@empty\@nil% cdr => (LISP) list body => \def\@cdr#1#2\@nil{#2}
 }
 
-\long\def\@ltu@ttl@jump@fi#1\fi{\fi#1}                   % Leaving the \if :D
+\long\def\@ltu@ttl@jump@fi#1\fi{\fi#1}% Leaving the \if :D
 \def\@ltu@ttl@formatter@current{\empty}
 
 \def\@ltu@ttl@format@iter#1 #2\@nil{%
-    \@ltu@ttl@format@step{\@ltu@ttl@formatter@current}{#1}%
-    \ifx!#2!\else%
-    \@ltu@ttl@jump@fi{%
-        \space%
-        \@ltu@ttl@format@iter#2\@nil%
-    }%
-    \fi%
+\@ltu@ttl@format@step{\@ltu@ttl@formatter@current}{#1}%
+\ifx!#2!\else%
+\@ltu@ttl@jump@fi{%
+    \space%
+    \@ltu@ttl@format@iter#2\@nil%
+}%
+\fi%
 }
 
 %% Routine to highlight the First Character in Acronyms

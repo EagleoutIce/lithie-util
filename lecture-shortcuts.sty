@@ -33,11 +33,16 @@
 \DeclareMathOperator\LH{\mathcal{LH}}
 \DeclareMathOperator\eig{Eig}
 \DeclareMathOperator\dif{\mathop{}\!\mathrm{d}}
-\DeclareMathOperator\hamming{d}
+\DeclareMathOperator\hamming{d_H}
+\DeclareMathOperator\hammingCode{d}
 
 \newcommand*\dint[1][x]{\mathop{}\!\frac{\mathrm{d}}{\mathrm{d}#1}}
-
-\def\N{\mathbb{N}} \def\Z{\mathbb{Z}} \def\R{\mathbb{R}} \def\Q{\mathbb{Q}} \def\C{\mathbb{C}}
+\AtBeginDocument{%
+\def\N{\mathbb{N}}%
+\def\Z{\mathbb{Z}}%
+\def\R{\mathbb{R}}%
+\def\Q{\mathbb{Q}}%
+\def\C{\mathbb{C}}}
 
 \DeclareMathOperator\sel{\textsc{sel}}
 \DeclareMathOperator\sign{sign}
@@ -74,6 +79,15 @@
 \providecommand*{\qesad}
     {\Leftrightarrow\nolinebreak\mkern-1mu\nolinebreak\vcentcolon}
 \providecommand*{\shouldeq}{\stackrel{!}{=}}
+
+\AtBeginDocument{%
+\@ifpackageloaded{enumitem}{%
+\newlist{aufgaben}{enumerate}{3}%
+\setlist[aufgaben]{leftmargin=*}%
+\setlist[aufgaben,1]{label=(\alph*)}%
+\setlist[aufgaben,2]{label=(\roman*)}%
+\setlist[aufgaben,3]{label=(\arabic*)}%
+}{}}
 
 \let\uc\textsc
 \newenvironment{erkenntnis}{\begin{center}}{\end{center}}

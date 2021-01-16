@@ -31,7 +31,8 @@
   xleftmargin     = 3pt,%
   xrightmargin    = 3pt,% detached as no numbers
   backgroundcolor = \color{black!0},
-  rulecolor       = \color{sol@colors@border}%
+  rulecolor       = \color{sol@colors@border},%
+  add to literate = {0x}{{\solGet{comments}{0x}}}2 {0b}{{\solGet{comments}{0b}}}2%
 }
 
 \def\rbash{\@ifnextchar[{\rbash@opt}{\rbash@opt[\thinspace:]}}

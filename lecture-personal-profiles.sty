@@ -24,18 +24,20 @@
 
 % #1 name #2 prefix #3 print #4 default scale #5 ex args
 \def\lecture@profiles@MakeImageCommands#1#2#3#4#5{%
-\expandafter\newcommand\expandafter*\csname Get#1\endcsname[2][#4]{\centering\includegraphics[width=##1\linewidth,#5]{#2##2-#3compressed}}% -compressed
-\expandafter\newcommand\expandafter*\csname Get#1Raw\endcsname[2][]{\includegraphics[##1]{#2##2-#3compressed}}%
+\expandafter\newcommand\expandafter*\csname Get#1\endcsname[2][#4]{\centering\includegraphics[width=##1\linewidth,#5]{#2##2#3-compressed}}% -compressed
+\expandafter\newcommand\expandafter*\csname Get#1Raw\endcsname[2][]{\includegraphics[##1]{#2##2#3-compressed}}%
+\expandafter\newcommand\expandafter*\csname GetUncompressed#1\endcsname[2][#4]{\centering\includegraphics[width=##1\linewidth,#5]{#2##2#3}}% -compressed
+\expandafter\newcommand\expandafter*\csname GetUncompressed#1Raw\endcsname[2][]{\includegraphics[##1]{#2##2#3}}%
 }
 
 \newif\ifscol%
 \AppendToProfile{print}{%
-  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{print-}{1}{}}\@mkcommands%
+  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{-print}{1}{}}\@mkcommands%
   \DisableMulticolHint%
   \scolfalse%
   \newenvironment{ltabular}%
-      {\@nameuse{tabular}}%
-      {\@nameuse{endtabular}}%
+    {\@nameuse{tabular}}%
+    {\@nameuse{endtabular}}%
   \RequirePackage{Romantik}% Romantik for cfr initials?
   \DefaultFindent=5.15pt%
   \DefaultNindent=0.489pt% compensate for offsets
@@ -51,15 +53,15 @@
   \DisableMulticolHint%
   \scolfalse%
   \newenvironment{ltabular}%
-      {\@nameuse{tabular}}%
-      {\@nameuse{endtabular}}%
+    {\@nameuse{tabular}}%
+    {\@nameuse{endtabular}}%
   % we color it
   \def\LettrineFontHook{\color{paletteA}}%
   \DefaultFindent=1.85pt%
   \DefaultNindent=0.25em%
   \def\DefaultLoversize{0.05}%
   \AtBeginDocument{%
-    \hypersetup{pdftitle={\lecture@r{title} (Digitale-Version)}}%
+    \hypersetup{pdftitle={\lecture@r{title} (Digitalversion)}}%
   }%
 }
 

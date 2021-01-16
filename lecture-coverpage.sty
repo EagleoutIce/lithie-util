@@ -90,6 +90,13 @@
 
 \AtEndPreamble{\expandafter\ifx\expandafter!\lecturecp@activecoverpage!\else\@nameuse{lecturecp@style@\lecturecp@activecoverpage @}\fi}
 
+% .########..##..........###....####.##....##
+% .##.....##.##.........##.##....##..###...##
+% .##.....##.##........##...##...##..####..##
+% .########..##.......##.....##..##..##.##.##
+% .##........##.......#########..##..##..####
+% .##........##.......##.....##..##..##...###
+% .##........########.##.....##.####.##....##
 \lecturecp@coverpagestyle{plain}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=0.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
@@ -98,8 +105,12 @@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry%
 \begin{titlepage}%
-\parbox{0.96\linewidth}{\raggedright\fontsize{49pt}{49pt}\selectfont\sffamily\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}\leavevmode\bigskip\\*}\par
-\parbox{0.96\linewidth}{\fontsize{17pt}{17pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\%
+\begin{center}
+    \hyphenpenalty=10000 \exhyphenpenalty=10000 %
+    \fontsize{46pt}{46pt}\selectfont\sffamily\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}\leavevmode\medskip\par
+    \parbox{0.96\linewidth}{\centering\fontsize{17pt}{17pt}\selectfont\sffamily\lecture@r{subtitle}}
+\end{center}
+\leavevmode\\%
 \vfill% set the titleimage
 \parbox[c][0.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
     \lecture@r{titleimage}%
@@ -112,6 +123,13 @@
 \restoregeometry{}\clearpage\egroup}
 }
 
+% .########..##..........###....####.##....##..........######..##.....##....###....##.......##......
+% .##.....##.##.........##.##....##..###...##.........##....##.###...###...##.##...##.......##......
+% .##.....##.##........##...##...##..####..##.........##.......####.####..##...##..##.......##......
+% .########..##.......##.....##..##..##.##.##.#######..######..##.###.##.##.....##.##.......##......
+% .##........##.......#########..##..##..####...............##.##.....##.#########.##.......##......
+% .##........##.......##.....##..##..##...###.........##....##.##.....##.##.....##.##.......##......
+% .##........########.##.....##.####.##....##..........######..##.....##.##.....##.########.########
 \lecturecp@coverpagestyle{plain-small}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=0.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
@@ -121,11 +139,11 @@
 \lecture@coverpage@geometry%
 \begin{titlepage}%
 \parbox{0.99\linewidth}{\raggedright\fontsize{39pt}{39pt}\selectfont\sffamily\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}\leavevmode\bigskip\\*}\par
-\parbox{0.99\linewidth}{\fontsize{15pt}{15pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\%
+\parbox{0.99\linewidth}{\fontsize{15pt}{15pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\*%
 \vfill% set the titleimage
 \parbox[c][0.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
     \lecture@r{titleimage}%
-\vfill\hbox{}}\leavevmode\\
+\vfill\hbox{}}\leavevmode\\*
 \vfill%
 \parbox[c]{\linewidth}{%
 \fontsize{15pt}{15pt}\selectfont\sffamily\color{gray}\lecture@r{brief}%
@@ -134,6 +152,13 @@
 \restoregeometry{}\clearpage\egroup}%
 }
 
+% .########....###....##....##..######..##....##
+% .##.........##.##...###...##.##....##..##..##.
+% .##........##...##..####..##.##.........####..
+% .######...##.....##.##.##.##.##..........##...
+% .##.......#########.##..####.##..........##...
+% .##.......##.....##.##...###.##....##....##...
+% .##.......##.....##.##....##..######.....##...
 \lecturecp@coverpagestyle{fancy}{%
 \def\lecture@coverpage@geometry{\newgeometry{margin=\z@}}
 
@@ -161,8 +186,8 @@
 % title:
 \hspace*{\lecturecp@leftwidth}\parbox{0.925\linewidth}{%
     \raggedright\fontsize{39pt}{39pt}\selectfont\sffamily%
-    \savebox{\lecturecp@title@widthbox}{\pbox{\linewidth}{\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}~~\null}}%
-    \usebox{\lecturecp@title@widthbox}\strut%
+    \savebox{\lecturecp@title@widthbox}{\pbox{\linewidth}{\raggedright\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}~~\null}}%
+    \usebox{\lecturecp@title@widthbox}\strut\medskip%
     \global\lecture@tmp@titlewidth=\wd\lecturecp@title@widthbox}%
     \leavevmode\\*[0.125cm]%
     \paletteA{\rule{\lecture@eff@titlewidth+\lecturecp@leftwidth}{1.33pt}}%
@@ -203,6 +228,13 @@
 \restoregeometry{}\clearpage\egroup}
 }
 
+% .########....###....##....##..######..##....##..........######..##.....##....###....##.......##......
+% .##.........##.##...###...##.##....##..##..##..........##....##.###...###...##.##...##.......##......
+% .##........##...##..####..##.##.........####...........##.......####.####..##...##..##.......##......
+% .######...##.....##.##.##.##.##..........##....#######..######..##.###.##.##.....##.##.......##......
+% .##.......#########.##..####.##..........##..................##.##.....##.#########.##.......##......
+% .##.......##.....##.##...###.##....##....##............##....##.##.....##.##.....##.##.......##......
+% .##.......##.....##.##....##..######.....##.............######..##.....##.##.....##.########.########
 \lecturecp@coverpagestyle{fancy-small}{%
 \def\lecture@coverpage@geometry{\newgeometry{margin=\z@}}
 
@@ -264,7 +296,32 @@
 }
 
 
+% ..######..####.##.....##.########..##.......########.........##.....##....###....##.......########
+% .##....##..##..###...###.##.....##.##.......##...............##.....##...##.##...##.......##......
+% .##........##..####.####.##.....##.##.......##...............##.....##..##...##..##.......##......
+% ..######...##..##.###.##.########..##.......######...#######.#########.##.....##.##.......######..
+% .......##..##..##.....##.##........##.......##...............##.....##.#########.##.......##......
+% .##....##..##..##.....##.##........##.......##...............##.....##.##.....##.##.......##......
+% ..######..####.##.....##.##........########.########.........##.....##.##.....##.########.##......
+\lecturecp@coverpagestyle{simple-half}{%
+\def\lecture@coverpage@geometry{}
 
+\renewcommand{\maketitle}{%
+\twocolumn[{%
+\parindent=\z@ \parskip=\z@ \leavevmode
+\vspace*{3em}\par\sffamily\fontsize{32}{32}
+\textbf{\paletteA{\lecture@r{title}}}\bigskip\leavevmode\\*
+\normalsize\strut\hfill\parbox[t]{0.85\linewidth}{\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*}\color{gray}\lecture@r{brief}}%
+\vspace*{5em}\leavevmode\par%
+}]{}}}
+
+% ..######..####.##.....##.########..##.......########
+% .##....##..##..###...###.##.....##.##.......##......
+% .##........##..####.####.##.....##.##.......##......
+% ..######...##..##.###.##.########..##.......######..
+% .......##..##..##.....##.##........##.......##......
+% .##....##..##..##.....##.##........##.......##......
+% ..######..####.##.....##.##........########.########
 \lecturecp@coverpagestyle{simple}{%
 \def\lecture@coverpage@geometry{}
 

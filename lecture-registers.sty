@@ -34,14 +34,14 @@
     \expandafter\gdef\csname lecture@register@short@#1\endcsname{}
 }
 
-\forcsvlist{\@lecture@definereg}{title,subtitle,subject,brief,author,duedate,supervisor,keywords,titleimage}
+\forcsvlist{\@lecture@definereg}{title,subtitle,subject,brief,author,date,duedate,supervisor,keywords,titleimage,authority,copyright}
 
 % iterators for handling and parsing author information.
 \def\lecture@@add@author#1{%
-    \let\lecture@@tmp@old@author\lecture@register@author%
-    \expandafter\ifx\expandafter\\\lecture@@tmp@old@author\\%
-    \xdef\lecture@register@author{#1}\else%
-    \xdef\lecture@register@author{\lecture@@tmp@old@author,#1}\fi%
+\let\lecture@@tmp@old@author\lecture@register@author%
+\expandafter\ifx\expandafter!\lecture@@tmp@old@author!%
+\xdef\lecture@register@author{#1}\else%
+\xdef\lecture@register@author{\lecture@@tmp@old@author,#1}\fi%
 }
 \let\addAuthor\lecture@@add@author
 
@@ -56,21 +56,21 @@
 
 \newcounter{lecture@counter@tmp@a}
 \def\lecture@@typeset@author#1{%
-    \setcounter{lecture@counter@tmp@a}{0}% start with an offset
-    \foreach \@tmp in {#1}%
-        {\expandafter\ifx\expandafter\\\@tmp\\\else%
-            \stepcounter{lecture@counter@tmp@a}\fi}%
-    \edef\lecture@author@totallength{\arabic{lecture@counter@tmp@a}}%
-    \setcounter{lecture@counter@tmp@a}{0}% stored the length of the list
-    \foreach \lecture@@tmp@curauthor in {#1} {%
-        \expandafter\ifx\expandafter\\\lecture@@tmp@curauthor\\%empty => ignore
-        \else\stepcounter{lecture@counter@tmp@a}%
-            \ifnum\thelecture@counter@tmp@a>1%
-            \ifnum\thelecture@counter@tmp@a=\lecture@author@totallength%
-                ~und \else,\space\fi\fi
-            \expandafter\lecture@@parse@author\lecture@@tmp@curauthor{} (??)??\@nil%
-        \fi%
-    }%
+\setcounter{lecture@counter@tmp@a}{0}% start with an offset
+\foreach \@tmp in {#1}%
+    {\expandafter\ifx\expandafter!\@tmp!\else%
+        \stepcounter{lecture@counter@tmp@a}\fi}%
+\edef\lecture@author@totallength{\arabic{lecture@counter@tmp@a}}%
+\setcounter{lecture@counter@tmp@a}{0}% stored the length of the list
+\foreach \lecture@@tmp@curauthor in {#1} {%
+    \expandafter\ifx\expandafter!\lecture@@tmp@curauthor!%empty => ignore
+    \else\stepcounter{lecture@counter@tmp@a}%
+        \ifnum\thelecture@counter@tmp@a>1%
+        \ifnum\thelecture@counter@tmp@a=\lecture@author@totallength%
+            ~und \else,\space\fi\fi
+        \expandafter\lecture@@parse@author\lecture@@tmp@curauthor{} (??)??\@nil%
+    \fi%
+}%
 }
 
 \newcommand*\lecture@typeset@authors{%
@@ -87,6 +87,10 @@
 \def\iflecture@er#1{\protected@edef\@@lecture@tmp{\lecture@r{#1}}\lecture@@chkempty}
 \def\lecture@rs#1{\@nameuse{lecture@register@short@#1}}
 \def\iflecture@ers#1{\protected@edef\@@lecture@tmp{\lecture@rs{#1}}\lecture@@chkempty}
+
+% public register access
+\let\lectureGetRegister\lecture@r
+\let\lectureGetRegisterShort\lecture@rs
 
 \AtBeginDocument{%
 \@ifpackageloaded{hyperref}{%
