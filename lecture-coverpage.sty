@@ -307,15 +307,13 @@
 \def\lecture@coverpage@geometry{}
 
 \renewcommand{\maketitle}{%
-\twocolumn[%
+\twocolumn[{%
 \parindent=\z@ \parskip=\z@ \leavevmode
-\sffamily\fontsize{32}{32}
+\vspace*{3em}\par\sffamily\fontsize{32}{32}
 \textbf{\paletteA{\lecture@r{title}}}\bigskip\leavevmode\\*
-\normalsize\strut\hfill\parbox{0.85\linewidth}{\color{gray}\raggedleft\lecture@r{subtitle}\\*\lecture@r{author}\iflecture@er{date}{}{,~\lecture@r{date}}}
-\vspace*{3em}\leavevmode\\*%
-%
-]{}}%
-}
+\normalsize\strut\hfill\parbox[t]{0.85\linewidth}{\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*}\color{gray}\lecture@r{brief}}%
+\vspace*{5em}\leavevmode\par%
+}]{}}}
 
 % ..######..####.##.....##.########..##.......########
 % .##....##..##..###...###.##.....##.##.......##......

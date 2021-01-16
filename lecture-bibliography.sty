@@ -9,17 +9,18 @@
 
 \ProvidesPackage{lecture-bibliography}[2020/09/22 v1.0 Bibliography Styling]
 
-\newif\iflbib@setup@biber@
-\DeclareOption{biber}{\lbib@setup@biber@true}
-\DeclareOption{nobiber}{\lbib@setup@biber@false}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=LBI,prefix=LBI@}
 
-\ProcessOptions*%
+\DeclareStringOption[alphabetic]{style}[alphabetic]
+\DeclareBoolOption{biber}
+\ProcessKeyvalOptions*\relax%
 
 \RequirePackage{csquotes}
-\iflbib@setup@biber@%
-\RequirePackage[backend=biber,style=alphabetic]{biblatex}
+\ifLBI@biber%
+\RequirePackage[backend=biber,style=\LBI@style]{biblatex}
 \else%
-\RequirePackage[backend=bibtex8,style=alphabetic]{biblatex}
+\RequirePackage[backend=bibtex8,style=\LBI@style]{biblatex}
 \fi
 
 \defbibheading{bibliography}[\bibname]{\section{#1}}
