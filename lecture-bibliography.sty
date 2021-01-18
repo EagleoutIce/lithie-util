@@ -14,9 +14,15 @@
 
 \DeclareStringOption[alphabetic]{style}[alphabetic]
 \DeclareBoolOption{biber}
+\DeclareBoolOption{backref}
 \ProcessKeyvalOptions*\relax%
 
 \RequirePackage{csquotes}
+
+\ifLBI@backref%
+\PassOptionsToPackage{backref=true}{biblatex}
+\fi
+
 \ifLBI@biber%
 \RequirePackage[backend=biber,style=\LBI@style]{biblatex}
 \else%
@@ -24,7 +30,14 @@
 \fi
 
 \defbibheading{bibliography}[\bibname]{\section{#1}}
-% currently nothing more :D
 
-% TODO:
+\ifLBI@backref%
+\DefineBibliographyStrings{english}{%
+  backrefpage = {cited on page}, backrefpages = {cited on pages} %
+}
+\DefineBibliographyStrings{german}{%
+  backrefpage = {Auf Seite:}, backrefpages = {Auf Seiten:}
+}
+\fi
+
 \endinput
