@@ -19,6 +19,7 @@
 \SetCommentSty{@lithie@algo@cmtfrmt}
 \SetNoFillComment
 
+\algoskipindent=0.5em
 \def\PreCode{\Indm}
 \def\StartCode{\Indp}
 \def\EndCode{\Indm}
@@ -30,9 +31,9 @@
 
 \def\@lithie@algo@def@style{\rmfamily\upshape}
 \def\@lithiealgo@init{%\def\alabel##1{\gdef\@alabel{#1}}%
-  \IncMargin{1em}\def\Int{{\@lithie@algo@def@style int}}\def\Matrix{{\@lithie@algo@def@style 2DMatrix}}\def\True{{\@lithie@algo@def@style true}}\def\False{{\@lithie@algo@def@style false}}%
+  \IncMargin{1.75em}\def\Int{{\@lithie@algo@def@style int}}\def\Matrix{{\@lithie@algo@def@style 2DMatrix}}\def\True{{\@lithie@algo@def@style true}}\def\False{{\@lithie@algo@def@style false}}%
 }
-\def\@lithiealgo@exit{\DecMargin{1em}}
+\def\@lithiealgo@exit{\DecMargin{1.75em}}
 
 \preto\algocf@algorithm{\@lithiealgo@init}
 \preto\endalgocf@algorithm{\@lithiealgo@exit}
