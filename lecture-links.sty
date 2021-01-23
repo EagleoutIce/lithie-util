@@ -44,14 +44,14 @@
 \newcommand*\SetUrlLinkStyle[1]{\def\leclink@url@linkstyle##1##2##3{#1}}
 \newcommand*\SetHrefLinkStyle[1]{\def\leclink@href@linkstyle##1##2##3{#1}}
 \newcommand*\SetFootnoteLinkStyle[1]{\def\leclink@footnote@linkstyle##1##2##3{#1}}
-\newcommand*\SetCiteColor[1]{\def\leclink@cite@color{#1}}
+\newcommand*\SetCiteColor[1]{\ifx!#1!\def\leclink@cite@color{}\else\def\leclink@cite@color{\hypersetup{citecolor=#1}}\fi}
 
 \newif\ifleclink@enabled@
-\newcommand*{\DisableLinkStyle}{\leclink@enabled@false}
-\newcommand*{\EnableLinkStyle}{\leclink@enabled@true}
+\newcommand*\DisableLinkStyle{\leclink@enabled@false}
+\newcommand*\EnableLinkStyle{\leclink@enabled@true}
 
 \SetAllLinkStyle{\texttt{#1}}
-\SetCiteColor{.}
+\SetCiteColor{}% do not modify by default
 \EnableLinkStyle
 
 \def\leclink@firstofthree#1#2#3{#1}
@@ -120,7 +120,7 @@
 % cite patch
     \ifcsname cite\endcsname
         \LetLtxMacro\leclink@cite@\cite%
-        \def\cite{\hypersetup{citecolor=\leclink@cite@color}\leclink@cite@}
+        \def\cite{\leclink@cite@color\leclink@cite@}
         \robustify\cite
     \fi
 }
