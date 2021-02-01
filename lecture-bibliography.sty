@@ -16,7 +16,6 @@
 \DeclareBoolOption{biber}
 \DeclareBoolOption{backref}
 
-\DeclareStringOption[{\normalfont\small}]{fontsize}
 
 \ProcessKeyvalOptions*\relax%
 
@@ -42,6 +41,6 @@
   backrefpage = {Seite:}, backrefpages = {Seiten:}
 }
 \fi
-\renewcommand*{\bibfont}{\LBI@fontsize}
+% \renewcommand*{\bibfont}{}
 
 \endinput
