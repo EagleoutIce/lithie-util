@@ -15,6 +15,9 @@
 \DeclareStringOption[alphabetic]{style}[alphabetic]
 \DeclareBoolOption{biber}
 \DeclareBoolOption{backref}
+
+\DeclareStringOption[{\normalfont\small}]{fontsize}
+
 \ProcessKeyvalOptions*\relax%
 
 \RequirePackage{csquotes}
@@ -39,5 +42,6 @@
   backrefpage = {Seite:}, backrefpages = {Seiten:}
 }
 \fi
+\renewcommand*{\bibfont}{\LBI@fontsize}
 
 \endinput
