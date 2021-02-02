@@ -7,11 +7,10 @@
 
 \ProvidesPackage{lecture-personal-extra-units}[2021/02/02 v1.0 Dealing with units]
 
-\RequirePackage{siunitx}
+\RequirePackage[obeyall]{siunitx}
 \sisetup{%
   output-decimal-marker={,}, group-separator={\,},
-  group-minimum-digits=3, abbreviations,
-  per-mode=symbol, detect-mode=true}
+  group-minimum-digits=3, per-mode=symbol}
 \DeclareSIUnit\sone{sone}
 \DeclareSIUnit\phon{phon}
 
