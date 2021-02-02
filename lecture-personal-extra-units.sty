@@ -1,0 +1,18 @@
+%% lecture-personal-extra-units.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 2.2.2021
+%% siunits
+
+\ProvidesPackage{lecture-personal-extra-units}[2021/02/02 v1.0 Dealing with units]
+
+\RequirePackage{siunitx}
+\sisetup{%
+  output-decimal-marker={,}, group-separator={\,},
+  group-minimum-digits=3, abbreviations,
+  per-mode=symbol, detect-mode=true}
+\DeclareSIUnit\sone{sone}
+\DeclareSIUnit\phon{phon}
+
+\endinput
