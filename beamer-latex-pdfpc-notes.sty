@@ -18,6 +18,7 @@
 \DeclareStringOption{starttime}
 \DeclareStringOption{endtime}
 \DeclareStringOption{lastminutes}
+\DeclareStringOption[9]{fontsize}
 \DeclareStringOption{defaulttransition}
 \DeclareBoolOption[false]{disablemarkdown}
 
@@ -64,6 +65,13 @@ ______</rdf:Description>^^J%
 % add PDFPC@schema
 \appto\hyxmp@pdf@schema\PDFPC@schema
 
+% write pdfpc file for fontsize
+\newwrite\PDFPC@fileout
+\AtBeginDocument{%
+  \immediate\openout\PDFPC@fileout\jobname.pdfpc\relax
+  \immediate\write\PDFPC@fileout{{"noteFontSize": \PDFPC@fontsize}}
+  \immediate\closeout\PDFPC@fileout
+}
 
 \LetLtxMacro\PDFPC@orig@note\note
 
@@ -87,22 +95,30 @@ ______</rdf:Description>^^J%
   \ifx\@tmpa\PDFPC@@option@itemize
     \def\item{\\- }%
   \fi
-  \pdfannot width 0pt height 0pt depth 0pt {%
-    /Subtype /Text%
-    /Contents (#2)%
+  \pdfannot width \z@ height \z@ depth \z@ {%
+    /Subtype /Text\space%
+    /T \@author\space%
+    /CA 0\space
+    /Name Comment\space
+    /Contents (#2)\space%
+    /F 4\space%
   }%
   \relax%
 \endgroup
 }
 
-\def\PDFPC@@option@enumerate{enumerate}
-\def\PDFPC@@option@itemize{itemize}
-
+\catcode`>=\active%
 \def\PDFPC@redefinition{%
   \def\,{ }\def\;{ }%
   \def\\{\string\n}\def\par{\string\n\string\n}%
   \def\textit##1{_##1_}\def\textbf##1{**##1**}%
+  \catcode`>=\active%
+  \def>{XxxxxxxxxX}
 }
+\catcode`>=12%
 
+
+\def\PDFPC@@option@enumerate{enumerate}
+\def\PDFPC@@option@itemize{itemize}
 
 \endinput
