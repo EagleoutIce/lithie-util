@@ -5,7 +5,7 @@
 %% Autor: Florian Sihler, 07.02.2021
 %%
 %% note with pdfpc support
-%% based on https://github.com/cebe/pdfpc-latex-notes/blob/master/pdfpcnotes.sty
+%% based on the pdfpc package of 2020
 
 \ProvidesPackage{beamer-latex-pdfpc-notes}[2021/02/07 v1.0.0 Compile and pdfpc-notes LaTeX2e-Codes in LaTeX-Beamer]
 
@@ -19,40 +19,52 @@
 \DeclareStringOption{endtime}
 \DeclareStringOption{lastminutes}
 \DeclareStringOption{fontsize}
+\DeclareStringOption{defaulttransition}
+\DeclareBoolOption[false]{disablemarkdown}
 
 \ProcessKeyvalOptions*
 
-\RequirePackage{letltxmacro}
+% Some guards to begin
 
-% Small macro to make inserting options easier.
-\newcommand*\PDFPC@option[2]{
-  \ifx#2\@empty\else
-    \immediate\write\PDFPC@out{[#1]}%
-    \immediate\write\PDFPC@out{#2}%
+\ifx\PDFPC@duration\@empty
+\else
+  \IfInteger{\PDFPC@duration}{}
+    {\PackageWarningNoLine{beamer-pdfpc-notes}{`duration' should be an integer}}%
+\fi
+%
+%
+\ifx\PDFPC@lastminutes\@empty
+\else
+  \IfInteger{\PDFPC@lastminutes}{}
+    {\PackageWarningNoLine{beamer-pdfpc-notes}{`lastminutes' should be an integer}}%
+\fi
+
+%%
+\RequirePackage{letltxmacro,xstring,hyperxmp}
+
+
+% Our schema
+\newcommand*{\PDFPC@schema}{%
+  \hyxmp@add@to@xml{%
+______<rdf:Description xmlns:pdfpc="https://github.com/pdfpc/pdfpc">^^J%
+  }%
+  \hyxmp@add@simple{pdfpc:Duration}{\PDFPC@duration}%
+  \hyxmp@add@simple{pdfpc:StartTime}{\PDFPC@starttime}%
+  \hyxmp@add@simple{pdfpc:EndTime}{\PDFPC@endtime}%
+  \hyxmp@add@simple{pdfpc:LastMinutes}{\PDFPC@lastminutes}%
+  \ifPDFPC@disablemarkdown%
+    \hyxmp@add@simple{pdfpc:DisableMarkdown}{true}%
+  \else%
+    \hyxmp@add@simple{pdfpc:DisableMarkdown}{false}%
   \fi
+  \hyxmp@add@simple{pdfpc:DefaultTransition}{\PDFPC@defaulttransition}%
+  \hyxmp@add@to@xml{%
+______</rdf:Description>^^J%
+  }%
 }
+% add PDFPC@schema
+\appto\hyxmp@pdf@schema\PDFPC@schema
 
-% create a new file handle
-\newwrite\PDFPC@out
-
-% open file on \begin{document}
-\AtBeginDocument{%
-  \immediate\openout\PDFPC@out\jobname.pdfpc\relax
-  \PDFPC@option{duration}{\PDFPC@duration}
-  \PDFPC@option{start_time}{\PDFPC@starttime}
-  \PDFPC@option{end_time}{\PDFPC@endtime}
-  \PDFPC@option{last_minutes}{\PDFPC@lastminutes}
-  \PDFPC@option{font_size}{\PDFPC@fontsize}
-  \immediate\write\PDFPC@out{[notes]}
-}
-% define a # http://tex.stackexchange.com/a/37757/10327
-\begingroup
-  \catcode`\#=12
-  \gdef\PDFPC@hash@char{#}%
-\endgroup
-
-
-\def\PDFPC@lastframe{0}
 
 \LetLtxMacro\PDFPC@orig@note\note
 
@@ -70,14 +82,18 @@
 }
 
 \long\def\PDFPC@writenote[#1]#2{%
-  % if frame changed - write a new header
-  \ifnum\theframenumber>\PDFPC@lastframe
-    \let\PDFPC@lastframe\theframenumber
-    % print '### \framenumber'
-    \immediate\write\PDFPC@out{\PDFPC@hash@char\PDFPC@hash@char\PDFPC@hash@char \theframenumber}%
+\begingroup%
+\PDFPC@redefinition
+  \def\@tmpa{#1}
+  \ifx\@tmpa\PDFPC@@option@itemize
+    \def\item{\\- }%
   \fi
-  % write note to file
-  \PDFPC@@writecontent[#1]{#2}
+  \pdfannot width 0pt height 0pt depth 0pt {%
+    /Subtype /Text%
+    /Contents (#2)%
+  }%
+  \relax%
+\endgroup
 }
 
 \def\PDFPC@@option@enumerate{enumerate}
@@ -85,22 +101,8 @@
 
 \def\PDFPC@redefinition{%
   \def\,{ }\def\;{ }%
-  \def\\{^^J}\def\par{^^J^^J}%
-  \def\textit##1{_##1_}%
-  \def\textbf##1{**##1**}%
+  \def\\{\string\n}\def\par{\string\n\string\n}%
 }
 
-\long\def\PDFPC@@writecontent[#1]#2{
-  \def\@tmpa{#1}\ifx\@tmpa\@empty
-  \immediate\write\PDFPC@out{\unexpanded{#2}}%
-  \else\ifx\@tmpa\PDFPC@@option@itemize
-  \protected@write\PDFPC@out{\def\item{\\- }\PDFPC@redefinition}{#2}%
-  \fi\fi
-}
-
-% close file on \end{document}
-\AtEndDocument{%
-  \immediate\closeout\PDFPC@out
-}
 
 \endinput
