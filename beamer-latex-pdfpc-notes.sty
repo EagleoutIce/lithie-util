@@ -18,7 +18,6 @@
 \DeclareStringOption{starttime}
 \DeclareStringOption{endtime}
 \DeclareStringOption{lastminutes}
-\DeclareStringOption{fontsize}
 \DeclareStringOption{defaulttransition}
 \DeclareBoolOption[false]{disablemarkdown}
 
@@ -102,6 +101,7 @@ ______</rdf:Description>^^J%
 \def\PDFPC@redefinition{%
   \def\,{ }\def\;{ }%
   \def\\{\string\n}\def\par{\string\n\string\n}%
+  \def\textit##1{_##1_}\def\textbf##1{**##1**}%
 }
 
 
