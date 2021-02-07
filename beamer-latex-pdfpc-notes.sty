@@ -1,0 +1,106 @@
+%% beamer-latex-pdfpc-notes.sty
+%%
+%% --------------------------------------------------------------------------
+%%
+%% Autor: Florian Sihler, 07.02.2021
+%%
+%% note with pdfpc support
+%% based on https://github.com/cebe/pdfpc-latex-notes/blob/master/pdfpcnotes.sty
+
+\ProvidesPackage{beamer-latex-pdfpc-notes}[2021/02/07 v1.0.0 Compile and pdfpc-notes LaTeX2e-Codes in LaTeX-Beamer]
+
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+  family=PDFPC,
+  prefix=PDFPC@
+}
+\DeclareStringOption{duration}
+\DeclareStringOption{starttime}
+\DeclareStringOption{endtime}
+\DeclareStringOption{lastminutes}
+\DeclareStringOption{fontsize}
+
+\ProcessKeyvalOptions*
+
+\RequirePackage{letltxmacro}
+
+% Small macro to make inserting options easier.
+\newcommand*\PDFPC@option[2]{
+  \ifx#2\@empty\else
+    \immediate\write\PDFPC@out{[#1]}%
+    \immediate\write\PDFPC@out{#2}%
+  \fi
+}
+
+% create a new file handle
+\newwrite\PDFPC@out
+
+% open file on \begin{document}
+\AtBeginDocument{%
+  \immediate\openout\PDFPC@out\jobname.pdfpc\relax
+  \PDFPC@option{duration}{\PDFPC@duration}
+  \PDFPC@option{start_time}{\PDFPC@starttime}
+  \PDFPC@option{end_time}{\PDFPC@endtime}
+  \PDFPC@option{last_minutes}{\PDFPC@lastminutes}
+  \PDFPC@option{font_size}{\PDFPC@fontsize}
+  \immediate\write\PDFPC@out{[notes]}
+}
+% define a # http://tex.stackexchange.com/a/37757/10327
+\begingroup
+  \catcode`\#=12
+  \gdef\PDFPC@hash@char{#}%
+\endgroup
+
+
+\def\PDFPC@lastframe{0}
+
+\LetLtxMacro\PDFPC@orig@note\note
+
+\def\note{\@ifnextchar[{\PDFPC@note}{\PDFPC@note[]}}
+\def\PDFPC@note[#1]{\@ifnextchar<{\PDFPC@@note@overlay[#1]}{\PDFPC@@note[#1]}}
+
+\long\def\PDFPC@@note@overlay[#1]<#2>#3{
+  \PDFPC@orig@note[#1]<#2>{#3}%
+  \PDFPC@writenote[#1]{#2}%
+}
+
+\long\def\PDFPC@@note[#1]#2{
+  \PDFPC@orig@note[#1]{#2}%
+  \PDFPC@writenote[#1]{#2}%
+}
+
+\long\def\PDFPC@writenote[#1]#2{%
+  % if frame changed - write a new header
+  \ifnum\theframenumber>\PDFPC@lastframe
+    \let\PDFPC@lastframe\theframenumber
+    % print '### \framenumber'
+    \immediate\write\PDFPC@out{\PDFPC@hash@char\PDFPC@hash@char\PDFPC@hash@char \theframenumber}%
+  \fi
+  % write note to file
+  \PDFPC@@writecontent[#1]{#2}
+}
+
+\def\PDFPC@@option@enumerate{enumerate}
+\def\PDFPC@@option@itemize{itemize}
+
+\def\PDFPC@redefinition{%
+  \def\,{ }\def\;{ }%
+  \def\\{^^J}\def\par{^^J^^J}%
+  \def\textit##1{_##1_}%
+  \def\textbf##1{**##1**}%
+}
+
+\long\def\PDFPC@@writecontent[#1]#2{
+  \def\@tmpa{#1}\ifx\@tmpa\@empty
+  \immediate\write\PDFPC@out{\unexpanded{#2}}%
+  \else\ifx\@tmpa\PDFPC@@option@itemize
+  \protected@write\PDFPC@out{\def\item{\\- }\PDFPC@redefinition}{#2}%
+  \fi\fi
+}
+
+% close file on \end{document}
+\AtEndDocument{%
+  \immediate\closeout\PDFPC@out
+}
+
+\endinput
