@@ -95,28 +95,25 @@ ______</rdf:Description>^^J%
   \ifx\@tmpa\PDFPC@@option@itemize
     \def\item{\\- }%
   \fi
+  \StrSubstitute{#2}{<}{&lt;}[\PDFPC@tcontentexpanded]
+  \StrSubstitute{\PDFPC@tcontentexpanded}{>}{&gt;}[\PDFPC@@tcontentexpanded]
   \pdfannot width \z@ height \z@ depth \z@ {%
     /Subtype /Text\space%
     /T \@author\space%
     /CA 0\space
     /Name Comment\space
-    /Contents (#2)\space%
+    /Contents (\PDFPC@@tcontentexpanded)\space%
     /F 4\space%
   }%
   \relax%
 \endgroup
 }
 
-\catcode`>=\active%
 \def\PDFPC@redefinition{%
   \def\,{ }\def\;{ }%
   \def\\{\string\n}\def\par{\string\n\string\n}%
   \def\textit##1{_##1_}\def\textbf##1{**##1**}%
-  \catcode`>=\active%
-  \def>{XxxxxxxxxX}
 }
-\catcode`>=12%
-
 
 \def\PDFPC@@option@enumerate{enumerate}
 \def\PDFPC@@option@itemize{itemize}
