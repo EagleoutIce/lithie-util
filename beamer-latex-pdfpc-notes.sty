@@ -10,10 +10,7 @@
 \ProvidesPackage{beamer-latex-pdfpc-notes}[2021/02/07 v1.0.0 Compile and pdfpc-notes LaTeX2e-Codes in LaTeX-Beamer]
 
 \RequirePackage{kvoptions}
-\SetupKeyvalOptions{
-  family=PDFPC,
-  prefix=PDFPC@
-}
+\SetupKeyvalOptions{family=PDFPC, prefix=PDFPC@}
 \DeclareStringOption{duration}
 \DeclareStringOption{starttime}
 \DeclareStringOption{endtime}
@@ -21,22 +18,24 @@
 \DeclareStringOption[9]{fontsize}
 \DeclareStringOption{defaulttransition}
 \DeclareBoolOption[false]{disablemarkdown}
+\DeclareBoolOption[false]{disable}
 
 \ProcessKeyvalOptions*
+\ifPDFPC@disable\expandafter\endinput\fi
 
 % Some guards to begin
 
 \ifx\PDFPC@duration\@empty
 \else
   \IfInteger{\PDFPC@duration}{}
-    {\PackageWarningNoLine{beamer-pdfpc-notes}{`duration' should be an integer}}%
+    {\PackageWarningNoLine{beamer-pdfpc-notes}{'duration' should be an integer}}%
 \fi
 %
 %
 \ifx\PDFPC@lastminutes\@empty
 \else
   \IfInteger{\PDFPC@lastminutes}{}
-    {\PackageWarningNoLine{beamer-pdfpc-notes}{`lastminutes' should be an integer}}%
+    {\PackageWarningNoLine{beamer-pdfpc-notes}{'lastminutes' should be an integer}}%
 \fi
 
 %%
