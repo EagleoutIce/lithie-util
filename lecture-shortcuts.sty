@@ -10,10 +10,13 @@
 \ProvidesPackage{lecture-shortcuts}[2020/09/19 v1.0 shortcuts]
 \RequirePackage{xspace,mathtools,amssymb,datetime}
 
+\AtEndPreamble{%
 \ifcsname enquote\endcsname
 \let\say\enquote\else% use legacy
 \providecommand\say[1]{\glqq#1\grqq{}}
-\robustify\say\fi
+\fi\robustify\say
+}
+
 \providecommand*\engl[2][]{#1(engl. \textit{#2})#1}
 \robustify\engl
 
