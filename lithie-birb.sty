@@ -43,7 +43,7 @@
     \path[fill,shadeA] (start-ll) -- ++(-\hhyp,-\hhyp) -- ++(\hhyp,-\hhyp) -- cycle;
     \path[fill,shadeA!90!black] (start-ll)++(0,-\hhyp) -- ++(-\hhyp,0) -- ++(\hhyp,-\hhyp) -- cycle;
     % upper (place the lithie sign on the wing t-upper)
-    \path[fill,shadeA] (start-lu) -- ++(-\hhyp,\hhyp) to[edge node={node[above=-1.75pt,shadeA!90!black,font=\footnotesize] {#1}}] ++(\hyp,0) -- cycle;
+    \path[fill,shadeA] (start-lu) -- ++(-\hhyp,\hhyp) to[edge node={node[above=1.75pt,shadeA!90!black,font=\footnotesize,outer sep=0pt,inner sep=0pt] {#1}}] ++(\hyp,0) -- cycle;
     \path[fill,shadeA!90!black] (start-lu) -- ++(0,\hhyp) -- ++(\hhyp,0) -- cycle;
 \end{scope}%
 \egroup}

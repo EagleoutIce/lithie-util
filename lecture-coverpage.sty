@@ -341,7 +341,6 @@
 % .##....##.##.....##.##.....##.##........##.....##.##....##....##............##.....##.##........##........##.......##....##.
 % ..######...#######..##.....##.##........##.....##..######.....##.............#######..##........##........########.##.....##
 \newlength\lecture@coverpage@lsmg
-\newsavebox\lecture@coverpage@uprightsbox
 
 \lecturecp@coverpagestyle{compact-upper}{%
 \def\lecture@coverpage@geometry{}
@@ -350,16 +349,16 @@
 \lecture@coverpage@lsmg=\dimexpr1in+\oddsidemargin\relax%
 \twocolumn[{%
 \parindent=\z@ \parskip=\z@
-\sffamily\fontsize{32}{32}\vspace*{-2\baselineskip}%
+\sffamily\fontsize{42}{42}%
+\vspace*{1.33em}%
 \parbox[b][0pt]{\linewidth}{%
-%
-\normalsize\savebox\lecture@coverpage@uprightsbox{%
-\parbox{0.85\linewidth}{\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*}\color{gray}\lecture@r{brief}}%
-}
-%
-\downsizeBoth{\ht\lecture@coverpage@uprightsbox}{.2\linewidth}{\lecture@r{titleimage}}
-\strut\hfill\usebox{\lecture@coverpage@uprightsbox}}\bigskip\par%
-\textbf{\paletteA{\lecture@r{title}}}\bigskip\par
+\normalsize
+\parbox{0.1\linewidth}{\lecture@r{titleimage}}\strut\hfill\parbox{0.85\linewidth}{\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*}\color{gray}\lecture@r{brief}}}\bigskip\par%
+\begin{tikzpicture}[overlay]
+    \begin{scope}[xshift=0.65\paperwidth,yshift=0.6cm,opacity=0.8]
+        \lithiebirb%
+    \end{scope}
+\end{tikzpicture}\parbox{.925\linewidth}{\raggedright\textbf{\lecture@r{title}}}\vspace*{3.5em}\par
 }]}{}}
 
 \endinput
