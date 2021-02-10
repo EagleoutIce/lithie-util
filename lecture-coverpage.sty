@@ -308,8 +308,7 @@
 
 \renewcommand{\maketitle}{%
 \twocolumn[{%
-\parindent=\z@ \parskip=\z@ \leavevmode
-\vspace*{3em}\par\sffamily\fontsize{32}{32}
+\parindent=\z@ \parskip=\z@\vspace*{3em}\par\sffamily\fontsize{32}{32}%
 \textbf{\paletteA{\lecture@r{title}}}\bigskip\leavevmode\\*
 \normalsize\strut\hfill\parbox[t]{0.85\linewidth}{\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*}\color{gray}\lecture@r{brief}}%
 \vspace*{6.25em}\leavevmode\par%
@@ -333,5 +332,27 @@
 \end{center}%
 \egroup}%
 }
+
+% ..######...#######..##.....##.########.....###.....######..########.........##.....##.########..########..########.########.
+% .##....##.##.....##.###...###.##.....##...##.##...##....##....##............##.....##.##.....##.##.....##.##.......##.....##
+% .##.......##.....##.####.####.##.....##..##...##..##..........##............##.....##.##.....##.##.....##.##.......##.....##
+% .##.......##.....##.##.###.##.########..##.....##.##..........##....#######.##.....##.########..########..######...########.
+% .##.......##.....##.##.....##.##........#########.##..........##............##.....##.##........##........##.......##...##..
+% .##....##.##.....##.##.....##.##........##.....##.##....##....##............##.....##.##........##........##.......##....##.
+% ..######...#######..##.....##.##........##.....##..######.....##.............#######..##........##........########.##.....##
+\lecturecp@coverpagestyle{compact-upper}{%
+\def\lecture@coverpage@geometry{}
+
+\newlength\lecture@coverpage@lsmg
+
+\renewcommand{\maketitle}{%
+\lecture@coverpage@lsmg=\dimexpr1in+\oddsidemargin\relax%
+\twocolumn[{%
+\parindent=\z@ \parskip=\z@
+\sffamily\fontsize{32}{32}%
+\hspace*{-\lecture@coverpage@lsmg}\colorbox{paletteA}{\hskip\lecture@coverpage@lsmg\textbf{\color{white}\lecture@r{title}}}\bigskip\leavevmode\\*
+\normalsize\strut\hfill\parbox[t]{0.85\linewidth}{\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*}\color{gray}\lecture@r{brief}}%
+\vspace*{6.25em}\leavevmode\par%
+}]{}}}
 
 \endinput
