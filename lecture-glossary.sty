@@ -14,6 +14,10 @@
 \DeclareOption{enumitem}{\lglos@setup@enumitem@true}
 \DeclareOption{noenumitem}{\lglos@setup@enumitem@false}
 
+\newif\iflglos@setup@short@
+\DeclareOption{short}{\lglos@setup@short@true}
+\DeclareOption{long}{\lglos@setup@short@false}
+
 \ProcessOptions*%
 
 \RequirePackage[acronym,nopostdot,numberedsection=nameref,section,translate=babel]{glossaries-accsupp}% style=super
@@ -40,15 +44,21 @@
     \quad\textit{\iflglos@thispage@issingle@\lglos@spage\else\lglos@ppage\fi:~#1}%
 }
 \def\lglos@printpages#1{%
-    \let\delimN\lglos@delimN\let\delimR\lglos@delimR%
-    % think it is single (like me; :cry:)
-    \lglos@thispage@issingle@true\@lglos@hide@in@da@void{#1}%
-    \@lglos@printpages{#1}}
+\let\delimN\lglos@delimN\let\delimR\lglos@delimR%
+% think it is single (like me; :cry:)
+\lglos@thispage@issingle@true\@lglos@hide@in@da@void{#1}%
+\@lglos@printpages{#1}}
 
 \def\LithieSetGlossaryStyle#1{\gdef\lglos@headingstyle##1{#1{##1}}}
 
 \def\lglos@default@headingstyle#1{\begin{center}\strut\emph{#1}\end{center}}
+\def\lglos@default@headingstyle@short#1{\medskip}
+
+\iflglos@setup@short@
+\LithieSetGlossaryStyle{\lglos@default@headingstyle@short}
+\else
 \LithieSetGlossaryStyle{\lglos@default@headingstyle}
+\fi
 
 \def\LithieSetGlossaryOpts#1{\gdef\lglos@desc@options{#1}}
 \LithieSetGlossaryOpts{}
@@ -72,7 +82,29 @@
     \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\lglos@printpages{##2}\par%
 }%
 }
-\setglossarystyle{lecture@glossary}
+\newglossarystyle{lecture@glossary@short}{%
+\setglossarystyle{tree}%
+\renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse%
+    \lglos@headingstyle{\glsgetgrouptitle{##1}}%
+    \iflglos@setup@enumitem@%
+    \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc%
+    \else% no enumitem
+    \begin{description}\fi}%
+\renewenvironment{theglossary}{%
+    \parindent=\z@ \parskip=\z@ plus 0.3pt%
+    \global\atinitglossarytrue\relax
+    }{\end{description}}%#
+\renewcommand{\glossentry}[2]{%reset of tree to pad pagenumbers
+    \hangindent\z@\relax \parindent\z@\relax
+    \item[\glsentryitem{##1}\glstreenamefmt{\glstarget{##1}{\glossentryname{##1}}}]%
+    \ifglshassymbol{##1}{\space(\glossentrysymbol{##1})}{}%
+    \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\par%
+}%
+}
+\iflglos@setup@short@%
+\setglossarystyle{lecture@glossary@short}%
+\else\setglossarystyle{lecture@glossary}\fi
+
 \makeglossaries
 
 \preto\printglossaries{\bgroup\interlinepenalty=1000}
