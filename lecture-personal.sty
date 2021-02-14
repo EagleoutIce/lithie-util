@@ -30,8 +30,8 @@
 \let\setSTheight\undefined
 
 \RequirePackage{subcaption,xtab}
-\addto\captionsngerman{\renewcommand{\equationautorefname}{Formel}}
-\addto\captionsenglish{\renewcommand{\equationautorefname}{Equation}}
+\appto\captionsngerman{\renewcommand{\equationautorefname}{Formel}}
+\appto\captionsenglish{\renewcommand{\equationautorefname}{Equation}}
 
 \edef\@lecture@personal@tmp{\LPM@extras}
 \ifx\@lecture@personal@tmp\@lecture@personal@noextra\else

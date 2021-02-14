@@ -13,25 +13,17 @@
 \DeclareOption{enable}{\lecture@registers@disable@false}
 \ProcessOptions*
 
-\iflecture@registers@disable@
-\expandafter\endinput\fi
+\iflecture@registers@disable@\expandafter\endinput\fi
 
 \RequirePackage{etoolbox}
 
-\def\@lecture@definereg#1{
-    \expandafter\xdef\csname#1\endcsname{%
-        \noexpand\@ifnextchar[%
-        {\expandafter\noexpand\csname#1 @hasopt\endcsname}%
-        {\expandafter\noexpand\csname#1 @noopt\endcsname}
-    }
-    \expandafter\xdef\csname#1 @hasopt\endcsname[##1]##2%
+\def\@lecture@definereg#1{%
+\expandafter\gdef\csname#1\endcsname{\expandafter\@dblarg\csname @#1@@\endcsname}
+\expandafter\xdef\csname @#1@@\endcsname[##1]##2%
     {\expandafter\noexpand\gdef\csname lecture@register@#1\endcsname{##2}%
-    \expandafter\noexpand\gdef\csname lecture@register@short@#1\endcsname{##1}}
-    \expandafter\xdef\csname#1 @noopt\endcsname##1%
-    {\expandafter\noexpand\gdef\csname lecture@register@#1\endcsname{##1}%
-    \expandafter\noexpand\gdef\csname lecture@register@short@#1\endcsname{##1}}
-    \expandafter\gdef\csname lecture@register@#1\endcsname{}
-    \expandafter\gdef\csname lecture@register@short@#1\endcsname{}
+        \expandafter\noexpand\gdef\csname lecture@register@short@#1\endcsname{##1}}
+\expandafter\gdef\csname lecture@register@#1\endcsname{}
+\expandafter\gdef\csname lecture@register@short@#1\endcsname{}
 }
 
 \forcsvlist{\@lecture@definereg}{title,subtitle,subject,brief,author,date,duedate,supervisor,keywords,titleimage,authority,copyright}
@@ -59,17 +51,17 @@
 \setcounter{lecture@counter@tmp@a}{0}% start with an offset
 \foreach \@tmp in {#1}%
     {\expandafter\ifx\expandafter!\@tmp!\else%
-        \stepcounter{lecture@counter@tmp@a}\fi}%
+        \addtocounter{lecture@counter@tmp@a}\@ne\fi}%
 \edef\lecture@author@totallength{\arabic{lecture@counter@tmp@a}}%
 \setcounter{lecture@counter@tmp@a}{0}% stored the length of the list
 \foreach \lecture@@tmp@curauthor in {#1} {%
-    \expandafter\ifx\expandafter!\lecture@@tmp@curauthor!%empty => ignore
-    \else\stepcounter{lecture@counter@tmp@a}%
-        \ifnum\thelecture@counter@tmp@a>1%
-        \ifnum\thelecture@counter@tmp@a=\lecture@author@totallength%
-            ~und \else,\space\fi\fi
-        \expandafter\lecture@@parse@author\lecture@@tmp@curauthor{} (??)??\@nil%
-    \fi%
+\expandafter\ifx\expandafter!\lecture@@tmp@curauthor!%empty => ignore
+\else\addtocounter{lecture@counter@tmp@a}\@ne%
+    \ifnum\thelecture@counter@tmp@a>1%
+    \ifnum\thelecture@counter@tmp@a=\lecture@author@totallength%
+        ~und \else,\space\fi\fi
+    \expandafter\lecture@@parse@author\lecture@@tmp@curauthor{} (??)??\@nil%
+\fi%
 }%
 }
 
