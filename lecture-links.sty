@@ -73,10 +73,10 @@
 \def\leclink@nostar@nameref#1{\lecstarfalse\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@nameref@linkstyle}\leclink@nameref{#1}}%
 
 \def\leclink@label@hyperref[#1]#2{%
-    \def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@hyperref@linkstyle}\leclink@hyperref[#1]{#2}%
+    \def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@hyperref@linkstyle}\leclink@@lb@hyperref[#1]{#2}%
 }%
 \def\leclink@full@hyperref#1#2#3{%
-    \def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@hyperref@linkstyle}\leclink@hyperref{#1}{#2}{#3}%
+    \def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@hyperref@linkstyle}\leclink@@@hyperref{#1}{#2}{#3}%
 }%
 
 \def\leclink@read@url#1{\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@url@linkstyle}\leclink@nxtst{\leclink@url{#1}}{#1}{}}%
@@ -97,6 +97,8 @@
     }%
     % hyperref
     \LetLtxMacro\leclink@hyperref\hyperref%
+    \LetLtxMacro\leclink@@lb@hyperref\label@hyperref%
+    \LetLtxMacro\leclink@@@hyperref\@hyperref%
     % what if no label?
     \renewcommand*{\hyperref}{%
         \@ifnextchar[{\Hy@babelnormalise\leclink@label@hyperref}\leclink@full@hyperref%
