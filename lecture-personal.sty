@@ -38,4 +38,13 @@
 \def\@lecture@personal@loadextras#1{\AtEndPreamble{\RequirePackage{lecture-personal-extra-#1}}}
 \expandafter\forcsvlist\expandafter\@lecture@personal@loadextras\expandafter{\@lecture@personal@tmp}
 \fi
+
+
+% index patch
+\ifcsname KOMAoption\endcsname\KOMAoption{index}{numbered}\fi
+\@ifpackageloaded{lecture-index}{%
+    \def\indexpagestyle{scrheadings}
+    %omit pagebreak
+    \AtBeginDocument{\def\idx@heading{\idx@@heading{\indexname}\ifidx@leveldown \addsecmark {\indexname }\else \@mkdouble {\MakeMarkcase {\indexname }}\fi}}
+}{}
 \endinput

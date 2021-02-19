@@ -1,25 +1,27 @@
 % comment - in case of need :D
-heading_prefix "\n\\providecommand{\\idxfsize}{\\normalsize}\n\\noindent\\ {\\centering\\tikz{\\node at(-1,0) {};\\node at(2,0) {};\\draw[rounded corners=3pt,fill=black!03,thick] (0,0) rectangle ++(5,0.5) node[midway,centered]{\\textbf{"
-heading_suffix "}};}}\\par\\nopagebreak\n"
+heading_prefix "\n%%% H-Break\n\\medskip\\par{\\centering\\tikz{\\node[text width=3cm,align=center] (hr) at (0,0) {\\textbf{"
+heading_suffix "}};\n\\draw[rounded corners=3pt,thick,line cap=round] ([yshift=-.125cm]hr.north west) |- (hr.north east) -- ++(0,-.125cm);\n\\draw[rounded corners=2.5pt,thick,line cap=round] ([yshift=.125cm]hr.south west) |- (hr.south east) -- ++(0,.125cm);}\\nopagebreak\\medskip\\par}\\nopagebreak\n"
 headings_flag 1
 preamble "\\begin{theindex}%
   \\providecommand*\\indexgroup[1]{\\indexspace
-    \\item \\textbf{#1}\\nopagebreak}~\\par%
+    \\item \\textbf{#1}\\nopagebreak}~\\par\\providecommand{\\idxfsize}{\\normalsize}\\makeatletter%
 "
 postamble "\n\n\\end{theindex}\n"
 group_skip "  %\n  \\indexspace\n  %\n"numhead_positive "Numbers"
 numhead_negative "Numbers"
 symhead_positive "\\small Symbole"
 symhead_negative "\\small Symbole"
-delim_0 "\\pgfsetfillopacity{1.0}\\dotfill\\iftrue\\rmfamily "
-delim_1 "\\pgfsetfillopacity{1.0}\\iftrue\\rmfamily:~"
-delim_2 "\\pgfsetfillopacity{0.0}\\iffalse"
+delim_0 "\\pgfsys@fill@opacity{1}\\dotfill\\iftrue\\rmfamily "
+delim_1 "\\pgfsys@fill@opacity{1}\\iftrue\\rmfamily:~"
+delim_2 "\\pgfsys@fill@opacity{0}\\iffalse"
 
-item_0 "\n  \\item\\idxfsize{}"
-item_1 "\n     \\subitem\\idxfsize{}"
-item_2 "\n        \\subsubitem\\idxfsize{}"
-item_12 "\\pgfsetfillopacity{1.0}\%\n\\subsubitem\\footnotesize\\mbox{\\footnotesize\\pgfsetfillopacity{1.0}\\rmfamily}\\footnotesize "
-item_2  "\\footnotesize\\mbox{\\pgfsetfillopacity{1.0}\%\n\\footnotesize\\pgfsetfillopacity{1.0}\\rmfamily,} "
+item_0 "\n  \\item\\color{black}\\idxfsize "
+item_01 "\n     \\subitem\\color{black}\\small "
+item_x1 "\n     \\subitem\\color{black}\\small "
+item_1 "\n     \\subitem\\color{black}\\small "
+item_12 "\\pgfsys@fill@opacity{1}\%\n\\subsubitem\\color{gray}\\footnotesize "
+item_x2 "\\pgfsys@fill@opacity{1}\%\n\\subsubitem\\color{gray}\\footnotesize "
+item_2  "\\footnotesize\\mbox{\\pgfsys@fill@opacity{1}\%\n\\rmfamily,} "
 
 encap_prefix "\\"
 encap_infix "{"
@@ -28,7 +30,7 @@ encap_suffix "}"
 quote '~'
 actual '`'
 
-delim_t "\\fi\\pgfsetfillopacity{1.0}\\rmfamily\\idxfsize{}"
+delim_t "\\fi\\pgfsys@fill@opacity{1}\\rmfamily\\idxfsize "
 % delim_n "}, \\hyperpage{"
 % \\hyperpage{"
 
