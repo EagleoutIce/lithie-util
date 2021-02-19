@@ -31,7 +31,7 @@ symhead_positive "\\small Symbole"
 symhead_negative "\\small Symbole"
 
 delim_0 "\\thinspace\\dotfill\\thinspace "
-delim_1 ",\\quad "
+delim_1 "\:~ "
 delim_2 "\\relax "
 
 item_0 "\n\n  \\item\\lecidx@@setup\\color{black}\\idxfsize "
