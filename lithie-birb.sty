@@ -12,7 +12,7 @@
 
 % place the bird
 % 1.5 line => 2.12132034 hyp
-\newcommand*\lithiebirb[1][\ifcsname hyperref\endcsname\href{https://github.com/EagleoutIce/lithie-util}{\Lithie}\else\Lithie\fi]{%
+\newcommand*\lithiebirb[1][\ifcsname hyperref\endcsname\href{https://github.com/EagleoutIce/lithie-util}{\Lithie\thinspace\textsuperscript{\color{gray}\lithieVersion}}\else\Lithie\fi]{%
 \bgroup%
 \edef\hyp{2.12132034}%
 \pgfmathsetmacro\hhyp{2.12132034/2}%
