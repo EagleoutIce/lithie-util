@@ -12,7 +12,7 @@
 \SetupKeyvalOptions{family=LECIDX, prefix=LECIDX@}
 \DeclareStringOption[true]{automatic}[false]
 
-\RequirePackage{imakeidx}
+\RequirePackage{imakeidx,letltxmacro,etoolbox}
 \def\indexname{Stichwortverzeichnis}
 \edef\lecture@imkdx{\noexpand\makeindex[title=\indexname,columns=2,columnsep=0.75cm,noautomatic=\LECIDX@automatic]}
 \lecture@imkdx
