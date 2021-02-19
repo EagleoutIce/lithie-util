@@ -15,7 +15,7 @@ preamble "\\begin{theindex}%
 }%
 \\def\\lecidx@@deset{%
   % only print if page differs from major
-  \\def\\hyperpage##1{\\ifdefstring{\\lecidx@@currentpage@pattern}{##1}{}{\\thinspace\\textsuperscript{(\\lecidx@@hyperpage{##1})}}}%
+  \\def\\hyperpage##1{\\ifdefstring{\\lecidx@@currentpage@pattern}{##1}{}{\\textsuperscript{(\\lecidx@@hyperpage{##1})}\\!}}%
 }%
 \\else%
 \\let\\lecidx@@setup\\relax%
@@ -32,7 +32,7 @@ symhead_negative "\\small Symbole"
 
 delim_0 "\\thinspace\\dotfill\\thinspace "
 delim_1 ",\\quad "
-delim_2 ""
+delim_2 "\\relax "
 
 item_0 "\n\n  \\item\\lecidx@@setup\\color{black}\\idxfsize "
 item_01 "\n\n     \\subitem\\lecidx@@setup\\color{black}\\small "
@@ -49,7 +49,7 @@ encap_suffix "}"
 quote '~'
 actual '`'
 
-delim_t ""
+delim_t "\\relax "
 % delim_n "}, \\hyperpage{"
 % \\hyperpage{"
 
