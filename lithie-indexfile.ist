@@ -11,7 +11,7 @@ preamble "\\begin{theindex}%
 \\LetLtxMacro\\lecidx@@hyperpage\\hyperpage%
 \\def\\lecidx@@setup{%
   \\let\\lecidx@@currentpage@pattern\\relax% default
-  \\def\\hyperpage##1{\\protected@edef\\lecidx@@currentpage@pattern{##1}\\lecidx@@hyperpage{##1}}%
+  \\def\\hyperpage##1{\\def\\lecidx@@currentpage@pattern{##1}\\lecidx@@hyperpage{##1}}%
 }%
 \\def\\lecidx@@deset{%
   % only print if page differs from major
