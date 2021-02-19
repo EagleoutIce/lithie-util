@@ -107,7 +107,7 @@
 }
 
 % define the groups
-\forcsvlist{\lu@DefineGroup}{all,util,color,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics}
+\forcsvlist{\lu@DefineGroup}{all,util,color,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics,index}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
 \lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,boxes}
@@ -143,6 +143,7 @@
 \lu@DefineModule{soa}{sopra-attachments}{sopra-attachments}{}{sopra}
 
 \lu@DefineModule{ltd}{lecture-t-diagrams}{lecture-t-diagrams}{}{lecture,graphics}
+\lu@DefineModule{lid}{lecture-index}{lecture-index}{}{index}
 
 \lu@DefineModule{emps}{eagle-maps}{eagle-maps}{}{graphics}
 
@@ -152,8 +153,6 @@
 
 % TODO: alias functionality?
 % TODO: encoding
-% TODO: siunitx
-% TODO: index
 
 \ProcessKeyvalOptions*
 
