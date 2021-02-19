@@ -2,10 +2,9 @@
 heading_prefix "\n\\providecommand{\\idxfsize}{\\normalsize}\n\\noindent\\ {\\centering\\tikz{\\node at(-1,0) {};\\node at(2,0) {};\\draw[rounded corners=3pt,fill=black!03,thick] (0,0) rectangle ++(5,0.5) node[midway,centered]{\\textbf{"
 heading_suffix "}};}}\\par\\nopagebreak\n"
 headings_flag 1
-preamble "\\protect\\thispagestyle{empty}
-\\begin{theindex}\\protect\\thispagestyle{empty}
+preamble "\\begin{theindex}%
   \\providecommand*\\indexgroup[1]{\\indexspace
-    \\item \\textbf{#1}\\nopagebreak}\\medskip\\par%
+    \\item \\textbf{#1}\\nopagebreak}~\\par%
 "
 postamble "\n\n\\end{theindex}\n"
 group_skip "  %\n  \\indexspace\n  %\n"numhead_positive "Numbers"
