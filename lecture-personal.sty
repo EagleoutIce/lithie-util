@@ -39,4 +39,11 @@
 \expandafter\forcsvlist\expandafter\@lecture@personal@loadextras\expandafter{\@lecture@personal@tmp}
 \fi
 
+\AtEndPreamble{%
+\ifcsname setIndexLinker\endcsname
+\ifcsname nohyper\endcsname
+\setIndexLinker{\nohyper{\hyperref[#1]{#2}}}%
+\fi\fi
+}
+
 \endinput

@@ -47,11 +47,11 @@ encap_infix "{"
 encap_suffix "}"
 
 quote '~'
-actual '`'
+actual '?'
 
 delim_t "\\relax "
 % delim_n "}, \\hyperpage{"
 % \\hyperpage{"
 
-indent_space '\t'
+indent_space "\t"
 indent_length 4

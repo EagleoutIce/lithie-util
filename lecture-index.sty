@@ -12,16 +12,22 @@
 \SetupKeyvalOptions{family=LECIDX, prefix=LECIDX@}
 \DeclareStringOption[true]{automatic}[false]
 
-\RequirePackage{imakeidx,letltxmacro,etoolbox}
+\RequirePackage{imakeidx,letltxmacro,etoolbox,xstring}
 \def\indexname{Stichwortverzeichnis}
 \edef\lecture@imkdx{\noexpand\makeindex[title=\indexname,columns=2,columnsep=0.75cm,noautomatic=\LECIDX@automatic]}
 \lecture@imkdx
 
 \def\hindex#1{\def\leci@index@h{#1}\index{#1}}
-\def\sindex#1{\index{\leci@index@h!#1}}
+\def\sindex#1{\index{\leci@index@h\idxsub #1}}
+
+\def\setIndexLinker#1{\gdef\lecidx@@linker##1##2{#1}}
+\def\idxactual{?}
+\def\idxsub{!}
+\setIndexLinker{\hyperref[#1]{#2}}
+\newcommand*\lindex[2][]{\StrSubstitute{#1}{\idxsub}{:sub:}[\lecidx@tmpl]\label{lecidx@\lecidx@tmpl @hi@#2@}\index{\ifx!#1!\else#1\idxsub\fi#2\idxactual\protect\lecidx@@linker{lecidx@\lecidx@tmpl @hi@#2@}{#2}}}
 
 \DeclareRobustCommand{\kw}[1]{\textbf{#1}\index{#1}}
-\DeclareRobustCommand{\sw}[2][Gruppenname]{#2\index{#1!#2}}
-\DeclareRobustCommand{\sr}[3][Gruppenname]{#3\index{#1!#2!#3}}
+\DeclareRobustCommand{\sw}[2][Gruppenname]{#2\index{#1\idxsub #2}}
+\DeclareRobustCommand{\sr}[3][Gruppenname]{#3\index{#1\idxsub #2\idxsub #3}}
 
 \endinput
