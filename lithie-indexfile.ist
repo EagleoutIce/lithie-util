@@ -24,7 +24,7 @@ preamble "\\begin{theindex}%
 \\fi
 \\newsavebox\\libidx@@sbox
 \\def\\lecidx@@maysub{\\ifx\\lecidx@for@setup\\@empty,\\space\\else\\subsubitem\\lecidx@@deset\\color{gray}\\footnotesize\\fi}%
-\\def\\lecidx@lowestbracecapsule#1{\\sbox\\libidx@@sbox{#1}\\ifdim\\z@=\\wd\\libidx@@sbox\\else\\textsuperscript{(#1)\\,}\\fi}
+\\def\\lecidx@lowestbracecapsule#1{\\sbox\\libidx@@sbox{#1}\\ifdim\\z@=\\wd\\libidx@@sbox\\else\\textsuperscript{(#1)\\!}\\fi}
 "
 postamble "\n\n\\end{theindex}\n"
 group_skip "  %\n  \\indexspace\n  %\n"
