@@ -34,9 +34,18 @@
 }
 
 % link index
-\newcommand*\lindex[2][]{\lecidx@sanitize{#1}\phantomsection\label{lecidx@\lecidx@tmpl @hi@#2@}\index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@tmpl @hi@#2@}{#2}}}
+\def\lindex{\@ifstar\lecidx@lindex\lecidx@@lindex}
+\robustify\lindex
+
+\newcommand*\lecidx@lindex[3][]{\lecidx@sanitize{#1}\phantomsection\label{lecidx@\lecidx@tmpl @hi@#2@}\index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@tmpl @hi@#2@}{#3}}}
+
+\newcommand*\lecidx@@lindex[2][]{\lecidx@lindex[#1]{#2}{#2}}
+
 % ref index
-\newcommand*\rindex[2][]{\lecidx@sanitize{#1}\index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@tmpl @hi@#2@}{#2}}}
+\def\rindex{\@ifstar\lecidx@rindex\lecidx@@rindex}
+
+\newcommand*\lecidx@rindex[3][]{\lecidx@sanitize{#1}\index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@tmpl @hi@#2@}{#2}}}
+\newcommand*\lecidx@@rindex[2][]{\lecidx@rindex[#1]{#2}{#2}}
 
 % sub link index
 \def\slindex#1{\lindex[\leci@index@h]{#1}}

@@ -46,7 +46,7 @@ encap_prefix "\\"
 encap_infix "{"
 encap_suffix "}"
 
-quote '~'
+quote '#'
 actual '?'
 
 delim_t "\\relax "
