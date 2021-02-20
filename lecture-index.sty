@@ -35,6 +35,7 @@
 \StrSubstitute{\lecidx@tmpl}{ö}{:oe:}[\lecidx@tmpl]%
 \StrSubstitute{\lecidx@tmpl}{ü}{:ue:}[\lecidx@tmpl]%
 \StrSubstitute{\lecidx@tmpl}{ß}{:ss:}[\lecidx@tmpl]%
+{\def\%{:percent:}\def\&{:and:}\protected@xdef\lecidx@tmpl{\lecidx@tmpl}}
 }
 
 % link index
@@ -50,12 +51,15 @@
 \def\rindex{\@ifstar\lecidx@rindex\lecidx@@rindex}
 \robustify\rindex
 
-\newcommand*\lecidx@rindex[3][]{\lecidx@sanitize{#1}\index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@tmpl @hi@#2@}{#2}}}
+\newcommand*\lecidx@rindex[3][]{\lecidx@sanitize{#1}\index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@tmpl @hi@#2@}{#3}}}
 \newcommand*\lecidx@@rindex[2][]{\lecidx@rindex[#1]{#2}{#2}}
 
 % sub link index
-\def\slindex#1{\lindex[\leci@index@h]{#1}}
+\def\slindex{\@ifstar\lecidx@slindex\lecidx@@slindex}
+\robustify\slindex
 
+\def\lecidx@slindex#1#2{\lindex*[\leci@index@h]{#1}{#2}}
+\def\lecidx@@slindex#1{\lindex[\leci@index@h]{#1}}
 
 % old for compat
 \DeclareRobustCommand{\kw}[1]{\textbf{#1}\index{#1}}
