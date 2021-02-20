@@ -12,7 +12,7 @@
 \SetupKeyvalOptions{family=LECIDX, prefix=LECIDX@}
 \DeclareStringOption[true]{automatic}[false]
 
-\RequirePackage{imakeidx,letltxmacro,etoolbox,xstring}
+\RequirePackage{imakeidx,letltxmacro,etoolbox,xstring,sanitize-umlaut}
 \def\indexname{Stichwortverzeichnis}
 \edef\lecture@imkdx{\noexpand\makeindex[title=\indexname,columns=2,columnsep=0.75cm,noautomatic=\LECIDX@automatic]}
 \lecture@imkdx
@@ -31,6 +31,10 @@
 % sloppy for now, i don't have time :D
 \def\lecidx@sanitize#1{%
 \StrSubstitute{#1}{\lecidx@idxsub}{:sub:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{ä}{:ae:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{ö}{:oe:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{ü}{:ue:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{ß}{:ss:}[\lecidx@tmpl]%
 }
 
 % link index
