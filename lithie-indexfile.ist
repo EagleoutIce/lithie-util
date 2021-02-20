@@ -1,29 +1,30 @@
 % comment - in case of need :D
-heading_prefix "\n%%% H-Break\n\\medskip\\par\\color{black}{\\centering\\tikz{\\node[text width=3cm,align=center] (hr) at (0,0) {\\textbf{"
+heading_prefix "\n%% Header\n\\medskip\\par\\color{black}{\\centering\\tikz{\\node[text width=3cm,align=center] (hr) at (0,0) {\\textbf{"
 heading_suffix "}};\n\\draw[rounded corners=3pt,thick,line cap=round] ([yshift=-.125cm]hr.north west) |- (hr.north east) -- ++(0,-.125cm);\n\\draw[rounded corners=2.5pt,thick,line cap=round] ([yshift=.125cm]hr.south west) |- (hr.south east) -- ++(0,.125cm);}\\nopagebreak\\medskip\\par}\\nopagebreak\n"
 headings_flag 1
 preamble "\\begin{theindex}%
   \\providecommand*\\indexgroup[1]{\\indexspace
     \\item \\textbf{#1}\\nopagebreak}~\\par\\providecommand{\\idxfsize}{\\normalsize}\\makeatletter%
 % Guarding hyperpage if present
-% maybe move to lecture-index?
 \\ifcsname hyperpage\\endcsname
 \\LetLtxMacro\\lecidx@@hyperpage\\hyperpage%
 \\def\\lecidx@@setup{%
-  \\def\\lecidx@for@setup{Yes}%
-  \\let\\lecidx@@currentpage@pattern\\relax% default
-  \\def\\hyperpage##1{\\def\\lecidx@@currentpage@pattern{##1}\\lecidx@@hyperpage{##1}}%
+  \\def\\lecidx@for@setup{Y}%
+  \\let\\lecidx@@currentpage@pattern\\relax%default
+  \\def\\hyperpage##1{\\gdef\\lecidx@@currentpage@pattern{##1}\\lecidx@@hyperpage{##1}}%
 }%
 \\def\\lecidx@@deset{%
-  % only print if page differs from major
+  % only pr. if page != major
   \\def\\lecidx@for@setup{}%
-  \\def\\hyperpage##1{\\ifdefstring{\\lecidx@@currentpage@pattern}{##1}{}{\\textsuperscript{(\\lecidx@@hyperpage{##1})}\\!}}%
+  \\def\\hyperpage##1{\\ifdefstring{\\lecidx@@currentpage@pattern}{##1}{}{\\lecidx@@hyperpage{##1}}}%
 }%
 \\else%
 \\let\\lecidx@@setup\\relax%
 \\let\\lecidx@@deset\\relax%
 \\fi
+\\newsavebox\\libidx@@sbox
 \\def\\lecidx@@maysub{\\ifx\\lecidx@for@setup\\@empty,\\space\\else\\subsubitem\\lecidx@@deset\\color{gray}\\footnotesize\\fi}%
+\\def\\lecidx@lowestbracecapsule#1{\\sbox\\libidx@@sbox{#1}\\ifdim\\z@=\\wd\\libidx@@sbox\\else\\textsuperscript{(#1)\\,}\\fi}
 "
 postamble "\n\n\\end{theindex}\n"
 group_skip "  %\n  \\indexspace\n  %\n"
@@ -33,9 +34,9 @@ numhead_negative "Numbers"
 symhead_positive "\\small Symbole"
 symhead_negative "\\small Symbole"
 
-delim_0 "\\thinspace\\dotfill\\thinspace "
-delim_1 "\:~ "
-delim_2 "\\relax "
+delim_0 "\\thinspace\\dotfill\\thinspace {"
+delim_1 "\:~ {"
+delim_2 "\\lecidx@lowestbracecapsule{\\relax "
 
 item_0 "\n\n  \\item\\lecidx@@setup\\color{black}\\idxfsize "
 item_01 "\n\n     \\subitem\\lecidx@@setup\\color{black}\\small "
@@ -52,7 +53,8 @@ encap_suffix "}"
 quote '#'
 actual '?'
 
-delim_t "\\relax "
+delim_t "}\\relax "
+delim_n ", "
 % delim_n "}, \\hyperpage{"
 % \\hyperpage{"
 
