@@ -43,6 +43,7 @@
 
 % ref index
 \def\rindex{\@ifstar\lecidx@rindex\lecidx@@rindex}
+\robustify\rindex
 
 \newcommand*\lecidx@rindex[3][]{\lecidx@sanitize{#1}\index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@tmpl @hi@#2@}{#2}}}
 \newcommand*\lecidx@@rindex[2][]{\lecidx@rindex[#1]{#2}{#2}}
