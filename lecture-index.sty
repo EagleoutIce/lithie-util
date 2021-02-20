@@ -40,8 +40,9 @@
 % link index
 \def\lindex{\@ifstar\lecidx@lindex\lecidx@@lindex}
 \robustify\lindex
-
-\newcommand*\lecidx@lindex[3][]{\lecidx@sanitize{#1}\phantomsection\label{lecidx@\lecidx@tmpl @hi@#2@}\index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@tmpl @hi@#2@}{#3}}}
+% only hook if outside float
+% \ifnum\@floatpenalty<0\else\phantomsection\fi
+\newcommand*\lecidx@lindex[3][]{\lecidx@sanitize{#1}\label{lecidx@\lecidx@tmpl @hi@#2@}\index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@tmpl @hi@#2@}{#3}}}
 
 \newcommand*\lecidx@@lindex[2][]{\lecidx@lindex[#1]{#2}{#2}}
 
