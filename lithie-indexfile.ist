@@ -1,5 +1,5 @@
 % comment - in case of need :D
-heading_prefix "\n%%% H-Break\n\\medskip\\par{\\centering\\tikz{\\node[text width=3cm,align=center] (hr) at (0,0) {\\textbf{"
+heading_prefix "\n%%% H-Break\n\\medskip\\par\\color{black}{\\centering\\tikz{\\node[text width=3cm,align=center] (hr) at (0,0) {\\textbf{"
 heading_suffix "}};\n\\draw[rounded corners=3pt,thick,line cap=round] ([yshift=-.125cm]hr.north west) |- (hr.north east) -- ++(0,-.125cm);\n\\draw[rounded corners=2.5pt,thick,line cap=round] ([yshift=.125cm]hr.south west) |- (hr.south east) -- ++(0,.125cm);}\\nopagebreak\\medskip\\par}\\nopagebreak\n"
 headings_flag 1
 preamble "\\begin{theindex}%
