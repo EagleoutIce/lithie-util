@@ -57,4 +57,7 @@
 \DeclareRobustCommand{\sw}[2][Gruppenname]{#2\index{#1\lecidx@idxsub #2}}
 \DeclareRobustCommand{\sr}[3][Gruppenname]{#3\index{#1\lecidx@idxsub #2\lecidx@idxsub #3}}
 
+% note for '.ist' (\\lecidx@@maysub):
+% This is a weird bugfix. To be honest, i do not know why it is required using ( and ) as index guards on different pages, the 1-hierarch fails to establish according to the item_12 rule and jumps to item_2 this guards item_2 with the setup-routine which has to be present only on an already established 2-hierarchy
+
 \endinput

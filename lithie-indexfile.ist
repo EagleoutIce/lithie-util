@@ -10,17 +10,20 @@ preamble "\\begin{theindex}%
 \\ifcsname hyperpage\\endcsname
 \\LetLtxMacro\\lecidx@@hyperpage\\hyperpage%
 \\def\\lecidx@@setup{%
+  \\def\\lecidx@for@setup{Yes}%
   \\let\\lecidx@@currentpage@pattern\\relax% default
   \\def\\hyperpage##1{\\def\\lecidx@@currentpage@pattern{##1}\\lecidx@@hyperpage{##1}}%
 }%
 \\def\\lecidx@@deset{%
   % only print if page differs from major
+  \\def\\lecidx@for@setup{}%
   \\def\\hyperpage##1{\\ifdefstring{\\lecidx@@currentpage@pattern}{##1}{}{\\textsuperscript{(\\lecidx@@hyperpage{##1})}\\!}}%
 }%
 \\else%
 \\let\\lecidx@@setup\\relax%
 \\let\\lecidx@@deset\\relax%
 \\fi
+\\def\\lecidx@@maysub{\\ifx\\lecidx@for@setup\\@empty,\\space\\else\\subsubitem\\lecidx@@deset\\color{gray}\\footnotesize\\fi}%
 "
 postamble "\n\n\\end{theindex}\n"
 group_skip "  %\n  \\indexspace\n  %\n"
@@ -40,7 +43,7 @@ item_x1 "\n\n     \\subitem\\lecidx@@setup\\color{black}\\small "
 item_1 "\n\n     \\subitem\\lecidx@@setup\\color{black}\\small "
 item_12 "\n\n         \\subsubitem\\lecidx@@deset\\color{gray}\\footnotesize "
 item_x2 "\n\n         \\subsubitem\\lecidx@@deset\\color{gray}\\footnotesize "
-item_2  ",\\space "
+item_2  "\\lecidx@@maysub "
 
 encap_prefix "\\"
 encap_infix "{"
@@ -53,5 +56,5 @@ delim_t "\\relax "
 % delim_n "}, \\hyperpage{"
 % \\hyperpage{"
 
-indent_space "\t"
-indent_length 4
+indent_space "\t\t"
+indent_length 16
