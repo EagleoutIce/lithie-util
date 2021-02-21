@@ -8,23 +8,23 @@ preamble "\\begin{theindex}%
 % Guarding hyperpage if present
 \\ifcsname hyperpage\\endcsname
 \\LetLtxMacro\\lecidx@@hyperpage\\hyperpage%
-\\def\\lecidx@@setup{%
+\\def\\lecidx@@s{%
   \\def\\lecidx@for@setup{Y}%
-  \\let\\lecidx@@currentpage@pattern\\relax%default
-  \\def\\hyperpage##1{\\gdef\\lecidx@@currentpage@pattern{##1}\\lecidx@@hyperpage{##1}}%
+  \\gdef\\lecidx@@currentpage@pattern{}%default
+  \\def\\hyperpage##1{\\gappto\\lecidx@@currentpage@pattern{##1}\\lecidx@@hyperpage{##1}}%
 }%
-\\def\\lecidx@@deset{%
+\\def\\lecidx@@d{%
   % only pr. if page != major
   \\def\\lecidx@for@setup{}%
-  \\def\\hyperpage##1{\\ifdefstring{\\lecidx@@currentpage@pattern}{##1}{}{\\lecidx@@hyperpage{##1}}}%
+  \\def\\hyperpage##1{\\gappto\\lecidx@currentpagebuff{##1}\\lecidx@@hyperpage{##1}}%
 }%
 \\else%
-\\let\\lecidx@@setup\\relax%
-\\let\\lecidx@@deset\\relax%
+\\let\\lecidx@@s\\relax%
+\\let\\lecidx@@d\\relax%
 \\fi
 \\newsavebox\\libidx@@sbox
-\\def\\lecidx@@maysub{\\ifx\\lecidx@for@setup\\@empty,\\space\\else\\subsubitem\\lecidx@@deset\\color{gray}\\footnotesize\\fi}%
-\\def\\lecidx@lowestbracecapsule#1{\\sbox\\libidx@@sbox{#1}\\ifdim\\z@=\\wd\\libidx@@sbox\\else\\textsuperscript{(#1)\\!}\\fi}
+\\def\\lecidx@@maysub{\\ifx\\lecidx@for@setup\\@empty,\\space\\else\\subsubitem\\lecidx@@d\\color{gray}\\footnotesize\\fi}%
+\\def\\lecidx@lb@encap#1{\\gdef\\lecidx@currentpagebuff{}\\sbox\\libidx@@sbox{#1}\\ifdefequal{\\lecidx@@currentpage@pattern}{\\lecidx@currentpagebuff}{}{\\textsuperscript{(#1)\\!}}}
 "
 postamble "\n\n\\end{theindex}\n"
 group_skip "  %\n  \\indexspace\n  %\n"
@@ -36,14 +36,14 @@ symhead_negative "\\small Symbole"
 
 delim_0 "\\thinspace\\dotfill\\thinspace {"
 delim_1 "\:~ {"
-delim_2 "\\lecidx@lowestbracecapsule{\\relax "
+delim_2 "\\lecidx@lb@encap{\\relax "
 
-item_0 "\n\n  \\item\\lecidx@@setup\\color{black}\\idxfsize "
-item_01 "\n\n     \\subitem\\lecidx@@setup\\color{black}\\small "
-item_x1 "\n\n     \\subitem\\lecidx@@setup\\color{black}\\small "
-item_1 "\n\n     \\subitem\\lecidx@@setup\\color{black}\\small "
-item_12 "\n\n         \\subsubitem\\lecidx@@deset\\color{gray}\\footnotesize "
-item_x2 "\n\n         \\subsubitem\\lecidx@@deset\\color{gray}\\footnotesize "
+item_0 "\n\n  \\item\\lecidx@@s\\color{black}\\idxfsize "
+item_01 "\n\n     \\subitem\\lecidx@@s\\color{black}\\small "
+item_x1 "\n\n     \\subitem\\lecidx@@s\\color{black}\\small "
+item_1 "\n\n     \\subitem\\lecidx@@s\\color{black}\\small "
+item_12 "\n\n         \\subsubitem\\lecidx@@d\\color{gray}\\footnotesize "
+item_x2 "\n\n         \\subsubitem\\lecidx@@d\\color{gray}\\footnotesize "
 item_2  "\\lecidx@@maysub "
 
 encap_prefix "\\"
