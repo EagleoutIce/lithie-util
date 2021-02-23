@@ -22,7 +22,7 @@
 
  % #1: university #2 Text, #3 Symbol centered
 \newcommand*\emblem[3][ulm university]{\def\@@university@name{#1}%
- \gdef\lecture@emblem{\lecture@generate@emblem{#2}{\hspace*{-0.025em}#3}{\lecturecp@emblemcolor}{\lecturecp@emblemcolor@symbol}{\lecturecp@emblemcolor}{51pt}{\lecture@font@eulerSmall}{0.125}{0.05}}%
+ \gdef\lecture@emblem{\lecture@generate@emblem{#2}{\hspace*{-.025em}#3}{\lecturecp@emblemcolor}{\lecturecp@emblemcolor@symbol}{\lecturecp@emblemcolor}{51pt}{\lecture@font@eulerSmall}{.125}{.05}}%
 }
 
 \DeclareFixedFont{\lecture@font@eulerNormal}{U}{eur}{b}{n}{\f@size}
@@ -45,36 +45,36 @@
 % #9 Offset for the Shadow of the symbol #2
  \begin{tikzpicture}[#5]%
  % Draw the upper Text in color #3 and extra formatting #7
- \draw [decorate,decoration={text along path,text align=center,%
+ \path[draw,decorate,decoration={text along path,text align=center,%
          text={|\footnotesize\lecture@font@eulerNormal\color{#3}#7|#1}}]% Upper text
      (-1.275-#8,0) arc [start angle=180, end angle=00, radius=1.275+#8];% Offset #8
 
    % Draw the two bullets in the main color of the tikzpicture
    \draw(-1.5,0) node {{\textbullet}} ++ (3,0) node {{\textbullet}};
  % Draw the lower text (\@@university@name) in color #3
- \draw [decorate,decoration={text along path,text align=center,
+ \path[draw,decorate,decoration={text along path,text align=center,
          text={|\footnotesize\lecture@font@eulerNormal\color{#3}|\@@university@name}}]
      (-1.6,0) arc [start angle=-180, end angle=00, radius=1.6];
  % Draw the inner thick circle in #3
- \draw[very thick, color=#3] (0,0) circle (1.25);
+ \path[draw,very thick, color=#3] (0,0) circle (1.25);
  % Draw the outer thick circle in #3
- \draw[thick, color=#3] (0,0) circle (1.75);
+ \path[draw,thick, color=#3] (0,0) circle (1.75);
  % Draw the inner 'dot' circle in #3
- \draw[thin, color=#3] circle (1.2);
+ \path[draw,thin, color=#3] circle (1.2);
  % Draw the dots on the inner 'dot' circle in #3
  \foreach \r in {0,24,...,360} {
-     \filldraw[#3] (\r:1.2) circle (0.01) node[circle,inner sep=0.222em] (\r) {};
+     \filldraw[#3] (\r:1.2) circle (.01) node[circle,inner sep=.222em] (\r) {};
  }
  % Draw the connection-lines in the main color of the tikzpicture
  \foreach \r in {0,24,...,360}  {
      \foreach \rr in {0,24,...,\r}{
-         \draw[very thin] (\r) -- (\rr);
+         \path[draw,very thin] (\r) -- (\rr);
      }
  }
  % Draw the symbol #2 shading with an offset of #9 and a size of #6
- \node[opacity=0.5] at(0.02+#9,-#9) {\fontsize{#6}{16pt}\selectfont#2};
+ \node[opacity=.5] at(.02+#9,-#9) {\fontsize{#6}{16pt}\selectfont#2};
  % Draw the symbol #2 with size #6 (same as shadow), color of #4
- \draw (0.02,0) node {\fontsize{#6}{16pt}\selectfont\color{#4}#2};
+ \draw (.02,0) node {\fontsize{#6}{16pt}\selectfont\color{#4}#2};
 \end{tikzpicture}%
 }
 
@@ -98,7 +98,7 @@
 % .##........##.......##.....##..##..##...###
 % .##........########.##.....##.####.##....##
 \lecturecp@coverpagestyle{plain}{%
-\def\lecture@coverpage@geometry{\newgeometry{width=0.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
+\def\lecture@coverpage@geometry{\newgeometry{width=.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
 \renewcommand{\maketitle}{\bgroup%
 \parindent=\z@%
@@ -108,17 +108,17 @@
 \begin{center}
     \hyphenpenalty=10000 \exhyphenpenalty=10000 %
     \fontsize{46pt}{46pt}\selectfont\sffamily\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}\leavevmode\medskip\par
-    \parbox{0.96\linewidth}{\centering\fontsize{17pt}{17pt}\selectfont\sffamily\lecture@r{subtitle}}
+    \parbox{.96\linewidth}{\centering\fontsize{17pt}{17pt}\selectfont\sffamily\lecture@r{subtitle}}
 \end{center}
 \leavevmode\\%
 \vfill% set the titleimage
-\parbox[c][0.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
+\parbox[c][.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
     \lecture@r{titleimage}%
 \vfill\hbox{}}\leavevmode\\
 \vfill%
-\parbox[c]{0.75\linewidth}{%
+\parbox[c]{.75\linewidth}{%
 \fontsize{17pt}{17pt}\selectfont\sffamily\color{gray}\lecture@r{brief}%
-}\hfill\parbox[c]{0.2\linewidth}{\lecture@emblem}%
+}\hfill\parbox[c]{.2\linewidth}{\lecture@emblem}%
 \end{titlepage}%
 \restoregeometry{}\clearpage\egroup}
 }
@@ -131,17 +131,17 @@
 % .##........##.......##.....##..##..##...###.........##....##.##.....##.##.....##.##.......##......
 % .##........########.##.....##.####.##....##..........######..##.....##.##.....##.########.########
 \lecturecp@coverpagestyle{plain-small}{%
-\def\lecture@coverpage@geometry{\newgeometry{width=0.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
+\def\lecture@coverpage@geometry{\newgeometry{width=.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
 \renewcommand{\maketitle}{\bgroup%
 \parindent=\z@%
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry%
 \begin{titlepage}%
-\parbox{0.99\linewidth}{\raggedright\fontsize{39pt}{39pt}\selectfont\sffamily\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}\leavevmode\bigskip\\*}\par
-\parbox{0.99\linewidth}{\fontsize{15pt}{15pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\*%
+\parbox{.99\linewidth}{\raggedright\fontsize{39pt}{39pt}\selectfont\sffamily\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}\leavevmode\bigskip\\*}\par
+\parbox{.99\linewidth}{\fontsize{15pt}{15pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\*%
 \vfill% set the titleimage
-\parbox[c][0.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
+\parbox[c][.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
     \lecture@r{titleimage}%
 \vfill\hbox{}}\leavevmode\\*
 \vfill%
@@ -179,49 +179,49 @@
 % upper fancies
 \begin{tikzpicture}[line join=round]%
 \filldraw[\lecturecp@emblemcolor@symbol]
-    (0,0) -- ++(0,-0.4) -- ++(0.4cm,0.3)
-    -- ++(\paperwidth-0.8cm,0) -- ++(0.4cm,-0.3)
+    (0,0) -- ++(0,-.4) -- ++(.4cm,.3)
+    -- ++(\paperwidth-.8cm,0) -- ++(.4cm,-.3)
     |- cycle;%
-\end{tikzpicture}\\*[0.1\paperheight]%
+\end{tikzpicture}\\*[.1\paperheight]%
 % title:
-\hspace*{\lecturecp@leftwidth}\parbox{0.925\linewidth}{%
+\hspace*{\lecturecp@leftwidth}\parbox{.925\linewidth}{%
     \raggedright\fontsize{39pt}{39pt}\selectfont\sffamily%
     \savebox{\lecturecp@title@widthbox}{\pbox{\linewidth}{\raggedright\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}~~\null}}%
     \usebox{\lecturecp@title@widthbox}\strut\medskip%
     \global\lecture@tmp@titlewidth=\wd\lecturecp@title@widthbox}%
-    \leavevmode\\*[0.125cm]%
+    \leavevmode\\*[.125cm]%
     \paletteA{\rule{\lecture@eff@titlewidth+\lecturecp@leftwidth}{1.33pt}}%
-    \\*[0.125cm]%
-\hspace*{\lecturecp@leftwidth}\parbox[t][2.25\baselineskip]{0.75\linewidth}{%
+    \\*[.125cm]%
+\hspace*{\lecturecp@leftwidth}\parbox[t][2.25\baselineskip]{.75\linewidth}{%
     \fontsize{15pt}{15pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\%
 \vfill% set the titleimage
-\parbox[c][0.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
+\parbox[c][.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
     \lecture@r{titleimage}%
 \vfill\hbox{}}\leavevmode\\%
 % At last we place the bannerblock%
 \vfill%
-\begin{tikzpicture}[line join=round,rounded corners=0.25pt]%
-\draw[semithick,\lecturecp@emblemcolor@symbol]
-    (0,\lecturecp@height+0.15) -- ++(0.6\paperwidth-0.175,0)
-    -- ++(0.1\paperwidth,1)    -- ++(0.1\paperwidth+0.175,0)
-    -- ++(0.1\paperwidth,-1)   -- ++(0.1\paperwidth,0);
-\draw[thick,\lecturecp@emblemcolor@symbol]
-    (0,\lecturecp@height+0.075) -- ++(0.6\paperwidth-0.1,0)
-    -- ++(0.1\paperwidth, 1)  -- ++(0.1\paperwidth+0.1,0)
-    -- ++(0.1\paperwidth,-1)  -- ++(0.1\paperwidth,0);
+\begin{tikzpicture}[line join=round,rounded corners=.25pt]%
+\path[draw,semithick,\lecturecp@emblemcolor@symbol]
+    (0,\lecturecp@height+.15) -- ++(.6\paperwidth-.175,0)
+    -- ++(.1\paperwidth,1)    -- ++(.1\paperwidth+.175,0)
+    -- ++(.1\paperwidth,-1)   -- ++(.1\paperwidth,0);
+\path[draw,thick,\lecturecp@emblemcolor@symbol]
+    (0,\lecturecp@height+.075) -- ++(.6\paperwidth-.1,0)
+    -- ++(.1\paperwidth, 1)  -- ++(.1\paperwidth+.1,0)
+    -- ++(.1\paperwidth,-1)  -- ++(.1\paperwidth,0);
 \filldraw[\lecturecp@emblemcolor@symbol]
     (0,0) -- ++(\paperwidth,0) -- ++(0,\lecturecp@height)
-    -- ++(-0.1\paperwidth,0)   -- ++(-0.1\paperwidth,1)
-    -- ++(-0.1\paperwidth,0)   -- ++(-0.1\paperwidth,-1)
-    -- ++(-0.6\paperwidth,0)   -- cycle;%
+    -- ++(-.1\paperwidth,0)   -- ++(-.1\paperwidth,1)
+    -- ++(-.1\paperwidth,0)   -- ++(-.1\paperwidth,-1)
+    -- ++(-.6\paperwidth,0)   -- cycle;%
 \begin{scope}[every node/.style={color=\lecturecp@emblemcolor}]%
-    \node[scale=0.89] at(0.75\paperwidth,\lecturecp@height/2+0.5) {\lecture@emblem};
-    \node[right,text width=0.6\paperwidth-\lecturecp@leftwidth] at(\lecturecp@leftwidth,\lecturecp@height/2)
+    \node[scale=.89] at(.75\paperwidth,\lecturecp@height/2+.5) {\lecture@emblem};
+    \node[right,text width=.6\paperwidth-\lecturecp@leftwidth] at(\lecturecp@leftwidth,\lecturecp@height/2)
         {\parbox[t]{\linewidth}{%
             \fontsize{15pt}{15pt}\selectfont\sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
             \par%
         }};
-    \node[align=left,right=\z@,outer sep=\z@,font=\normalsize\sffamily] at(0.9*\paperwidth,\lecturecp@height/2) {\Lithie\smallskip\\\resizebox{\widthof{\Lithie}}{!}{\textsf{Ver. \lithie@version}}};%
+    \node[align=left,right=\z@,outer sep=\z@,font=\normalsize\sffamily] at(.9*\paperwidth,\lecturecp@height/2) {\Lithie\smallskip\\\resizebox{\widthof{\Lithie}}{!}{\textsf{Ver. \lithie@version}}};%
 \end{scope}%
 \end{tikzpicture}%
 \end{titlepage}%
@@ -253,38 +253,38 @@
 %
 \begin{titlepage}%
 % upper fancies
-\vspace*{-0.95cm}\begin{tikzpicture}[line join=round]%
+\vspace*{-.95cm}\begin{tikzpicture}[line join=round]%
     \filldraw[\lecturecp@emblemcolor@symbol]
-        (0,0) -- ++(0,-0.65) -- ++(0.5cm,0.3)
-        -- ++(\paperwidth-1cm,0) -- ++(0.5cm,-0.3)
+        (0,0) -- ++(0,-.65) -- ++(.5cm,.3)
+        -- ++(\paperwidth-1cm,0) -- ++(.5cm,-.3)
         |- cycle;%
-\end{tikzpicture}\\*[0.07\paperheight]%
+\end{tikzpicture}\\*[.07\paperheight]%
 % title:
-\hspace*{\lecturecp@leftwidth}\parbox{0.65\linewidth}{%
+\hspace*{\lecturecp@leftwidth}\parbox{.65\linewidth}{%
     \raggedright\fontsize{30pt}{30pt}\selectfont\sffamily%
     \savebox{\lecturecp@title@widthbox}{\pbox{\linewidth}{\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}~~\null}}%
     \usebox{\lecturecp@title@widthbox}\strut%
     \global\lecture@tmp@titlewidth=\wd\lecturecp@title@widthbox}%
-    \leavevmode\\*[0.125cm]%
+    \leavevmode\\*[.125cm]%
     \paletteA{\rule{\lecture@eff@titlewidth+\lecturecp@leftwidth}{1.33pt}}%
-    \\*[0.125cm]%
-\hspace*{\lecturecp@leftwidth}\parbox{0.75\linewidth}{%
+    \\*[.125cm]%
+\hspace*{\lecturecp@leftwidth}\parbox{.75\linewidth}{%
     \fontsize{14pt}{14pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\%
 \vfill% set the titleimage
-\parbox[c][0.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
+\parbox[c][.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
     \lecture@r{titleimage}%
 \vfill\hbox{}}\leavevmode\\%
 % At last we place the bannerblock%
 \vfill%
 \noindent\hspace*{-2pt}\begin{tikzpicture}[line join=round]%
-\draw[semithick,\lecturecp@emblemcolor@symbol]
-    (0,\lecturecp@height+0.15) -- ++(\paperwidth+2pt,0);
-\draw[thick,\lecturecp@emblemcolor@symbol]
-    (0,\lecturecp@height+0.075) -- ++(\paperwidth+2pt,0);
-\filldraw[\lecturecp@emblemcolor@symbol]
+\path[draw,semithick,\lecturecp@emblemcolor@symbol]
+    (0,\lecturecp@height+.15) -- ++(\paperwidth+2pt,0);
+\path[draw,thick,\lecturecp@emblemcolor@symbol]
+    (0,\lecturecp@height+.075) -- ++(\paperwidth+2pt,0);
+\path[fill,draw,\lecturecp@emblemcolor@symbol]
     (0,0) rectangle ++(\paperwidth+2pt,\lecturecp@height);%
 \begin{scope}[every node/.style={color=\lecturecp@emblemcolor}]%
-\node[right,scale=0.95] at(\lecturecp@leftwidth,\lecturecp@height/2)
+\node[right,scale=.95] at(\lecturecp@leftwidth,\lecturecp@height/2)
     {\parbox[t]{\linewidth}{%
         \sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
         \par%
@@ -310,7 +310,7 @@
 \twocolumn[{%
 \parindent=\z@ \parskip=\z@\vspace*{3em}\par\sffamily\fontsize{32}{32}%
 \textbf{\paletteA{\lecture@r{title}}}\bigskip\leavevmode\\*
-\normalsize\strut\hfill\parbox[t]{0.85\linewidth}{\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*}\color{gray}\lecture@r{brief}}%
+\normalsize\strut\hfill\parbox[t]{.85\linewidth}{\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*}\color{gray}\lecture@r{brief}}%
 \vspace*{6.25em}\leavevmode\par%
 }]{}}}
 
@@ -353,12 +353,15 @@
 \vspace*{1.33em}%
 \parbox[b][0pt]{\linewidth}{%
 \normalsize
-\parbox{0.1\linewidth}{\lecture@r{titleimage}}\strut\hfill\parbox{0.85\linewidth}{\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*}\color{gray}\lecture@r{brief}}}\bigskip\par%
+\parbox{.1\linewidth}{\lecture@r{titleimage}}\strut\hfill\parbox{.85\linewidth}{\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*}\color{gray}\lecture@r{brief}}}\vspace{2em}\par%
 \begin{tikzpicture}[overlay]
-    \begin{scope}[xshift=0.65\paperwidth,yshift=0.6cm,opacity=0.8]
+    \begin{scope}[xshift=.69\paperwidth,yshift=.6cm,opacity=.8,scale=.75]
         \lithiebirb%
     \end{scope}
-\end{tikzpicture}\parbox[c][3cm][t]{.925\linewidth}{\raggedright\textbf{\lecture@r{title}}}\vspace*{3.5em}\par
+\end{tikzpicture}\sbox0{\parbox{.925\linewidth}{\raggedright\textbf{\lecture@r{title}}}}%
+% set min ht to 4em
+\ifdim\dimexpr\ht0+\dp0<2cm \dp0\dimexpr2cm-\ht0\fi\usebox0%
+\vspace*{2.5em}\par
 }]}{}}
 
 \endinput

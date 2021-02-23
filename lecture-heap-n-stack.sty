@@ -58,7 +58,7 @@
 }
 
 \def\lhns@heap@element@#1#2#3{%
-    \lhns@debug{Register heap element [\thelhns@heap] text: '#1', extras: '#2', style: '#3'}
+    \lhns@debug{Reg heap element [\thelhns@heap] text: '#1', extras: '#2', style: '#3'}
     \@namedef{lhn@heap@elem@i@\thelhns@heap}{{#1}{#2}{#3}}%
 \stepcounter{lhns@heap}}
 
@@ -73,7 +73,7 @@
 
 
 \def\lhns@stack@element@#1#2#3{%
-    \lhns@debug{Register stack element [\thelhns@stack] text: '#1', extras: '#2', style: '#3'}
+    \lhns@debug{Reg stack elem [\thelhns@stack] text: '#1', extras: '#2', style: '#3'}
     \@namedef{lhn@stack@elem@i@\thelhns@stack}{{#1}{#2}{#3}} %
 \stepcounter{lhns@stack}}
 
@@ -87,7 +87,7 @@
 
 % heap/stack | number | position
 \def\lhns@render@elem@from#1#2#3{%
-    \lhns@debug{Render element [#2] from #1 at #3}
+    \lhns@debug{Render elem [#2] from #1 at #3}
     \protected@edef\@lhns@tmp{\noexpand\lhns@render@elem@\@nameuse{lhn@#1@elem@i@#2}{#3}{#1-#2}}\@lhns@tmp%
 }
 % #1 text #2 extra format #3 style #4 position #5 name
