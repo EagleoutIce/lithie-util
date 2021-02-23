@@ -35,7 +35,7 @@
 
 \edef\@lecture@personal@tmp{\LPM@extras}
 \ifx\@lecture@personal@tmp\@lecture@personal@noextra\else
-\def\@lecture@personal@loadextras#1{\AtEndPreamble{\RequirePackage{lecture-personal-extra-#1}}}
+\def\@lecture@personal@loadextras#1{\RequirePackage{lecture-personal-extra-#1}}
 \expandafter\forcsvlist\expandafter\@lecture@personal@loadextras\expandafter{\@lecture@personal@tmp}
 \fi
 
