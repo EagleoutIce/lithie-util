@@ -1,30 +1,32 @@
 % comment - in case of need :D
-heading_prefix "\n%% Header\n\\medskip\\par\\color{black}{\\centering\\tikz{\\node[text width=3cm,align=center] (hr) at (0,0) {\\textbf{"
-heading_suffix "}};\n\\draw[rounded corners=3pt,thick,line cap=round] ([yshift=-.125cm]hr.north west) |- (hr.north east) -- ++(0,-.125cm);\n\\draw[rounded corners=2.5pt,thick,line cap=round] ([yshift=.125cm]hr.south west) |- (hr.south east) -- ++(0,.125cm);}\\nopagebreak\\medskip\\par}\\nopagebreak\n"
+heading_prefix "\n%% Header
+\\medskip\\par\\color{black}{\\centering\\lecidx@head{"
+heading_suffix "}\\nopagebreak\\medskip\\par}\\nopagebreak\n"
 headings_flag 1
 preamble "\\begin{theindex}%
   \\providecommand*\\indexgroup[1]{\\indexspace
     \\item \\textbf{#1}\\nopagebreak}~\\par\\providecommand{\\idxfsize}{\\normalsize}\\makeatletter%
-% Guarding hyperpage if present
+% Guard hyperpage if present
 \\ifcsname hyperpage\\endcsname
-\\LetLtxMacro\\lecidx@@hyperpage\\hyperpage%
+\\LetLtxMacro\\lecidx@@hp\\hyperpage%
 \\def\\lecidx@@s{%
-  \\def\\lecidx@for@setup{Y}%
-  \\gdef\\lecidx@@currentpage@pattern{}%default
-  \\def\\hyperpage##1{\\gappto\\lecidx@@currentpage@pattern{##1}\\lecidx@@hyperpage{##1}}%
+  \\def\\lecidx@fs{Y}%
+  \\gdef\\lecidx@@cpp{}%default
+  \\def\\hyperpage##1{\\gappto\\lecidx@@cpp{##1}\\lecidx@@hp{##1}}%
 }%
 \\def\\lecidx@@d{%
   % only pr. if page != major
-  \\def\\lecidx@for@setup{}%
-  \\def\\hyperpage##1{\\gappto\\lecidx@currentpagebuff{##1}\\lecidx@@hyperpage{##1}}%
+  \\def\\lecidx@fs{}%
+  \\def\\hyperpage##1{\\gappto\\lecidx@currentpagebuff{##1}\\lecidx@@hp{##1}}%
 }%
-\\else%
-\\let\\lecidx@@s\\relax%
-\\let\\lecidx@@d\\relax%
-\\fi
+\\else\\let\\lecidx@@s\\relax \\let\\lecidx@@d\\relax\\fi
+% guard tikz
+\\ifcsname tikz\\endcsname
+\\def\\lecidx@head#1{\\tikz{\\node[text width=3cm,align=center] (hr) at (0,0) {\\textbf{}};\\draw[rounded corners=3pt,thick,line cap=round]([yshift=-.125cm]hr.north west)|-(hr.north east)--++(0,-.125cm);\\draw[rounded corners=2.5pt,thick,line cap=round] ([yshift=.125cm]hr.south west)|-(hr.south east)--++(0,.125cm);}}
+\\else\\let\\lecidx@head\\textbf\\fi
 \\newsavebox\\libidx@@sbox
-\\def\\lecidx@@maysub{\\ifx\\lecidx@for@setup\\@empty,\\space\\else\\subsubitem\\lecidx@@d\\color{gray}\\footnotesize\\fi}%
-\\def\\lecidx@lb@encap#1{\\gdef\\lecidx@currentpagebuff{}\\sbox\\libidx@@sbox{#1}\\ifdefequal{\\lecidx@@currentpage@pattern}{\\lecidx@currentpagebuff}{}{\\textsuperscript{(#1)\\!}}}
+\\def\\lecidx@@maysub{\\ifx\\lecidx@fs\\@empty,\\space\\else\\subsubitem\\lecidx@@d\\color{gray}\\footnotesize\\fi}%
+\\def\\lecidx@lb@encap#1{\\gdef\\lecidx@currentpagebuff{}\\sbox\\libidx@@sbox{#1}\\ifdefequal{\\lecidx@@cpp}{\\lecidx@currentpagebuff}{}{\\textsuperscript{(#1)\\!}}}
 "
 postamble "\n\n\\end{theindex}\n"
 group_skip "  %\n  \\indexspace\n  %\n"
