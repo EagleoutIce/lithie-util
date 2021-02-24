@@ -50,7 +50,7 @@
 }
 
 \AppendToProfile{default}{%
-  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{1}{}}\@mkcommands%
+  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{1}{}}\@mkcommands
   \DisableMulticolHint%
   \scolfalse%
   \newenvironment{ltabular}%
@@ -67,9 +67,9 @@
 }
 
 \RegisterProfile{mobile}{%
-  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{0.925}{height=0.8\noexpand\textheight,keepaspectratio}}\@mkcommands%
+  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{0.925}{height=0.8\noexpand\textheight,keepaspectratio}}\@mkcommands
   \DisableMulticolHint%\EnableMulticolHint%
-  \scoltrue\makeatletter%
+  \scoltrue\makeatletter
   \def\fps@figure{tbp}\def\fps@table{tbp}%
   \def\floatpagefraction{0.5}\def\topfraction{0.7}%
   \def\bottomfraction{0}\setcounter{topnumber}{3}%2

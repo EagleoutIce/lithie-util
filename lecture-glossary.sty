@@ -74,7 +74,7 @@
     \else% no enumitem
     \begin{description}\fi}%
 \renewenvironment{theglossary}{%
-    \parindent=\z@ \parskip=\z@ plus 0.3pt%
+    \parindent=\z@ \parskip=\z@ plus .3pt%
     \global\atinitglossarytrue\relax
     }{\end{description}}%#
 \renewcommand{\glossentry}[2]{%reset of tree to pad pagenumbers
@@ -93,7 +93,7 @@
     \else% no enumitem
     \begin{description}\fi}%
 \renewenvironment{theglossary}{%
-    \parindent=\z@ \parskip=\z@ plus 0.3pt%
+    \parindent=\z@ \parskip=\z@ plus .3pt%
     \global\atinitglossarytrue\relax
     }{\end{description}}%#
 \renewcommand{\glossentry}[2]{%reset of tree to pad pagenumbers
@@ -109,6 +109,12 @@
 
 \makeglossaries
 
-\preto\printglossaries{\bgroup\interlinepenalty=1000}
-\g@addto@macro\printglossaries{\egroup}
+\preto\printglossaries{\begingroup\interlinepenalty=1000}
+\g@addto@macro\printglossaries{\endgroup}
+
+\def\glslong#1{{\glsreset{#1}\gls{#1}}}
+\def\glspllong#1{{\glsreset{#1}\glspl{#1}}}
+\def\glsshort#1{{\glsunset{#1}\gls{#1}}}
+\def\glsplshort#1{{\glsunset{#1}\glspl{#1}}}
+
 \endinput

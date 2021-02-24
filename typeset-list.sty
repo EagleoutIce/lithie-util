@@ -16,9 +16,9 @@
     \foreach \@tmp[count=\@@c@tmp] in \@tmpl {\xdef\@c@tmp{\@@c@tmp}}%
 }
 
-\newcommand*{\TypesetList}[3][typesetVoid]{\bgroup%
-    \edef\@typeset@list@and{#3}\edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp%
-    \egroup%
+\newcommand*{\TypesetList}[3][typesetVoid]{\bgroup
+    \edef\@typeset@list@and{#3}\edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
+    \egroup
 }
 
 \newcommand*{\typesetList}[2][typesetVoid]{%
@@ -30,11 +30,11 @@
     \def\@tmpl{#2}%
     \getListLength{#2}%
     \foreach \x[count=\i] in \@tmpl {%
-        \ifnum\i>1 \ifnum\i=\@c@tmp%
-        ~und \else%
-        ,\space\fi%
-        \fi%
-        \@nameuse{#1}{\x}%
+        \ifnum\i>1 \ifnum\i=\@c@tmp
+        ~und \else
+        ,\space\fi
+        \fi
+        \csname#1\endcsname{\x}%
     }\ignorespaces%
 }
 
@@ -42,7 +42,7 @@
 \def\NoFormatChar{|}
 
 \def\@ltu@ttl@format@step#1#2{%
-    \xdef\tmp@@ltu@ttl@first{\@car #2\@empty\@nil}\ifx\tmp@@ltu@ttl@first\NoFormatChar\@gobble{\@car #2\@empty\@nil}\else%
+    \xdef\tmp@@ltu@ttl@first{\@car #2\@empty\@nil}\ifx\tmp@@ltu@ttl@first\NoFormatChar\@gobble{\@car #2\@empty\@nil}\else
     \expandafter#1\expandafter{\@car #2\@empty\@nil}% % car => (LISP) list head => \def\@car#1#2\@nil{#1}
     \fi%
     \@cdr #2\@empty\@nil% cdr => (LISP) list body => \def\@cdr#1#2\@nil{#2}
@@ -55,8 +55,7 @@
 \@ltu@ttl@format@step{\@ltu@ttl@formatter@current}{#1}%
 \ifx!#2!\else%
 \@ltu@ttl@jump@fi{%
-    \space%
-    \@ltu@ttl@format@iter#2\@nil%
+    \space\@ltu@ttl@format@iter#2\@nil
 }%
 \fi%
 }
