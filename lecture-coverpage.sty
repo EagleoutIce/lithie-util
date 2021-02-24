@@ -74,7 +74,7 @@
  % Draw the symbol #2 shading with an offset of #9 and a size of #6
  \node[opacity=.5] at(.02+#9,-#9) {\fontsize{#6}{16pt}\selectfont#2};
  % Draw the symbol #2 with size #6 (same as shadow), color of #4
- \draw (.02,0) node {\fontsize{#6}{16pt}\selectfont\color{#4}#2};
+ \path[draw] (.02,0) node {\fontsize{#6}{16pt}\selectfont\color{#4}#2};
 \end{tikzpicture}%
 }
 

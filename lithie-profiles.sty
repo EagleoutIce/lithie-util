@@ -13,7 +13,7 @@
 
 % #1 name #2 commands
 \def\lip@RegisterProfile#1#2{%
-\ifcsname lip@profile@#1\endcsname%
+\ifcsname lip@profile@#1\endcsname
     \PackageWarning{lithie-profiles}{Profile '#1' already exists. Appending.}%
     \lip@AppendToProfile{#1}{#2}%
 \else%
@@ -28,8 +28,8 @@
 }
 
 \def\lip@UseProfile#1{%
-\ifcsname lip@profile@#1\endcsname%
-    \@nameuse{lip@profile@#1}%
+\ifcsname lip@profile@#1\endcsname
+    \csname lip@profile@#1\endcsname
 \else%
     \PackageError{lithie-profiles}{The Profile '#1' is unknown. Choose one of: \lip@allprofiles}%
 \fi%
@@ -42,13 +42,13 @@
 
 \long\def\ifprofile#1{%
 \def\@tmpa{#1}%
-\ifx\@tmpa\lithieprofile%
-    \expandafter\lip@firstoftwo%
-\else\expandafter\lip@secondoftwo\fi%
+\ifx\@tmpa\lithieprofile
+    \expandafter\lip@firstoftwo
+\else\expandafter\lip@secondoftwo\fi
 }
 
 \AtEndPreamble{%
-\expandafter\ifx\expandafter!\lithieprofile!\else%
+\ifx\lithieprofile\@empty\else
     \lip@UseProfile{\lithieprofile}%
 \fi%
 }
@@ -56,7 +56,7 @@
 \lip@RegisterProfile{default}{}
 \lip@RegisterProfile{print}{}
 
-\let\RegisterProfile\lip@RegisterProfile%
-\let\AppendToProfile\lip@AppendToProfile%
+\let\RegisterProfile\lip@RegisterProfile
+\let\AppendToProfile\lip@AppendToProfile
 
 \endinput

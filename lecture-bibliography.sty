@@ -16,24 +16,23 @@
 \DeclareBoolOption{biber}
 \DeclareBoolOption{backref}
 
-
-\ProcessKeyvalOptions*\relax%
+\ProcessKeyvalOptions*
 
 \RequirePackage{csquotes}
 
-\ifLBI@backref%
+\ifLBI@backref
 \PassOptionsToPackage{backref=true}{biblatex}
 \fi
 
-\ifLBI@biber%
+\ifLBI@biber
 \RequirePackage[backend=biber,style=\LBI@style]{biblatex}
-\else%
+\else
 \RequirePackage[backend=bibtex8,style=\LBI@style]{biblatex}
 \fi
 
 \defbibheading{bibliography}[\bibname]{\section{#1}}
 
-\ifLBI@backref%
+\ifLBI@backref
 \DefineBibliographyStrings{english}{backrefpage={on page}, backrefpages={on pages}}
 \DefineBibliographyStrings{german}{backrefpage={Seite:}, backrefpages={Seiten:}}
 \fi

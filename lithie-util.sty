@@ -9,11 +9,10 @@
 \ProvidesPackage{lithie-util}[2020/09/20 v1.0 the lithie util collector]
 
 \RequirePackage{kvoptions,etoolbox,lithie-profiles}
-
 \SetupKeyvalOptions{family=LITU,prefix=LITU@}
 
 % general
-\def\@litu@none{LITHIE@NOOPTS@GIVEN}
+\def\@litu@none{LIT@NOOPTS}
 
 % hooks
 \def\@litu@hook@PackageRequire{} \def\@litu@hook@GroupRequire{} \def\@litu@hook@RequirePackages{}
@@ -32,28 +31,28 @@
 \def\lu@AddToGroup#1#2{\expandafter\def\expandafter\@litu@tmp@listnam\expandafter{\csname @litu@@group@#1\endcsname}%
 \edef\@litu@tmp{\noexpand\@litu@atl\expandonce{\@litu@tmp@listnam}{#2}}\@litu@tmp}
 
-\def\lu@LoadGroup#1{\protected@edef\@litu@tmp@groupload{\noexpand\forlistloop{\noexpand\lu@LoadModule}{\@nameuse{@litu@@group@#1}}}%
+\def\lu@LoadGroup#1{\protected@edef\@litu@tmp@groupload{\noexpand\forlistloop{\noexpand\lu@LoadModule}{\csname @litu@@group@#1\endcsname}}%
 \@litu@tmp@groupload}
 
 \def\@@lu@atgs#1#2{\lu@AddToGroup{#2}{#1}}
 
 \def\lu@AddToGroups#1#2{\edef\@litu@tmp{#2}%
-    \protected@edef\@litu@tmp@curcsv{\noexpand\forcsvlist{\noexpand\@@lu@atgs{\@litu@tmp}}{#1}}\@litu@tmp@curcsv%
+    \protected@edef\@litu@tmp@curcsv{\noexpand\forcsvlist{\noexpand\@@lu@atgs{\@litu@tmp}}{#1}}\@litu@tmp@curcsv
 }
 
-\def\lu@Get#1#2{\@nameuse{@lu@module@map@#2@#1}}
+\def\lu@Get#1#2{\csname @lu@module@map@#2@#1\endcsname}
 
 % TODO: maybe avoid duplicate loading; maybe group commands to avoid pollution?
 \def\@litu@resolve@module@args#1#2#3{%
 \edef\@litu@name{\lu@Get{#1}{name}}% todo only expand once
-\edef\@litu@cur{\@nameuse{LITU@\@litu@name}}%
+\edef\@litu@cur{\csname LITU@\@litu@name\endcsname}%
 \ifx\@litu@cur\@litu@none#2\else#3\fi}
 
 \def\@@litu@util{:}
 \def\@@litu@load@consume@arg@ifcmd#1#2->#3#4{%
     \ifstrempty{#1#2}{}{\def\@@litu@first@chk{#1}%
     \ifx\@@litu@first@chk\@@litu@util% is command
-        #3{#2}\else#4{#2}\fi%
+        #3{#2}\else#4{#2}\fi
 }}
 
 \def\@litu@cmd@defaults{defaults}
@@ -61,9 +60,9 @@
 % #1 module id, #2 command
 \def\@litu@execute@command#1#2{%
 \def\@@litu@cmd@chk{#2}%
-\ifx\@@litu@cmd@chk\@litu@cmd@defaults%
+\ifx\@@litu@cmd@chk\@litu@cmd@defaults
     \edef\@litu@tmp{\noexpand\@@litu@passopt@fp{\lu@Get{#1}{defaults}}{\lu@Get{#1}{package}}}%
-    \@litu@tmp\fi%
+    \@litu@tmp\fi
 }
 
 \def\@litu@gobble#1{}
@@ -72,7 +71,7 @@
 \@@litu@load@consume@arg@ifcmd#3->{%
 \@litu@execute@command{#2}% is command
 }{ % is no command
-\PassOptionsToPackage{#3}{#1}\@litu@gobble%
+\PassOptionsToPackage{#3}{#1}\@litu@gobble
 }}
 
 \def\@litu@load@curargs#1{%
@@ -82,7 +81,7 @@
 
 \def\@lu@RequirePackage#1{%
 % allow others PassOptionsToPackage to be called by other hooks:
-\appto\@litu@hook@RequirePackages{\typeout{Loadlib \lu@Get{#1}{package} for '#1'}%
+\g@addto@macro\@litu@hook@RequirePackages{\typeout{LLib \lu@Get{#1}{package} (#1)}%
 \RequirePackage{\lu@Get{#1}{package}}}}
 
 \def\lu@LoadModule#1{%
@@ -101,8 +100,8 @@
   \expandafter\def\csname @lu@module@map@package@#1\endcsname{#3}%
   \expandafter\def\csname @lu@module@map@defaults@#1\endcsname{#4}%
   \expandafter\def\csname @lu@module@map@groups@#1\endcsname{all,#5}%
-  \protected@edef\@litu@tmp{\noexpand\DeclareStringOption[\@litu@none]{\lu@Get{#1}{name}}[\lu@Get{#1}{defaults}]}\@litu@tmp%
-  \appto\@litu@hook@PackageRequire{\lu@LoadModuleIfGiven{#1}}%
+  \protected@edef\@litu@tmp{\noexpand\DeclareStringOption[\@litu@none]{\lu@Get{#1}{name}}[\lu@Get{#1}{defaults}]}\@litu@tmp
+  \g@addto@macro\@litu@hook@PackageRequire{\lu@LoadModuleIfGiven{#1}}%
   \lu@AddToGroups{\lu@Get{#1}{groups}}{#1}%
 }
 
@@ -157,7 +156,7 @@
 \ProcessKeyvalOptions*
 
 % Load individuals first to allow options
-\@litu@hook@PackageRequire%
+\@litu@hook@PackageRequire
 % Now load the groups.
 \forlistloop{\lu@LoadGroup}{\@litu@hook@GroupRequire}%
 % Require the packages

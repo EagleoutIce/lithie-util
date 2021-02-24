@@ -31,7 +31,7 @@
 % iterators for handling and parsing author information.
 \def\lecture@@add@author#1{%
 \let\lecture@@tmp@old@author\lecture@register@author%
-\expandafter\ifx\expandafter!\lecture@@tmp@old@author!%
+\ifx\lecture@@tmp@old@author\@empty
 \xdef\lecture@register@author{#1}\else%
 \xdef\lecture@register@author{\lecture@@tmp@old@author,#1}\fi%
 }
@@ -50,12 +50,12 @@
 \def\lecture@@typeset@author#1{%
 \setcounter{lecture@counter@tmp@a}{0}% start with an offset
 \foreach \@tmp in {#1}%
-    {\expandafter\ifx\expandafter!\@tmp!\else%
+    {\ifx\@tmp\@empty\else%
         \addtocounter{lecture@counter@tmp@a}\@ne\fi}%
 \edef\lecture@author@totallength{\arabic{lecture@counter@tmp@a}}%
 \setcounter{lecture@counter@tmp@a}{0}% stored the length of the list
 \foreach \lecture@@tmp@curauthor in {#1} {%
-\expandafter\ifx\expandafter!\lecture@@tmp@curauthor!%empty => ignore
+\ifx\lecture@@tmp@curauthor\@empty
 \else\addtocounter{lecture@counter@tmp@a}\@ne%
     \ifnum\thelecture@counter@tmp@a>1%
     \ifnum\thelecture@counter@tmp@a=\lecture@author@totallength%
@@ -74,7 +74,7 @@
 \def\lecture@secondoftwo#1#2{#2}
 
 \def\lecture@r#1{\@nameuse{lecture@register@#1}}
-\def\lecture@@chkempty{\expandafter\ifx\expandafter!\@@lecture@tmp!\expandafter\lecture@firstoftwo\else\expandafter\lecture@secondoftwo\fi}
+\def\lecture@@chkempty{\ifx\@@lecture@tmp\@empty\expandafter\lecture@firstoftwo\else\expandafter\lecture@secondoftwo\fi}
 \def\iflecture@e#1{\protected@edef\@@lecture@tmp{#1}\lecture@@chkempty}
 \def\iflecture@er#1{\protected@edef\@@lecture@tmp{\lecture@r{#1}}\lecture@@chkempty}
 \def\lecture@rs#1{\@nameuse{lecture@register@short@#1}}

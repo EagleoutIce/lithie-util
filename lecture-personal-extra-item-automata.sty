@@ -25,9 +25,7 @@
   mark state/.style={thick},%
   % mark a state as the initial state
   initial/.style={},%
-  %
   % transitions
-  %
   % arrow to be used in transitions
   t/.tip={Kite},%
   % normal: transition=(
@@ -53,13 +51,13 @@
 }
 
 \newcommand*\lecture@personal@itemautomata@nostar[3][]{%
-    \bgroup%
-        \let\e\endsymbol%
-        \let\r\readpointer%
-        #2~\(\lecture@personal@to\)~%
-        #3%
-        \ifx\\#1\\\else~\hfill\textcolor{darkgray}{\mbox{#1}}\fi%
-    \egroup%
+  \bgroup
+      \let\e\endsymbol
+      \let\r\readpointer
+      #2~$\lecture@personal@to$~%
+      #3%
+      \ifx!#1!\else~\hfill\textcolor{darkgray}{\mbox{#1}}\fi
+  \egroup
 }
 
 \newcommand*{\automata}[2][]{\graph[math nodes,grow right=1.5cm,edges={-Kite},#1]{#2};}

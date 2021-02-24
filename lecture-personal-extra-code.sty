@@ -25,7 +25,7 @@ fileext=loc,listname={Alle Listings},name=Listing,placement=tbp,within=none,%
 % modifx code styles to match box
 
 \newlength\cftcodenumwidth
-\setlength\cftcodenumwidth{\libx@numwidth+\libx@numwidth@offset}
+\cftcodenumwidth=\dimexpr\libx@numwidth+\libx@numwidth@offset\relax
 
 \gdef\l@code#1#2{\@dottedtocline{1}{\cftcodenumwidth}{\cftcodenumwidth}{#1}{#2}}%
 
