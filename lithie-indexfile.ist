@@ -24,7 +24,7 @@ preamble "\\begin{theindex}%
   \\def\\hyperpage##1{\\g@addto@macro\\lecidx@currentpagebuff{##1}\\lecidx@@hp{##1}}%
 }%
 \\else\\let\\lecidx@@s\\relax \\let\\lecidx@@d\\relax\\fi
-\\newsavebox\\libidx@@sbox
+\\ifcsname libidx@@sbox\\endcsname\\else \\newsavebox\\libidx@@sbox\\fi
 \\def\\lecidx@@maysub{\\ifx\\lecidx@fs\\@empty,\\space\\else\\subsubitem\\lecidx@@d\\color{gray}\\footnotesize\\fi}%
 \\def\\lecidx@lb@encap#1{\\gdef\\lecidx@currentpagebuff{}\\sbox\\libidx@@sbox{#1}\\ifx\\lecidx@@cpp\\lecidx@currentpagebuff\\else\\textsuperscript{(#1)\\!}\\fi}
 "

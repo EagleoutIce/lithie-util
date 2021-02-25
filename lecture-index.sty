@@ -12,7 +12,7 @@
 \SetupKeyvalOptions{family=LECIDX, prefix=LECIDX@}
 \DeclareStringOption[true]{automatic}[false]
 
-\RequirePackage{imakeidx,letltxmacro,etoolbox,xstring,sanitize-umlaut}
+\RequirePackage{imakeidx,letltxmacro,etoolbox,xstring}
 \def\indexname{Stichwortverzeichnis}
 \edef\lecture@imkdx{\noexpand\makeindex[title=\indexname,columns=2,columnsep=0.75cm,noautomatic=\LECIDX@automatic]}
 \lecture@imkdx
@@ -20,7 +20,7 @@
 % hi index
 \def\hindex#1{\def\leci@index@h{#1}\index{#1}}
 % sub index
-\def\sindex#1{\index{\leci@index@h\lecidx@idxsub #1}}
+\def\sindex#1{\lecidx@index{\leci@index@h\lecidx@idxsub #1}}
 
 \def\setIndexLinker#1{\gdef\lecidx@@linker##1##2{#1}}
 \def\lecidx@idxactual{?}
@@ -30,20 +30,27 @@
 
 % sloppy for now, i don't have time :D
 \def\lecidx@sanitize#1{%
+{\def\%{:percent:}\def\&{:and:}\def\-{:-:}%
 \StrSubstitute{#1}{\lecidx@idxsub}{:sub:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{Ä}{:Ae:}[\lecidx@tmpl]%
 \StrSubstitute{\lecidx@tmpl}{ä}{:ae:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{Ö}{:Oe:}[\lecidx@tmpl]%
 \StrSubstitute{\lecidx@tmpl}{ö}{:oe:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{Ü}{:Ue:}[\lecidx@tmpl]%
 \StrSubstitute{\lecidx@tmpl}{ü}{:ue:}[\lecidx@tmpl]%
 \StrSubstitute{\lecidx@tmpl}{ß}{:ss:}[\lecidx@tmpl]%
-{\def\%{:percent:}\def\&{:and:}\protected@xdef\lecidx@tmpl{\lecidx@tmpl}}%
+\protected@xdef\lecidx@tmpl{\lecidx@tmpl}}%
 }
+
+\def\lecidxindex{\jobname}
+\def\lecidx@index#1{\index[\lecidxindex]{#1}}
 
 % link index
 \def\lindex{\@ifstar\lecidx@lindex\lecidx@@lindex}
 \robustify\lindex
 % only hook if outside float
 % \ifnum\@floatpenalty<0\else\phantomsection\fi
-\newcommand*\lecidx@lindex[3][]{\lecidx@sanitize{#1}\label{lecidx@\lecidx@tmpl @hi@#2@}\index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@tmpl @hi@#2@}{#3}}}
+\newcommand*\lecidx@lindex[3][]{\lecidx@sanitize{#1}\let\lecidx@root\lecidx@tmpl\lecidx@sanitize{#2}\label{lecidx@\lecidx@root @hi@\lecidx@tmpl @}\lecidx@index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@root @hi@\lecidx@tmpl @}{#3}}}
 
 \newcommand*\lecidx@@lindex[2][]{\lecidx@lindex[#1]{#2}{#2}}
 
@@ -51,7 +58,7 @@
 \def\rindex{\@ifstar\lecidx@rindex\lecidx@@rindex}
 \robustify\rindex
 
-\newcommand*\lecidx@rindex[3][]{\lecidx@sanitize{#1}\index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@tmpl @hi@#2@}{#3}}}
+\newcommand*\lecidx@rindex[3][]{\lecidx@sanitize{#1}\let\lecidx@root\lecidx@tmpl\lecidx@sanitize{#2}\lecidx@index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@root @hi@\lecidx@tmpl @}{#3}}}
 \newcommand*\lecidx@@rindex[2][]{\lecidx@rindex[#1]{#2}{#2}}
 
 % sub link index
@@ -62,9 +69,9 @@
 \def\lecidx@@slindex#1{\lindex[\leci@index@h]{#1}}
 
 % old for compat
-\DeclareRobustCommand{\kw}[1]{\textbf{#1}\index{#1}}
-\DeclareRobustCommand{\sw}[2][Gruppenname]{#2\index{#1\lecidx@idxsub #2}}
-\DeclareRobustCommand{\sr}[3][Gruppenname]{#3\index{#1\lecidx@idxsub #2\lecidx@idxsub #3}}
+\DeclareRobustCommand{\kw}[1]{\textbf{#1}\lecidx@index{#1}}
+\DeclareRobustCommand{\sw}[2][Gruppenname]{#2\lecidx@index{#1\lecidx@idxsub #2}}
+\DeclareRobustCommand{\sr}[3][Gruppenname]{#3\lecidx@index{#1\lecidx@idxsub #2\lecidx@idxsub #3}}
 
 % note for '.ist' (\\lecidx@@maysub):
 % This is a weird bugfix. To be honest, i do not know why it is required using ( and ) as index guards on different pages, the 1-hierarch fails to establish according to the item_12 rule and jumps to item_2 this guards item_2 with the setup-routine which has to be present only on an already established 2-hierarchy
