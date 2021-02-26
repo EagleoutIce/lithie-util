@@ -22,7 +22,7 @@
 \let\@litu@atl\listadd
 
 % #1 group id
-\def\lu@DefineGroup#1{%
+\def\lu@Definendgroup#1{%
     \@namedef{@litu@@group@#1}{}%
     \@litu@atl\@litu@all@groups{#1}%
     \DeclareVoidOption{#1}{\listadd\@litu@hook@GroupRequire{#1}}%
@@ -106,7 +106,7 @@
 }
 
 % define the groups
-\forcsvlist{\lu@DefineGroup}{all,util,color,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics,index}
+\forcsvlist{\lu@Definendgroup}{all,util,color,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics,index}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
 \lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,boxes}

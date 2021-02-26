@@ -75,8 +75,8 @@
   \def\bottomfraction{0}\setcounter{topnumber}{3}%2
   \setcounter{bottomnumber}{0}\setcounter{totalnumber}{3}%
   \newenvironment{ltabular}%
-    {\bgroup\small\@nameuse{xtabular}}%
-    {\@nameuse{endxtabular}\egroup}%
+    {\begingroup\small\@nameuse{xtabular}}%
+    {\@nameuse{endxtabular}\endgroup}%
   \setcounter{DefaultLines}{2}%
   % we color it
   \def\LettrineFontHook{\color{paletteA}}%

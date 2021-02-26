@@ -16,12 +16,12 @@ fileext=loc,listname={Alle Listings},name=Listing,placement=tbp,within=none,%
 ]{code}
 
 % patch to bridge for lithie boxe
-\def\listofcodes{\bgroup%
+\def\listofcodes{\begingroup%
 \def\contentsname{Alle Listings}% may?
 \libx@listof@heading{\contentsname}%
 \let\numberline\libx@list@numberformat% right align by boxes
 \libx@starttoc{loc}%
-\egroup}
+\endgroup}
 % modifx code styles to match box
 
 \newlength\cftcodenumwidth

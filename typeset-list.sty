@@ -16,9 +16,9 @@
     \foreach \@tmp[count=\@@c@tmp] in \@tmpl {\xdef\@c@tmp{\@@c@tmp}}%
 }
 
-\newcommand*{\TypesetList}[3][typesetVoid]{\bgroup
+\newcommand*{\TypesetList}[3][typesetVoid]{\begingroup
     \edef\@typeset@list@and{#3}\edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
-    \egroup
+    \endgroup
 }
 
 \newcommand*{\typesetList}[2][typesetVoid]{%

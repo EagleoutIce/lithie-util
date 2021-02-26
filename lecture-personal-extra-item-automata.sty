@@ -51,13 +51,13 @@
 }
 
 \newcommand*\lecture@personal@itemautomata@nostar[3][]{%
-  \bgroup
+  \begingroup
       \let\e\endsymbol
       \let\r\readpointer
       #2~$\lecture@personal@to$~%
       #3%
       \ifx!#1!\else~\hfill\textcolor{darkgray}{\mbox{#1}}\fi
-  \egroup
+  \endgroup
 }
 
 \newcommand*{\automata}[2][]{\graph[math nodes,grow right=1.5cm,edges={-Kite},#1]{#2};}

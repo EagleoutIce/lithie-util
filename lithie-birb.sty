@@ -13,7 +13,7 @@
 % place the bird
 % 1.5 line => 2.12132034 hyp
 \newcommand*\lithiebirb[1][\LithieFull]{%
-\bgroup%
+\begingroup%
 \edef\hyp{2.12132034}%
 \pgfmathsetmacro\hhyp{2.12132034/2}%
 \begin{scope}[overlay]% xshift=.74\paperwidth,yshift=-2.75cm,scale=1,
@@ -46,5 +46,5 @@
     \path[fill,shadeA] (start-lu) -- ++(-\hhyp,\hhyp) to[edge node={node[above=1.75pt,shadeA!90!black,font=\small,outer sep=0pt,inner sep=0pt,transform shape] {#1}}] ++(\hyp,0) -- cycle;
     \path[fill,shadeA!90!black] (start-lu) -- ++(0,\hhyp) -- ++(\hhyp,0) -- cycle;
 \end{scope}%
-\egroup}
+\endgroup}
 \endinput

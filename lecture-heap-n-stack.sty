@@ -165,7 +165,7 @@
 }
 
 % #1 => number on top
-\newenvironment{heap-n-stack}[1]{\bgroup%
+\newenvironment{heap-n-stack}[1]{\begingroup%
 \setcounter{lhns@heap}{0}\setcounter{lhns@stack}{0}%
 \edef\lhns@thisnumber{#1}%
 \lhns@renderstackfalse\lhns@renderheapfalse%
@@ -185,6 +185,6 @@
 \node[above=\lhns@innersep] at (stack-border.north) {\lhns@thisnumber};
 % other else case dropped as no heap or stack => no number
 \fi\fi
-\egroup}
+\endgroup}
 
 \endinput

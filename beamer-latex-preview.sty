@@ -48,14 +48,14 @@
 % #1 Name
 \def\ltxpreview#1{\tcbset{listing file=helper-\jobname-#1-slidelst}}
 
-\def\eblLoadLtx#1#2#3{\bgroup%
+\def\eblLoadLtx#1#2#3{\begingroup%
 \tcbset{listing file=helper-\jobname-#1-slidelst}% <-- Use a unique name
 \tcbinputlisting{
     lstpresenterstyle,listing outside comment,pdf comment,run pdflatex,
     lower separated=false,
     listing options={style=sol@SOPRA,style=LSTADVANCED,language=lLatex,morekeywords={[5]{\\Dieter,\\borange,\\bgreen,\\bred,\\bcolor,\\bteal}},morekeywords={[3]{episch}}},#3,
     sidebyside,sidebyside gap=6mm,raster columns=1,comment style={#2, width=.5\linewidth}
-}\egroup%
+}\endgroup%
 }
 
 \DeclareTCBListing{sclatex}{% preview latex code

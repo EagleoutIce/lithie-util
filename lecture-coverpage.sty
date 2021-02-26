@@ -100,7 +100,7 @@
 \lecturecp@coverpagestyle{plain}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
-\renewcommand{\maketitle}{\bgroup%
+\renewcommand{\maketitle}{\begingroup%
 \parindent=\z@%
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry%
@@ -120,7 +120,7 @@
 \fontsize{17pt}{17pt}\selectfont\sffamily\color{gray}\lecture@r{brief}%
 }\hfill\parbox[c]{.2\linewidth}{\lecture@emblem}%
 \end{titlepage}%
-\restoregeometry{}\clearpage\egroup}
+\restoregeometry{}\clearpage\endgroup}
 }
 
 % .########..##..........###....####.##....##..........######..##.....##....###....##.......##......
@@ -133,7 +133,7 @@
 \lecturecp@coverpagestyle{plain-small}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
-\renewcommand{\maketitle}{\bgroup%
+\renewcommand{\maketitle}{\begingroup%
 \parindent=\z@%
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry%
@@ -149,7 +149,7 @@
 \fontsize{15pt}{15pt}\selectfont\sffamily\color{gray}\lecture@r{brief}%
 }%
 \end{titlepage}%
-\restoregeometry{}\clearpage\egroup}%
+\restoregeometry{}\clearpage\endgroup}%
 }
 
 % .########....###....##....##..######..##....##
@@ -169,7 +169,7 @@
 
 \newsavebox{\lecturecp@title@widthbox}
 \newlength{\lecture@tmp@titlewidth}
-\renewcommand{\maketitle}{\bgroup%
+\renewcommand{\maketitle}{\begingroup%
 \parindent=\z@%
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 %
@@ -225,7 +225,7 @@
 \end{scope}%
 \end{tikzpicture}%
 \end{titlepage}%
-\restoregeometry{}\clearpage\egroup}
+\restoregeometry{}\clearpage\endgroup}
 }
 
 % .########....###....##....##..######..##....##..........######..##.....##....###....##.......##......
@@ -245,7 +245,7 @@
 
 \newsavebox{\lecturecp@title@widthbox}
 \newlength{\lecture@tmp@titlewidth}
-\renewcommand{\maketitle}{\bgroup%
+\renewcommand{\maketitle}{\begingroup%
 \parindent=\z@%
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 %
@@ -292,7 +292,7 @@
 \end{scope}%
 \end{tikzpicture}%
 \end{titlepage}%
-\restoregeometry{}\clearpage\egroup}
+\restoregeometry{}\clearpage\endgroup}
 }
 
 
@@ -324,13 +324,13 @@
 \lecturecp@coverpagestyle{simple}{%
 \def\lecture@coverpage@geometry{}
 
-\renewcommand{\maketitle}{\bgroup%
+\renewcommand{\maketitle}{\begingroup%
 \parindent=\z@%
 \begin{center}%
     \sffamily{\bfseries\Huge\lecture@r{title}}\medskip\leavevmode\\
     \normalsize\lecture@r{subtitle}\vspace*{3em}%
 \end{center}%
-\egroup}%
+\endgroup}%
 }
 
 % ..######...#######..##.....##.########.....###.....######..########.........##.....##.########..########..########.########.
