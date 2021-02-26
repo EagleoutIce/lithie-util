@@ -109,7 +109,7 @@ ______</rdf:Description>^^J%
 }
 
 \def\PDFPC@redefinition{%
-  \def\,{ }\def\;{ }%
+  \let\,\space \let\;\space
   \def\\{\string\n}\def\par{\string\n\string\n}%
   \def\textit##1{_##1_}\def\textbf##1{**##1**}%
 }

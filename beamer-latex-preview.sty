@@ -21,11 +21,11 @@
     enhanced jigsaw,
     listing only,
     breakable=true,
-    opacityback=0.9,
+    opacityback=.9,
     arc is angular=5mm,
-    fuzzy halo=0.1mm with MudWhite,
-    top=0.11mm,
-    bottom=0.11mm,
+    fuzzy halo=.1mm with MudWhite,
+    top=.11mm,
+    bottom=.11mm,
     colframe=Charcoal,
   }
 }
@@ -43,7 +43,7 @@
     framexleftmargin=3pt,
     rulecolor=\color{Charcoal},
     %frameround=tttt, %% mag backgroundcolor nicht
-    framerule=0.5pt,
+    framerule=.5pt,
 }
 % #1 Name
 \def\ltxpreview#1{\tcbset{listing file=helper-\jobname-#1-slidelst}}
@@ -54,7 +54,7 @@
     lstpresenterstyle,listing outside comment,pdf comment,run pdflatex,
     lower separated=false,
     listing options={style=sol@SOPRA,style=LSTADVANCED,language=lLatex,morekeywords={[5]{\\Dieter,\\borange,\\bgreen,\\bred,\\bcolor,\\bteal}},morekeywords={[3]{episch}}},#3,
-    sidebyside,sidebyside gap=6mm,raster columns=1,comment style={#2, width=0.5\linewidth}
+    sidebyside,sidebyside gap=6mm,raster columns=1,comment style={#2, width=.5\linewidth}
 }\egroup%
 }
 
@@ -62,10 +62,10 @@
     O{} % Listing Args
     O{} % TCB Args
 }{%
-  enhanced jigsaw,breakable,blankest,enlarge top by=3pt,enlarge bottom by=3pt,listing side text,righthand width=3.5cm,before lower={\vspace*{-0.75\baselineskip}},
+  enhanced jigsaw,breakable,blankest,enlarge top by=3pt,enlarge bottom by=3pt,listing side text,righthand width=3.5cm,before lower={\vspace*{-.75\baselineskip}},
   listing options={%
     style=sol@SOPRA,
-    language=lLatex,#1},#2, after={\\[-0.25\baselineskip]},
+    language=lLatex,#1},#2, after={\\[-.25\baselineskip]},
 }
 {}
 

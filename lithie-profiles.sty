@@ -30,9 +30,9 @@
 \def\lip@UseProfile#1{%
 \ifcsname lip@profile@#1\endcsname
     \csname lip@profile@#1\endcsname
-\else%
+\else
     \PackageError{lithie-profiles}{The Profile '#1' is unknown. Choose one of: \lip@allprofiles}%
-\fi%
+\fi
 }
 
 \providecommand*{\lithieprofile}{default}
