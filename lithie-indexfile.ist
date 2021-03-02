@@ -1,5 +1,6 @@
 % comment - in case of need :D
 heading_prefix "\n%% Header\n% guard tikz (would make preamble too long otherwise)
+  \\ifcsname needspace\\endcsname \\needspace{3\\baselineskip}\\fi
   \\ifcsname tikz\\endcsname
   \\def\\lecidx@head#1{\\tikz{\\node[text width=3cm,align=center] (hr) at (0,0) {\\textbf{#1}};\\draw[rounded corners=3pt,thick,line cap=round]([yshift=-.125cm]hr.north west)|-(hr.north east)--++(0,-.125cm);\\draw[rounded corners=2.5pt,thick,line cap=round] ([yshift=.125cm]hr.south west)|-(hr.south east)--++(0,.125cm);}}
   \\else\\let\\lecidx@head\\textbf\\fi\\medskip\\par\\color{black}{\\centering\\lecidx@head{"
