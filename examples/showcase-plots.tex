@@ -17,13 +17,15 @@
 \maketitle
 
 \begin{tikzpicture}
-    \begin{xbar}{sym={1,2},xy=10pt:25pt,plain,fancy}
+    \begin{xbar}{sym={1,2},dim=5cm:3.5cm,plain,fancy,d=0:15}
         \bar[tikzA]{(10,1) (15,2)}
     \end{xbar}
 \end{tikzpicture}
 
-\begin{ybar}[*]{sym={1,2},yx=10pt:25pt,plain,fancy}
+\begin{ybar}[*]{sym={1,2},yx=5pt:50pt,plain,fancy,t=3,lw}
     \bar[tikzA]{(1,10) (2,15)}
+    \bar[tikzB]{(1,5) (2,8)}
+    \legend{Bar A, Bar B}
 \end{ybar}
 
 \end{document}

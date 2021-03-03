@@ -11,10 +11,15 @@
 \newlength\libpp@barspace \libpp@barspace=1pt
 \newlength\libpp@barwidth \libpp@barwidth=11pt
 
+\newif\iflibpp@autotikz@
+
+\def\libpp@barsymtype{x}
+\def\libpp@barftype{y}
+
 \pgfplotsset{
     compat=1.16,%
     every axis/.append style={legend cell align={left}},%
-    dim/.style args={#1 and #2}{width=#1,height=#2},%
+    dim/.style args={#1:#2}{width=#1,height=#2},%
     plain legend/.style={%
         legend style={draw=none, inner sep=\z@, rounded corners=1.125pt}%
     },%
@@ -23,25 +28,28 @@
     },%
     plain ticks/.style={tick style={draw=none},xticklabels={,,},yticklabels={,,}},%
     plain/.style={plain legend, plain axis, plain ticks},%
-    xd/.style args={#1:#2}{xmin=#1,xmax=#2},
-    yd/.style args={#1:#2}{ymin=#1,ymax=#2},%
-    xd*/.style args={#1:#2:#3}{xmin=#1,xmax=#2,x=#3},
-    yd*/.style args={#1:#2:#3}{ymin=#1,ymax=#2,y=#3},%
-    xy/.style args={#1:#2}{x=#1,y=#2}, yx/.style args={#1:#2}{y=#1,x=#2},
+    xd/.style args={#1:#2}{xmin={#1},xmax={#2}},
+    yd/.style args={#1:#2}{ymin={#1},ymax={#2}},%
+    d/.style args={#1:#2}{\libpp@barftype d=#1:#2},%
+    d'/.style args={#1:#2}{\libpp@barsymtype d=#1:#2},%
+    xy/.style args={#1:#2}{x=#1,y=#2}, yx/.style args={#1:#2}{y={#1},x={#2}},
+    xt/.style={xtick distance={#1}}, yt/.style={ytick distance={#1}},
+    xyt/.style args={#1:#2}{xt={#1},yt={#2}},
+    t/.style={\libpp@barftype t={#1}}, t'/.style={\libpp@barsymtype t={#1}},
     sym/.style={symbolic \libpp@barsymtype\space coords={#1}, \libpp@barsymtype tick=data},%
-    bar plot/.style={enlargelimits={abs=1.25*\libpp@barwidth},bar width=#1},%
+    bar plot/.style={enlarge \libpp@barsymtype\space limits={auto,abs=1.25*\libpp@barwidth},bar width={#1}},%
     blockbar/.style={rounded corners=1pt,#1},%
     labels/.style args={#1:#2}{xlabel={#1},ylabel={#2}},%
     compat/show suggested version=false,%
-    fancy x/.style={xticklabel={\color{gray}\axisdefaultticklabel},yticklabel={\axisdefaultticklabel},xmajorgrids,extra x ticks=#1},%
+    fancy x/.style={xticklabel={\color{gray}\axisdefaultticklabel},yticklabel={\axisdefaultticklabel},xmajorgrids,extra x ticks={#1}},%
     fancy x/.default={},%
-    fancy y/.style={yticklabel={\color{gray}\axisdefaultticklabel},xticklabel={\axisdefaultticklabel},ymajorgrids,extra y ticks=#1},%
+    fancy y/.style={yticklabel={\color{gray}\axisdefaultticklabel},xticklabel={\axisdefaultticklabel},ymajorgrids,extra y ticks={#1}},%
     fancy y/.default={},%
     fancy/.style={fancy \libpp@barftype=#1},%
-    fancy/.default={}%
+    fancy/.default={},%
+    le/.style={legend pos={north east}}, lw/.style={legend pos={north west}},
 }
 
-\newif\iflibpp@autotikz@
 \pgfkeys{%
     /libpp@keys/.is family, /libpp@keys,%
     pre code/.store in=\libpp@box@PreCode, pre code={},%
@@ -49,9 +57,6 @@
     */.code={\libpp@autotikz@true\def\libpp@autotikz@{#1}},
     */.initial={}%
 }
-
-\def\libpp@barsymtype{x}
-\def\libpp@barftype{y}
 
 \newenvironment{ybar}[2][]{\begingroup%
     \def\libpp@barsymtype{x}%
