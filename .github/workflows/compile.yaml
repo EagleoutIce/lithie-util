@@ -23,12 +23,12 @@ jobs:
         echo "tx-default" | sltx docker
     - name: Compile the Documents
       run: |
-        sltx compile --root --profile "tx-default" "examples/showcase-shortcuts.tex" "examples/showcase-glossary.tex" "examples/showcase-bibliography.tex" "examples/showcase-profiles.tex" "examples/showcase-heap-n-stack.tex" "examples/showcase-resize.tex"
+        sltx compile --root --profile "tx-default" "examples/showcase-shortcuts.tex" "examples/showcase-glossary.tex" "examples/showcase-bibliography.tex" "examples/showcase-profiles.tex" "examples/showcase-heap-n-stack.tex" "examples/showcase-resize.tex" "examples/showcase-plots.tex"
     - name: Commit
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add -f "showcase-shortcuts.pdf" "showcase-glossary.pdf" "showcase-bibliography.pdf" "showcase-profiles.pdf" "showcase-heap-n-stack.pdf" "showcase-resize.pdf"
+        git add -f "showcase-shortcuts.pdf" "showcase-glossary.pdf" "showcase-bibliography.pdf" "showcase-profiles.pdf" "showcase-heap-n-stack.pdf" "showcase-resize.pdf" "examples/showcase-plots.tex"
         git commit -m "Newly compiled data"
     - name: Push changes
       uses: ad-m/github-push-action@master
