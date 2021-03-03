@@ -1,0 +1,15 @@
+%% lecture-needspace.sty
+%% --------------------------------------------------------------------------
+%% Autor: Florian Sihler, 03.03.2021
+%%
+%% A new approach on the needspace package
+
+\ProvidesPackage{lecture-needspace}[2021/03/03 v1.0 needspace]
+
+\def\lecture@needspace@newpage{\break}
+\def\requirespace#1{%
+\ifdim\dimexpr#1\relax>\dimexpr\pagegoal-\pagetotal\relax
+    \lecture@needspace@newpage
+\fi}
+
+\endinput

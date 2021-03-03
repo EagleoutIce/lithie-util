@@ -1,0 +1,14 @@
+\documentclass{article}
+
+\usepackage{lecture-needspace}
+\usepackage[showframe]{geometry}
+\usepackage{lipsum,pgffor}
+
+\flushbottom
+
+\begin{document}
+\foreach \i in {1,...,10} {
+    \requirespace{8\baselineskip}\lipsum[2]\par
+}
+
+\end{document}
