@@ -15,10 +15,10 @@ preamble "\\begin{theindex}%
 \\newif\\ifledx@rc@
 \\def\\ledx@@s{%
   \\def\\ledx@fs{Y}\\gdef\\ledx@@u{}\\gdef\\ledx@@b{}%
-  \\def\\hyperpage##1{\\g@addto@macro\\ledx@@u{##1}\\let\\ledx@@b\\ledx@@u\\ledx@h{##1}}%
+  \\def\\hyperpage##1{\\g@addto@macro\\ledx@@u{##1}\\global\\let\\ledx@@b\\ledx@@u\\ledx@h{##1}}%
 }%
 \\def\\ledx@@sl{%
-  \\def\\ledx@fs{Y}\\ledx@rc@true\\let\\ledx@@u\\ledx@@b
+  \\def\\ledx@fs{Y}\\ledx@rc@true\\global\\let\\ledx@@u\\ledx@@b
   \\def\\hyperpage##1{\\ifledx@rc@\\def\\ledx@@u{}\\ledx@rc@false\\fi\\g@addto@macro\\ledx@@u{##1}\\ledx@h{##1}}%
 }%
 \\def\\ledx@@d{%
