@@ -4,7 +4,13 @@
 %% Autor: Florian Sihler, 03.03.2021
 %% Plotstyles
 
-\ProvidesPackage{lecture-personal-plots}[2021/03/03 v1.0 my plotstyle :)]
+\ProvidesPackage{lecture-personal-extra-plots}[2021/03/03 v1.0 my plotstyle :)]
+
+
+\newif\iflibpp@tpalette@ \libpp@tpalette@true
+\DeclareOption{tpalette}{ \libpp@tpalette@true }
+\DeclareOption{notpalette}{ \libpp@tpalette@false }
+\ProcessOptions*
 
 \RequirePackage{tikz,pgfplots}
 
@@ -38,6 +44,9 @@
     t/.style={\libpp@barftype t={#1}}, t'/.style={\libpp@barsymtype t={#1}},
     sym/.style={symbolic \libpp@barsymtype\space coords={#1}, \libpp@barsymtype tick=data},%
     bar plot/.style={enlarge \libpp@barsymtype\space limits={auto,abs=1.25*\libpp@barwidth},bar width={#1}},%
+    ex/.style={enlarge x limits={#1}},
+    ey/.style={enlarge y limits={#1}},
+    e/.style={e\libpp@barsymtype={#1}},
     blockbar/.style={rounded corners=1pt,#1},%
     labels/.style args={#1:#2}{xlabel={#1},ylabel={#2}},%
     compat/show suggested version=false,%
@@ -48,6 +57,7 @@
     fancy/.style={fancy \libpp@barftype=#1},%
     fancy/.default={},%
     le/.style={legend pos={north east}}, lw/.style={legend pos={north west}},
+    libpp@default/.style={}%
 }
 
 \pgfkeys{%
@@ -58,24 +68,74 @@
     */.initial={}%
 }
 
-\newenvironment{ybar}[2][]{\begingroup%
-    \def\libpp@barsymtype{x}%
+\def\libpp@@A{tikzA}\def\libpp@@B{tikzB}
+\def\libpp@@C{tikzC}\def\libpp@@D{tikzD}
+
+\def\libpp@@cyclecolor{%
+\ifx\libpp@@c\libpp@@A \let\libpp@@c\libpp@@B\else
+\ifx\libpp@@c\libpp@@B \let\libpp@@c\libpp@@C\else
+\ifx\libpp@@c\libpp@@C \let\libpp@@c\libpp@@D\else
+\ifx\libpp@@c\libpp@@D \let\libpp@@c\libpp@@A\else
+\fi\fi\fi\fi
+}
+
+\def\libpp@@resetcolor{\def\libpp@@c{tikzA}}
+
+\iflibpp@tpalette@
+\let\libpp@cyclecolor\libpp@@cyclecolor
+\let\libpp@resetcolor\libpp@@resetcolor
+\libpp@@resetcolor
+\else
+\def\libpp@cyclecolor{}
+\def\libpp@resetcolor{}
+\fi
+
+\def\libpp@init#1{\pgfkeys{/libpp@keys,#1}\libpp@resetcolor}
+
+\long\def\libpp@newbar@env#1[#2:#3](#4)(#5){%
+    \newenvironment{#1}[2][#2]{\begingroup#4\libpp@box@PreCode}%
+        {\libpp@box@PostCode#5\endgroup}%
+    \newenvironment{#1*}[2][#3]{\begingroup#4\libpp@box@PreCode}%
+        {\libpp@box@PostCode#5\endgroup}%
+}
+
+
+\libpp@newbar@env{ybar}[:*]%
+    (\def\libpp@barsymtype{x}%
     \def\libpp@barftype{y}%
-    \pgfkeys{/libpp@keys,#1}%
+    \libpp@init{#1}%
     \iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
-    \axis[ybar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
-    \let\bar\libpp@bar\libpp@box@PreCode
-}{\libpp@box@PostCode\endaxis\iflibpp@autotikz@\endtikzpicture\fi\endgroup}
+    \axis[libpp@default,ybar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
+    \let\bar\libpp@bar)%
+    (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
 
-\newenvironment{xbar}[2][]{\begingroup%
-    \def\libpp@barsymtype{y}%
+  \libpp@newbar@env{xbar}[:*]%
+    (\def\libpp@barsymtype{y}%
     \def\libpp@barftype{x}%
-    \pgfkeys{/libpp@keys,#1}%
+    \libpp@init{#1}%
     \iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
-    \axis[xbar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
-    \let\bar\libpp@bar\libpp@box@PreCode
-}{\libpp@box@PostCode\endaxis\iflibpp@autotikz@\endtikzpicture\fi\endgroup}
+    \axis[libpp@default,xbar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
+    \let\bar\libpp@bar)%
+    (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
 
-\newcommand*\libpp@bar[2][]{\addplot[blockbar={#1}] coordinates {#2};}
+\def\libpp@bar{\@ifnextchar[\libpp@bar@opt\libpp@bar@noopt}
+\def\libpp@bar@opt[#1]#2{\addplot[blockbar={#1}] coordinates {#2};}
+\def\libpp@bar@@noopt#1{%
+    \libpp@cyclecolor%
+    \let\@tmpa\libpp@@c%
+    \protected@edef\@tmp{\noexpand\addplot[blockbar={\@tmpa}] coordinates {\unexpanded{#1}};}\@tmp%
+}
+
+\iflibpp@tpalette@
+\let\libpp@bar@noopt\libpp@bar@@noopt
+\else
+\def\libpp@bar@@noopt{\libpp@bar@opt[]}
+\fi
+
+
+\def\SetDefaultBars#1{\pgfplotsset{libpp@default/.style={#1}}}
+\def\AppendDefaultBars#1{\pgfplotsset{libpp@default/.append style={#1}}}
+
+\SetDefaultBars{ymin=0,plain,fancy}
 
 \endinput
