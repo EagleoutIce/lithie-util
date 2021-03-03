@@ -8,7 +8,7 @@
 
 \ProvidesPackage{lecture-personal-tikz}[2020/11/03 v1.0 Personal tikz]
 
-\RequirePackage{forest,pgfplots}
+\RequirePackage{forest}
 
 \def\fillfont{\def\mdseries@sf{medium}\sffamily}
 \colorlet{lec@descgray}{lightgray!32!white}
@@ -31,5 +31,4 @@
 }
 % mindmap and trees for overview
 \usetikzlibrary{graphs,arrows.meta,calc}
-\pgfplotsset{compat=1.16,every axis/.append style={legend cell align={left}}}
 \endinput

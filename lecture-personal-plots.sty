@@ -1,0 +1,76 @@
+%% lecture-cancel.sty
+%%
+%% --------------------------------------------------------------------------
+%% Autor: Florian Sihler, 03.03.2021
+%% Plotstyles
+
+\ProvidesPackage{lecture-personal-plots}[2021/03/03 v1.0 my plotstyle :)]
+
+\RequirePackage{tikz,pgfplots}
+
+\newlength\libpp@barspace \libpp@barspace=1pt
+\newlength\libpp@barwidth \libpp@barwidth=11pt
+
+\pgfplotsset{
+    compat=1.16,%
+    every axis/.append style={legend cell align={left}},%
+    dim/.style args={#1 and #2}{width=#1,height=#2},%
+    plain legend/.style={%
+        legend style={draw=none, inner sep=\z@, rounded corners=1.125pt}%
+    },%
+    plain axis/.style={%e
+        axis line style={draw=none},xtick pos=left,ytick pos=left%
+    },%
+    plain ticks/.style={tick style={draw=none},xticklabels={,,},yticklabels={,,}},%
+    plain/.style={plain legend, plain axis, plain ticks},%
+    xd/.style args={#1:#2}{xmin=#1,xmax=#2},
+    yd/.style args={#1:#2}{ymin=#1,ymax=#2},%
+    xd*/.style args={#1:#2:#3}{xmin=#1,xmax=#2,x=#3},
+    yd*/.style args={#1:#2:#3}{ymin=#1,ymax=#2,y=#3},%
+    xy/.style args={#1:#2}{x=#1,y=#2}, yx/.style args={#1:#2}{y=#1,x=#2},
+    sym/.style={symbolic \libpp@barsymtype\space coords={#1}, \libpp@barsymtype tick=data},%
+    bar plot/.style={enlargelimits={abs=1.25*\libpp@barwidth},bar width=#1},%
+    blockbar/.style={rounded corners=1pt,#1},%
+    labels/.style args={#1:#2}{xlabel={#1},ylabel={#2}},%
+    compat/show suggested version=false,%
+    fancy x/.style={xticklabel={\color{gray}\axisdefaultticklabel},yticklabel={\axisdefaultticklabel},xmajorgrids,extra x ticks=#1},%
+    fancy x/.default={},%
+    fancy y/.style={yticklabel={\color{gray}\axisdefaultticklabel},xticklabel={\axisdefaultticklabel},ymajorgrids,extra y ticks=#1},%
+    fancy y/.default={},%
+    fancy/.style={fancy \libpp@barftype=#1},%
+    fancy/.default={}%
+}
+
+\newif\iflibpp@autotikz@
+\pgfkeys{%
+    /libpp@keys/.is family, /libpp@keys,%
+    pre code/.store in=\libpp@box@PreCode, pre code={},%
+    post code/.store in=\libpp@box@PostCode, post code={},%
+    */.code={\libpp@autotikz@true\def\libpp@autotikz@{#1}},
+    */.initial={}%
+}
+
+\def\libpp@barsymtype{x}
+\def\libpp@barftype{y}
+
+\newenvironment{ybar}[2][]{\begingroup%
+    \def\libpp@barsymtype{x}%
+    \def\libpp@barftype{y}%
+    \pgfkeys{/libpp@keys,#1}%
+    \iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
+    \axis[ybar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
+    \let\bar\libpp@bar\libpp@box@PreCode
+}{\libpp@box@PostCode\endaxis\iflibpp@autotikz@\endtikzpicture\fi\endgroup}
+
+\newenvironment{xbar}[2][]{\begingroup%
+    \def\libpp@barsymtype{y}%
+    \def\libpp@barftype{x}%
+    \pgfkeys{/libpp@keys,#1}%
+    \iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
+    \axis[xbar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
+    \let\bar\libpp@bar\libpp@box@PreCode
+}{\libpp@box@PostCode\endaxis\iflibpp@autotikz@\endtikzpicture\fi\endgroup}
+
+\newcommand*\libpp@bar[2][]{\addplot[blockbar={#1}] coordinates {#2};}
+
+\endinput

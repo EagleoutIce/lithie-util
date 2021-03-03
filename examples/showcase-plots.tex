@@ -1,0 +1,29 @@
+\errorcontextlines 999999
+\documentclass{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[main=ngerman]{babel}
+
+\usepackage{lecture-personal-plots}
+\usepackage{tikz-palettes}
+
+\title{Showcase der Plots}
+
+\author{Florian Sihler (florian.sihler@uni-ulm.de)}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{tikzpicture}
+    \begin{xbar}{sym={1,2},xy=10pt:25pt,plain,fancy}
+        \bar[tikzA]{(10,1) (15,2)}
+    \end{xbar}
+\end{tikzpicture}
+
+\begin{ybar}[*]{sym={1,2},yx=10pt:25pt,plain,fancy}
+    \bar[tikzA]{(1,10) (2,15)}
+\end{ybar}
+
+\end{document}
