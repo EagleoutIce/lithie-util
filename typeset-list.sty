@@ -10,23 +10,23 @@
 
 \RequirePackage{pgffor}
 
-\newcommand*{\getListLength}[1]{%
+\newcommand*\getListLength[1]{%
     \def\@tmpl{#1}%
     \gdef\@c@tmp{0}%
     \foreach \@tmp[count=\@@c@tmp] in \@tmpl {\xdef\@c@tmp{\@@c@tmp}}%
 }
 
-\newcommand*{\TypesetList}[3][typesetVoid]{\begingroup
+\newcommand*\TypesetList[3][typesetVoid]{\begingroup
     \edef\@typeset@list@and{#3}\edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
     \endgroup
 }
 
-\newcommand*{\typesetList}[2][typesetVoid]{%
+\newcommand*\typesetList[2][typesetVoid]{%
     \edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp%
 }
 
 %% this will typeset a List in German List-Notation
-\newcommand*{\@@typesetList}[2][typesetVoid]{%
+\newcommand*\@@typesetList[2][typesetVoid]{%
     \def\@tmpl{#2}%
     \getListLength{#2}%
     \foreach \x[count=\i] in \@tmpl {%
