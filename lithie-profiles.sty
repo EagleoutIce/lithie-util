@@ -16,11 +16,11 @@
 \ifcsname lip@profile@#1\endcsname
     \PackageWarning{lithie-profiles}{Profile '#1' already exists. Appending.}%
     \lip@AppendToProfile{#1}{#2}%
-\else%
+\else
 \expandafter\def\csname lip@profile@#1\endcsname{}%
 \xdef\lip@allprofiles{\@ifundefined{lip@allprofiles}{}{\lip@allprofiles,}#1}%
 \lip@AppendToProfile{#1}{#2}%
-\fi%
+\fi
 }
 
 \def\lip@AppendToProfile#1#2{%
