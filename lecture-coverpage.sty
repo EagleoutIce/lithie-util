@@ -17,8 +17,7 @@
 
 \def\lecturecp@emblemcolor{gray}
 \def\lecturecp@emblemcolor@symbol{gray}
-% Emblem
-\def\lecture@emblem{}
+\def\lecture@emblem{} % Emblem
 
  % #1: university #2 Text, #3 Symbol centered
 \newcommand*\emblem[3][ulm university]{\def\@@university@name{#1}%
@@ -31,8 +30,6 @@
 \def\@@university@name{ulm university}
 
 % The code is based on the emblem generation algorithm of lilly
-
-%% Upper Text %% Symbol %% WHITE Color %% BACK Color %% Tikz %% Size %% FONTSIZE UPPER
 \def\lecture@generate@emblem#1#2#3#4#5#6#7#8#9{%
 % #1 Upper Text [Mathematik,...]
 % #2 Symbol to be displayed [$\pi$], can be theoretically everything.
@@ -88,7 +85,7 @@
 \def\selectcoverpage#1{\gdef\lecturecp@activecoverpage{#1}}
 \selectcoverpage{}
 
-\AtEndPreamble{\expandafter\ifx\expandafter!\lecturecp@activecoverpage!\else\@nameuse{lecturecp@style@\lecturecp@activecoverpage @}\fi}
+\AtEndPreamble{\ifx\lecturecp@activecoverpage\@empty\else\@nameuse{lecturecp@style@\lecturecp@activecoverpage @}\fi}
 
 % .########..##..........###....####.##....##
 % .##.....##.##.........##.##....##..###...##
@@ -100,10 +97,10 @@
 \lecturecp@coverpagestyle{plain}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
-\renewcommand{\maketitle}{\begingroup%
-\parindent=\z@%
+\renewcommand{\maketitle}{\begingroup
+\parindent=\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
-\lecture@coverpage@geometry%
+\lecture@coverpage@geometry
 \begin{titlepage}%
 \begin{center}
     \hyphenpenalty=10000 \exhyphenpenalty=10000 %
@@ -112,7 +109,7 @@
 \end{center}
 \leavevmode\\%
 \vfill% set the titleimage
-\parbox[c][.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
+\parbox[c][.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill
     \lecture@r{titleimage}%
 \vfill\hbox{}}\leavevmode\\
 \vfill%
@@ -133,18 +130,18 @@
 \lecturecp@coverpagestyle{plain-small}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
-\renewcommand{\maketitle}{\begingroup%
-\parindent=\z@%
+\renewcommand{\maketitle}{\begingroup
+\parindent=\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
-\lecture@coverpage@geometry%
+\lecture@coverpage@geometry
 \begin{titlepage}%
 \parbox{.99\linewidth}{\raggedright\fontsize{39pt}{39pt}\selectfont\sffamily\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}\leavevmode\bigskip\\*}\par
 \parbox{.99\linewidth}{\fontsize{15pt}{15pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\*%
 \vfill% set the titleimage
-\parbox[c][.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill%
+\parbox[c][.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill
     \lecture@r{titleimage}%
 \vfill\hbox{}}\leavevmode\\*
-\vfill%
+\vfill
 \parbox[c]{\linewidth}{%
 \fontsize{15pt}{15pt}\selectfont\sffamily\color{gray}\lecture@r{brief}%
 }%
@@ -165,15 +162,14 @@
 \def\lecturecp@emblemcolor{white}
 \def\lecturecp@emblemcolor@symbol{paletteA}
 \def\lecturecp@height{3}
-\def\lecturecp@leftwidth{1.5cm}%
+\def\lecturecp@leftwidth{1.5cm}
 
 \newsavebox{\lecturecp@title@widthbox}
 \newlength{\lecture@tmp@titlewidth}
-\renewcommand{\maketitle}{\begingroup%
-\parindent=\z@%
+\renewcommand{\maketitle}{\begingroup\parindent=\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 %
-\lecture@coverpage@geometry%
+\lecture@coverpage@geometry
 %
 \begin{titlepage}%
 % upper fancies
@@ -185,9 +181,9 @@
 \end{tikzpicture}\\*[.1\paperheight]%
 % title:
 \hspace*{\lecturecp@leftwidth}\parbox{.925\linewidth}{%
-    \raggedright\fontsize{39pt}{39pt}\selectfont\sffamily%
+    \raggedright\fontsize{39pt}{39pt}\selectfont\sffamily
     \savebox{\lecturecp@title@widthbox}{\pbox{\linewidth}{\raggedright\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}~~\null}}%
-    \usebox{\lecturecp@title@widthbox}\strut\medskip%
+    \usebox{\lecturecp@title@widthbox}\strut\medskip
     \global\lecture@tmp@titlewidth=\wd\lecturecp@title@widthbox}%
     \leavevmode\\*[.125cm]%
     \paletteA{\rule{\lecture@eff@titlewidth+\lecturecp@leftwidth}{1.33pt}}%
@@ -199,7 +195,7 @@
     \lecture@r{titleimage}%
 \vfill\hbox{}}\leavevmode\\%
 % At last we place the bannerblock%
-\vfill%
+\vfill
 \begin{tikzpicture}[line join=round,rounded corners=.25pt]%
 \path[draw,semithick,\lecturecp@emblemcolor@symbol]
     (0,\lecturecp@height+.15) -- ++(.6\paperwidth-.175,0)
@@ -219,7 +215,7 @@
     \node[right,text width=.6\paperwidth-\lecturecp@leftwidth] at(\lecturecp@leftwidth,\lecturecp@height/2)
         {\parbox[t]{\linewidth}{%
             \fontsize{15pt}{15pt}\selectfont\sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
-            \par%
+            \par
         }};
     \node[align=left,right=\z@,outer sep=\z@,font=\normalsize\sffamily] at(.9*\paperwidth,\lecturecp@height/2) {\Lithie\smallskip\\\resizebox{\widthof{\Lithie}}{!}{\textsf{Ver. \lithie@version}}};%
 \end{scope}%
@@ -241,15 +237,15 @@
 \def\lecturecp@emblemcolor{white}
 \def\lecturecp@emblemcolor@symbol{paletteA}
 \def\lecturecp@height{2}
-\def\lecturecp@leftwidth{1cm}%
+\def\lecturecp@leftwidth{1cm}
 
 \newsavebox{\lecturecp@title@widthbox}
 \newlength{\lecture@tmp@titlewidth}
-\renewcommand{\maketitle}{\begingroup%
-\parindent=\z@%
+\renewcommand{\maketitle}{\begingroup
+\parindent=\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 %
-\lecture@coverpage@geometry%
+\lecture@coverpage@geometry
 %
 \begin{titlepage}%
 % upper fancies
@@ -324,8 +320,8 @@
 \lecturecp@coverpagestyle{simple}{%
 \def\lecture@coverpage@geometry{}
 
-\renewcommand{\maketitle}{\begingroup%
-\parindent=\z@%
+\renewcommand{\maketitle}{\begingroup
+\parindent=\z@
 \begin{center}%
     \sffamily{\bfseries\Huge\lecture@r{title}}\medskip\leavevmode\\
     \normalsize\lecture@r{subtitle}\vspace*{3em}%

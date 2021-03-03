@@ -7,7 +7,6 @@
 %% Float modifications i use in my scripts
 
 \ProvidesPackage{lecture-personal}[2020/11/03 v1.0 Personal collection]
-
 \RequirePackage{kvoptions,etoolbox}
 \SetupKeyvalOptions{family=LPM,prefix=LPM@}
 
@@ -17,9 +16,9 @@
 \DeclareStringOption{command}
 \DeclareStringOption[\@lecture@personal@noextra]{extras}[\@lecture@personal@noextra]
 
-\ProcessKeyvalOptions*\relax%
+\ProcessKeyvalOptions*%
 
-\RequirePackage{lecture-personal-float,lecture-personal-general,lecture-personal-tikz,lecture-personal-glossary,lecture-personal-tabular,lecture-personal-resize}
+\RequirePackage{lecture-personal-float,lecture-personal-general,lecture-personal-tikz,lecture-personal-glossary,lecture-personal-tabular,lecture-personal-resize,lecture-personal-plots}
 \RequirePackage[imgprefix=\LPM@imgprefix,command=\LPM@command]{lecture-personal-profiles}
 
 % if supertabular is loaded, they would conflict :)))

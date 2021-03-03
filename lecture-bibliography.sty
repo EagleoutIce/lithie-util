@@ -6,7 +6,6 @@
 %%
 %% Basically a styling for the bibliography setting i like,
 %% maybe more styles will be added in the future
-
 \ProvidesPackage{lecture-bibliography}[2020/09/22 v1.0 Bibliography Styling]
 
 \RequirePackage{kvoptions}
@@ -20,9 +19,7 @@
 
 \RequirePackage{csquotes}
 
-\ifLBI@backref
-\PassOptionsToPackage{backref=true}{biblatex}
-\fi
+\ifLBI@backref \PassOptionsToPackage{backref=true}{biblatex} \fi
 
 \ifLBI@biber
 \RequirePackage[backend=biber,style=\LBI@style]{biblatex}

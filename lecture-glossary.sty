@@ -46,7 +46,7 @@
     \quad\textit{\iflglos@thispage@issingle@\lglos@spage\else\lglos@ppage\fi:~#1}%
 }
 \def\lglos@printpages#1{%
-\let\delimN\lglos@delimN\let\delimR\lglos@delimR%
+\let\delimN\lglos@delimN\let\delimR\lglos@delimR
 % think it is single (like me; :cry:)
 \lglos@thispage@issingle@true\@lglos@hide@in@da@void{#1}%
 \@lglos@printpages{#1}}
@@ -67,10 +67,10 @@
 
 \newglossarystyle{lecture@glossary}{%
 \setglossarystyle{tree}%
-\renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse%
+\renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse
     \lglos@headingstyle{\glsgetgrouptitle{##1}}%
-    \iflglos@setup@enumitem@%
-    \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc%
+    \iflglos@setup@enumitem@
+    \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc
     \else% no enumitem
     \begin{description}\fi}%
 \renewenvironment{theglossary}{%
@@ -88,8 +88,8 @@
 \setglossarystyle{tree}%
 \renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse%
     \lglos@headingstyle{\glsgetgrouptitle{##1}}%
-    \iflglos@setup@enumitem@%
-    \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc%
+    \iflglos@setup@enumitem@
+    \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc
     \else% no enumitem
     \begin{description}\fi}%
 \renewenvironment{theglossary}{%
@@ -100,7 +100,7 @@
     \hangindent\z@\relax \parindent\z@\relax
     \item[\glsentryitem{##1}\glstreenamefmt{\glstarget{##1}{\glossentryname{##1}}}]%
     \ifglshassymbol{##1}{\space(\glossentrysymbol{##1})}{}%
-    \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\par%
+    \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\par
 }%
 }
 \iflglos@setup@short@%

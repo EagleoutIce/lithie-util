@@ -13,14 +13,14 @@
 
 \DeclareStringOption{imgprefix}
 \DeclareStringOption{command}
-\ProcessKeyvalOptions*\relax%
+\ProcessKeyvalOptions*
 
 \RequirePackage{lettrine}
-\setcounter{DefaultLines}{3}%
+\setcounter{DefaultLines}{3}
 \LettrineOnGridfalse
 \LettrineRealHeighttrue
 \DefaultSlope=\z@
-\def\LettrineTextFont{}%
+\def\LettrineTextFont{}
 
 % #1 name #2 prefix #3 print #4 default scale #5 ex args
 \def\lecture@profiles@MakeImageCommands#1#2#3#4#5{%
@@ -40,7 +40,7 @@
     {\@nameuse{endtabular}}%
   \RequirePackage{Romantik}% Romantik for cfr initials?
   \DefaultFindent=5.15pt%
-  \DefaultNindent=0.489pt% compensate for offsets
+  \DefaultNindent=.489pt% compensate for offsets
   \def\LettrineFontHook{\Romantik}%
   \AtBeginDocument{%
     \hypersetup{pdftitle={\lecture@r{title} (Druckversion)}}%
@@ -59,19 +59,19 @@
   % we color it
   \def\LettrineFontHook{\color{paletteA}}%
   \DefaultFindent=1.85pt%
-  \DefaultNindent=0.25em%
-  \def\DefaultLoversize{0.05}%
+  \DefaultNindent=.25em%
+  \def\DefaultLoversize{.05}%
   \AtBeginDocument{%
     \hypersetup{pdftitle={\lecture@r{title} (Digitalversion)}}%
   }%
 }
 
 \RegisterProfile{mobile}{%
-  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{0.925}{height=0.8\noexpand\textheight,keepaspectratio}}\@mkcommands
+  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{.925}{height=.8\noexpand\textheight,keepaspectratio}}\@mkcommands
   \DisableMulticolHint%\EnableMulticolHint%
   \scoltrue\makeatletter
   \def\fps@figure{tbp}\def\fps@table{tbp}%
-  \def\floatpagefraction{0.5}\def\topfraction{0.7}%
+  \def\floatpagefraction{.5}\def\topfraction{.7}%
   \def\bottomfraction{0}\setcounter{topnumber}{3}%2
   \setcounter{bottomnumber}{0}\setcounter{totalnumber}{3}%
   \newenvironment{ltabular}%
@@ -81,7 +81,7 @@
   % we color it
   \def\LettrineFontHook{\color{paletteA}}%
   \DefaultFindent=1.85pt%
-  \DefaultNindent=0.25em%
+  \DefaultNindent=.25em%
   \AtBeginDocument{%
     \hypersetup{pdftitle={\lecture@r{title} (Mobilversion)}}%
   }%
