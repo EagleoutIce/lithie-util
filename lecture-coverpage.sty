@@ -310,6 +310,24 @@
 \vspace*{6.25em}\leavevmode\par%
 }]{}}}
 
+% ..######..########..........##.....##....###....##.......########
+% .##....##.##.....##.........##.....##...##.##...##.......##......
+% .##.......##.....##.........##.....##..##...##..##.......##......
+% ..######..########..#######.#########.##.....##.##.......######..
+% .......##.##................##.....##.#########.##.......##......
+% .##....##.##................##.....##.##.....##.##.......##......
+% ..######..##................##.....##.##.....##.########.##......
+\lecturecp@coverpagestyle{sp-half}{%
+\def\lecture@coverpage@geometry{}%
+\renewcommand{\maketitle}{\begingroup%
+\ifcsname microtypesetup\endcsname\microtypesetup{protrusion=false}\fi
+\parindent=\z@ \parskip=\z@\par%
+\thispagestyle{plain}%
+\parbox{\linewidth}{\sffamily\fontsize{27}{27}\raggedleft\sbox0{\textbf{\paletteA{\lecture@r{title}}}}\usebox0\\*
+\large\hfill\parbox[t]{\wd0}{\color{gray}\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*\normalsize\color{lightgray}\nohyper{\typesetAuthors},~\lecture@r{subject}\\*}\color{gray}\lecture@r{brief}}%
+\vspace*{2.25em}\leavevmode\par}
+\endgroup}}
+
 % ..######..####.##.....##.########..##.......########
 % .##....##..##..###...###.##.....##.##.......##......
 % .##........##..####.####.##.....##.##.......##......

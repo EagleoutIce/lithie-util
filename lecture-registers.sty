@@ -30,10 +30,10 @@
 
 % iterators for handling and parsing author information.
 \def\lecture@@add@author#1{%
-\let\lecture@@tmp@old@author\lecture@register@author%
+\let\lecture@@tmp@old@author\lecture@register@author
 \ifx\lecture@@tmp@old@author\@empty
-\xdef\lecture@register@author{#1}\else%
-\xdef\lecture@register@author{\lecture@@tmp@old@author,#1}\fi%
+\xdef\lecture@register@author{#1}\else
+\xdef\lecture@register@author{\lecture@@tmp@old@author,#1}\fi
 }
 \let\addAuthor\lecture@@add@author
 
@@ -56,11 +56,11 @@
 \setcounter{lecture@counter@tmp@a}{0}% stored the length of the list
 \foreach \lecture@@tmp@curauthor in {#1} {%
 \ifx\lecture@@tmp@curauthor\@empty
-\else\addtocounter{lecture@counter@tmp@a}\@ne%
+\else\addtocounter{lecture@counter@tmp@a}\@ne
     \ifnum\thelecture@counter@tmp@a>1%
-    \ifnum\thelecture@counter@tmp@a=\lecture@author@totallength%
+    \ifnum\thelecture@counter@tmp@a=\lecture@author@totallength
         ~und \else,\space\fi\fi
-    \expandafter\lecture@@parse@author\lecture@@tmp@curauthor{} (??)??\@nil%
+    \expandafter\lecture@@parse@author\lecture@@tmp@curauthor{} (??)??\@nil
 \fi%
 }%
 }
