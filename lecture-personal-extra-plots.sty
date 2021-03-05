@@ -32,7 +32,8 @@
     plain axis/.style={%e
         axis line style={draw=none},xtick pos=left,ytick pos=left%
     },%
-    plain ticks/.style={tick style={draw=none},xticklabels={,,},yticklabels={,,}},%
+    no x/.style={xticklabels={,,}},no y/.style={yticklabels={,,}},%
+    plain ticks/.style={tick style={draw=none},no x,no y},%
     plain/.style={plain legend, plain axis, plain ticks},%
     xd/.style args={#1:#2}{xmin={#1},xmax={#2}},
     yd/.style args={#1:#2}{ymin={#1},ymax={#2}},%
@@ -49,6 +50,7 @@
     e/.style={e\libpp@barsymtype={#1}},
     blockbar/.style={rounded corners=1pt,#1},%
     labels/.style args={#1:#2}{xlabel={#1},ylabel={#2}},%
+    xl/.style={xlabel={#1}},yl/.style={ylabel={#1}},%
     compat/show suggested version=false,%
     fancy x/.style={xticklabel={\color{gray}\axisdefaultticklabel},yticklabel={\axisdefaultticklabel},xmajorgrids,extra x ticks={#1}},%
     fancy x/.default={},%
@@ -57,7 +59,9 @@
     fancy/.style={fancy \libpp@barftype=#1},%
     fancy/.default={},%
     le/.style={legend pos={north east}}, lw/.style={legend pos={north west}},
-    libpp@default/.style={}%
+    libpp@default/.style={},%
+    libpp@default@bars/.style={},%
+    libpp@default@plots/.style={}%
 }
 
 \pgfkeys{%
@@ -105,17 +109,27 @@
     \def\libpp@barftype{y}%
     \libpp@init{#1}%
     \iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
-    \axis[libpp@default,ybar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
+    \axis[libpp@default,libpp@default@bars,ybar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
     \let\bar\libpp@bar)%
     (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
 
-  \libpp@newbar@env{xbar}[:*]%
+\libpp@newbar@env{xbar}[:*]%
     (\def\libpp@barsymtype{y}%
     \def\libpp@barftype{x}%
     \libpp@init{#1}%
     \iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
-    \axis[libpp@default,xbar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
+    \axis[libpp@default,libpp@default@bars,xbar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
     \let\bar\libpp@bar)%
+    (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
+
+
+\libpp@newbar@env{plot}[:*]%
+    (\def\libpp@barsymtype{x}%
+    \def\libpp@barftype{y}%
+    \libpp@init{#1}%
+    \iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
+    \axis[libpp@default,libpp@default@plots,#2]%
+    )%
     (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
 
 \def\libpp@bar{\@ifnextchar[\libpp@bar@opt\libpp@bar@noopt}
@@ -132,10 +146,13 @@
 \def\libpp@bar@@noopt{\libpp@bar@opt[]}
 \fi
 
+\def\SetDefaultPlots#1{\pgfplotsset{libpp@default@plots/.style={#1}}}
+\def\AppendDefaultPlots#1{\pgfplotsset{libpp@default@plots/.append style={#1}}}
 
-\def\SetDefaultBars#1{\pgfplotsset{libpp@default/.style={#1}}}
-\def\AppendDefaultBars#1{\pgfplotsset{libpp@default/.append style={#1}}}
+\def\SetDefaultBars#1{\pgfplotsset{libpp@default@bars/.style={#1}}}
+\def\AppendDefaultBars#1{\pgfplotsset{libpp@default@bars/.append style={#1}}}
 
 \SetDefaultBars{plain,fancy}
+\SetDefaultPlots{plain,fancy}
 
 \endinput
