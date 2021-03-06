@@ -117,7 +117,7 @@
 % }
 
 \def\lhns@render@heap{%
-    \lhns@renderheaptrue%
+    \lhns@renderheaptrue
     % render root element:
     \ifnum\value{lhns@heap}>0 % at least one element => draw
     \pgfmathsetmacro\lhns@elemtextwidth{\lhns@elemwidth-\lhns@innersep}%
@@ -165,18 +165,18 @@
 }
 
 % #1 => number on top
-\newenvironment{heap-n-stack}[1]{\begingroup%
+\newenvironment{heap-n-stack}[1]{\begingroup
 \setcounter{lhns@heap}{0}\setcounter{lhns@stack}{0}%
 \edef\lhns@thisnumber{#1}%
-\lhns@renderstackfalse\lhns@renderheapfalse%
-\let\stack\lhns@stack@element%
-\let\istack\lhns@stack@element@imp%
-\let\heap\lhns@heap@element%
-\let\iheap\lhns@heap@element@imp%
-\let\renderheap\lhns@render@heap%
-\let\renderstack\lhns@render@stack%
+\lhns@renderstackfalse\lhns@renderheapfalse
+\let\stack\lhns@stack@element
+\let\istack\lhns@stack@element@imp
+\let\heap\lhns@heap@element
+\let\iheap\lhns@heap@element@imp
+\let\renderheap\lhns@render@heap
+\let\renderstack\lhns@render@stack
 }{%
-\iflhns@renderheap\iflhns@renderstack%
+\iflhns@renderheap\iflhns@renderstack
     % both present
     \path(stack-border.north west) -- (heap-border.north east) node[midway,above=\lhns@innersep] {\lhns@thisnumber};
 \else% only heap
@@ -186,5 +186,4 @@
 % other else case dropped as no heap or stack => no number
 \fi\fi
 \endgroup}
-
 \endinput

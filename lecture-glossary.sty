@@ -6,7 +6,6 @@
 %%
 %% Basically a styling for the glossary setting i like,
 %% maybe more styles will be added in the future
-
 \ProvidesPackage{lecture-glossary}[2020/09/22 v1.0 Glossary Styling]
 
 % enumitem support
@@ -18,7 +17,7 @@
 \DeclareOption{short}{\lglos@setup@short@true}
 \DeclareOption{long}{\lglos@setup@short@false}
 
-\ProcessOptions*%
+\ProcessOptions*
 
 \RequirePackage[acronym,nopostdot,numberedsection=nameref,section,noglossaryindex
 ,translate=babel]{glossaries-accsupp}% style=super
@@ -81,16 +80,15 @@
     \hangindent\z@\relax \parindent\z@\relax
     \item[\glsentryitem{##1}\glstreenamefmt{\glstarget{##1}{\glossentryname{##1}}}]%
     \ifglshassymbol{##1}{\space(\glossentrysymbol{##1})}{}%
-    \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\lglos@printpages{##2}\par%
+    \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\lglos@printpages{##2}\par
 }%
 }
 \newglossarystyle{lecture@glossary@short}{%
 \setglossarystyle{tree}%
-\renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse%
+\renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse
     \lglos@headingstyle{\glsgetgrouptitle{##1}}%
     \iflglos@setup@enumitem@
-    \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc
-    \else% no enumitem
+    \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc\else% no enumitem
     \begin{description}\fi}%
 \renewenvironment{theglossary}{%
     \parindent=\z@ \parskip=\z@ plus .3pt%
@@ -103,7 +101,7 @@
     \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\par
 }%
 }
-\iflglos@setup@short@%
+\iflglos@setup@short@
 \setglossarystyle{lecture@glossary@short}%
 \else\setglossarystyle{lecture@glossary}\fi
 
@@ -116,5 +114,10 @@
 \def\glspllong#1{{\glsreset{#1}\glspl{#1}}}
 \def\glsshort#1{{\glsunset{#1}\gls{#1}}}
 \def\glsplshort#1{{\glsunset{#1}\glspl{#1}}}
+
+\def\Glslong#1{{\glsreset{#1}\Gls{#1}}}
+\def\Glspllong#1{{\glsreset{#1}\Glspl{#1}}}
+\def\Glsshort#1{{\glsunset{#1}\Gls{#1}}}
+\def\Glsplshort#1{{\glsunset{#1}\Glspl{#1}}}
 
 \endinput

@@ -119,7 +119,7 @@
     % Calculate the radius of the arc ends.
     %
     \pgfmathcosec@{\halfarcangle}%
-    \pgf@ya=\pgfmathresult\pgf@y%
+    \pgf@ya=\pgfmathresult\pgf@y
     \edef\yradius{\the\pgf@ya}%
     \pgfmathmultiply@{\pgfkeysvalueof{/pgf/wstate shape arc width}}{\pgfkeysvalueof{/pgf/wstate shape arc factor}}%
     \lecture@personal@tikz@a=\pgfmathresult pt%
@@ -130,8 +130,8 @@
     % Arc width = r - r*cos(a/2).
     %
     \pgfmathcos@{\halfarcangle}%
-    \pgf@xa=\lecture@personal@tikz@a%
-    \advance\pgf@xa by-\pgfmathresult\lecture@personal@tikz@a%
+    \pgf@xa=\lecture@personal@tikz@a
+    \advance\pgf@xa by-\pgfmathresult\lecture@personal@tikz@a
     %
     % When the node contents are pushed inside a convex arc,
     % the resulting chord has a height r - r*cos(asin(0.5*h/r)).

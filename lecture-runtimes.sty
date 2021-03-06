@@ -16,7 +16,7 @@
     The 'sopra-listings'-package wasn't loaded.%
     Please load it before this package as it is necessary %
     for this package.}%
-  \expandafter\endinput%
+  \expandafter\endinput
 }
 
 \lstdefinestyle{lecture@BashOutput}{%
@@ -56,9 +56,9 @@
 \def\rbashcurrentinject{}
 \def\lecture@runtimes@getBashFileExecutionOutput#1{%
 \lecture@runtimes@ExecuteBash{\jobname.run.out}{#1}% safest way :D
-\edef\@exectmp{%
+\protected@edef\@exectmp{%
   \noexpand\lstinputlisting[style=lecture@BashOutput,language=lVoid,\rbashcurrentinject]{\jobname.run.out}%
-}\@exectmp{}%
+}\@exectmp
 \lecture@runtimes@Execute{ rm \jobname.run.out }%
 }
 
@@ -67,7 +67,7 @@
 }
 
 \def\lecture@runtimes@Execute#1{\immediate\write18{#1}}
-\ifshellescape\else%
+\ifshellescape\else
 \def\lecture@runtimes@error{\textbf{Achtung: Shell escape/write-18 ist nicht aktiv! Kann nichts anzeigen!}}%
 % Definiere die Befehle mit einer entsprechenden Fehlermeldung
 % overwrite 'lecture@runtimes@getBashFileExecutionOutput':
@@ -76,5 +76,5 @@
 \def\lecture@runtimes@Execute#1{\lecture@runtimes@error}%
 \fi
 
-\let\rExecute\lecture@runtimes@Execute%
+\let\rExecute\lecture@runtimes@Execute
 \endinput

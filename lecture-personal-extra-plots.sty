@@ -135,9 +135,9 @@
 \def\libpp@bar{\@ifnextchar[\libpp@bar@opt\libpp@bar@noopt}
 \def\libpp@bar@opt[#1]#2{\addplot[blockbar={#1}] coordinates {#2};}
 \def\libpp@bar@@noopt#1{%
-    \libpp@cyclecolor%
-    \let\@tmpa\libpp@@c%
-    \protected@edef\@tmp{\noexpand\addplot[blockbar={\@tmpa}] coordinates {\unexpanded{#1}};}\@tmp%
+    \libpp@cyclecolor
+    \let\@tmpa\libpp@@c
+    \protected@edef\@tmp{\noexpand\addplot[blockbar={\@tmpa}] coordinates {\unexpanded{#1}};}\@tmp
 }
 
 \iflibpp@tpalette@
