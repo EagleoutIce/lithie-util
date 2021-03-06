@@ -52,7 +52,7 @@
 
 \tikzset{%
     lhns@impstyle/.style={thick},%
-    lhns@basestyle/.style={rectangle,outer sep=0pt,inner sep=\lhns@innersep},
+    lhns@basestyle/.style={rectangle,outer sep=\z@,inner sep=\lhns@innersep},
     lhns@border/.style={rectangle,rounded corners=2pt,dashed,draw},%
     lhns/.style={{Circle[length=4.5pt]}-Kite}%
 }
@@ -132,11 +132,11 @@
     % render boundaries
     \node[lhns@border,fit={([yshift=-\lhns@captionsep-\baselineskip]heap-\lhns@heapemax-box.south) (heap-0-box.north) (heap-0-box.east) (heap-0-box.west) ([yshift=-\lhns@minborderheight]\lhns@heaproot)},inner sep=\lhns@borderbuff] (heap-border) {}; % last fit node is min height
     % label "heap"
-    \node[outer sep=0pt,inner sep=0pt,above=\lhns@captionsep,minimum height=\baselineskip] (heap-label) at (heap-border.south) {Heap};
+    \node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (heap-label) at (heap-border.south) {Heap};
     \else% render hull
     \node[lhns@border,fit={([yshift=-\lhns@minborderheight]\lhns@heaproot) (\lhns@heaproot)},inner sep=\lhns@borderbuff,minimum width=\lhns@borderbuff+\lhns@elemwidth] (heap-border) {}; % last fit node is min height
     % label "heap"
-    \node[outer sep=0pt,inner sep=0pt,above=\lhns@captionsep,minimum height=\baselineskip] (heap-label) at (heap-border.south) {Heap};
+    \node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (heap-label) at (heap-border.south) {Heap};
     \fi
 }
 
@@ -156,11 +156,11 @@
     % render boundaries
     \node[lhns@border,fit={([yshift=-\lhns@captionsep-\baselineskip]stack-\lhns@stackemax-box.south) (stack-0-box.north) (stack-0-box.east) (stack-0-box.west) ([yshift=-\lhns@minborderheight]\lhns@stackroot)},inner sep=\lhns@borderbuff] (stack-border) {}; % last fit node is min height
     % label "stack"
-    \node[outer sep=0pt,inner sep=0pt,above=\lhns@captionsep,minimum height=\baselineskip] (stack-label) at (stack-border.south) {Stack};
+    \node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (stack-label) at (stack-border.south) {Stack};
     \else% render hull
     \node[lhns@border,fit={([yshift=-\lhns@minborderheight]\lhns@stackroot) (\lhns@stackroot)},inner sep=\lhns@borderbuff,minimum width=2*\lhns@borderbuff+\lhns@elemwidth] (stack-border) {}; % last fit node is min height
     % label "stack"
-    \node[outer sep=0pt,inner sep=0pt,above=\lhns@captionsep,minimum height=\baselineskip] (stack-label) at (stack-border.south) {Stack};
+    \node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (stack-label) at (stack-border.south) {Stack};
     \fi
 }
 

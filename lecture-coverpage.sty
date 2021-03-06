@@ -3,7 +3,6 @@
 %% --------------------------------------------------------------------------
 %%
 %% Autor: Florian Sihler, 21.10.2020
-%%
 %% Coverpage generation based on the lilly-philosopher generation
 %%
 \ProvidesPackage{lecture-coverpage}[2020/10/21 v1.0 coverpages]
@@ -17,7 +16,7 @@
 
 \def\lecturecp@emblemcolor{gray}
 \def\lecturecp@emblemcolor@symbol{gray}
-\def\lecture@emblem{} % Emblem
+\def\lecture@emblem{}
 
  % #1: university #2 Text, #3 Symbol centered
 \newcommand*\emblem[3][ulm university]{\def\@@university@name{#1}%
@@ -112,7 +111,7 @@
 \parbox[c][.55\paperwidth]{\linewidth}{\centering\hbox{}\vfill
     \lecture@r{titleimage}%
 \vfill\hbox{}}\leavevmode\\
-\vfill%
+\vfill
 \parbox[c]{.75\linewidth}{%
 \fontsize{17pt}{17pt}\selectfont\sffamily\color{gray}\lecture@r{brief}%
 }\hfill\parbox[c]{.2\linewidth}{\lecture@emblem}%
@@ -319,9 +318,9 @@
 % ..######..##................##.....##.##.....##.########.##......
 \lecturecp@coverpagestyle{sp-half}{%
 \def\lecture@coverpage@geometry{}%
-\renewcommand{\maketitle}{\begingroup%
+\renewcommand{\maketitle}{\begingroup
 \ifcsname microtypesetup\endcsname\microtypesetup{protrusion=false}\fi
-\parindent=\z@ \parskip=\z@\par%
+\parindent=\z@ \parskip=\z@\par
 \thispagestyle{plain}%
 \parbox{\linewidth}{\sffamily\fontsize{27}{27}\raggedleft\sbox0{\textbf{\paletteA{\lecture@r{title}}}}\usebox0\\*
 \large\hfill\parbox[t]{\wd0}{\color{gray}\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*\normalsize\color{lightgray}\nohyper{\typesetAuthors},~\lecture@r{subject}\\*}\color{gray}\lecture@r{brief}}%
@@ -365,7 +364,7 @@
 \parindent=\z@ \parskip=\z@
 \sffamily\fontsize{42}{42}%
 \vspace*{1.33em}%
-\parbox[b][0pt]{\linewidth}{%
+\parbox[b][\z@]{\linewidth}{%
 \normalsize
 \parbox{.1\linewidth}{\lecture@r{titleimage}}\strut\hfill\parbox{.85\linewidth}{\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*}\color{gray}\lecture@r{brief}}}\vspace{2em}\par%
 \begin{tikzpicture}[overlay]
