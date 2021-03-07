@@ -127,14 +127,12 @@
 % cite patch
     \ifcsname cite\endcsname
         \LetLtxMacro\leclink@cite@\cite
-        \def\cite{\leclink@cite@color\leclink@cite@}
-        \robustify\cite
+        \DeclareRobustCommand\cite{\leclink@cite@color\leclink@cite@}
     \fi
 }
 
 \begingroup
-\catcode`\$=6 %
-\catcode`\#=12 %
+\catcode`\$=6 \catcode`\#=12 %
 \gdef\leclink@overwrite@hrefsplit{%
 \def\href@split$$1#$$2#$$3\\$$4{%
     \def\lecmrk{$$1}\leclink@pnextlinkstyle{\leclink@href@linkstyle}\hyper@@link{$$1}{$$2}{$$4}%
