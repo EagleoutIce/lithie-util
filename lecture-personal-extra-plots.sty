@@ -27,7 +27,7 @@
     every axis/.append style={legend cell align={left}},%
     dim/.style args={#1:#2}{width=#1,height=#2},%
     plain legend/.style={%
-        legend style={draw=none, inner sep=\z@, rounded corners=1.125pt}%
+        legend style={draw=none, inner sep=\z@, rounded corners=1pt}%
     },%
     plain axis/.style={%e
         axis line style={draw=none},xtick pos=left,ytick pos=left%
@@ -48,7 +48,7 @@
     ex/.style={enlarge x limits={#1}},
     ey/.style={enlarge y limits={#1}},
     e/.style={e\libpp@barsymtype={#1}},
-    blockbar/.style={rounded corners=1pt,#1},%
+    blockbar/.style={rounded corners=.8pt,#1},%
     labels/.style args={#1:#2}{xlabel={#1},ylabel={#2}},%
     xl/.style={xlabel={#1}},yl/.style={ylabel={#1}},%
     compat/show suggested version=false,%
@@ -62,7 +62,8 @@
     lse/.style={legend pos={south east}}, lsw/.style={legend pos={south west}},
     libpp@default/.style={},%
     libpp@default@bars/.style={},%
-    libpp@default@plots/.style={}%
+    libpp@default@plots/.style={},%
+    striped/.style={postaction={pattern=north east lines},pattern color=white}%
 }
 
 \pgfkeys{%
@@ -111,7 +112,7 @@
     \libpp@init{#1}%
     \iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
     \axis[libpp@default,libpp@default@bars,ybar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
-    \let\bar\libpp@bar)%
+    \let\bar\libpp@bar\let\sbar\libpp@sbar)%
     (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
 
 \libpp@newbar@env{xbar}[:*]%
@@ -119,8 +120,8 @@
     \def\libpp@barftype{x}%
     \libpp@init{#1}%
     \iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
-    \axis[libpp@default,libpp@default@bars,xbar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
-    \let\bar\libpp@bar)%
+    \axis[libpp@default,libpp@default@bars,xbar=\libpp@barspace,bar plot=\libpp@barwidth,#2]%
+    \let\bar\libpp@bar\let\sbar\libpp@sbar)%
     (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
 
 
@@ -133,18 +134,20 @@
     )%
     (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
 
-\def\libpp@bar{\@ifnextchar[\libpp@bar@opt\libpp@bar@noopt}
-\def\libpp@bar@opt[#1]#2{\addplot[blockbar={#1}] coordinates {#2};}
-\def\libpp@bar@@noopt#1{%
+\def\libpp@bar{\@ifnextchar[\libpp@bar@opt\libpp@bar@noopt{}}
+\def\libpp@sbar{\@ifnextchar[\libpp@bar@opt\libpp@bar@noopt{striped}}
+
+\def\libpp@bar@opt#1[#2]#3{\addplot[blockbar={#2},#1] coordinates {#3};}
+\def\libpp@bar@@noopt#1#2{%
     \libpp@cyclecolor
     \let\@tmpa\libpp@@c
-    \protected@edef\@tmp{\noexpand\addplot[blockbar={\@tmpa}] coordinates {\unexpanded{#1}};}\@tmp
+    \protected@edef\@tmp{\noexpand\addplot[blockbar={\@tmpa},#1] coordinates {\unexpanded{#2}};}\@tmp
 }
 
 \iflibpp@tpalette@
 \let\libpp@bar@noopt\libpp@bar@@noopt
 \else
-\def\libpp@bar@@noopt{\libpp@bar@opt[]}
+\def\libpp@bar@@noopt#1{\libpp@bar@opt#1[]}
 \fi
 
 \def\SetDefaultPlots#1{\pgfplotsset{libpp@default@plots/.style={#1}}}
