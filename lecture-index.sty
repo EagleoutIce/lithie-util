@@ -46,8 +46,7 @@
 \def\lecidx@index#1{\index[\lecidxindex]{#1}}
 
 % link index
-\def\lindex{\@ifstar\lecidx@lindex\lecidx@@lindex}
-\robustify\lindex
+\DeclareRobustCommand*\lindex{\@ifstar\lecidx@lindex\lecidx@@lindex}
 % only hook if outside float
 % \ifnum\@floatpenalty<0\else\phantomsection\fi
 \newcommand*\lecidx@lindex[3][]{\lecidx@sanitize{#1}\let\lecidx@root\lecidx@tmpl\lecidx@sanitize{#2}\label{lecidx@\lecidx@root @hi@\lecidx@tmpl @}\lecidx@index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@root @hi@\lecidx@tmpl @}{#3}}}
@@ -55,15 +54,13 @@
 \newcommand*\lecidx@@lindex[2][]{\lecidx@lindex[#1]{#2}{#2}}
 
 % ref index
-\def\rindex{\@ifstar\lecidx@rindex\lecidx@@rindex}
-\robustify\rindex
+\DeclareRobustCommand*\rindex{\@ifstar\lecidx@rindex\lecidx@@rindex}
 
 \newcommand*\lecidx@rindex[3][]{\lecidx@sanitize{#1}\let\lecidx@root\lecidx@tmpl\lecidx@sanitize{#2}\lecidx@index{\ifx!#1!\else#1\lecidx@idxsub\fi#2\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@root @hi@\lecidx@tmpl @}{#3}}}
 \newcommand*\lecidx@@rindex[2][]{\lecidx@rindex[#1]{#2}{#2}}
 
 % sub link index
-\def\slindex{\@ifstar\lecidx@slindex\lecidx@@slindex}
-\robustify\slindex
+\DeclareRobustCommand*\slindex{\@ifstar\lecidx@slindex\lecidx@@slindex}
 
 \def\lecidx@slindex#1#2{\lindex*[\leci@index@h]{#1}{#2}}
 \def\lecidx@@slindex#1{\lindex[\leci@index@h]{#1}}
