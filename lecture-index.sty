@@ -45,6 +45,9 @@
 \def\lecidxindex{\jobname}
 \def\lecidx@index#1{\index[\lecidxindex]{#1}}
 
+% used to gobble braces from o
+\def\lecidx@tick#1{"#1}
+
 % link index
 \DeclareRobustCommand*\lindex{\@ifstar\lecidx@lindex\lecidx@@lindex}
 % only hook if outside float
@@ -52,17 +55,25 @@
 \newcommand*\lecidx@lindex[3][]{%
 \lecidx@sanitize{#1}\let\lecidx@root\lecidx@tmpl\lecidx@sanitize{#2}%
 \label{lecidx@\lecidx@root @hi@\lecidx@tmpl @}%
-{\protected@xdef\lecidx@sort{\ifx!#1!\else#1\lecidx@idxsub\fi#2}}%
+{\def\"{\lecidx@tick}\protected@xdef\lecidx@sort{\ifx!#1!\else#1\lecidx@idxsub\fi#2}}%
 \lecidx@index{\lecidx@sort\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@root @hi@\lecidx@tmpl @}{#3}}}
 
 \newcommand*\lecidx@@lindex[2][]{\lecidx@lindex[#1]{#2}{#2}}
+
+
+\newcommand*\lecidx@guardidx[2][\jobname]{\begingroup
+    {\def\"{\lecidx@tick}\protected@xdef\lecidx@sort{#2}}%
+    \def\lecidxindex{#1}%
+    \lecidx@index{\lecidx@sort\lecidx@idxactual#2}%
+\endgroup}
+\let\guardidx\lecidx@guardidx
 
 % ref index
 \DeclareRobustCommand*\rindex{\@ifstar\lecidx@rindex\lecidx@@rindex}
 
 \newcommand*\lecidx@rindex[3][]{%
 \lecidx@sanitize{#1}\let\lecidx@root\lecidx@tmpl\lecidx@sanitize{#2}%
-{\protected@xdef\lecidx@sort{\ifx!#1!\else#1\lecidx@idxsub\fi#2}}%
+{\def\"{\lecidx@tick}\protected@xdef\lecidx@sort{\ifx!#1!\else#1\lecidx@idxsub\fi#2}}%
 \lecidx@index{\lecidx@sort\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@root @hi@\lecidx@tmpl @}{#3}}}
 \newcommand*\lecidx@@rindex[2][]{\lecidx@rindex[#1]{#2}{#2}}
 
