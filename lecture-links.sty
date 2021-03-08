@@ -50,6 +50,9 @@
 \newcommand*\DisableLinkStyle{\leclink@enabled@false}
 \newcommand*\EnableLinkStyle{\leclink@enabled@true}
 
+\providecommand\disablehyper{\DisableLinkStyle}
+\providecommand\nohyper[1]{\begingroup\disablehyper #1\endgroup}
+
 \SetAllLinkStyle{\texttt{#1}}
 \SetCiteColor{}% do not modify by default
 \EnableLinkStyle
