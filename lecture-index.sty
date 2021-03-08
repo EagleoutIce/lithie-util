@@ -43,7 +43,7 @@
 }
 
 \def\lecidxindex{\jobname}
-\def\lecidx@index#1#2{\index[#2]{#1}}
+\def\lecidx@index#1{\index[\lecidxindex]{#1}}
 
 % link index
 \DeclareRobustCommand*\lindex{\@ifstar\lecidx@lindex\lecidx@@lindex}
@@ -52,14 +52,8 @@
 \newcommand*\lecidx@lindex[3][]{%
 \lecidx@sanitize{#1}\let\lecidx@root\lecidx@tmpl\lecidx@sanitize{#2}%
 \label{lecidx@\lecidx@root @hi@\lecidx@tmpl @}%
-{\def\"{}\protected@xdef\lecidx@sort{\ifx!#1!\else#1\lecidx@idxsub\fi#2}}%
+{\protected@xdef\lecidx@sort{\ifx!#1!\else#1\lecidx@idxsub\fi#2}}%
 \lecidx@index{\lecidx@sort\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@root @hi@\lecidx@tmpl @}{#3}}}
-
-\newcommand*\lecidx@guardidx[2][\jobname]{%
-    {\def\"{}\protected@xdef\lecidx@sort{#2}}%
-    \lecidx@index{\lecidx@sort\lecidx@idxactual#2}{#1}%
-}
-\let\guardidx\lecidx@guardidx
 
 \newcommand*\lecidx@@lindex[2][]{\lecidx@lindex[#1]{#2}{#2}}
 
@@ -68,8 +62,8 @@
 
 \newcommand*\lecidx@rindex[3][]{%
 \lecidx@sanitize{#1}\let\lecidx@root\lecidx@tmpl\lecidx@sanitize{#2}%
-{\def\"{}\protected@xdef\lecidx@sort{\ifx!#1!\else#1\lecidx@idxsub\fi#2}}%
-\lecidx@index{\lecidx@sort\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@root @hi@\lecidx@tmpl @}{#3}}{\lecidxindex}}
+{\protected@xdef\lecidx@sort{\ifx!#1!\else#1\lecidx@idxsub\fi#2}}%
+\lecidx@index{\lecidx@sort\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@root @hi@\lecidx@tmpl @}{#3}}}
 \newcommand*\lecidx@@rindex[2][]{\lecidx@rindex[#1]{#2}{#2}}
 
 % sub link index
@@ -79,9 +73,9 @@
 \def\lecidx@@slindex#1{\lindex[\leci@index@h]{#1}}
 
 % old for compat
-\DeclareRobustCommand{\kw}[1]{\textbf{#1}\lecidx@index{#1}{\lecidxindex}}
-\DeclareRobustCommand{\sw}[2][Gruppenname]{#2\lecidx@index{#1\lecidx@idxsub #2}{\lecidxindex}}
-\DeclareRobustCommand{\sr}[3][Gruppenname]{#3\lecidx@index{#1\lecidx@idxsub #2\lecidx@idxsub #3}{\lecidxindex}}
+\DeclareRobustCommand{\kw}[1]{\textbf{#1}\lecidx@index{#1}}
+\DeclareRobustCommand{\sw}[2][Gruppenname]{#2\lecidx@index{#1\lecidx@idxsub #2}}
+\DeclareRobustCommand{\sr}[3][Gruppenname]{#3\lecidx@index{#1\lecidx@idxsub #2\lecidx@idxsub #3}}
 
 % note for '.ist' (\\lecidx@@maysub):
 % This is a weird bugfix. To be honest, i do not know why it is required using ( and ) as index guards on different pages, the 1-hierarch fails to establish according to the item_12 rule and jumps to item_2 this guards item_2 with the setup-routine which has to be present only on an already established 2-hierarchy
