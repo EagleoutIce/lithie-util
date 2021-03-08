@@ -134,8 +134,8 @@
     )%
     (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
 
-\def\libpp@bar{\@ifnextchar[\libpp@bar@opt\libpp@bar@noopt{}}
-\def\libpp@sbar{\@ifnextchar[\libpp@bar@opt\libpp@bar@noopt{striped}}
+\def\libpp@bar{\@ifnextchar[{\libpp@bar@opt{}}{\libpp@bar@noopt{}}}
+\def\libpp@sbar{\@ifnextchar[{\libpp@bar@opt{striped}}{\libpp@bar@noopt{striped}}}
 
 \def\libpp@bar@opt#1[#2]#3{\addplot[blockbar={#2},#1] coordinates {#3};}
 \def\libpp@bar@@noopt#1#2{%
