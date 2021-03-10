@@ -32,8 +32,7 @@
     \csname lip@profile@#1\endcsname
 \else
     \PackageError{lithie-profiles}{The Profile '#1' is unknown. Choose one of: \lip@allprofiles}%
-\fi
-}
+\fi}
 
 \providecommand*{\lithieprofile}{default}
 
@@ -50,8 +49,7 @@
 \AtEndPreamble{%
 \ifx\lithieprofile\@empty\else
     \lip@UseProfile{\lithieprofile}%
-\fi%
-}
+\fi}
 
 \lip@RegisterProfile{default}{}
 \lip@RegisterProfile{print}{}
