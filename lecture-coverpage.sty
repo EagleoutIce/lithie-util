@@ -96,7 +96,7 @@
 \lecturecp@coverpagestyle{plain}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
-\renewcommand{\maketitle}{\begingroup
+\renewcommand\maketitle{\begingroup
 \parindent=\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry
@@ -129,7 +129,7 @@
 \lecturecp@coverpagestyle{plain-small}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
-\renewcommand{\maketitle}{\begingroup
+\renewcommand\maketitle{\begingroup
 \parindent=\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry
@@ -165,7 +165,7 @@
 
 \newsavebox{\lecturecp@title@widthbox}
 \newlength{\lecture@tmp@titlewidth}
-\renewcommand{\maketitle}{\begingroup\parindent=\z@
+\renewcommand\maketitle{\begingroup\parindent=\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 %
 \lecture@coverpage@geometry
@@ -240,7 +240,7 @@
 
 \newsavebox{\lecturecp@title@widthbox}
 \newlength{\lecture@tmp@titlewidth}
-\renewcommand{\maketitle}{\begingroup
+\renewcommand\maketitle{\begingroup
 \parindent=\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 %
@@ -301,7 +301,7 @@
 \lecturecp@coverpagestyle{simple-half}{%
 \def\lecture@coverpage@geometry{}
 
-\renewcommand{\maketitle}{%
+\renewcommand\maketitle{%
 \twocolumn[{%
 \parindent=\z@ \parskip=\z@\vspace*{3em}\par\sffamily\fontsize{32}{32}%
 \textbf{\paletteA{\lecture@r{title}}}\bigskip\leavevmode\\*
@@ -318,7 +318,7 @@
 % ..######..##................##.....##.##.....##.########.##......
 \lecturecp@coverpagestyle{sp-half}{%
 \def\lecture@coverpage@geometry{}%
-\renewcommand{\maketitle}{\begingroup
+\renewcommand\maketitle{\begingroup
 \ifcsname microtypesetup\endcsname\microtypesetup{protrusion=false}\fi
 \parindent=\z@ \parskip=\z@\par
 \thispagestyle{plain}%
@@ -337,7 +337,7 @@
 \lecturecp@coverpagestyle{simple}{%
 \def\lecture@coverpage@geometry{}
 
-\renewcommand{\maketitle}{\begingroup
+\renewcommand\maketitle{\begingroup
 \parindent=\z@
 \begin{center}%
     \sffamily{\bfseries\Huge\lecture@r{title}}\medskip\leavevmode\\
@@ -358,7 +358,7 @@
 \lecturecp@coverpagestyle{compact-upper}{%
 \def\lecture@coverpage@geometry{}
 
-\renewcommand{\maketitle}{%
+\renewcommand\maketitle{%
 \lecture@coverpage@lsmg=\dimexpr1in+\oddsidemargin\relax%
 \twocolumn[{%
 \parindent=\z@ \parskip=\z@
