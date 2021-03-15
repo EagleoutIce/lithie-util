@@ -77,14 +77,21 @@
 \def\lecture@eff@titlewidth{\lecture@tmp@titlewidth}
 \def\lecturetitlewidth#1{\def\lecture@eff@titlewidth{#1}}
 
+\def\lecture@allcoverpages{}
 \long\def\lecturecp@coverpagestyle#1#2{%
     \expandafter\gdef\csname lecturecp@style@#1@\endcsname{#2}%
+    \ifx\lecture@allcoverpages\@empty \def\lecture@allcoverpages{#1}%
+    \else\g@addto@macro\lecture@allcoverpages{,#1}\fi
 }
 % maybe insert guards if not found?
 \def\selectcoverpage#1{\gdef\lecturecp@activecoverpage{#1}}
 \selectcoverpage{}
 
-\AtEndPreamble{\ifx\lecturecp@activecoverpage\@empty\else\@nameuse{lecturecp@style@\lecturecp@activecoverpage @}\fi}
+\AtEndPreamble{\ifx\lecturecp@activecoverpage\@empty%
+    \else\ifcsname lecturecp@style@\lecturecp@activecoverpage @\endcsname
+        \@nameuse{lecturecp@style@\lecturecp@activecoverpage @}%
+    \else\PackageError{lecture-coverpage}{The desired coverpage style '\lecturecp@activecoverpage' is unknown. Choose one of: '\lecture@allcoverpages'}
+    \fi\fi}
 
 % .########..##..........###....####.##....##
 % .##.....##.##.........##.##....##..###...##
