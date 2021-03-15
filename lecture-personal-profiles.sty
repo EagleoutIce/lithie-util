@@ -30,11 +30,13 @@
 \expandafter\newcommand\expandafter*\csname GetUncompressed#1Raw\endcsname[2][]{\includegraphics[##1]{#2##2#3}}%
 }
 
+\def\lecture@personal@printsuffix{ (Druckversion)}
+
 \newif\ifscol%
 \AppendToProfile{print}{%
-  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{-print}{1}{}}\@mkcommands%
-  \DisableMulticolHint%
-  \scolfalse%
+  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{-print}{1}{}}\@mkcommands
+  \DisableMulticolHint
+  \scolfalse
   \newenvironment{ltabular}%
     {\@nameuse{tabular}}%
     {\@nameuse{endtabular}}%
@@ -43,16 +45,18 @@
   \DefaultNindent=.489pt% compensate for offsets
   \def\LettrineFontHook{\Romantik}%
   \AtBeginDocument{%
-    \hypersetup{pdftitle={\lecture@r{title} (Druckversion)}}%
+    \hypersetup{pdftitle={\lecture@r{title}\lecture@personal@printsuffix}}%
   }%
   \colorlet{libx@limerence@box@backcolor}{gray!5!white}%
   \def\LettrineTextFont{\scshape}%
 }
 
+\def\lecture@personal@defaultsuffix{ (Digitalversion)}
+
 \AppendToProfile{default}{%
   \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{1}{}}\@mkcommands
-  \DisableMulticolHint%
-  \scolfalse%
+  \DisableMulticolHint
+  \scolfalse
   \newenvironment{ltabular}%
     {\@nameuse{tabular}}%
     {\@nameuse{endtabular}}%
@@ -62,10 +66,11 @@
   \DefaultNindent=.25em%
   \def\DefaultLoversize{.05}%
   \AtBeginDocument{%
-    \hypersetup{pdftitle={\lecture@r{title} (Digitalversion)}}%
+    \hypersetup{pdftitle={\lecture@r{title}\lecture@personal@defaultsuffix}}%
   }%
 }
 
+\def\lecture@personal@mobilsuffix{ (Mobilversion)}
 \RegisterProfile{mobile}{%
   \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{.925}{height=.8\noexpand\textheight,keepaspectratio}}\@mkcommands
   \DisableMulticolHint%\EnableMulticolHint%
@@ -83,7 +88,7 @@
   \DefaultFindent=1.85pt%
   \DefaultNindent=.25em%
   \AtBeginDocument{%
-    \hypersetup{pdftitle={\lecture@r{title} (Mobilversion)}}%
+    \hypersetup{pdftitle={\lecture@r{title}\lecture@personal@mobilsuffix}}%
   }%
 }
 
