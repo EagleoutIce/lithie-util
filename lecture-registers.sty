@@ -73,11 +73,11 @@
 \def\lecture@firstoftwo#1#2{#1}
 \def\lecture@secondoftwo#1#2{#2}
 
-\def\lecture@r#1{\@nameuse{lecture@register@#1}}
+\def\lecture@r#1{\csname lecture@register@#1\endcsname}
 \def\lecture@@chkempty{\ifx\@@lecture@tmp\@empty\expandafter\lecture@firstoftwo\else\expandafter\lecture@secondoftwo\fi}
 \def\iflecture@e#1{\protected@edef\@@lecture@tmp{#1}\lecture@@chkempty}
 \def\iflecture@er#1{\protected@edef\@@lecture@tmp{\lecture@r{#1}}\lecture@@chkempty}
-\def\lecture@rs#1{\@nameuse{lecture@register@short@#1}}
+\def\lecture@rs#1{\csname lecture@register@short@#1\endcsname}
 \def\iflecture@ers#1{\protected@edef\@@lecture@tmp{\lecture@rs{#1}}\lecture@@chkempty}
 
 % public register access

@@ -7,16 +7,13 @@
 
 \ProvidesPackage{lecture-personal-general}[2020/11/03 v1.0 Personal general stuff]
 
-\RequirePackage{xfrac,tikzsymbols}
+\RequirePackage{xfrac,tikzsymbols,eucal}
 
 % mathbreaks
 \allowdisplaybreaks[2]
 
-\RequirePackage{eucal}
 \let\oldO\O
 \let\emptyset\varnothing
-\AtBeginDocument{%
-\def\O{\ensuremath{\EuScript{O}}}%
-}
+\AtBeginDocument{\def\O{\ensuremath{\EuScript{O}}}}
 
 \endinput

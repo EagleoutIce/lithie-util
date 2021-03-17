@@ -7,7 +7,6 @@
 %% More customizeable typeset-list command
 %%
 \ProvidesPackage{typeset-list}[2020/10/12 v1.0 typeset-lists]
-
 \RequirePackage{pgffor}
 
 \newcommand*\getListLength[1]{%
@@ -22,7 +21,7 @@
 }
 
 \newcommand*\typesetList[2][typesetVoid]{%
-    \edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp%
+    \edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
 }
 
 %% this will typeset a List in German List-Notation
@@ -31,11 +30,9 @@
     \getListLength{#2}%
     \foreach \x[count=\i] in \@tmpl {%
         \ifnum\i>1 \ifnum\i=\@c@tmp
-        ~und \else
-        ,\space\fi
-        \fi
+        ~und \else,\space\fi\fi
         \csname#1\endcsname{\x}%
-    }\ignorespaces%
+    }\ignorespaces
 }
 
 \let\@ltu@ttl@TextBfFormat\textbf
@@ -44,7 +41,7 @@
 \def\@ltu@ttl@format@step#1#2{%
     \xdef\tmp@@ltu@ttl@first{\@car #2\@empty\@nil}\ifx\tmp@@ltu@ttl@first\NoFormatChar\@gobble{\@car #2\@empty\@nil}\else
     \expandafter#1\expandafter{\@car #2\@empty\@nil}% % car => (LISP) list head => \def\@car#1#2\@nil{#1}
-    \fi%
+    \fi
     \@cdr #2\@empty\@nil% cdr => (LISP) list body => \def\@cdr#1#2\@nil{#2}
 }
 
@@ -53,11 +50,10 @@
 
 \def\@ltu@ttl@format@iter#1 #2\@nil{%
 \@ltu@ttl@format@step{\@ltu@ttl@formatter@current}{#1}%
-\ifx!#2!\else%
+\ifx!#2!\else
 \@ltu@ttl@jump@fi{%
     \space\@ltu@ttl@format@iter#2\@nil
-}%
-\fi%
+}\fi
 }
 
 %% Routine to highlight the First Character in Acronyms

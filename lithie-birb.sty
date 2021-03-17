@@ -14,36 +14,36 @@
 \newcommand*\lithiebirb[1][\LithieFull]{%
 \begingroup
 \edef\hyp{2.12132034}%
-\pgfmathsetmacro\hhyp{2.12132034/2}%
+\pgfmathsetmacro\hhyp{\hyp/2}%
 \begin{scope}[overlay]% xshift=.74\paperwidth,yshift=-2.75cm,scale=1,
     % upper left _|
-    \path[fill,shadeD] (0,0) -| (1.5,1.5) -- cycle;
-    \path[fill,shadeD!90!black] (.75,.75) -- (1.5,0) -- (0,0) -- cycle;
+    \path[fill,shadeD] (0,0)-|(1.5,1.5)--cycle;
+    \path[fill,shadeD!90!black] (.75,.75)--(1.5,0)--(0,0)--cycle;
     % right of upper
     \path(1.5,1.5) ++(.1,0) coordinate (start-ut);
-    \path[fill,shadeC] (start-ut) -- ++(0,-\hyp) -- ++(\hhyp,\hhyp) -- ++(-\hhyp,\hhyp) -- cycle;
-    \path[fill,shadeC!90!black] (start-ut)++(0,-\hhyp) -- ++(\hhyp,0) -- ++(-\hhyp,-\hhyp) -- cycle;
+    \path[fill,shadeC] (start-ut)--++(0,-\hyp)--++(\hhyp,\hhyp)--++(-\hhyp,\hhyp)--cycle;
+    \path[fill,shadeC!90!black] (start-ut)++(0,-\hhyp)--++(\hhyp,0)--++(-\hhyp,-\hhyp)--cycle;
     % middle square of doubles middle triangle upper
     \path(start-ut) ++(.1,-\hyp) coordinate (start-mtu);
-    \path[fill,shadeB] (start-mtu) -- ++(\hhyp,\hhyp) -- ++(\hhyp,-\hhyp) -- cycle;
-    \path[fill,shadeB!90!black] (start-mtu)++(\hhyp,0) -- ++(0,\hhyp) -- ++(\hhyp,-\hhyp) -- cycle;
+    \path[fill,shadeB] (start-mtu)--++(\hhyp,\hhyp)--++(\hhyp,-\hhyp)--cycle;
+    \path[fill,shadeB!90!black] (start-mtu)++(\hhyp,0)--++(0,\hhyp)--++(\hhyp,-\hhyp)--cycle;
     % --- lower
     \path(start-ut) ++(.1,-\hyp-.1/1.25) coordinate (start-mtl);
-    \path[fill,shadeB] (start-mtl) -- ++(\hhyp,-\hhyp) -- ++(\hhyp,\hhyp) -- cycle;
-    \path[fill,shadeB!90!black] (start-mtl)++(\hhyp,0) -- ++(0,-\hhyp) -- ++(-\hhyp,\hhyp) -- cycle;
+    \path[fill,shadeB] (start-mtl)--++(\hhyp,-\hhyp)--++(\hhyp,\hhyp)--cycle;
+    \path[fill,shadeB!90!black] (start-mtl)++(\hhyp,0)--++(0,-\hhyp)--++(-\hhyp,\hhyp)--cycle;
     % last lower
     \path(start-mtl) ++(\hyp+.05,-.05) coordinate (start-ll);
     % last upper
     \path(start-mtu) ++(\hyp+.1,0) coordinate (start-lu);
     % shadow for the bird
     \path(start-ll) ++(-\hhyp,-\hhyp) coordinate (shade-lower);
-    \path[fill,lightgray!45!white!95!shadeA,opacity=.75] (start-lu)++(\hyp+.1+3*\hhyp,-3*\hhyp) -- ++(-4*\hhyp, 4*\hhyp) -- (shade-lower) -- ++(4*\hhyp,-4*\hhyp) -- cycle;
+    \path[fill,lightgray!45!white!95!shadeA,opacity=.75] (start-lu)++(\hyp+.1+3*\hhyp,-3*\hhyp)--++(-4*\hhyp, 4*\hhyp)--(shade-lower)--++(4*\hhyp,-4*\hhyp)--cycle;
     % last upper and lower draw above shadow (no layer)
-    \path[fill,shadeA] (start-ll) -- ++(-\hhyp,-\hhyp) -- ++(\hhyp,-\hhyp) -- cycle;
-    \path[fill,shadeA!90!black] (start-ll)++(0,-\hhyp) -- ++(-\hhyp,0) -- ++(\hhyp,-\hhyp) -- cycle;
+    \path[fill,shadeA] (start-ll)--++(-\hhyp,-\hhyp)--++(\hhyp,-\hhyp)--cycle;
+    \path[fill,shadeA!90!black] (start-ll)++(0,-\hhyp)--++(-\hhyp,0)--++(\hhyp,-\hhyp)--cycle;
     % upper (place the lithie sign on the wing t-upper)
-    \path[fill,shadeA] (start-lu) -- ++(-\hhyp,\hhyp) to[edge node={node[above=1.75pt,shadeA!90!black,font=\small,outer sep=\z@,inner sep=\z@,transform shape] {#1}}] ++(\hyp,0) -- cycle;
-    \path[fill,shadeA!90!black] (start-lu) -- ++(0,\hhyp) -- ++(\hhyp,0) -- cycle;
+    \path[fill,shadeA] (start-lu)--++(-\hhyp,\hhyp) to[edge node={node[above=1.75pt,shadeA!90!black,font=\small,outer sep=\z@,inner sep=\z@,transform shape] {#1}}] ++(\hyp,0)--cycle;
+    \path[fill,shadeA!90!black] (start-lu)--++(0,\hhyp)--++(\hhyp,0)--cycle;
 \end{scope}%
 \endgroup}
 \endinput

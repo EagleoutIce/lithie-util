@@ -52,7 +52,6 @@
 \ifcsname robustify\endcsname
 \robustify\rbash \robustify\Rbash\fi
 
-
 \def\rbashcurrentinject{}
 \def\lecture@runtimes@getBashFileExecutionOutput#1{%
 \lecture@runtimes@ExecuteBash{\jobname.run.out}{#1}% safest way :D
@@ -62,9 +61,7 @@
 \lecture@runtimes@Execute{ rm \jobname.run.out }%
 }
 
-\def\lecture@runtimes@ExecuteBash#1#2{%
-  \lecture@runtimes@Execute{ #2 > #1 2> #1}%
-}
+\def\lecture@runtimes@ExecuteBash#1#2{\lecture@runtimes@Execute{ #2 > #1 2> #1}}
 
 \def\lecture@runtimes@Execute#1{\immediate\write18{#1}}
 \ifshellescape\else

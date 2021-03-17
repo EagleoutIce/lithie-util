@@ -15,7 +15,6 @@
 \DeclareStringOption{imgprefix}
 \DeclareStringOption{command}
 \DeclareStringOption[\@lecture@personal@noextra]{extras}[\@lecture@personal@noextra]
-
 \ProcessKeyvalOptions*
 
 \RequirePackage{lecture-personal-float,lecture-personal-general,lecture-personal-tikz,lecture-personal-glossary,lecture-personal-tabular,lecture-personal-resize}
@@ -42,8 +41,7 @@
 \ifcsname setIndexLinker\endcsname
 \ifcsname nohyper\endcsname
 \setIndexLinker{\nohyper{\hyperref[#1]{#2}}}%
-\fi\fi
-}
+\fi\fi}
 
 \LoadBoxStyle{limerence}
 \endinput

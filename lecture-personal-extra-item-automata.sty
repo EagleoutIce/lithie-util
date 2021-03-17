@@ -177,7 +177,7 @@
     %
     \pgf@x=\halftextwidth\relax
     \advance\pgf@x by\xoffset\relax
-    \pgf@xc=\pgf@ya%
+    \pgf@xc=\pgf@ya
     \advance\pgf@xc by-\pgf@xb
     \ifdim\pgf@xc>\pgf@x\relax
       \advance\pgf@xc by-\pgf@x
@@ -235,7 +235,7 @@
       \pgf@x=\pgfmathresult\pgf@x
       \edef\convexxshift{\the\pgf@x}%
     \fi
-    \addtosavedmacro\convexxshift%
+    \addtosavedmacro\convexxshift
   }%
   \saveddimen\halflinewidth{\pgf@x.5\pgflinewidth}%
   \savedanchor\centerpoint{%
@@ -245,7 +245,7 @@
   }%
   \savedanchor\midpoint{%
     \pgf@x=.5\wd\pgfnodeparttextbox
-    \pgfmathsetlength\pgf@y{+0.5ex}%
+    \pgfmathsetlength\pgf@y{+.5ex}%
   }%
   \savedanchor\basepoint{%
     \pgf@x=.5\wd\pgfnodeparttextbox
@@ -337,8 +337,8 @@
     }%
   }%
   \anchor{north east}{%
-    \roundedrectanglepoints%
-    \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex%
+    \roundedrectanglepoints
+    \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
       \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\arcwidth+\convexxshift}{+0pt}}%
     \else
       \csname pgf@anchor@wstate shape@east\endcsname
@@ -467,5 +467,4 @@
   \fi
   }%
 }%
-
 \endinput

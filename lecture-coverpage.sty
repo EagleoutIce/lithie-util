@@ -288,8 +288,7 @@
 \begin{scope}[every node/.style={color=\lecturecp@emblemcolor}]%
 \node[right,scale=.95] at(\lecturecp@leftwidth,\lecturecp@height/2)
     {\parbox[t]{\linewidth}{%
-        \sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
-        \par%
+        \sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}\par
     }};
 \end{scope}%
 \end{tikzpicture}%
@@ -343,7 +342,6 @@
 % ..######..####.##.....##.##........########.########
 \lecturecp@coverpagestyle{simple}{%
 \def\lecture@coverpage@geometry{}
-
 \renewcommand\maketitle{\begingroup
 \parindent=\z@
 \begin{center}%
@@ -364,7 +362,6 @@
 
 \lecturecp@coverpagestyle{compact-upper}{%
 \def\lecture@coverpage@geometry{}
-
 \renewcommand\maketitle{%
 \lecture@coverpage@lsmg=\dimexpr1in+\oddsidemargin\relax%
 \twocolumn[{%

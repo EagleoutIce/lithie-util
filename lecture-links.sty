@@ -66,7 +66,6 @@
 \def\leclink@noformat@linkstyle#1#2#3{#1}
 % set a default
 \leclink@pnextlinkstyle{\leclink@href@linkstyle}
-
 \newif\iflecstar
 
 \def\leclink@star@autoref#1{\lecstartrue\def\lecmrk{#1}\leclink@autoref*{#1}}
@@ -90,12 +89,12 @@
 \AtBeginDocument{% robust not needed as let persists
 % autoref
     \LetLtxMacro\leclink@autoref\autoref
-    \renewcommand*{\autoref}{%
+    \renewcommand*\autoref{%
         \@ifstar\leclink@star@autoref\leclink@nostar@autoref
     }%
 % nameref
     \LetLtxMacro\leclink@nameref\nameref
-    \renewcommand*{\nameref}{%
+    \renewcommand*\nameref{%
         \@ifstar\leclink@star@nameref\leclink@nostar@autoref
     }%
     % hyperref
@@ -103,18 +102,18 @@
     \LetLtxMacro\leclink@@lb@hyperref\label@hyperref
     \LetLtxMacro\leclink@@@hyperref\@hyperref
     % what if no label?
-    \renewcommand*{\hyperref}{%
+    \renewcommand*\hyperref{%
         \@ifnextchar[{\Hy@babelnormalise\leclink@label@hyperref}\leclink@full@hyperref
     }%
 % url Note: url may be handled differently
     \LetLtxMacro\leclink@url\url
-    \renewcommand*{\url}{\hyper@normalise\leclink@read@url}%
+    \renewcommand*\url{\hyper@normalise\leclink@read@url}%
 % footnote (direct - guard?)
     \LetLtxMacro\leclink@footnotemark\@footnotemark
-    \renewcommand*{\@footnotemark}{\ifleclink@enabled@\expandafter\leclink@footnote@linkstyle\else\expandafter\leclink@firstofthree\fi{\leclink@footnotemark}{}{}}%
+    \renewcommand*\@footnotemark{\ifleclink@enabled@\expandafter\leclink@footnote@linkstyle\else\expandafter\leclink@firstofthree\fi{\leclink@footnotemark}{}{}}%
 % hyperlink
     \LetLtxMacro\leclink@hyperlink\hyperlink
-    \renewcommand*{\hyperlink}[2]{\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@hyperlink@linkstyle}\leclink@hyperlink{#1}{#2}}%
+    \renewcommand*\hyperlink[2]{\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@hyperlink@linkstyle}\leclink@hyperlink{#1}{#2}}%
 % href
     % We do not modify href as it depends on the href-keys we redef the split-call
     \leclink@overwrite@hrefsplit

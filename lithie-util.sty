@@ -76,7 +76,7 @@
 
 \def\@litu@load@curargs#1{%
 \edef\@litu@tmp{\noexpand\forcsvlist{\noexpand\@@litu@load@consume@arg{%
-        \lu@Get{#1}{package}}{#1}}{\@litu@cur}}%
+    \lu@Get{#1}{package}}{#1}}{\@litu@cur}}%
 \@litu@tmp}
 
 \def\@lu@RequirePackage#1{%
@@ -152,13 +152,12 @@
 
 % TODO: alias functionality?
 % TODO: encoding
-
 \ProcessKeyvalOptions*
 
 % Load individuals first to allow options
 \@litu@hook@PackageRequire
 % Now load the groups.
-\forlistloop{\lu@LoadGroup}{\@litu@hook@GroupRequire}%
+\forlistloop{\lu@LoadGroup}{\@litu@hook@GroupRequire}
 % Require the packages
 \@litu@hook@RequirePackages\relax
 

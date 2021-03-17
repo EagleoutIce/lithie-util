@@ -11,7 +11,7 @@ headings_flag 1
 preamble "\\begin{theindex}%
   \\providecommand*\\indexgroup[1]{\\item \\textbf{#1}\\nopagebreak}~\\par\\providecommand{\\idxfsize}{\\normalsize}\\makeatletter
 \\ifcsname hyperpage\\endcsname
-\\LetLtxMacro\\ledx@h\\hyperpage%
+\\LetLtxMacro\\ledx@h\\hyperpage
 \\newif\\ifledx@rc@
 \\def\\ledx@@s{%
   \\def\\ledx@fs{Y}\\gdef\\ledx@@u{}\\gdef\\ledx@@b{}%

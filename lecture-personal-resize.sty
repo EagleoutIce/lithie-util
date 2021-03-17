@@ -27,7 +27,7 @@
 % [width] | height | content
 \newcommand\downsizeHeight[3][!]{%
   \savebox{\lecture@personal@downsize@box}{#3}%
-  \lecture@personal@downsize@box@height=\ht\lecture@personal@downsize@box%
+  \lecture@personal@downsize@box@height=\ht\lecture@personal@downsize@box
   \advance\lecture@personal@downsize@box@height by \dp\lecture@personal@downsize@box
   \ifdim\lecture@personal@downsize@box@height>#2 %
     \resizebox*{#1}{#2}{\usebox\lecture@personal@downsize@box}%
@@ -38,7 +38,7 @@
 % TODO: this might be reduced to use one/two dimens less
 \newcommand\downsizeBoth[3]{%
   \savebox{\lecture@personal@downsize@box}{#3}%
-  \lecture@personal@downsize@box@height=\ht\lecture@personal@downsize@box%
+  \lecture@personal@downsize@box@height=\ht\lecture@personal@downsize@box
   \advance\lecture@personal@downsize@box@height by \dp\lecture@personal@downsize@box
   \lecture@personal@downsize@box@width=\wd\lecture@personal@downsize@box
   \ifdim\lecture@personal@downsize@box@width>#2 %

@@ -24,9 +24,7 @@
 % \noist % disable index style file
 \RequirePackage{glossary-longragged}
 
-\iflglos@setup@enumitem@
-\RequirePackage{enumitem}
-\fi
+\iflglos@setup@enumitem@ \RequirePackage{enumitem} \fi
 
 \newif\ifatinitglossary
 % single- and plural-page

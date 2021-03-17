@@ -6,7 +6,6 @@
 %%
 %% note with pdfpc support
 %% based on the pdfpc package of 2020
-
 \ProvidesPackage{beamer-latex-pdfpc-notes}[2021/02/07 v1.0.0 Compile and pdfpc-notes LaTeX2e-Codes in LaTeX-Beamer]
 
 \RequirePackage{kvoptions}
@@ -28,14 +27,13 @@
 \ifx\PDFPC@duration\@empty
 \else
   \IfInteger{\PDFPC@duration}{}
-    {\PackageWarningNoLine{beamer-pdfpc-notes}{'duration' should be an integer}}%
+    {\PackageWarningNoLine{beamer-pdfpc-notes}{'duration' should be an integer}}
 \fi
-%
-%
+
 \ifx\PDFPC@lastminutes\@empty
 \else
   \IfInteger{\PDFPC@lastminutes}{}
-    {\PackageWarningNoLine{beamer-pdfpc-notes}{'lastminutes' should be an integer}}%
+    {\PackageWarningNoLine{beamer-pdfpc-notes}{'lastminutes' should be an integer}}
 \fi
 
 %%
@@ -51,9 +49,9 @@ ______<rdf:Description xmlns:pdfpc="https://github.com/pdfpc/pdfpc">^^J%
   \hyxmp@add@simple{pdfpc:StartTime}{\PDFPC@starttime}%
   \hyxmp@add@simple{pdfpc:EndTime}{\PDFPC@endtime}%
   \hyxmp@add@simple{pdfpc:LastMinutes}{\PDFPC@lastminutes}%
-  \ifPDFPC@disablemarkdown%
+  \ifPDFPC@disablemarkdown
     \hyxmp@add@simple{pdfpc:DisableMarkdown}{true}%
-  \else%
+  \else
     \hyxmp@add@simple{pdfpc:DisableMarkdown}{false}%
   \fi
   \hyxmp@add@simple{pdfpc:DefaultTransition}{\PDFPC@defaulttransition}%
@@ -88,7 +86,7 @@ ______</rdf:Description>^^J%
 }
 
 \long\def\PDFPC@writenote[#1]#2{%
-\begingroup%
+\begingroup
 \PDFPC@redefinition
   \def\@tmpa{#1}
   \ifx\@tmpa\PDFPC@@option@itemize

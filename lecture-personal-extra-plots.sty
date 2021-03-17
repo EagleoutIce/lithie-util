@@ -8,8 +8,8 @@
 
 
 \newif\iflibpp@tpalette@ \libpp@tpalette@true
-\DeclareOption{tpalette}{ \libpp@tpalette@true }
-\DeclareOption{notpalette}{ \libpp@tpalette@false }
+\DeclareOption{tpalette}{\libpp@tpalette@true}
+\DeclareOption{notpalette}{\libpp@tpalette@false}
 \ProcessOptions*
 
 \RequirePackage{tikz,pgfplots}
@@ -56,12 +56,10 @@
     fancy x/.default={},%
     fancy y/.style={yticklabel={\color{gray}\axisdefaultticklabel},xticklabel={\axisdefaultticklabel},ymajorgrids,extra y ticks={#1}},%
     fancy y/.default={},%
-    fancy/.style={fancy \libpp@barftype=#1},%
-    fancy/.default={},%
+    fancy/.style={fancy \libpp@barftype=#1}, fancy/.default={},%
     le/.style={legend pos={north east}}, lw/.style={legend pos={north west}},
     lse/.style={legend pos={south east}}, lsw/.style={legend pos={south west}},
-    libpp@default/.style={},%
-    libpp@default@bars/.style={},%
+    libpp@default/.style={},libpp@default@bars/.style={},%
     libpp@default@plots/.style={},%
     striped/.style={postaction={pattern=north east lines},pattern color=white}%
 }
@@ -92,8 +90,7 @@
 \let\libpp@resetcolor\libpp@@resetcolor
 \libpp@@resetcolor
 \else
-\def\libpp@cyclecolor{}
-\def\libpp@resetcolor{}
+\def\libpp@cyclecolor{}\def\libpp@resetcolor{}
 \fi
 
 \def\libpp@init#1{\pgfkeys{/libpp@keys,#1}\libpp@resetcolor}

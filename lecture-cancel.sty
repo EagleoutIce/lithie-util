@@ -7,7 +7,7 @@
 \ProvidesPackage{lecture-cancel}[2020/10/12 v1.0 cancel out text]
 
 % #1 text #2 shift start h #3 shift start v #4 shift end h #5 shift end v
-\newcommand*{\lecture@cancel}[5]{%
+\newcommand*\lecture@cancel[5]{%
     % clear out styles to avoid conflicting defs
     \tikz[baseline=(cancel-node.base),every node/.style={},every path/.style={}]{%
         \node[inner sep=\z@,outer sep=\z@] (cancel-node) {#1};
