@@ -11,7 +11,11 @@
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{family=LECIDX,prefix=LECIDX@}
 \DeclareStringOption[true]{automatic}[false]
+\DeclareBoolOption{dosplit}
 
+\ProcessKeyvalOptions*
+
+\ifLECIDX@dosplit\PassOptionsToPackage{splitindex}{imakeidx}\fi
 \RequirePackage[quiet]{imakeidx}
 \RequirePackage{letltxmacro,etoolbox,xstring}
 \def\indexname{Stichwortverzeichnis}
