@@ -38,7 +38,7 @@
 \let\addAuthor\lecture@@add@author
 
 \def\lecture@mail#1{\href{mailto:#1}{#1}}
-\let\mail\lecture@mail%
+\let\mail\lecture@mail
 
 \def\lecture@@mail@unknown{??}
 \def\lecture@@parse@author#1 (#2)#3\@nil{%
@@ -57,8 +57,8 @@
 \foreach \lecture@@tmp@curauthor in {#1} {%
 \ifx\lecture@@tmp@curauthor\@empty
 \else\addtocounter{lecture@counter@tmp@a}\@ne
-    \ifnum\thelecture@counter@tmp@a>1%
-    \ifnum\thelecture@counter@tmp@a=\lecture@author@totallength
+    \ifnum\thelecture@counter@tmp@a>1 %
+    \ifnum\thelecture@counter@tmp@a=\lecture@author@totallength\relax
         ~und \else,\space\fi\fi
     \expandafter\lecture@@parse@author\lecture@@tmp@curauthor{} (??)??\@nil
 \fi
