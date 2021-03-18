@@ -1,18 +1,12 @@
 %% lithie-util.sty
-%%
-%% --------------------------------------------------------------------------
-%%
-%% Autor: Florian Sihler, 20.09.2020
-%%
+%% Author: Florian Sihler, 20.09.2020
 %% Collection of all the other packages i have, which are requsted as needed.
-%%
 \ProvidesPackage{lithie-util}[2020/09/20 v1.0 the lithie util collector]
-
 \RequirePackage{kvoptions,etoolbox,lithie-profiles}
 \SetupKeyvalOptions{family=LITU,prefix=LITU@}
 
 % general
-\def\@litu@none{LIT@NOOPTS}
+\def\@litu@none{LIT@NO}
 
 % hooks
 \def\@litu@hook@PackageRequire{} \def\@litu@hook@GroupRequire{} \def\@litu@hook@RequirePackages{}
@@ -23,7 +17,7 @@
 
 % #1 group id
 \def\lu@Definendgroup#1{%
-    \@namedef{@litu@@group@#1}{}%
+    \expandafter\def\csname @litu@@group@#1\endcsname{}%
     \@litu@atl\@litu@all@groups{#1}%
     \DeclareVoidOption{#1}{\listadd\@litu@hook@GroupRequire{#1}}%
 }
@@ -40,9 +34,8 @@
     \protected@edef\@litu@tmp@curcsv{\noexpand\forcsvlist{\noexpand\@@lu@atgs{\@litu@tmp}}{#1}}\@litu@tmp@curcsv
 }
 
-\def\lu@Get#1#2{\csname @lu@module@map@#2@#1\endcsname}
+\def\lu@Get#1#2{\csname @lu@mu@map@#2@#1\endcsname}
 
-% TODO: maybe avoid duplicate loading; maybe group commands to avoid pollution?
 \def\@litu@resolve@module@args#1#2#3{%
 \edef\@litu@name{\lu@Get{#1}{name}}% todo only expand once
 \edef\@litu@cur{\csname LITU@\@litu@name\endcsname}%
@@ -61,7 +54,7 @@
 \def\@litu@execute@command#1#2{%
 \def\@@litu@cmd@chk{#2}%
 \ifx\@@litu@cmd@chk\@litu@cmd@defaults
-    \edef\@litu@tmp{\noexpand\@@litu@passopt@fp{\lu@Get{#1}{defaults}}{\lu@Get{#1}{package}}}%
+    \protected@edef\@litu@tmp{\noexpand\@@litu@passopt@fp{\lu@Get{#1}{defaults}}{\lu@Get{#1}{package}}}%
     \@litu@tmp\fi
 }
 
@@ -75,13 +68,13 @@
 }}
 
 \def\@litu@load@curargs#1{%
-\edef\@litu@tmp{\noexpand\forcsvlist{\noexpand\@@litu@load@consume@arg{%
+\protected@edef\@litu@tmp{\noexpand\forcsvlist{\noexpand\@@litu@load@consume@arg{%
     \lu@Get{#1}{package}}{#1}}{\@litu@cur}}%
 \@litu@tmp}
 
 \def\@lu@RequirePackage#1{%
 % allow others PassOptionsToPackage to be called by other hooks:
-\g@addto@macro\@litu@hook@RequirePackages{\typeout{LLib \lu@Get{#1}{package} (#1)}%
+\g@addto@macro\@litu@hook@RequirePackages{\typeout{L \lu@Get{#1}{package} (#1)}%
 \RequirePackage{\lu@Get{#1}{package}}}}
 
 \def\lu@LoadModule#1{%
@@ -96,10 +89,10 @@
 
 % #1 id, #2 module, #3 package-name, #4 defaults, #5 groups (all is forced)
 \def\lu@DefineModule#1#2#3#4#5{%
-  \expandafter\def\csname @lu@module@map@name@#1\endcsname{#2}%
-  \expandafter\def\csname @lu@module@map@package@#1\endcsname{#3}%
-  \expandafter\def\csname @lu@module@map@defaults@#1\endcsname{#4}%
-  \expandafter\def\csname @lu@module@map@groups@#1\endcsname{all,#5}%
+  \expandafter\def\csname @lu@mu@map@name@#1\endcsname{#2}%
+  \expandafter\def\csname @lu@mu@map@package@#1\endcsname{#3}%
+  \expandafter\def\csname @lu@mu@map@defaults@#1\endcsname{#4}%
+  \expandafter\def\csname @lu@mu@map@groups@#1\endcsname{all,#5}%
   \protected@edef\@litu@tmp{\noexpand\DeclareStringOption[\@litu@none]{\lu@Get{#1}{name}}[\lu@Get{#1}{defaults}]}\@litu@tmp
   \g@addto@macro\@litu@hook@PackageRequire{\lu@LoadModuleIfGiven{#1}}%
   \lu@AddToGroups{\lu@Get{#1}{groups}}{#1}%

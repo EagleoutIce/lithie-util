@@ -1,10 +1,5 @@
 %% lecture-personal.sty
-%%
-%% --------------------------------------------------------------------------
-%%
-%% Autor: Florian Sihler, 3.11.2020
-%%
-%% Float modifications i use in my scripts
+%% Author: Florian Sihler, 3.11.2020
 
 \ProvidesPackage{lecture-personal}[2020/11/03 v1.0 Personal collection]
 \RequirePackage{kvoptions,etoolbox}
@@ -17,7 +12,9 @@
 \DeclareStringOption[\@lecture@personal@noextra]{extras}[\@lecture@personal@noextra]
 \ProcessKeyvalOptions*
 
-\RequirePackage{lecture-personal-float,lecture-personal-general,lecture-personal-tikz,lecture-personal-glossary,lecture-personal-tabular,lecture-personal-resize}
+\RequirePackage{lecture-personal-float,lecture-personal-general,%
+    lecture-personal-tikz,lecture-personal-glossary,%
+    lecture-personal-tabular,lecture-personal-resize}
 \RequirePackage[imgprefix=\LPM@imgprefix,command=\LPM@command]{lecture-personal-profiles}
 
 % if supertabular is loaded, they would conflict :)))
@@ -31,10 +28,9 @@
 \appto\captionsngerman{\def\equationautorefname{Formel}}
 \appto\captionsenglish{\def\equationautorefname{Equation}}
 
-\edef\@lecture@personal@tmp{\LPM@extras}
+\protected@edef\@lecture@personal@tmp{\LPM@extras}
 \ifx\@lecture@personal@tmp\@lecture@personal@noextra\else
-\def\@lecture@personal@loadextras#1{\RequirePackage{lecture-personal-extra-#1}}
-\expandafter\forcsvlist\expandafter\@lecture@personal@loadextras\expandafter{\@lecture@personal@tmp}
+    \RequirePackage[load={\@lecture@personal@tmp}]{lecture-personal-extra}
 \fi
 
 \AtEndPreamble{%

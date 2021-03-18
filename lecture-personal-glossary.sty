@@ -20,9 +20,7 @@
 
 \def\glstreenamefmt#1{#1}
 
-% TODO: important fix for glossarymark
 \let\glossarymark\sectionmark
-\renewcommand{\glossarysection}[2][]{\section{#1}}
-% \renewcommand*{\glstextformat}[1]{\lecture@fig@style@nonbold{#1}}
+\renewcommand\glossarysection[2][]{\section{#1}}
 
 \endinput
