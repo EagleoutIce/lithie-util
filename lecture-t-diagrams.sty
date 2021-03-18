@@ -1,15 +1,10 @@
 %% lecture-t-diagrams.sty
-%%
-%% --------------------------------------------------------------------------
-%%
-%% Autor: Florian Sihler, 25.10.2020
-%%
+%% Author: Florian Sihler, 25.10.2020
+
 %% tikz extension for t-diagrams
-%%
 \ProvidesPackage{lecture-t-diagrams}[2020/11/06 v1.0 t-diagrams]
 
 % two hours wasted to do it with shapes. Lets do it simpler
-
 \newlength\tblocksize \tblocksize=.9cm
 \newlength\tblockoffset \tblockoffset=.33em
 
@@ -35,5 +30,4 @@
 
 \def\tdiagramdefaultscale{.9}
 \newenvironment{t-diagram}[1][]{\tikzpicture[yscale=\tdiagramdefaultscale,#1]}{\endtikzpicture}
-
 \endinput

@@ -1,11 +1,7 @@
 %% typeset-list.sty
-%%
-%% --------------------------------------------------------------------------
-%%
-%% Autor: Florian Sihler, 1.12.2020
-%%
+%% Author: Florian Sihler, 1.12.2020
+
 %% More customizeable typeset-list command
-%%
 \ProvidesPackage{typeset-list}[2020/10/12 v1.0 typeset-lists]
 \RequirePackage{pgffor}
 
@@ -16,12 +12,12 @@
 }
 
 \newcommand*\TypesetList[3][typesetVoid]{\begingroup
-    \edef\@typeset@list@and{#3}\edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
+    \protected@edef\@typeset@list@and{#3}\protected@edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
     \endgroup
 }
 
 \newcommand*\typesetList[2][typesetVoid]{%
-    \edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
+    \protected@edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
 }
 
 %% this will typeset a List in German List-Notation
@@ -62,5 +58,4 @@
     \def\@ltu@ttl@formatter@current{\@ltu@ttl@TextBfFormat}%
     \def\@Acronym{\@ltu@ttl@format@iter#1 \@nil}{\ignorespaces\@Acronym}%
 }
-
 \endinput

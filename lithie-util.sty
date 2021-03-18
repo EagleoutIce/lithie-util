@@ -1,13 +1,12 @@
 %% lithie-util.sty
 %% Author: Florian Sihler, 20.09.2020
+
 %% Collection of all the other packages i have, which are requsted as needed.
 \ProvidesPackage{lithie-util}[2020/09/20 v1.0 the lithie util collector]
 \RequirePackage{kvoptions,etoolbox,lithie-profiles}
 \SetupKeyvalOptions{family=LITU,prefix=LITU@}
 
-% general
 \def\@litu@none{LIT@NO}
-
 % hooks
 \def\@litu@hook@PackageRequire{} \def\@litu@hook@GroupRequire{} \def\@litu@hook@RequirePackages{}
 \def\@litu@all@groups{}
@@ -154,5 +153,4 @@
 \forlistloop{\lu@LoadGroup}{\@litu@hook@GroupRequire}
 % Require the packages
 \@litu@hook@RequirePackages\relax
-
 \endinput
