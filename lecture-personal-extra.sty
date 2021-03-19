@@ -3,16 +3,16 @@
 \ProvidesPackage{lecture-personal-extra}[2020/11/03 v1.0 Personal extra collection]
 \RequirePackage{kvoptions,etoolbox}
 \SetupKeyvalOptions{family=LPE,prefix=LPE@}
-
-\edef\@l@persex@no{L@PERS@NO}
+\def\@l@persex@no{L@PERS@NO}
 
 \DeclareStringOption[\@l@persex@no]{load}[\@l@persex@no]
 \ProcessKeyvalOptions*
 
+\def\@l@persex@load#1{\RequirePackage{lecture-personal-extra-#1}}
+\newcommand*\LoadPersonalExtras[1]{\ifx!#1!\else\forcsvlist\@l@persex@load{#1}\fi}
+
 \protected@edef\@l@persex@{\LPE@load}
 \ifx\@l@persex@\@l@persex@no\else
-\def\@l@persex@load#1{\RequirePackage{lecture-personal-extra-#1}}
-\expandafter\forcsvlist\expandafter\@l@persex@load\expandafter{\@l@persex@}
+    \expandafter\LoadPersonalExtras\expandafter{\@l@persex@}%
 \fi
-
 \endinput
