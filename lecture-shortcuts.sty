@@ -71,14 +71,10 @@
 \let\oldphi\phi
 \let\phi\varphi
 
-\providecommand*\das
-    {\vcentcolon\nolinebreak\mkern-1mu\nolinebreak=}
-\providecommand*\daseq
-    {\vcentcolon\nolinebreak\mkern-1mu\nolinebreak\Leftrightarrow}
-\providecommand*\sad
-    {=\nolinebreak\mkern-1mu\nolinebreak\vcentcolon}
-\providecommand*\qesad
-    {\Leftrightarrow\nolinebreak\mkern-1mu\nolinebreak\vcentcolon}
+\providecommand*\das{\vcentcolon\nolinebreak\mkern-1mu\nolinebreak=}
+\providecommand*\daseq{\vcentcolon\nolinebreak\mkern-1mu\nolinebreak\Leftrightarrow}
+\providecommand*\sad{=\nolinebreak\mkern-1mu\nolinebreak\vcentcolon}
+\providecommand*\qesad{\Leftrightarrow\nolinebreak\mkern-1mu\nolinebreak\vcentcolon}
 \providecommand*\shouldeq{\stackrel{!}{=}}
 
 \AtBeginDocument{%
@@ -90,12 +86,9 @@
 \setlist[aufgaben,3]{label=(\arabic*)}%
 }{}}
 
-\let\uc\textsc
-\robustify\uc
+\let\uc\textsc \robustify\uc
 \newenvironment{erkenntnis}{\begin{center}}{\end{center}}
 
-\let\rom\@roman
-\let\Rom\@Roman
-
+\let\rom\@roman \let\Rom\@Roman
 \def\InputFrom#1{\def\input@path{#1}}
 \endinput

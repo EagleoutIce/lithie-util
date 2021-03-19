@@ -1,0 +1,23 @@
+%% lecture-personal-extra-compiler-construction.sty
+%% Author: Florian Sihler, 19.3.2021
+
+\ProvidesPackage{lecture-personal-extra-compiler-construction}[2021/03/19 v1.0 compiler-construction etras]
+
+\RequirePackage{mathtools}
+\DeclareRobustCommand\LTo{\ensuremath{\xRightarrow[\text{\smaller[2]lm}~]{}}}
+\DeclareRobustCommand\RTo{\ensuremath{\xRightarrow[\text{\smaller[2]rm}~]{}}}
+\DeclareRobustCommand\First{\MakeUppercase{first}}
+\DeclareRobustCommand\Follow{\MakeUppercase{follow}}
+\DeclareRobustCommand\FirstK{\MakeUppercase{first}\textsubscript{k}}
+\DeclareRobustCommand\FollowK{\MakeUppercase{follow}\textsubscript{k}}
+\DeclareMathOperator\Lout{out}
+\DeclareMathOperator\Lgen{gen}
+\DeclareMathOperator\Lin{in}
+\DeclareMathOperator\Lkill{kill}
+\DeclareMathOperator\la{LA}
+\providecommand\tblockfont[1]{\textit{#1}}
+\def\lepro@cc@bslfrmt#1#2{\mbox{\tblockfont{#1}\ifx!#2!\else\textsubscript{\thinspace\T{#2}}\fi}}
+\def\SL{\lepro@cc@bslfrmt{SL}}\def\SC{\lepro@cc@bslfrmt{SC}}
+\def\ML{\lepro@cc@bslfrmt{ML}}\def\TL{\lepro@cc@bslfrmt{TL}}
+\def\IL{\lepro@cc@bslfrmt{IL}}
+\endinput
