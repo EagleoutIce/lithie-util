@@ -1,10 +1,9 @@
 %% lecture-personal-extra-compiler-construction.sty
 %% Author: Florian Sihler, 19.3.2021
 \ProvidesPackage{lecture-personal-extra-compiler-construction}[2021/03/19 v1.0 compiler-construction etras]
-
-\RequirePackage{mathtools}
-\DeclareRobustCommand\LTo{\ensuremath{\xRightarrow[\text{\smaller[2]lm}~]{}}}
-\DeclareRobustCommand\RTo{\ensuremath{\xRightarrow[\text{\smaller[2]rm}~]{}}}
+\RequirePackage{mathtools,relsize}
+\DeclareRobustCommand\LTo{\ensuremath{\xRightarrow[\text{\raisebox{2.25pt}[\z@][\z@]{\smaller[2]lm}}~]{}}}
+\DeclareRobustCommand\RTo{\ensuremath{\xRightarrow[\text{\raisebox{2.25pt}[\z@][\z@]{\smaller[2]rm}}~]{}}}
 \DeclareRobustCommand\First{\MakeUppercase{first}}
 \DeclareRobustCommand\Follow{\MakeUppercase{follow}}
 \DeclareRobustCommand\FirstK{\MakeUppercase{first}\textsubscript{k}}
