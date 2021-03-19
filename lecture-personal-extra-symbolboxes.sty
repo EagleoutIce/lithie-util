@@ -4,18 +4,18 @@
 \ProvidesPackage{lecture-personal-extra-symbolboxes}[2021/03/18 v1.0 symbolboxes]
 
 \RequirePackage{tikz}
-\def\lec@pexsym@#1{\tikz{\node[#1]{};}}
+\def\lec@pexsym@#1{\tikz{\node[draw=black,#1]{};}}
 
 \newsavebox\symCircle
-\sbox\symCircle{\lec@pexsym@{circle,fill=paletteA,draw=black,scale=.6,minimum width=1em,minimum height=1em}}
+\sbox\symCircle{\lec@pexsym@{circle,fill=paletteA,scale=.6,minimum width=1em,minimum height=1em}}
 \newsavebox\symSquare
-\sbox\symSquare{\lec@pexsym@{rectangle,fill=paletteB,draw=black,scale=.6,minimum width=1em,minimum height=1em}}
+\sbox\symSquare{\lec@pexsym@{rectangle,fill=paletteB,scale=.6,minimum width=1em,minimum height=1em}}
 \newsavebox\symDiamond
-\sbox\symDiamond{\lec@pexsym@{diamond,fill=paletteD,draw=black,scale=.6,minimum width=1em,minimum height=1em}}
+\sbox\symDiamond{\lec@pexsym@{diamond,fill=paletteD,scale=.6,minimum width=1em,minimum height=1em}}
 \newsavebox\symTriangle
-\sbox\symTriangle{\lec@pexsym@{isosceles triangle,fill=paletteA!60!white,draw=black,scale=.55,minimum width=.9em,minimum height=.75em,shape border rotate=90}}
+\sbox\symTriangle{\lec@pexsym@{isosceles triangle,fill=paletteA!60!white,scale=.55,minimum width=.9em,minimum height=.75em,shape border rotate=90}}
 \newsavebox\symPuff
-\sbox\symPuff{\lec@pexsym@{cloud, cloud puffs=7,fill=paletteB!60!white,draw=black,scale=.6,minimum width=1.33em,minimum height=1.33em}}
+\sbox\symPuff{\lec@pexsym@{cloud,cloud puffs=7,fill=paletteB!60!white,scale=.6,minimum width=1.33em,minimum height=1.33em}}
 \newsavebox\symTape
-\sbox\symTape{\lec@pexsym@{shape=tape,tape bend height=.25em,fill=paletteC!60!white,draw=black,scale=.6,minimum width=1.33em,minimum height=1em}}
+\sbox\symTape{\lec@pexsym@{shape=tape,tape bend height=.25em,fill=paletteC!60!white,scale=.6,minimum width=1.33em,minimum height=1em}}
 \endinput

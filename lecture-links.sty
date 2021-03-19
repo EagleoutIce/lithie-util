@@ -65,22 +65,21 @@
 \newif\iflecstar
 
 \def\leclink@star@autoref#1{\lecstartrue\def\lecmrk{#1}\leclink@autoref*{#1}}
-\def\leclink@nostar@autoref#1{\lecstarfalse\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@autoref@linkstyle}\leclink@autoref{#1}}%
+\def\leclink@nostar@autoref#1{\lecstarfalse\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@autoref@linkstyle}\leclink@autoref{#1}}
 
 \def\leclink@star@nameref#1{\lecstartrue\def\lecmrk{#1}\leclink@nameref*{#1}}%
-\def\leclink@nostar@nameref#1{\lecstarfalse\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@nameref@linkstyle}\leclink@nameref{#1}}%
+\def\leclink@nostar@nameref#1{\lecstarfalse\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@nameref@linkstyle}\leclink@nameref{#1}}
 
 \def\leclink@label@hyperref[#1]#2{%
     \def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@hyperref@linkstyle}\leclink@@lb@hyperref[#1]{#2}%
-}%
+}
 \def\leclink@full@hyperref#1#2#3{%
     \def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@hyperref@linkstyle}\leclink@@@hyperref{#1}{#2}{#3}%
-}%
+}
 
 \def\leclink@read@url#1{\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@url@linkstyle}\leclink@nxtst{\leclink@url{#1}}{#1}{}}%
-
-\def\leclink@star@ref#1{\lecstartrue\def\lecmrk{#1}\leclink@ref*{#1}}%
-    \def\leclink@nostar@ref#1{\lecstarfalse\def\lecmrk{#1}\leclink@ref{#1}}%
+\def\leclink@star@ref#1{\lecstartrue\def\lecmrk{#1}\leclink@ref*{#1}}
+\def\leclink@nostar@ref#1{\lecstarfalse\def\lecmrk{#1}\leclink@ref{#1}}
 
 \AtBeginDocument{% robust not needed as let persists
 % autoref
@@ -135,7 +134,6 @@
 \def\href@split$$1#$$2#$$3\\$$4{%
     \def\lecmrk{$$1}\leclink@pnextlinkstyle{\leclink@href@linkstyle}\hyper@@link{$$1}{$$2}{$$4}%
   \endgroup
-}%
-}
+}}
 \endgroup
 \endinput

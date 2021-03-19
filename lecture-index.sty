@@ -9,7 +9,6 @@
 \SetupKeyvalOptions{family=LECIDX,prefix=LECIDX@}
 \DeclareStringOption[true]{automatic}[false]
 \DeclareBoolOption{dosplit}
-
 \ProcessKeyvalOptions*
 
 \ifLECIDX@dosplit\PassOptionsToPackage{splitindex}{imakeidx}\fi
@@ -63,14 +62,12 @@
 
 \newcommand*\lecidx@@lindex[2][]{\lecidx@lindex[#1]{#2}{#2}}
 
-
 \newcommand*\lecidx@guardidx[2][\jobname]{\begingroup
     {\def\"{\lecidx@tick}\protected@xdef\lecidx@sort{#2}}%
     \def\lecidxindex{#1}%
     \lecidx@index{\lecidx@sort\lecidx@idxactual#2}%
 \endgroup}
 \let\guardidx\lecidx@guardidx
-
 % ref index
 \DeclareRobustCommand*\rindex{\@ifstar\lecidx@rindex\lecidx@@rindex}
 
@@ -82,10 +79,8 @@
 
 % sub link index
 \DeclareRobustCommand*\slindex{\@ifstar\lecidx@slindex\lecidx@@slindex}
-
 \def\lecidx@slindex#1#2{\lindex*[\leci@index@h]{#1}{#2}}
 \def\lecidx@@slindex#1{\lindex[\leci@index@h]{#1}}
-
 % old for compat
 \DeclareRobustCommand{\kw}[1]{\textbf{#1}\lecidx@index{#1}}
 \DeclareRobustCommand{\sw}[2][Gruppenname]{#2\lecidx@index{#1\lecidx@idxsub #2}}
