@@ -33,6 +33,7 @@
 \def\lecidx@sanitize#1{%
 {\def\%{:percent:}\def\&{:and:}\def\-{:-:}\def\"{:quote:}%
  \def\~{:tilde:}\def\'{:tright:}\def\allowbreak{}%
+ \def\({:bgmath:}\def\){:emath:}%
 \StrSubstitute{#1}{\lecidx@idxsub}{:sub:}[\lecidx@tmpl]%
 \StrSubstitute{\lecidx@tmpl}{Ä}{:Ae:}[\lecidx@tmpl]%
 \StrSubstitute{\lecidx@tmpl}{ä}{:ae:}[\lecidx@tmpl]%

@@ -21,16 +21,16 @@
 
 \RequirePackage{etoolbox,letltxmacro}
 % no linebreaks in footnotes:
-\interfootnotelinepenalty=10000
+\interfootnotelinepenalty10000
 
 \newcommand*\SetAllLinkStyle[1]{%
-    \def\leclink@autoref@linkstyle##1##2##3{#1}%
-    \def\leclink@nameref@linkstyle##1##2##3{#1}%
-    \def\leclink@hyperref@linkstyle##1##2##3{#1}%
-    \def\leclink@hyperlink@linkstyle##1##2##3{#1}%
-    \def\leclink@url@linkstyle##1##2##3{#1}%
-    \def\leclink@href@linkstyle##1##2##3{#1}%
-    \def\leclink@footnote@linkstyle##1##2##3{#1}%
+\def\leclink@autoref@linkstyle##1##2##3{#1}%
+\def\leclink@nameref@linkstyle##1##2##3{#1}%
+\def\leclink@hyperref@linkstyle##1##2##3{#1}%
+\def\leclink@hyperlink@linkstyle##1##2##3{#1}%
+\def\leclink@url@linkstyle##1##2##3{#1}%
+\def\leclink@href@linkstyle##1##2##3{#1}%
+\def\leclink@footnote@linkstyle##1##2##3{#1}%
 }
 
 \newcommand*\SetAutorefLinkStyle[1]{\def\leclink@autoref@linkstyle##1##2##3{#1}}
