@@ -12,7 +12,7 @@
 
 \RequirePackage{tikz,pgfplots}
 
-\newlength\libpp@barspace \libpp@barspace=1pt
+\newlength\libpp@barspace \libpp@barspace=\p@
 \newlength\libpp@barwidth \libpp@barwidth=11pt
 
 \newif\iflibpp@autotikz@
@@ -25,7 +25,7 @@
     every axis/.append style={legend cell align={left}},%
     dim/.style args={#1:#2}{width=#1,height=#2},%
     plain legend/.style={%
-        legend style={draw=none, inner sep=\z@, rounded corners=1pt}%
+        legend style={draw=none, inner sep=\z@, rounded corners=\p@}%
     },%
     plain axis/.style={%e
         axis line style={draw=none},xtick pos=left,ytick pos=left%

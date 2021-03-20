@@ -2,9 +2,7 @@
 %% Author: Florian Sihler, 25.10.2020
 
 %% algorithms2e Support for lectures
-%%
 \ProvidesPackage{lecture-algorithms}[2020/10/25 v1.0 algorithms2e]
-
 \RequirePackage{etoolbox}
 \RequirePackage[linesnumbered,algoruled]{algorithm2e}
 
@@ -27,7 +25,7 @@
 \SetKw{KwNot}{not}
 
 \def\@lithie@algo@def@style{\rmfamily\upshape}
-\def\@lithiealgo@init{%\def\alabel##1{\gdef\@alabel{#1}}%
+\def\@lithiealgo@init{%
   \IncMargin{1.75em}\def\Int{{\@lithie@algo@def@style int}}\def\Matrix{{\@lithie@algo@def@style 2DMatrix}}\def\True{{\@lithie@algo@def@style true}}\def\False{{\@lithie@algo@def@style false}}%
 }
 \def\@lithiealgo@exit{\DecMargin{1.75em}}
