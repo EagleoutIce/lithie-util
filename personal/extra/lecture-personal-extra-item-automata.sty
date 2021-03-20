@@ -13,7 +13,7 @@
   % normal state used for small s_i State diagrams
   state/.style={circle,font=\Large\sffamily, draw, minimum size=1cm,minimum height=1cm,lecture@state@init},
   % wide state used for s_{1,3,7,9} or [S \to \readpointer E \endsymbol]
-  wstate/.style={wstate shape,wstate shape arc factor=0.45,font=\Large\sffamily, draw, minimum size=1cm,minimum height=1cm,inner sep=8pt,align=left,lecture@state@init},%
+  wstate/.style={wstate shape,wstate shape arc factor=.45,font=\Large\sffamily, draw, minimum size=1cm,minimum height=1cm,inner sep=8pt,align=left,lecture@state@init},%
   % block state, used like state but with padding
   bstate/.style={rectangle,draw,align=left,minimum width=2cm,inner sep=3pt,lecture@state@init},%
   % mark a state as final
@@ -48,420 +48,419 @@
 }
 
 \newcommand*\lecture@personal@itemautomata@nostar[3][]{%
-  \begingroup
-      \let\e\endsymbol
-      \let\r\readpointer
-      #2~$\lecture@personal@to$~%
-      #3%
-      \ifx!#1!\else~\hfill\textcolor{darkgray}{\mbox{#1}}\fi
-  \endgroup
+\begingroup
+\let\e\endsymbol
+\let\r\readpointer
+#2~$\lecture@personal@to$~%
+#3%
+\ifx!#1!\else~\hfill\textcolor{darkgray}{\mbox{#1}}\fi
+\endgroup
 }
 
-\newcommand*{\automata}[2][]{\graph[math nodes,grow right=1.5cm,edges={-Kite},#1]{#2};}
+\newcommand*\automata[2][]{\graph[math nodes,grow right=1.5cm,edges={-Kite},#1]{#2};}
 
 % Rounded rectangle => wstate shape
 % based on pgf
 
 \pgfkeys{/pgf/.cd,
-    wstate shape west arc/.initial=convex,%
-    wstate shape east arc/.initial=convex,%
-    wstate shape left arc/.style={/pgf/wstate shape west arc=#1},%
-    wstate shape right arc/.style={/pgf/wstate shape east arc=#1},%
-    wstate shape arc length/.initial=180,%
-    wstate shape arc factor/.initial=1,%
-    wstate shape arc width/.initial=33pt%
+  wstate shape west arc/.initial=convex,%
+  wstate shape east arc/.initial=convex,%
+  wstate shape left arc/.style={/pgf/wstate shape west arc=#1},%
+  wstate shape right arc/.style={/pgf/wstate shape east arc=#1},%
+  wstate shape arc length/.initial=180,%
+  wstate shape arc factor/.initial=1,%
+  wstate shape arc width/.initial=33pt%
 }%
 \newlength\lecture@personal@tikz@a
 
 \pgfdeclareshape{wstate shape}{%
-  \savedmacro\westarc{%
-    \edef\westarc{\pgfkeysvalueof{/pgf/wstate shape west arc}}%
-  }%
-  \savedmacro\eastarc{%
-    \edef\eastarc{\pgfkeysvalueof{/pgf/wstate shape east arc}}%
-  }%
-  \savedmacro\roundedrectanglepoints{%
-    %
-    % Get half the arc angle, a.
-    %
-    \pgfmathsetlength\pgf@x{\pgfkeysvalueof{/pgf/wstate shape arc length}}%
-    \pgf@x=.5\pgf@x
-    \edef\halfarcangle{\pgfmath@tonumber{\pgf@x}}%
-    \addtosavedmacro\halfarcangle
-    %
-    % Get the (half) node dimensions x & y.
-    %
-    \pgfmathsetlength\pgf@x{\pgfkeysvalueof{/pgf/inner xsep}}%
-    \edef\innerxsep{\the\pgf@x}%
-    \pgf@xa=0.5\wd\pgfnodeparttextbox
-    \edef\halftextwidth{\the\pgf@xa}%
-    \addtosavedmacro\halftextwidth
-    \advance\pgf@x by\pgf@xa
-    %
-    \pgfmathsetlength\pgf@y{\pgfkeysvalueof{/pgf/inner ysep}}%
-    \edef\innerysep{\the\pgf@y}%
-    \pgf@ya=.5\ht\pgfnodeparttextbox
-    \advance\pgf@ya by.5\dp\pgfnodeparttextbox
-    \edef\halftextheight{\the\pgf@ya}%
-    \addtosavedmacro\halftextheight
-    \advance\pgf@y by\pgf@ya
-    %
-    % Adjust for minimum height
-    %
-    \pgfmathsetlength\pgf@yb{\pgfkeysvalueof{/pgf/minimum height}}%
-    \ifdim\pgf@y<.5\pgf@yb \pgf@y=.5\pgf@yb \fi
-    \edef\halfheight{\the\pgf@y}%
-    \addtosavedmacro\halfheight
-    %
-    % Calculate the radius of the arc ends.
-    %
-    \pgfmathcosec@{\halfarcangle}%
-    \pgf@ya=\pgfmathresult\pgf@y
-    \edef\yradius{\the\pgf@ya}%
-    \pgfmathmultiply@{\pgfkeysvalueof{/pgf/wstate shape arc width}}{\pgfkeysvalueof{/pgf/wstate shape arc factor}}%
-    \lecture@personal@tikz@a=\pgfmathresult pt%
-    \edef\xradius{\the\lecture@personal@tikz@a}%
-    \addtosavedmacro\yradius
-    \addtosavedmacro\xradius
-    %
-    % Arc width = r - r*cos(a/2).
-    %
-    \pgfmathcos@{\halfarcangle}%
-    \pgf@xa=\lecture@personal@tikz@a
-    \advance\pgf@xa by-\pgfmathresult\lecture@personal@tikz@a
-    %
-    % When the node contents are pushed inside a convex arc,
-    % the resulting chord has a height r - r*cos(asin(0.5*h/r)).
-    %
-    \pgfmathdivide{\halftextheight}{\yradius}%
-    \pgfmathasin@{\pgfmathresult}%
-    \pgfmathcos@{\pgfmathresult}%
-    \pgf@xb=\lecture@personal@tikz@a
-    \advance\pgf@xb by-\pgfmathresult\lecture@personal@tikz@a
-    %
-    % Adjust for minimum width.
-    %
-    \edef\westarc{\pgfkeysvalueof{/pgf/wstate shape west arc}}%
-    \edef\eastarc{\pgfkeysvalueof{/pgf/wstate shape east arc}}%
-    %
-    \pgfutil@tempdima=2.0\pgf@x% x still holds the half width.
-    \ifx\westarc\pgf@lib@sh@misc@rr@text@concave
-      \advance\pgfutil@tempdima by\pgf@xa
-    \else
-      \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
-        \advance\pgfutil@tempdima by\pgf@xb
-      \fi
-    \fi
-    %
-    \ifx\eastarc\pgf@lib@sh@misc@rr@text@concave
-      \advance\pgfutil@tempdima by\pgf@xa
-    \else
-      \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
-        \advance\pgfutil@tempdima by\pgf@xb
-      \fi
-    \fi
-    %
-    \pgfmathsetlength\pgfutil@tempdimb{\pgfkeysvalueof{/pgf/minimum width}}%
-    \ifdim\pgfutil@tempdima<\pgfutil@tempdimb
-      \advance\pgfutil@tempdimb by-\pgfutil@tempdima
-      \divide\pgfutil@tempdimb by2\relax
-      \edef\xoffset{\the\pgfutil@tempdimb}%
-    \else
-      \let\xoffset=\innerxsep%
-    \fi
-    %
-    % The node is made wider if convex arcs overlap.
-    %
-    \pgf@x=\halftextwidth\relax
-    \advance\pgf@x by\xoffset\relax
-    \pgf@xc=\pgf@ya
-    \advance\pgf@xc by-\pgf@xb
-    \ifdim\pgf@xc>\pgf@x\relax
-      \advance\pgf@xc by-\pgf@x
-      \advance\pgf@xc by\xoffset\relax
-      \edef\xoffset{\the\pgf@xc}%
-    \fi
-    \addtosavedmacro\xoffset
-    %
-    \pgf@x=\halftextwidth\relax
-    \advance\pgf@x by\xoffset\relax
-    \edef\halfwidth{\the\pgf@x}%
-    \addtosavedmacro\halfwidth
-    %
-    \edef\arcwidth{\the\pgf@xa}%
-    \addtosavedmacro\arcwidth
-    %
-    \edef\chordwidth{\the\pgf@xb}%
-    \addtosavedmacro\chordwidth
-    %
-    \pgfmathsetlengthmacro\outerxsep{\pgfkeysvalueof{/pgf/outer xsep}}%
-    \pgfmathsetlengthmacro\outerysep{\pgfkeysvalueof{/pgf/outer ysep}}%
-    \addtosavedmacro\outerxsep
-    \addtosavedmacro\outerysep
-    %
-    % calculate some horizontal adjustments made for the default miter
-    % drawn when an arc meets the north or south side of the node path.
-    %
-    \ifdim\halfarcangle pt=90pt\relax% Avoid division by zero.
-      \def\concavexshift{0pt}%
-    \else
-      % For a concave arc: outer xsep * cosec((90-a/2)/2)*cos((90-a/2)/2).
-      \pgfmathsubtract@{90}{\halfarcangle}%
-      \pgfmathdivide@{\pgfmathresult}{2}%
-      \let\angletemp=\pgfmathresult
-      \pgf@x=\outerxsep\relax
-      \pgfmathcosec@{\angletemp}%
-      \pgf@x=\pgfmathresult\pgf@x
-      \pgfmathcos@{\angletemp}%
-      \pgf@x=\pgfmathresult\pgf@x
-      \edef\concavexshift{\the\pgf@x}%
-    \fi
-    \addtosavedmacro\concavexshift%
-    %
-    \ifdim\halfarcangle pt=90pt\relax% Avoid division by zero.
-      \def\convexxshift{0pt}%
-    \else
-      % For a convex arc: outer xsep * cosec((90+a/2)/2)*cos((90+a/2)/2).
-      \pgfmathadd@{90}{\halfarcangle}%
-      \pgfmathdivide@{\pgfmathresult}{2}%
-      \let\angletemp=\pgfmathresult
-      \pgf@x=\outerxsep\relax
-      \pgfmathcosec@{\angletemp}%
-      \pgf@x=\pgfmathresult\pgf@x
-      \pgfmathcos@{\angletemp}%
-      \pgf@x=\pgfmathresult\pgf@x
-      \edef\convexxshift{\the\pgf@x}%
-    \fi
-    \addtosavedmacro\convexxshift
-  }%
-  \saveddimen\halflinewidth{\pgf@x.5\pgflinewidth}%
-  \savedanchor\centerpoint{%
-    \pgf@x=.5\wd\pgfnodeparttextbox
-    \pgf@y=.5\ht\pgfnodeparttextbox
-    \advance\pgf@y by-.5\dp\pgfnodeparttextbox
-  }%
-  \savedanchor\midpoint{%
-    \pgf@x=.5\wd\pgfnodeparttextbox
-    \pgfmathsetlength\pgf@y{+.5ex}%
-  }%
-  \savedanchor\basepoint{%
-    \pgf@x=.5\wd\pgfnodeparttextbox
-    \pgf@y\z@\relax
-  }%
-  \anchor{center}{\centerpoint}%
-  \anchor{mid}{\midpoint}%
-  \anchor{mid west}{%
-    \csname pgf@anchor@wstate shape@west\endcsname
-    \pgf@xc=\pgf@x
-    \midpoint
-    \pgf@x=\pgf@xc
-  }%
-  \anchor{mid east}{%
-    \csname pgf@anchor@wstate shape@east\endcsname
-    \pgf@xc=\pgf@x
-    \midpoint
-    \pgf@x=\pgf@xc
-  }%
-  \anchor{base}{\basepoint}%
-  \anchor{base west}{%
-    \csname pgf@anchor@wstate shape@west\endcsname
-    \pgf@xc=\pgf@x
-    \basepoint
-    \pgf@x=\pgf@xc
-  }%
-  \anchor{base east}{%
-    \csname pgf@anchor@wstate shape@east\endcsname
-    \pgf@xc=\pgf@x
-    \basepoint
-    \pgf@x=\pgf@xc
-  }%
-  \anchor{north}{%
-    \roundedrectanglepoints
-    \pgfpointadd{\centerpoint}{\pgfpoint{+0pt}{\halfheight+\outerysep}}%
-  }%
-  \anchor{south}{%
-    \roundedrectanglepoints
-    \pgfpointadd{\centerpoint}{\pgfpoint{+0pt}{-\halfheight-\outerysep}}%
-  }%
-  \anchor{west}{%
-    \roundedrectanglepoints
-    \pgfpointadd{\centerpoint}{%
-      \ifx\westarc\pgf@lib@sh@misc@rr@text@concave
-        \pgfpoint{-\halfwidth-\arcwidth-\concavexshift}{+0pt}%
-      \else
-        \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
-          \pgfpoint{-\halfwidth-\chordwidth-\outerxsep}{+0pt}%
-        \else
-          \pgfpoint{-\halfwidth-\outerxsep}{+0pt}%
-        \fi
-      \fi
-    }%
-  }%
-  \anchor{north west}{%
-    \roundedrectanglepoints
-    \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
-      \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\arcwidth-\convexxshift}{+0pt}}%
-    \else
-      \csname pgf@anchor@wstate shape@west\endcsname
-    \fi
-    \pgf@xc=\pgf@x
-    \csname pgf@anchor@wstate shape@north\endcsname
-    \pgf@x=\pgf@xc
-  }%
-  \anchor{south west}{%
-    \roundedrectanglepoints
-    \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
-      \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\arcwidth-\convexxshift}{+0pt}}%
-    \else
-      \csname pgf@anchor@wstate shape@west\endcsname
-    \fi
-    \pgf@xc=\pgf@x
-    \csname pgf@anchor@wstate shape@south\endcsname
-    \pgf@x=\pgf@xc
-  }%
-  \anchor{east}{%
-    \roundedrectanglepoints
-    \pgfpointadd{\centerpoint}{%
-      \ifx\eastarc\pgf@lib@sh@misc@rr@text@concave
-        \pgfpoint{\halfwidth+\arcwidth+\concavexshift}{+0pt}%
-      \else
-        \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
-          \pgfpoint{\halfwidth+\chordwidth+\outerxsep}{+0pt}%
-        \else
-          \pgfpoint{\halfwidth+\outerxsep}{+0pt}%
-        \fi
-      \fi
-    }%
-  }%
-  \anchor{north east}{%
-    \roundedrectanglepoints
-    \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
-      \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\arcwidth+\convexxshift}{+0pt}}%
-    \else
-      \csname pgf@anchor@wstate shape@east\endcsname
-    \fi
-    \pgf@xc=\pgf@x
-    \csname pgf@anchor@wstate shape@north\endcsname
-    \pgf@x=\pgf@xc
-  }%
-  \anchor{south east}{%
-    \roundedrectanglepoints
-    \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
-      \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\arcwidth+\convexxshift}{+0pt}}%
-    \else
-      \csname pgf@anchor@wstate shape@east\endcsname
-    \fi
-    \pgf@xc=\pgf@x
-    \csname pgf@anchor@wstate shape@south\endcsname
-    \pgf@x=\pgf@xc
-  }%
-  \backgroundpath{%
-    {%
-      \roundedrectanglepoints%
-      \pgftransformshift{\centerpoint}%
-      \pgfpathmoveto{\pgfpoint{0pt}{\halfheight}}%
-      \ifx\eastarc\pgf@lib@sh@misc@rr@text@concave
-        \pgfpathlineto{\pgfpoint{\halfwidth+\arcwidth}{+\halfheight}}%
-        \pgfpatharc{180-\halfarcangle}{180+\halfarcangle}{+\xradius and +\yradius}%
-      \else
-        \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
-          % right part of upper and lower horizontal lines
-          \pgfpathlineto{\pgfpoint{\halfwidth+\chordwidth-\arcwidth}{+\halfheight}}%
-          \pgfpatharc{+\halfarcangle}{+-\halfarcangle}{+\xradius and +\yradius}%
-        \else
-          \pgfpathlineto{\pgfqpoint{\halfwidth}{\halfheight}}%
-          \pgfpathlineto{\pgfqpoint{\halfwidth}{-\halfheight}}%
-        \fi
-      \fi
-      \ifx\westarc\pgf@lib@sh@misc@rr@text@concave
-        \pgfpathlineto{\pgfpoint{-\halfwidth-\arcwidth}{+-\halfheight}}%
-        \pgfpatharc{+-\halfarcangle}{+\halfarcangle}{+\xradius and +\yradius}%
-      \else
-        \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
-          \pgfpathlineto{\pgfpoint{-\halfwidth-\chordwidth+\arcwidth}{+-\halfheight}}%
-          \pgfpatharc{180+\halfarcangle}{180-\halfarcangle}{+\xradius and +\yradius}%
-        \else
-          \pgfpathlineto{\pgfqpoint{-\halfwidth}{-\halfheight}}%
-          \pgfpathlineto{\pgfqpoint{-\halfwidth}{\halfheight}}%
-        \fi
-      \fi
-      \pgfpathclose
-    }%
-  }%
-  \anchorborder{%
-  \pgfextract@process\externalpoint{%
-    \pgfextract@process\externalpoint{}%
-      \pgfpointadd{\centerpoint}{\externalpoint}%
-    }%
-  \roundedrectanglepoints
-  %
-  \pgfmathanglebetweenpoints{\centerpoint}{\externalpoint}%
-  \let\externalangle=\pgfmathresult
-  \pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@north west\endcsname}%
-  \ifdim\externalangle pt<\pgfmathresult pt\relax
-    \pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@north east\endcsname}%
-    \ifdim\externalangle pt<\pgfmathresult pt\relax
-      % Between north east and east.
-      \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
-        \pgfextract@process\arccenter{%
-          \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\xradius}{+0pt}}%
-        }%
-        \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
-          {\arccenter}{0}{\halfarcangle}{\xradius+\outerxsep and \yradius+\outerysep}%
-      \else
-        \pgfpointintersectionoflines
-          {\csname pgf@anchor@wstate shape@north east\endcsname}%
-          {\csname pgf@anchor@wstate shape@south east\endcsname}%
-          {\externalpoint}{\centerpoint}%
-      \fi
-    \else
-      % Between north west and north east.
-      \pgfpointintersectionoflines
-        {\csname pgf@anchor@wstate shape@north east\endcsname}%
-        {\csname pgf@anchor@wstate shape@north west\endcsname}%
-        {\externalpoint}{\centerpoint}%
-    \fi
+\savedmacro\westarc{%
+\edef\westarc{\pgfkeysvalueof{/pgf/wstate shape west arc}}%
+}%
+\savedmacro\eastarc{%
+\edef\eastarc{\pgfkeysvalueof{/pgf/wstate shape east arc}}%
+}%
+\savedmacro\roundedrectanglepoints{%
+%
+% Get half the arc angle, a.
+%
+\pgfmathsetlength\pgf@x{\pgfkeysvalueof{/pgf/wstate shape arc length}}%
+\pgf@x=.5\pgf@x
+\edef\halfarcangle{\pgfmath@tonumber{\pgf@x}}%
+\addtosavedmacro\halfarcangle
+%
+% Get the (half) node dimensions x & y.
+%
+\pgfmathsetlength\pgf@x{\pgfkeysvalueof{/pgf/inner xsep}}%
+\edef\innerxsep{\the\pgf@x}%
+\pgf@xa=.5\wd\pgfnodeparttextbox
+\edef\halftextwidth{\the\pgf@xa}%
+\addtosavedmacro\halftextwidth
+\advance\pgf@x by\pgf@xa
+%
+\pgfmathsetlength\pgf@y{\pgfkeysvalueof{/pgf/inner ysep}}%
+\edef\innerysep{\the\pgf@y}%
+\pgf@ya=.5\ht\pgfnodeparttextbox
+\advance\pgf@ya by.5\dp\pgfnodeparttextbox
+\edef\halftextheight{\the\pgf@ya}%
+\addtosavedmacro\halftextheight
+\advance\pgf@y by\pgf@ya
+%
+% Adjust for minimum height
+%
+\pgfmathsetlength\pgf@yb{\pgfkeysvalueof{/pgf/minimum height}}%
+\ifdim\pgf@y<.5\pgf@yb \pgf@y=.5\pgf@yb \fi
+\edef\halfheight{\the\pgf@y}%
+\addtosavedmacro\halfheight
+%
+% Calculate the radius of the arc ends.
+%
+\pgfmathcosec@{\halfarcangle}%
+\pgf@ya=\pgfmathresult\pgf@y
+\edef\yradius{\the\pgf@ya}%
+\pgfmathmultiply@{\pgfkeysvalueof{/pgf/wstate shape arc width}}{\pgfkeysvalueof{/pgf/wstate shape arc factor}}%
+\lecture@personal@tikz@a=\pgfmathresult pt%
+\edef\xradius{\the\lecture@personal@tikz@a}%
+\addtosavedmacro\yradius
+\addtosavedmacro\xradius
+%
+% Arc width = r - r*cos(a/2).
+%
+\pgfmathcos@{\halfarcangle}%
+\pgf@xa=\lecture@personal@tikz@a
+\advance\pgf@xa by-\pgfmathresult\lecture@personal@tikz@a
+%
+% When the node contents are pushed inside a convex arc,
+% the resulting chord has a height r - r*cos(asin(0.5*h/r)).
+%
+\pgfmathdivide{\halftextheight}{\yradius}%
+\pgfmathasin@{\pgfmathresult}%
+\pgfmathcos@{\pgfmathresult}%
+\pgf@xb=\lecture@personal@tikz@a
+\advance\pgf@xb by-\pgfmathresult\lecture@personal@tikz@a
+%
+% Adjust for minimum width.
+%
+\edef\westarc{\pgfkeysvalueof{/pgf/wstate shape west arc}}%
+\edef\eastarc{\pgfkeysvalueof{/pgf/wstate shape east arc}}%
+%
+\pgfutil@tempdima=2.0\pgf@x% x still holds the half width.
+\ifx\westarc\pgf@lib@sh@misc@rr@text@concave
+  \advance\pgfutil@tempdima by\pgf@xa
+\else
+  \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
+    \advance\pgfutil@tempdima by\pgf@xb
+  \fi
+\fi
+%
+\ifx\eastarc\pgf@lib@sh@misc@rr@text@concave
+  \advance\pgfutil@tempdima by\pgf@xa
+\else
+  \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
+    \advance\pgfutil@tempdima by\pgf@xb
+  \fi
+\fi
+%
+\pgfmathsetlength\pgfutil@tempdimb{\pgfkeysvalueof{/pgf/minimum width}}%
+\ifdim\pgfutil@tempdima<\pgfutil@tempdimb
+  \advance\pgfutil@tempdimb by-\pgfutil@tempdima
+  \divide\pgfutil@tempdimb by2\relax
+  \edef\xoffset{\the\pgfutil@tempdimb}%
+\else
+  \let\xoffset=\innerxsep%
+\fi
+%
+% The node is made wider if convex arcs overlap.
+%
+\pgf@x=\halftextwidth\relax
+\advance\pgf@x by\xoffset\relax
+\pgf@xc=\pgf@ya
+\advance\pgf@xc by-\pgf@xb
+\ifdim\pgf@xc>\pgf@x\relax
+  \advance\pgf@xc by-\pgf@x
+  \advance\pgf@xc by\xoffset\relax
+  \edef\xoffset{\the\pgf@xc}%
+\fi
+\addtosavedmacro\xoffset
+%
+\pgf@x=\halftextwidth\relax
+\advance\pgf@x by\xoffset\relax
+\edef\halfwidth{\the\pgf@x}%
+\addtosavedmacro\halfwidth
+%
+\edef\arcwidth{\the\pgf@xa}%
+\addtosavedmacro\arcwidth
+%
+\edef\chordwidth{\the\pgf@xb}%
+\addtosavedmacro\chordwidth
+%
+\pgfmathsetlengthmacro\outerxsep{\pgfkeysvalueof{/pgf/outer xsep}}%
+\pgfmathsetlengthmacro\outerysep{\pgfkeysvalueof{/pgf/outer ysep}}%
+\addtosavedmacro\outerxsep
+\addtosavedmacro\outerysep
+%
+% calculate some horizontal adjustments made for the default miter
+% drawn when an arc meets the north or south side of the node path.
+%
+\ifdim\halfarcangle pt=90pt\relax% Avoid division by zero.
+  \def\concavexshift{0pt}%
+\else
+  % For a concave arc: outer xsep * cosec((90-a/2)/2)*cos((90-a/2)/2).
+  \pgfmathsubtract@{90}{\halfarcangle}%
+  \pgfmathdivide@{\pgfmathresult}{2}%
+  \let\angletemp=\pgfmathresult
+  \pgf@x=\outerxsep\relax
+  \pgfmathcosec@{\angletemp}%
+  \pgf@x=\pgfmathresult\pgf@x
+  \pgfmathcos@{\angletemp}%
+  \pgf@x=\pgfmathresult\pgf@x
+  \edef\concavexshift{\the\pgf@x}%
+\fi
+\addtosavedmacro\concavexshift%
+%
+\ifdim\halfarcangle pt=90pt\relax% Avoid division by zero.
+  \def\convexxshift{0pt}%
+\else
+  % For a convex arc: outer xsep * cosec((90+a/2)/2)*cos((90+a/2)/2).
+  \pgfmathadd@{90}{\halfarcangle}%
+  \pgfmathdivide@{\pgfmathresult}{2}%
+  \let\angletemp=\pgfmathresult
+  \pgf@x=\outerxsep\relax
+  \pgfmathcosec@{\angletemp}%
+  \pgf@x=\pgfmathresult\pgf@x
+  \pgfmathcos@{\angletemp}%
+  \pgf@x=\pgfmathresult\pgf@x
+  \edef\convexxshift{\the\pgf@x}%
+\fi
+\addtosavedmacro\convexxshift
+}%
+\saveddimen\halflinewidth{\pgf@x.5\pgflinewidth}%
+\savedanchor\centerpoint{%
+\pgf@x=.5\wd\pgfnodeparttextbox
+\pgf@y=.5\ht\pgfnodeparttextbox
+\advance\pgf@y by-.5\dp\pgfnodeparttextbox
+}%
+\savedanchor\midpoint{%
+\pgf@x=.5\wd\pgfnodeparttextbox
+\pgfmathsetlength\pgf@y{+.5ex}%
+}%
+\savedanchor\basepoint{%
+\pgf@x=.5\wd\pgfnodeparttextbox
+\pgf@y\z@\relax
+}%
+\anchor{center}{\centerpoint}%
+\anchor{mid}{\midpoint}%
+\anchor{mid west}{%
+\csname pgf@anchor@wstate shape@west\endcsname
+\pgf@xc=\pgf@x
+\midpoint
+\pgf@x=\pgf@xc
+}%
+\anchor{mid east}{%
+\csname pgf@anchor@wstate shape@east\endcsname
+\pgf@xc=\pgf@x
+\midpoint
+\pgf@x=\pgf@xc
+}%
+\anchor{base}{\basepoint}%
+\anchor{base west}{%
+\csname pgf@anchor@wstate shape@west\endcsname
+\pgf@xc=\pgf@x
+\basepoint
+\pgf@x=\pgf@xc
+}%
+\anchor{base east}{%
+\csname pgf@anchor@wstate shape@east\endcsname
+\pgf@xc=\pgf@x
+\basepoint
+\pgf@x=\pgf@xc
+}%
+\anchor{north}{%
+\roundedrectanglepoints
+\pgfpointadd{\centerpoint}{\pgfpoint{+0pt}{\halfheight+\outerysep}}%
+}%
+\anchor{south}{%
+\roundedrectanglepoints
+\pgfpointadd{\centerpoint}{\pgfpoint{+0pt}{-\halfheight-\outerysep}}%
+}%
+\anchor{west}{%
+\roundedrectanglepoints
+\pgfpointadd{\centerpoint}{%
+  \ifx\westarc\pgf@lib@sh@misc@rr@text@concave
+    \pgfpoint{-\halfwidth-\arcwidth-\concavexshift}{+0pt}%
   \else
-    \pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@south west\endcsname}%
-    \ifdim\externalangle pt<\pgfmathresult pt\relax
-      % Between south west and north west.
-      \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
-        \pgfextract@process\arccenter{%
-          \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\xradius}{+0pt}}%
-        }%
-        \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
-          {\arccenter}{180-\halfarcangle}{180+\halfarcangle}{\xradius+\outerxsep and \yradius+\outerysep}%
-      \else
-        \pgfpointintersectionoflines
-          {\csname pgf@anchor@wstate shape@north west\endcsname}%
-          {\csname pgf@anchor@wstate shape@south west\endcsname}%
-          {\externalpoint}{\centerpoint}%
-      \fi
+    \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
+      \pgfpoint{-\halfwidth-\chordwidth-\outerxsep}{+0pt}%
     \else
-      \pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@south east\endcsname}%
-      \ifdim\externalangle pt<\pgfmathresult pt\relax
-        % Between south east and south west.
-        \pgfpointintersectionoflines%
-          {\csname pgf@anchor@wstate shape@south east\endcsname}%
-          {\csname pgf@anchor@wstate shape@south west\endcsname}%
-          {\externalpoint}{\centerpoint}%
-      \else
-        % Between east and south east.
-        \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
-          \pgfextract@process\arccenter{%
-            \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\xradius}{+0pt}}%
-          }%
-          \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
-            {\arccenter}{360-\halfarcangle}{360}{\xradius+\outerxsep and \yradius+\outerysep}%
-        \else
-          \pgfpointintersectionoflines%
-            {\csname pgf@anchor@wstate shape@north east\endcsname}%
-            {\csname pgf@anchor@wstate shape@south east\endcsname}%
-            {\externalpoint}{\centerpoint}%
-        \fi
-      \fi
+      \pgfpoint{-\halfwidth-\outerxsep}{+0pt}%
     \fi
   \fi
-  }%
 }%
+}%
+\anchor{north west}{%
+\roundedrectanglepoints
+\ifx\westarc\pgf@lib@sh@misc@rr@text@convex
+  \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\arcwidth-\convexxshift}{+0pt}}%
+\else
+  \csname pgf@anchor@wstate shape@west\endcsname
+\fi
+\pgf@xc=\pgf@x
+\csname pgf@anchor@wstate shape@north\endcsname
+\pgf@x=\pgf@xc
+}%
+\anchor{south west}{%
+\roundedrectanglepoints
+\ifx\westarc\pgf@lib@sh@misc@rr@text@convex
+  \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\arcwidth-\convexxshift}{+0pt}}%
+\else
+  \csname pgf@anchor@wstate shape@west\endcsname
+\fi
+\pgf@xc=\pgf@x
+\csname pgf@anchor@wstate shape@south\endcsname
+\pgf@x=\pgf@xc
+}%
+\anchor{east}{%
+\roundedrectanglepoints
+\pgfpointadd{\centerpoint}{%
+  \ifx\eastarc\pgf@lib@sh@misc@rr@text@concave
+    \pgfpoint{\halfwidth+\arcwidth+\concavexshift}{+0pt}%
+  \else
+    \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
+      \pgfpoint{\halfwidth+\chordwidth+\outerxsep}{+0pt}%
+    \else
+      \pgfpoint{\halfwidth+\outerxsep}{+0pt}%
+    \fi
+  \fi
+}%
+}%
+\anchor{north east}{%
+\roundedrectanglepoints
+\ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
+  \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\arcwidth+\convexxshift}{+0pt}}%
+\else
+  \csname pgf@anchor@wstate shape@east\endcsname
+\fi
+\pgf@xc=\pgf@x
+\csname pgf@anchor@wstate shape@north\endcsname
+\pgf@x=\pgf@xc
+}%
+\anchor{south east}{%
+\roundedrectanglepoints
+\ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
+  \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\arcwidth+\convexxshift}{+0pt}}%
+\else
+  \csname pgf@anchor@wstate shape@east\endcsname
+\fi
+\pgf@xc=\pgf@x
+\csname pgf@anchor@wstate shape@south\endcsname
+\pgf@x=\pgf@xc
+}%
+\backgroundpath{%
+{%
+  \roundedrectanglepoints%
+  \pgftransformshift{\centerpoint}%
+  \pgfpathmoveto{\pgfpoint{0pt}{\halfheight}}%
+  \ifx\eastarc\pgf@lib@sh@misc@rr@text@concave
+    \pgfpathlineto{\pgfpoint{\halfwidth+\arcwidth}{+\halfheight}}%
+    \pgfpatharc{180-\halfarcangle}{180+\halfarcangle}{+\xradius and +\yradius}%
+  \else
+    \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
+      % right part of upper and lower horizontal lines
+      \pgfpathlineto{\pgfpoint{\halfwidth+\chordwidth-\arcwidth}{+\halfheight}}%
+      \pgfpatharc{+\halfarcangle}{+-\halfarcangle}{+\xradius and +\yradius}%
+    \else
+      \pgfpathlineto{\pgfqpoint{\halfwidth}{\halfheight}}%
+      \pgfpathlineto{\pgfqpoint{\halfwidth}{-\halfheight}}%
+    \fi
+  \fi
+  \ifx\westarc\pgf@lib@sh@misc@rr@text@concave
+    \pgfpathlineto{\pgfpoint{-\halfwidth-\arcwidth}{+-\halfheight}}%
+    \pgfpatharc{+-\halfarcangle}{+\halfarcangle}{+\xradius and +\yradius}%
+  \else
+    \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
+      \pgfpathlineto{\pgfpoint{-\halfwidth-\chordwidth+\arcwidth}{+-\halfheight}}%
+      \pgfpatharc{180+\halfarcangle}{180-\halfarcangle}{+\xradius and +\yradius}%
+    \else
+      \pgfpathlineto{\pgfqpoint{-\halfwidth}{-\halfheight}}%
+      \pgfpathlineto{\pgfqpoint{-\halfwidth}{\halfheight}}%
+    \fi
+  \fi
+  \pgfpathclose
+}%
+}%
+\anchorborder{%
+\pgfextract@process\externalpoint{%
+\pgfextract@process\externalpoint{}%
+  \pgfpointadd{\centerpoint}{\externalpoint}%
+}%
+\roundedrectanglepoints
+%
+\pgfmathanglebetweenpoints{\centerpoint}{\externalpoint}%
+\let\externalangle=\pgfmathresult
+\pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@north west\endcsname}%
+\ifdim\externalangle pt<\pgfmathresult pt\relax
+\pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@north east\endcsname}%
+\ifdim\externalangle pt<\pgfmathresult pt\relax
+  % Between north east and east.
+  \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
+    \pgfextract@process\arccenter{%
+      \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\xradius}{+0pt}}%
+    }%
+    \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
+      {\arccenter}{0}{\halfarcangle}{\xradius+\outerxsep and \yradius+\outerysep}%
+  \else
+    \pgfpointintersectionoflines
+      {\csname pgf@anchor@wstate shape@north east\endcsname}%
+      {\csname pgf@anchor@wstate shape@south east\endcsname}%
+      {\externalpoint}{\centerpoint}%
+  \fi
+\else
+  % Between north west and north east.
+  \pgfpointintersectionoflines
+    {\csname pgf@anchor@wstate shape@north east\endcsname}%
+    {\csname pgf@anchor@wstate shape@north west\endcsname}%
+    {\externalpoint}{\centerpoint}%
+\fi
+\else
+\pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@south west\endcsname}%
+\ifdim\externalangle pt<\pgfmathresult pt\relax
+  % Between south west and north west.
+  \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
+    \pgfextract@process\arccenter{%
+      \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\xradius}{+0pt}}%
+    }%
+    \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
+      {\arccenter}{180-\halfarcangle}{180+\halfarcangle}{\xradius+\outerxsep and \yradius+\outerysep}%
+  \else
+    \pgfpointintersectionoflines
+      {\csname pgf@anchor@wstate shape@north west\endcsname}%
+      {\csname pgf@anchor@wstate shape@south west\endcsname}%
+      {\externalpoint}{\centerpoint}%
+  \fi
+\else
+  \pgfmathanglebetweenpoints{\centerpoint}{\csname pgf@anchor@wstate shape@south east\endcsname}%
+  \ifdim\externalangle pt<\pgfmathresult pt\relax
+    % Between south east and south west.
+    \pgfpointintersectionoflines%
+      {\csname pgf@anchor@wstate shape@south east\endcsname}%
+      {\csname pgf@anchor@wstate shape@south west\endcsname}%
+      {\externalpoint}{\centerpoint}%
+  \else
+    % Between east and south east.
+    \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
+      \pgfextract@process\arccenter{%
+        \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\xradius}{+0pt}}%
+      }%
+      \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
+        {\arccenter}{360-\halfarcangle}{360}{\xradius+\outerxsep and \yradius+\outerysep}%
+    \else
+      \pgfpointintersectionoflines%
+        {\csname pgf@anchor@wstate shape@north east\endcsname}%
+        {\csname pgf@anchor@wstate shape@south east\endcsname}%
+        {\externalpoint}{\centerpoint}%
+    \fi
+  \fi
+\fi
+\fi
+}}%
 \endinput
