@@ -33,7 +33,7 @@
 \def\lecidx@sanitize#1{%
 {\def\%{:percent:}\def\&{:and:}\def\-{:-:}\def\"{:quote:}%
  \def\~{:tilde:}\def\'{:tright:}\def\allowbreak{}\def\nobreak{}%
- \def\({:bgmath:}\def\){:emath:}%
+ \def\({:bgmath:}\def\){:emath:}\def\textit##1{##1}\def\textbf##1{##1}\def\textsc##1{##1}\def\textsl##1{##1}\lecidx@sanitize@custom
 \StrSubstitute{#1}{\lecidx@idxsub}{:sub:}[\lecidx@tmpl]%
 \StrSubstitute{\lecidx@tmpl}{Ä}{:Ae:}[\lecidx@tmpl]%
 \StrSubstitute{\lecidx@tmpl}{ä}{:ae:}[\lecidx@tmpl]%
@@ -42,8 +42,13 @@
 \StrSubstitute{\lecidx@tmpl}{Ü}{:Ue:}[\lecidx@tmpl]%
 \StrSubstitute{\lecidx@tmpl}{ü}{:ue:}[\lecidx@tmpl]%
 \StrSubstitute{\lecidx@tmpl}{ß}{:ss:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{~}{:nbsp:}[\lecidx@tmpl]%
 \protected@xdef\lecidx@tmpl{\lecidx@tmpl}}%
 }
+\let\lecidxsanitize\lecidx@sanitize
+\def\lecidx@sanitize@custom{}
+\def\lecidxaddsanitize#1{\g@addto@macro\lecidx@sanitize@custom{#1}}
+
 
 \def\lecidxindex{\jobname}
 \def\lecidx@index#1{\index[\lecidxindex]{#1}}
