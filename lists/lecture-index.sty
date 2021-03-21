@@ -31,7 +31,7 @@
 
 % sloppy for now, i don't have time :D
 \def\lecidx@sanitize#1{%
-{\def\%{:percent:}\def\&{:and:}\def\-{:-:}\def\"{:quote:}%
+{\def\%{:percent:}\def\&{:and:}\def\-{:-:}\def\_{:udl:}\def\"{:quote:}%
  \def\~{:tilde:}\def\'{:tright:}\def\allowbreak{}\def\nobreak{}%
  \def\({:bgmath:}\def\){:emath:}\def\textit##1{##1}\def\textbf##1{##1}\def\textsc##1{##1}\def\textsl##1{##1}\lecidx@sanitize@custom
 \StrSubstitute{#1}{\lecidx@idxsub}{:sub:}[\lecidx@tmpl]%
