@@ -78,49 +78,49 @@
 
 \AtBeginDocument{% robust not needed as let persists
 % autoref
-    \LetLtxMacro\leclink@autoref\autoref
-    \renewcommand*\autoref{%
-        \@ifstar\leclink@star@autoref\leclink@nostar@autoref
-    }%
+\LetLtxMacro\leclink@autoref\autoref
+\renewcommand*\autoref{%
+    \@ifstar\leclink@star@autoref\leclink@nostar@autoref
+}%
 % nameref
-    \LetLtxMacro\leclink@nameref\nameref
-    \renewcommand*\nameref{%
-        \@ifstar\leclink@star@nameref\leclink@nostar@autoref
-    }%
-    % hyperref
-    \LetLtxMacro\leclink@hyperref\hyperref
-    \LetLtxMacro\leclink@@lb@hyperref\label@hyperref
-    \LetLtxMacro\leclink@@@hyperref\@hyperref
-    % what if no label?
-    \renewcommand*\hyperref{%
-        \@ifnextchar[{\Hy@babelnormalise\leclink@label@hyperref}\leclink@full@hyperref
-    }%
+\LetLtxMacro\leclink@nameref\nameref
+\renewcommand*\nameref{%
+    \@ifstar\leclink@star@nameref\leclink@nostar@autoref
+}%
+% hyperref
+\LetLtxMacro\leclink@hyperref\hyperref
+\LetLtxMacro\leclink@@lb@hyperref\label@hyperref
+\LetLtxMacro\leclink@@@hyperref\@hyperref
+% what if no label?
+\renewcommand*\hyperref{%
+    \@ifnextchar[{\Hy@babelnormalise\leclink@label@hyperref}\leclink@full@hyperref
+}%
 % url Note: url may be handled differently
-    \LetLtxMacro\leclink@url\url
-    \renewcommand*\url{\hyper@normalise\leclink@read@url}%
+\LetLtxMacro\leclink@url\url
+\renewcommand*\url{\hyper@normalise\leclink@read@url}%
 % footnote (direct - guard?)
-    \LetLtxMacro\leclink@footnotemark\@footnotemark
-    \renewcommand*\@footnotemark{\ifleclink@enabled@\expandafter\leclink@footnote@linkstyle\else\expandafter\leclink@firstofthree\fi{\leclink@footnotemark}{}{}}%
+\LetLtxMacro\leclink@footnotemark\@footnotemark
+\renewcommand*\@footnotemark{\ifleclink@enabled@\expandafter\leclink@footnote@linkstyle\else\expandafter\leclink@firstofthree\fi{\leclink@footnotemark}{}{}}%
 % hyperlink
-    \LetLtxMacro\leclink@hyperlink\hyperlink
-    \renewcommand*\hyperlink[2]{\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@hyperlink@linkstyle}\leclink@hyperlink{#1}{#2}}%
+\LetLtxMacro\leclink@hyperlink\hyperlink
+\renewcommand*\hyperlink[2]{\def\lecmrk{#1}\leclink@pnextlinkstyle{\leclink@hyperlink@linkstyle}\leclink@hyperlink{#1}{#2}}%
 % href
-    % We do not modify href as it depends on the href-keys we redef the split-call
-    \leclink@overwrite@hrefsplit
+% We do not modify href as it depends on the href-keys we redef the split-call
+\leclink@overwrite@hrefsplit
 % simple ref
-    \LetLtxMacro\leclink@ref\ref
-    \def\ref{\@ifstar\leclink@star@ref\leclink@nostar@ref}%
+\LetLtxMacro\leclink@ref\ref
+\def\ref{\@ifstar\leclink@star@ref\leclink@nostar@ref}%
 % modify the core
-    % #1 typem #2 url #3 destination name #4 text
-    \LetLtxMacro\leclink@hl@@\hyper@link@
-    \def\hyper@link@[#1]#2#3#4{%
-        \leclink@nxtst{\leclink@hl@@[#1]{#2}{#3}{#4}}{#2}{#3}%
-    }
+% #1 typem #2 url #3 destination name #4 text
+\LetLtxMacro\leclink@hl@@\hyper@link@
+\def\hyper@link@[#1]#2#3#4{%
+    \leclink@nxtst{\leclink@hl@@[#1]{#2}{#3}{#4}}{#2}{#3}%
+}
 % cite patch
-    \ifcsname cite\endcsname
-        \LetLtxMacro\leclink@cite@\cite
-        \DeclareRobustCommand\cite{\leclink@cite@color\leclink@cite@}
-    \fi
+\ifcsname cite\endcsname
+    \LetLtxMacro\leclink@cite@\cite
+    \DeclareRobustCommand\cite{\leclink@cite@color\leclink@cite@}
+\fi
 }
 
 \begingroup

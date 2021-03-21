@@ -13,11 +13,9 @@
 \newif\iflglos@setup@short@
 \DeclareOption{short}{\lglos@setup@short@true}
 \DeclareOption{long}{\lglos@setup@short@false}
-
 \ProcessOptions*
 
-\RequirePackage[acronym,nopostdot,numberedsection=nameref,section,noglossaryindex
-,translate=babel]{glossaries-accsupp}% style=super
+\RequirePackage[acronym,nopostdot,numberedsection=nameref,section,noglossaryindex,translate=babel]{glossaries-accsupp}%
 % \noist % disable index style file
 \RequirePackage{glossary-longragged}
 
@@ -27,7 +25,7 @@
 % single- and plural-page
 % this is a hack. i check if 'delimN' or 'delimR' are in the page def
 % therefore i execute the page-commands but gobble all of their outputs
-\newsavebox{\@lglos@la@void}
+\newsavebox\@lglos@la@void
 \def\@lglos@hide@in@da@void#1{\sbox{\@lglos@la@void}{#1}}
 \def\lglos@spage{Seite}\def\lglos@ppage{Seiten}
 
@@ -86,7 +84,7 @@
     \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc\else% no enumitem
     \begin{description}\fi}%
 \renewenvironment{theglossary}{%
-    \parindent=\z@ \parskip=\z@ plus .3pt%
+    \parindent=\z@ \parskip=\z@ plus .3pt\relax
     \global\atinitglossarytrue\relax
     }{\end{description}}%#
 \renewcommand\glossentry[2]{%reset of tree to pad pagenumbers
@@ -96,13 +94,12 @@
     \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\par
 }%
 }
-\iflglos@setup@short@
-\setglossarystyle{lecture@glossary@short}%
+\iflglos@setup@short@\setglossarystyle{lecture@glossary@short}%
 \else\setglossarystyle{lecture@glossary}\fi
 
 \makeglossaries
 
-\preto\printglossaries{\begingroup\interlinepenalty=1000}
+\preto\printglossaries{\begingroup\interlinepenalty1000}
 \g@addto@macro\printglossaries{\endgroup}
 
 \def\glslong#1{{\glsreset{#1}\gls{#1}}}

@@ -1,22 +1,17 @@
 %% lecture-cancel.sty
 %% Author: Florian Sihler, 03.03.2021
 
-%% Plotstyles
 \ProvidesPackage{lecture-personal-extra-plots}[2021/03/03 v1.0 my plotstyle :)]
-
-
 \newif\iflibpp@tpalette@ \libpp@tpalette@true
 \DeclareOption{tpalette}{\libpp@tpalette@true}
 \DeclareOption{notpalette}{\libpp@tpalette@false}
 \ProcessOptions*
-
 \RequirePackage{tikz,pgfplots}
 
 \newlength\libpp@barspace \libpp@barspace=\p@
 \newlength\libpp@barwidth \libpp@barwidth=11pt
 
 \newif\iflibpp@autotikz@
-
 \def\libpp@barsymtype{x}
 \def\libpp@barftype{y}
 
@@ -87,47 +82,42 @@
 \let\libpp@cyclecolor\libpp@@cyclecolor
 \let\libpp@resetcolor\libpp@@resetcolor
 \libpp@@resetcolor
-\else
-\def\libpp@cyclecolor{}\def\libpp@resetcolor{}
-\fi
+\else\def\libpp@cyclecolor{}\def\libpp@resetcolor{}\fi
 
 \def\libpp@init#1{\pgfkeys{/libpp@keys,#1}\libpp@resetcolor}
 
 \long\def\libpp@newbar@env#1[#2:#3](#4)(#5){%
-    \newenvironment{#1}[2][#2]{\begingroup#4\libpp@box@PreCode}%
-        {\libpp@box@PostCode#5\endgroup}%
-    \newenvironment{#1*}[2][#3]{\begingroup#4\libpp@box@PreCode}%
-        {\libpp@box@PostCode#5\endgroup}%
+\newenvironment{#1}[2][#2]{\begingroup#4\libpp@box@PreCode}%
+    {\libpp@box@PostCode#5\endgroup}%
+\newenvironment{#1*}[2][#3]{\begingroup#4\libpp@box@PreCode}%
+    {\libpp@box@PostCode#5\endgroup}%
 }
 
 
 \libpp@newbar@env{ybar}[:*]%
-    (\def\libpp@barsymtype{x}%
-    \def\libpp@barftype{y}%
-    \libpp@init{#1}%
-    \iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
-    \axis[libpp@default,libpp@default@bars,ybar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
-    \let\bar\libpp@bar\let\sbar\libpp@sbar)%
-    (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
+(\def\libpp@barsymtype{x}\def\libpp@barftype{y}%
+\libpp@init{#1}%
+\iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
+\axis[libpp@default,libpp@default@bars,ybar=\libpp@barspace, bar plot=\libpp@barwidth,#2]%
+\let\bar\libpp@bar\let\sbar\libpp@sbar)%
+(\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
 
 \libpp@newbar@env{xbar}[:*]%
-    (\def\libpp@barsymtype{y}%
-    \def\libpp@barftype{x}%
-    \libpp@init{#1}%
-    \iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
-    \axis[libpp@default,libpp@default@bars,xbar=\libpp@barspace,bar plot=\libpp@barwidth,#2]%
-    \let\bar\libpp@bar\let\sbar\libpp@sbar)%
-    (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
+(\def\libpp@barsymtype{y}\def\libpp@barftype{x}%
+\libpp@init{#1}%
+\iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
+\axis[libpp@default,libpp@default@bars,xbar=\libpp@barspace,bar plot=\libpp@barwidth,#2]%
+\let\bar\libpp@bar\let\sbar\libpp@sbar)%
+(\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
 
 
 \libpp@newbar@env{plot}[:*]%
-    (\def\libpp@barsymtype{x}%
-    \def\libpp@barftype{y}%
-    \libpp@init{#1}%
-    \iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
-    \axis[libpp@default,libpp@default@plots,#2]%
-    )%
-    (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
+(\def\libpp@barsymtype{x}\def\libpp@barftype{y}%
+\libpp@init{#1}%
+\iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
+\axis[libpp@default,libpp@default@plots,#2]%
+)%
+(\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
 
 \def\libpp@bar{\@ifnextchar[{\libpp@bar@opt{}}{\libpp@bar@noopt{}}}
 \def\libpp@sbar{\@ifnextchar[{\libpp@bar@opt{striped}}{\libpp@bar@noopt{striped}}}
@@ -139,11 +129,8 @@
     \protected@edef\@tmp{\noexpand\addplot[blockbar={\@tmpa},#1] coordinates {\unexpanded{#2}};}\@tmp
 }
 
-\iflibpp@tpalette@
-\let\libpp@bar@noopt\libpp@bar@@noopt
-\else
-\def\libpp@bar@@noopt#1{\libpp@bar@opt#1[]}
-\fi
+\iflibpp@tpalette@\let\libpp@bar@noopt\libpp@bar@@noopt
+\else\def\libpp@bar@@noopt#1{\libpp@bar@opt#1[]}\fi
 
 \def\SetDefaultPlots#1{\pgfplotsset{libpp@default@plots/.style={#1}}}
 \def\AppendDefaultPlots#1{\pgfplotsset{libpp@default@plots/.append style={#1}}}

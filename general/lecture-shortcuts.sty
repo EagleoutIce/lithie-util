@@ -13,8 +13,7 @@
 \ifcsname enquote\endcsname
 \let\say\enquote\else% use legacy
 \providecommand\say[1]{\glqq#1\grqq{}}
-\fi\robustify\say
-}
+\fi\robustify\say}
 
 \providecommand*\engl[2][]{#1(engl. \textit{#2})#1}
 \robustify\engl
@@ -40,10 +39,8 @@
 
 \newcommand*\dint[1][x]{\mathop{\frac{\mathrm{d}}{\mathrm{d}#1}}}
 \AtBeginDocument{%
-\def\N{\mathbb{N}}%
-\def\Z{\mathbb{Z}}%
-\def\R{\mathbb{R}}%
-\def\Q{\mathbb{Q}}%
+\def\N{\mathbb{N}}\def\Z{\mathbb{Z}}%
+\def\R{\mathbb{R}}\def\Q{\mathbb{Q}}%
 \def\C{\mathbb{C}}}
 
 \DeclareMathOperator\sel{\textsc{sel}}
@@ -66,10 +63,8 @@
 
 \def\timestamp{\today, \currenttime}
 \def\tasksplit{\medskip\par\needspace{2\baselineskip}\textbf{Lösung:}\par}
-\let\oldepsilon\epsilon
-\let\epsilon\varepsilon
-\let\oldphi\phi
-\let\phi\varphi
+\let\oldepsilon\epsilon \let\epsilon\varepsilon
+\let\oldphi\phi \let\phi\varphi
 
 \providecommand*\das{\vcentcolon\nolinebreak\mkern-1mu\nolinebreak=}
 \providecommand*\daseq{\vcentcolon\nolinebreak\mkern-1mu\nolinebreak\Leftrightarrow}

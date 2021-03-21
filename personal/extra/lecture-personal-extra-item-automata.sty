@@ -2,7 +2,6 @@
 %% Author: Florian Sihler, 3.11.2020
 
 %% stuff i use in my item-automata scripts
-
 \ProvidesPackage{lecture-personal-extra-item-automata}[2020/12/08 v1.0 Personal item-automata]
 
 % state diagram
@@ -201,32 +200,32 @@
 % drawn when an arc meets the north or south side of the node path.
 %
 \ifdim\halfarcangle pt=90pt\relax% Avoid division by zero.
-  \def\concavexshift{0pt}%
+  \def\concavexshift{\z@}%
 \else
   % For a concave arc: outer xsep * cosec((90-a/2)/2)*cos((90-a/2)/2).
   \pgfmathsubtract@{90}{\halfarcangle}%
-  \pgfmathdivide@{\pgfmathresult}{2}%
+  \pgfmathdivide@\pgfmathresult{2}%
   \let\angletemp=\pgfmathresult
   \pgf@x=\outerxsep\relax
-  \pgfmathcosec@{\angletemp}%
+  \pgfmathcosec@\angletemp
   \pgf@x=\pgfmathresult\pgf@x
-  \pgfmathcos@{\angletemp}%
+  \pgfmathcos@\angletemp
   \pgf@x=\pgfmathresult\pgf@x
   \edef\concavexshift{\the\pgf@x}%
 \fi
 \addtosavedmacro\concavexshift%
 %
 \ifdim\halfarcangle pt=90pt\relax% Avoid division by zero.
-  \def\convexxshift{0pt}%
+  \def\convexxshift{\z@}%
 \else
   % For a convex arc: outer xsep * cosec((90+a/2)/2)*cos((90+a/2)/2).
   \pgfmathadd@{90}{\halfarcangle}%
   \pgfmathdivide@{\pgfmathresult}{2}%
   \let\angletemp=\pgfmathresult
   \pgf@x=\outerxsep\relax
-  \pgfmathcosec@{\angletemp}%
+  \pgfmathcosec@\angletemp
   \pgf@x=\pgfmathresult\pgf@x
-  \pgfmathcos@{\angletemp}%
+  \pgfmathcos@\angletemp
   \pgf@x=\pgfmathresult\pgf@x
   \edef\convexxshift{\the\pgf@x}%
 \fi
@@ -275,22 +274,22 @@
 }%
 \anchor{north}{%
 \roundedrectanglepoints
-\pgfpointadd{\centerpoint}{\pgfpoint{+0pt}{\halfheight+\outerysep}}%
+\pgfpointadd{\centerpoint}{\pgfpoint{\z@}{\halfheight+\outerysep}}%
 }%
 \anchor{south}{%
 \roundedrectanglepoints
-\pgfpointadd{\centerpoint}{\pgfpoint{+0pt}{-\halfheight-\outerysep}}%
+\pgfpointadd{\centerpoint}{\pgfpoint{\z@}{-\halfheight-\outerysep}}%
 }%
 \anchor{west}{%
 \roundedrectanglepoints
 \pgfpointadd{\centerpoint}{%
   \ifx\westarc\pgf@lib@sh@misc@rr@text@concave
-    \pgfpoint{-\halfwidth-\arcwidth-\concavexshift}{+0pt}%
+    \pgfpoint{-\halfwidth-\arcwidth-\concavexshift}{\z@}%
   \else
     \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
-      \pgfpoint{-\halfwidth-\chordwidth-\outerxsep}{+0pt}%
+      \pgfpoint{-\halfwidth-\chordwidth-\outerxsep}{\z@}%
     \else
-      \pgfpoint{-\halfwidth-\outerxsep}{+0pt}%
+      \pgfpoint{-\halfwidth-\outerxsep}{\z@}%
     \fi
   \fi
 }%
@@ -298,7 +297,7 @@
 \anchor{north west}{%
 \roundedrectanglepoints
 \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
-  \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\arcwidth-\convexxshift}{+0pt}}%
+  \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\arcwidth-\convexxshift}{\z@}}%
 \else
   \csname pgf@anchor@wstate shape@west\endcsname
 \fi
@@ -309,7 +308,7 @@
 \anchor{south west}{%
 \roundedrectanglepoints
 \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
-  \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\arcwidth-\convexxshift}{+0pt}}%
+  \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\arcwidth-\convexxshift}{\z@}}%
 \else
   \csname pgf@anchor@wstate shape@west\endcsname
 \fi
@@ -321,12 +320,12 @@
 \roundedrectanglepoints
 \pgfpointadd{\centerpoint}{%
   \ifx\eastarc\pgf@lib@sh@misc@rr@text@concave
-    \pgfpoint{\halfwidth+\arcwidth+\concavexshift}{+0pt}%
+    \pgfpoint{\halfwidth+\arcwidth+\concavexshift}{\z@}%
   \else
     \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
-      \pgfpoint{\halfwidth+\chordwidth+\outerxsep}{+0pt}%
+      \pgfpoint{\halfwidth+\chordwidth+\outerxsep}{\z@}%
     \else
-      \pgfpoint{\halfwidth+\outerxsep}{+0pt}%
+      \pgfpoint{\halfwidth+\outerxsep}{\z@}%
     \fi
   \fi
 }%
@@ -334,7 +333,7 @@
 \anchor{north east}{%
 \roundedrectanglepoints
 \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
-  \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\arcwidth+\convexxshift}{+0pt}}%
+  \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\arcwidth+\convexxshift}{\z@}}%
 \else
   \csname pgf@anchor@wstate shape@east\endcsname
 \fi
@@ -345,7 +344,7 @@
 \anchor{south east}{%
 \roundedrectanglepoints
 \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
-  \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\arcwidth+\convexxshift}{+0pt}}%
+  \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\arcwidth+\convexxshift}{\z@}}%
 \else
   \csname pgf@anchor@wstate shape@east\endcsname
 \fi
@@ -357,7 +356,7 @@
 {%
   \roundedrectanglepoints%
   \pgftransformshift{\centerpoint}%
-  \pgfpathmoveto{\pgfpoint{0pt}{\halfheight}}%
+  \pgfpathmoveto{\pgfpoint{\z@}{\halfheight}}%
   \ifx\eastarc\pgf@lib@sh@misc@rr@text@concave
     \pgfpathlineto{\pgfpoint{\halfwidth+\arcwidth}{+\halfheight}}%
     \pgfpatharc{180-\halfarcangle}{180+\halfarcangle}{+\xradius and +\yradius}%
@@ -402,7 +401,7 @@
   % Between north east and east.
   \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
     \pgfextract@process\arccenter{%
-      \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\xradius}{+0pt}}%
+      \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\xradius}{\z@}}%
     }%
     \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
       {\arccenter}{0}{\halfarcangle}{\xradius+\outerxsep and \yradius+\outerysep}%
@@ -425,7 +424,7 @@
   % Between south west and north west.
   \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
     \pgfextract@process\arccenter{%
-      \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\xradius}{+0pt}}%
+      \pgfpointadd{\centerpoint}{\pgfpoint{-\halfwidth-\chordwidth+\xradius}{\z@}}%
     }%
     \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
       {\arccenter}{180-\halfarcangle}{180+\halfarcangle}{\xradius+\outerxsep and \yradius+\outerysep}%
@@ -447,7 +446,7 @@
     % Between east and south east.
     \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex
       \pgfextract@process\arccenter{%
-        \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\xradius}{+0pt}}%
+        \pgfpointadd{\centerpoint}{\pgfpoint{\halfwidth+\chordwidth-\xradius}{\z@}}%
       }%
       \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
         {\arccenter}{360-\halfarcangle}{360}{\xradius+\outerxsep and \yradius+\outerysep}%

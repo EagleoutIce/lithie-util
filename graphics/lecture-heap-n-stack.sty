@@ -10,14 +10,12 @@
 \DeclareOption{nodebug}{\lhns@debug@false}
 \ProcessOptions*
 
-\iflhns@debug@\let\lhns@debug\typeout
-\else\let\lhns@debug\@gobble\fi
+\iflhns@debug@\let\lhns@debug\typeout\else\let\lhns@debug\@gobble\fi
 
 \RequirePackage{pbox,tikz}
 \usetikzlibrary{fit,arrows.meta}
 
-\newcounter{lhns@heap}
-\newcounter{lhns@stack}
+\newcounter{lhns@heap} \newcounter{lhns@stack}
 \newif\iflhns@renderheap
 \newif\iflhns@renderstack
 
@@ -53,11 +51,9 @@
 \def\lhns@heap@element@opt[#1]#2{\lhns@heap@element@{#2}{#1}{normal}}
 \def\lhns@heap@element@noopt#1{\lhns@heap@element@{#1}{}{normal}}
 
-
 \def\lhns@heap@element@imp{\@ifnextchar[\lhns@heap@element@imp@opt\lhns@heap@element@imp@noopt}
 \def\lhns@heap@element@imp@opt[#1]#2{\lhns@heap@element@{#2}{#1}{important}}
 \def\lhns@heap@element@imp@noopt#1{\lhns@heap@element@{#1}{}{important}}
-
 
 \def\lhns@stack@element@#1#2#3{%
     \lhns@debug{Reg stack elem [\thelhns@stack] text: '#1', extras: '#2', style: '#3'}
@@ -96,51 +92,51 @@
 
 % note: to allow correct line starts we set the inner nodes extra using their auto width
 \def\lhns@render@heap{%
-    \lhns@renderheaptrue
-    % render root element:
-    \ifnum\value{lhns@heap}>0\relax % at least one element => draw
-    \pgfmathsetmacro\lhns@elemtextwidth{\lhns@elemwidth-\lhns@innersep}%
-    \lhns@render@elem@from{heap}{0}{\lhns@heaproot};
-    % number for iteration
-    \pgfmathsetmacro\lhns@heapemax{int(\value{lhns@heap}-1)}%
-    \ifnum\lhns@heapemax>0\relax % at least one element left => draw
-        \foreach[remember=\i as \li (initially 0)] \i in {1,...,\lhns@heapemax} {
-            \lhns@render@elem@from{heap}{\i}{heap-\li-box.south};
-        }
-    \fi
-    % render boundaries
-    \node[lhns@border,fit={([yshift=-\lhns@captionsep-\baselineskip]heap-\lhns@heapemax-box.south) (heap-0-box.north) (heap-0-box.east) (heap-0-box.west) ([yshift=-\lhns@minborderheight]\lhns@heaproot)},inner sep=\lhns@borderbuff] (heap-border) {}; % last fit node is min height
-    % label "heap"
-    \node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (heap-label) at (heap-border.south) {Heap};
-    \else% render hull
-    \node[lhns@border,fit={([yshift=-\lhns@minborderheight]\lhns@heaproot) (\lhns@heaproot)},inner sep=\lhns@borderbuff,minimum width=\lhns@borderbuff+\lhns@elemwidth] (heap-border) {}; % last fit node is min height
-    % label "heap"
-    \node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (heap-label) at (heap-border.south) {Heap};
-    \fi
+\lhns@renderheaptrue
+% render root element:
+\ifnum\value{lhns@heap}>0\relax % at least one element => draw
+\pgfmathsetmacro\lhns@elemtextwidth{\lhns@elemwidth-\lhns@innersep}%
+\lhns@render@elem@from{heap}{0}{\lhns@heaproot};
+% number for iteration
+\pgfmathsetmacro\lhns@heapemax{int(\value{lhns@heap}-1)}%
+\ifnum\lhns@heapemax>0\relax % at least one element left => draw
+    \foreach[remember=\i as \li (initially 0)] \i in {1,...,\lhns@heapemax} {
+        \lhns@render@elem@from{heap}{\i}{heap-\li-box.south};
+    }
+\fi
+% render boundaries
+\node[lhns@border,fit={([yshift=-\lhns@captionsep-\baselineskip]heap-\lhns@heapemax-box.south) (heap-0-box.north) (heap-0-box.east) (heap-0-box.west) ([yshift=-\lhns@minborderheight]\lhns@heaproot)},inner sep=\lhns@borderbuff] (heap-border) {}; % last fit node is min height
+% label "heap"
+\node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (heap-label) at (heap-border.south) {Heap};
+\else% render hull
+\node[lhns@border,fit={([yshift=-\lhns@minborderheight]\lhns@heaproot) (\lhns@heaproot)},inner sep=\lhns@borderbuff,minimum width=\lhns@borderbuff+\lhns@elemwidth] (heap-border) {}; % last fit node is min height
+% label "heap"
+\node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (heap-label) at (heap-border.south) {Heap};
+\fi
 }
 
 \def\lhns@render@stack{
-    \lhns@renderstacktrue
-    % render root element:
-    \ifnum\value{lhns@stack}>0\relax % at least one element => draw
-    \pgfmathsetmacro\lhns@elemtextwidth{\lhns@elemwidth-\lhns@innersep}%
-    \lhns@render@elem@from{stack}{0}{\lhns@stackroot};
-    % number for iteration
-    \pgfmathsetmacro\lhns@stackemax{int(\value{lhns@stack}-1)}%
-    \ifnum\lhns@stackemax>0\relax % at least one element left => draw
-        \foreach[remember=\i as \li (initially 0)] \i in {1,...,\lhns@stackemax} {
-            \lhns@render@elem@from{stack}{\i}{stack-\li-box.south};
-        }
-    \fi
-    % render boundaries
-    \node[lhns@border,fit={([yshift=-\lhns@captionsep-\baselineskip]stack-\lhns@stackemax-box.south) (stack-0-box.north) (stack-0-box.east) (stack-0-box.west) ([yshift=-\lhns@minborderheight]\lhns@stackroot)},inner sep=\lhns@borderbuff] (stack-border) {}; % last fit node is min height
-    % label "stack"
-    \node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (stack-label) at (stack-border.south) {Stack};
-    \else% render hull
-    \node[lhns@border,fit={([yshift=-\lhns@minborderheight]\lhns@stackroot) (\lhns@stackroot)},inner sep=\lhns@borderbuff,minimum width=2*\lhns@borderbuff+\lhns@elemwidth] (stack-border) {}; % last fit node is min height
-    % label "stack"
-    \node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (stack-label) at (stack-border.south) {Stack};
-    \fi
+\lhns@renderstacktrue
+% render root element:
+\ifnum\value{lhns@stack}>0\relax % at least one element => draw
+\pgfmathsetmacro\lhns@elemtextwidth{\lhns@elemwidth-\lhns@innersep}%
+\lhns@render@elem@from{stack}{0}{\lhns@stackroot};
+% number for iteration
+\pgfmathsetmacro\lhns@stackemax{int(\value{lhns@stack}-1)}%
+\ifnum\lhns@stackemax>0\relax % at least one element left => draw
+    \foreach[remember=\i as \li (initially 0)] \i in {1,...,\lhns@stackemax} {
+        \lhns@render@elem@from{stack}{\i}{stack-\li-box.south};
+    }
+\fi
+% render boundaries
+\node[lhns@border,fit={([yshift=-\lhns@captionsep-\baselineskip]stack-\lhns@stackemax-box.south) (stack-0-box.north) (stack-0-box.east) (stack-0-box.west) ([yshift=-\lhns@minborderheight]\lhns@stackroot)},inner sep=\lhns@borderbuff] (stack-border) {}; % last fit node is min height
+% label "stack"
+\node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (stack-label) at (stack-border.south) {Stack};
+\else% render hull
+\node[lhns@border,fit={([yshift=-\lhns@minborderheight]\lhns@stackroot) (\lhns@stackroot)},inner sep=\lhns@borderbuff,minimum width=2*\lhns@borderbuff+\lhns@elemwidth] (stack-border) {}; % last fit node is min height
+% label "stack"
+\node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (stack-label) at (stack-border.south) {Stack};
+\fi
 }
 
 % #1 => number on top

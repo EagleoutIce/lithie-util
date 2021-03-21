@@ -3,7 +3,6 @@
 \ProvidesPackage{lecture-personal}[2020/11/03 v1.0 Personal collection]
 \RequirePackage{kvoptions,etoolbox}
 \SetupKeyvalOptions{family=LPM,prefix=LPM@}
-
 \edef\@lecture@personal@noextra{LECTURE@PERSONAL@NOEXTRA}
 
 \DeclareStringOption{imgprefix}
@@ -37,6 +36,5 @@
 \ifcsname nohyper\endcsname
 \setIndexLinker{\nohyper{\hyperref[#1]{#2}}}%
 \fi\fi}
-
 \LoadBoxStyle{limerence}
 \endinput

@@ -5,7 +5,6 @@
 %% to compile and present latex-files. Used to be with beamer.
 
 \ProvidesPackage{beamer-latex-preview}[2019/10/25 v1.0.0 Compile and Preview LaTeX2e-Codes in LaTeX-Beamer]
-
 \tcbuselibrary{listings,xparse,raster}
 
 \definecolor{MudWhite}{RGB}{245,245,243}
@@ -20,15 +19,10 @@
 }
 
 \lstdefinestyle{LSTADVANCED}{
-    style=sol@SOPRA,
-    backgroundcolor={},
-    rulecolor={},
+    style=sol@SOPRA,backgroundcolor={},rulecolor={},
     numberstyle=\color{gray}\footnotesize\sffamily,
-    xleftmargin=12pt,
-    xrightmargin=3pt,frame=l,numbers=left,
-    numbersep=12pt,framexleftmargin=3pt,
-    rulecolor=\color{Charcoal},
-    %frameround=tttt, %% mag backgroundcolor nicht
+    xleftmargin=12pt,xrightmargin=3pt,frame=l,numbers=left,
+    numbersep=12pt,framexleftmargin=3pt,rulecolor=\color{Charcoal},
     framerule=.5pt,
 }
 % #1 Name
@@ -51,12 +45,8 @@
   listing options={%
     style=sol@SOPRA,
     language=lLatex,#1},#2, after={\\[-.25\baselineskip]},
-}
-{}
-
-\DeclareDocumentEnvironment{slatex}{}{
-  \presentlst{lLatex}
-}{\endpresentlst}
+}{}
+\DeclareDocumentEnvironment{slatex}{}{\presentlst{lLatex}}{\endpresentlst}
 
 \DeclareTCBListing{presentlst}{%
     O{} % Listing Args
