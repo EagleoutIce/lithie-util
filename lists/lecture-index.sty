@@ -1,6 +1,5 @@
 %% lecture-index.sty
 %% Author: Florian Sihler, 8.10.2020
-
 %% Makeindex control
 \ProvidesPackage{lecture-index}[2020/10/08 v1.0 Index control]
 \RequirePackage{kvoptions}
@@ -16,31 +15,45 @@
 \edef\lecture@imkdx{\noexpand\makeindex[title=\indexname,columns=2,columnsep=.75cm,noautomatic=\LECIDX@automatic]}
 \lecture@imkdx
 
-% hi index
-\def\hindex#1{\def\leci@index@h{#1}\index{#1}}
-% sub index
-\def\sindex#1{\lecidx@index{\leci@index@h\lecidx@idxsub #1}}
+\def\hindex#1{\def\leci@index@h{#1}\index{#1}} % hi index
+\def\sindex#1{\lecidx@index{\leci@index@h\lecidx@idxsub #1}} % sub index
 
 \def\setIndexLinker#1{\gdef\lecidx@@linker##1##2{#1}}
-\def\lecidx@idxactual{?} \def\lecidx@idxsub{!} \def\lecidx@idxpage{|}
+\def\lecidx@idxactual{?}\def\lecidx@idxsub{!}\def\lecidx@idxpage{|}
 \setIndexLinker{\hyperref[#1]{#2}}
 
-% sloppy for now, i don't have time :D
-\def\lecidx@sanitize#1{%
-{\def\%{:percent:}\def\&{:and:}\def\-{:-:}\def\_{:udl:}\def\"{:quote:}%
- \def\~{:tilde:}\def\'{:tright:}\def\allowbreak{}\def\nobreak{}%
- \def\({:bgmath:}\def\){:emath:}\def\textit##1{##1}\def\textbf##1{##1}\def\textsc##1{##1}\def\textsl##1{##1}\lecidx@sanitize@custom
-\StrSubstitute{#1}{\lecidx@idxsub}{:sub:}[\lecidx@tmpl]%
-\StrSubstitute{\lecidx@tmpl}{Ä}{:Ae:}[\lecidx@tmpl]%
-\StrSubstitute{\lecidx@tmpl}{ä}{:ae:}[\lecidx@tmpl]%
-\StrSubstitute{\lecidx@tmpl}{Ö}{:Oe:}[\lecidx@tmpl]%
-\StrSubstitute{\lecidx@tmpl}{ö}{:oe:}[\lecidx@tmpl]%
-\StrSubstitute{\lecidx@tmpl}{Ü}{:Ue:}[\lecidx@tmpl]%
-\StrSubstitute{\lecidx@tmpl}{ü}{:ue:}[\lecidx@tmpl]%
-\StrSubstitute{\lecidx@tmpl}{ß}{:ss:}[\lecidx@tmpl]%
-\StrSubstitute{\lecidx@tmpl}{~}{:nbsp:}[\lecidx@tmpl]%
-\protected@xdef\lecidx@tmpl{\lecidx@tmpl}}%
+% NOTE: this method expects utf8 encoding
+\def\lecidx@expected@ienc@{utf8}
+\AtBeginDocument{\ifx\inputencodingname\lecidx@expected@ienc@\else\PackageError{lecture-index}{currently sanitation is only setup to work with utf8. sorry.}{Use utf8 with inputenc or update the package :)}\fi}
+
+\def\lecidx@repl@uc#1#2{%
+  \expandafter\def\csname u8:\detokenize{#1}\endcsname{#2}%
 }
+\def\lecidx@sanitize{\begingroup\lecidx@sanitize@definitions\lecidx@sanitize@@}
+
+\def\lecidx@sanitize@@#1{%
+    % currently this one remains as i do not want to use the usual active trick
+    \StrSubstitute{#1}{\lecidx@idxsub}{:sub:}[\lecidx@tmpl]%
+    \protected@xdef\lecidx@tmpl{\lecidx@tmpl}\endgroup
+}
+
+\def\lecidx@sanitize@definitions{%
+ %symbol and math stuff :)
+ \def\%{:per:}\def\&{:and:}\def\_{:udl:}\def\"{:qt:}%
+ \def\~{:til:}\def\'{:tr:}\def\({:bm:}\def\){:em:}\def~{:nbsp:}%
+ % breaking and hyphenation
+ \def\-{}\def\allowbreak{}\def\nobreak{}%
+ % formatting
+ \def\textit##1{##1}\def\textbf##1{##1}\def\textsc##1{##1}\def\textsl##1{##1}
+ % umlauts
+ \lecidx@repl@uc{^^c3^^a4}{:ae:}\lecidx@repl@uc{^^c3^^b6}{:oe:}%
+ \lecidx@repl@uc{^^c3^^bc}{:ue:}\lecidx@repl@uc{^^c3^^84}{:Ae:}%
+ \lecidx@repl@uc{^^c3^^96}{:Oe:}\lecidx@repl@uc{^^c3^^9c}{:Ue:}%
+ \lecidx@repl@uc{^^c3^^9f}{:ss:}%
+ % the idx keys
+ \lecidx@sanitize@custom
+}
+
 \let\lecidxsanitize\lecidx@sanitize
 \def\lecidx@sanitize@custom{}
 \def\lecidxaddsanitize#1{\g@addto@macro\lecidx@sanitize@custom{#1}}
@@ -53,8 +66,6 @@
 
 % link index
 \DeclareRobustCommand*\lindex{\@ifstar\lecidx@lindex\lecidx@@lindex}
-% only hook if outside float
-% \ifnum\@floatpenalty<0\else\phantomsection\fi
 \newcommand*\lecidx@lindex[3][]{%
 \lecidx@sanitize{#1}\let\lecidx@root\lecidx@tmpl\lecidx@sanitize{#2}%
 \label{lecidx@\lecidx@root @hi@\lecidx@tmpl @}%
