@@ -15,11 +15,8 @@
   wstate/.style={wstate shape,wstate shape arc factor=.45,font=\Large\sffamily, draw, minimum size=1cm,minimum height=1cm,inner sep=8pt,align=left,lecture@state@init},%
   % block state, used like state but with padding
   bstate/.style={rectangle,draw,align=left,minimum width=2cm,inner sep=3pt,lecture@state@init},%
-  % mark a state as final
   final/.style={double,double distance=1.33pt,outer ysep=\p@,outer xsep=1.65pt},%
-  % mark a state as special
   mark state/.style={thick},%
-  % mark a state as the initial state
   initial/.style={},%
   % transitions
   % arrow to be used in transitions
@@ -60,12 +57,10 @@
 % based on pgf
 
 \pgfkeys{/pgf/.cd,
-  wstate shape west arc/.initial=convex,%
-  wstate shape east arc/.initial=convex,%
+  wstate shape west arc/.initial=convex,wstate shape east arc/.initial=convex,%
   wstate shape left arc/.style={/pgf/wstate shape west arc=#1},%
   wstate shape right arc/.style={/pgf/wstate shape east arc=#1},%
-  wstate shape arc length/.initial=180,%
-  wstate shape arc factor/.initial=1,%
+  wstate shape arc length/.initial=180,wstate shape arc factor/.initial=1,%
   wstate shape arc width/.initial=33pt%
 }%
 \newlength\lecture@personal@tikz@a

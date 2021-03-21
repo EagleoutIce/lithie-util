@@ -53,9 +53,8 @@
 \def\@litu@execute@command#1#2{%
 \def\@@litu@cmd@chk{#2}%
 \ifx\@@litu@cmd@chk\@litu@cmd@defaults
-    \protected@edef\@litu@tmp{\noexpand\@@litu@passopt@fp{\lu@Get{#1}{defaults}}{\lu@Get{#1}{package}}}%
-    \@litu@tmp\fi
-}
+\protected@edef\@litu@tmp{\noexpand\@@litu@passopt@fp{\lu@Get{#1}{defaults}}{\lu@Get{#1}{package}}}%
+\@litu@tmp\fi}
 
 \def\@litu@gobble#1{}
 % allow ':defaults' to be used for defaults
@@ -142,15 +141,10 @@
 \lu@DefineModule{ttl}{typeset-list}{typeset-list}{}{}
 % personal
 \lu@DefineModule{lper}{lecture-personal}{lecture-personal}{}{personal}
-
-% TODO: alias functionality?
-% TODO: encoding
 \ProcessKeyvalOptions*
 
 % Load individuals first to allow options
 \@litu@hook@PackageRequire
-% Now load the groups.
 \forlistloop{\lu@LoadGroup}{\@litu@hook@GroupRequire}
-% Require the packages
 \@litu@hook@RequirePackages\relax
 \endinput

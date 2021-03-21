@@ -48,12 +48,12 @@
       % r_target > r_box  ?
       \ifdim\lecpd@downsize@b>\lecpd@downsize@a
         % then scale to w: w_box * h_target/h_box, h: htarget
-        \pgfmathqparse{\lecture@personal@downsize@box@width * (#1 / \lecture@personal@downsize@box@height)}
+        \pgfmathqparse{\lecture@personal@downsize@box@width * (#1/\lecture@personal@downsize@box@height)}
         \lecpd@downsize@a=\pgfmathresult pt\relax
         \resizebox*{\lecpd@downsize@a}{#1}{\usebox\lecture@personal@downsize@box}%
       \else % r_target <= r_box
         % then scale to w: w_target, h: h_box * w_target/w_box
-        \pgfmathqparse{\lecture@personal@downsize@box@height * (#2 / \lecture@personal@downsize@box@width)}
+        \pgfmathqparse{\lecture@personal@downsize@box@height * (#2/\lecture@personal@downsize@box@width)}
         \lecpd@downsize@a=\pgfmathresult pt\relax
         \resizebox*{#2}{\lecpd@downsize@a}{\usebox\lecture@personal@downsize@box}%
       \fi
