@@ -24,18 +24,41 @@
 
 % NOTE: this method expects utf8 encoding
 \def\lecidx@expected@ienc@{utf8}
-\AtBeginDocument{\ifx\inputencodingname\lecidx@expected@ienc@\else\PackageError{lecture-index}{currently sanitation is only setup to work with utf8. sorry.}{Use utf8 with inputenc or update the package :)}\fi}
+\AtBeginDocument{%
+\ifx\inputencodingname\lecidx@expected@ienc@
+    \let\lecidx@sanitize@definitions@extra\lecidx@sanitize@definitions@extra@unicode
+\else\let\lecidx@sanitize@@\lecidx@sanitize@@compat\fi}
 
 \def\lecidx@repl@uc#1#2{%
   \expandafter\def\csname u8:\detokenize{#1}\endcsname{#2}%
 }
 \def\lecidx@sanitize{\begingroup\lecidx@sanitize@definitions\lecidx@sanitize@@}
 
+\def\lecidx@sanitize@@compat#1{%
+\StrSubstitute{#1}{\lecidx@idxsub}{:sub:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{Ä}{:Ae:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{ä}{:ae:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{Ö}{:Oe:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{ö}{:oe:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{Ü}{:Ue:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{ü}{:ue:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{ß}{:ss:}[\lecidx@tmpl]%
+\StrSubstitute{\lecidx@tmpl}{~}{:nbsp:}[\lecidx@tmpl]%
+\protected@xdef\lecidx@tmpl{\lecidx@tmpl}%
+}
+
 \def\lecidx@sanitize@@#1{%
     % currently this one remains as i do not want to use the usual active trick
     \StrSubstitute{#1}{\lecidx@idxsub}{:sub:}[\lecidx@tmpl]%
     \protected@xdef\lecidx@tmpl{\lecidx@tmpl}\endgroup
 }
+
+\def\lecidx@sanitize@definitions@extra@unicode{% umlauts
+\lecidx@repl@uc{^^c3^^a4}{:ae:}\lecidx@repl@uc{^^c3^^b6}{:oe:}%
+\lecidx@repl@uc{^^c3^^bc}{:ue:}\lecidx@repl@uc{^^c3^^84}{:Ae:}%
+\lecidx@repl@uc{^^c3^^96}{:Oe:}\lecidx@repl@uc{^^c3^^9c}{:Ue:}%
+\lecidx@repl@uc{^^c3^^9f}{:ss:}}
+\def\lecidx@sanitize@definitions@extra{}
 
 \def\lecidx@sanitize@definitions{%
  %symbol and math stuff :)
@@ -45,11 +68,7 @@
  \def\-{}\def\allowbreak{}\def\nobreak{}%
  % formatting
  \def\textit##1{##1}\def\textbf##1{##1}\def\textsc##1{##1}\def\textsl##1{##1}
- % umlauts
- \lecidx@repl@uc{^^c3^^a4}{:ae:}\lecidx@repl@uc{^^c3^^b6}{:oe:}%
- \lecidx@repl@uc{^^c3^^bc}{:ue:}\lecidx@repl@uc{^^c3^^84}{:Ae:}%
- \lecidx@repl@uc{^^c3^^96}{:Oe:}\lecidx@repl@uc{^^c3^^9c}{:Ue:}%
- \lecidx@repl@uc{^^c3^^9f}{:ss:}%
+ \lecidx@sanitize@definitions@extra
  % the idx keys
  \lecidx@sanitize@custom
 }
