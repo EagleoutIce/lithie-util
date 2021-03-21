@@ -20,7 +20,6 @@
 \ifPDFPC@disable\expandafter\endinput\fi
 
 % Some guards to begin
-
 \ifx\PDFPC@duration\@empty
 \else
   \IfInteger{\PDFPC@duration}{}
@@ -33,12 +32,10 @@
     {\PackageWarningNoLine{beamer-pdfpc-notes}{'lastminutes' should be an integer}}
 \fi
 
-%%
 \RequirePackage{letltxmacro,xstring,hyperxmp}
 
-
 % Our schema
-\newcommand*{\PDFPC@schema}{%
+\newcommand*\PDFPC@schema{%
   \hyxmp@add@to@xml{%
 ______<rdf:Description xmlns:pdfpc="https://github.com/pdfpc/pdfpc">^^J%
   }%

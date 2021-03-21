@@ -61,7 +61,7 @@
 
 \newglossarystyle{lecture@glossary}{%
 \setglossarystyle{tree}%
-\renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse
+\renewcommand\glsgroupheading[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse
     \lglos@headingstyle{\glsgetgrouptitle{##1}}%
     \iflglos@setup@enumitem@
     \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc
@@ -80,7 +80,7 @@
 }
 \newglossarystyle{lecture@glossary@short}{%
 \setglossarystyle{tree}%
-\renewcommand{\glsgroupheading}[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse
+\renewcommand\glsgroupheading[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse
     \lglos@headingstyle{\glsgetgrouptitle{##1}}%
     \iflglos@setup@enumitem@
     \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc\else% no enumitem
@@ -89,7 +89,7 @@
     \parindent=\z@ \parskip=\z@ plus .3pt%
     \global\atinitglossarytrue\relax
     }{\end{description}}%#
-\renewcommand{\glossentry}[2]{%reset of tree to pad pagenumbers
+\renewcommand\glossentry[2]{%reset of tree to pad pagenumbers
     \hangindent\z@\relax \parindent\z@\relax
     \item[\glsentryitem{##1}\glstreenamefmt{\glstarget{##1}{\glossentryname{##1}}}]%
     \ifglshassymbol{##1}{\space(\glossentrysymbol{##1})}{}%

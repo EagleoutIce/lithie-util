@@ -46,8 +46,7 @@
 \def\lecture@@typeset@author#1{%
 \setcounter{lecture@counter@tmp@a}{0}% start with an offset
 \foreach \@tmp in {#1}%
-    {\ifx\@tmp\@empty\else%
-        \addtocounter{lecture@counter@tmp@a}\@ne\fi}%
+    {\ifx\@tmp\@empty\else\addtocounter{lecture@counter@tmp@a}\@ne\fi}%
 \edef\lecture@author@totallength{\arabic{lecture@counter@tmp@a}}%
 \setcounter{lecture@counter@tmp@a}{0}% stored the length of the list
 \foreach \lecture@@tmp@curauthor in {#1} {%
@@ -58,11 +57,9 @@
         ~und \else,\space\fi\fi
     \expandafter\lecture@@parse@author\lecture@@tmp@curauthor{} (??)??\@nil
 \fi
-}%
-}
+}}
 
-\newcommand*\lecture@typeset@authors{%
-    \protected@edef\@tmp{\noexpand\lecture@@typeset@author{\lecture@register@author}}\@tmp}
+\newcommand*\lecture@typeset@authors{\protected@edef\@tmp{\noexpand\lecture@@typeset@author{\lecture@register@author}}\@tmp}
 \let\typesetAuthor\lecture@typeset@authors
 \let\typesetAuthors\lecture@typeset@authors
 

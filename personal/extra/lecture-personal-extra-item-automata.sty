@@ -39,9 +39,7 @@
 
 \let\lecture@personal@to\to%
 % will be enabled inside of all states
-% [#1] possible suffix
-% #2 left side of production
-% #3 right side of production
+% [#1] possible suffix #2 left side of production #3 right side of production
 \def\lecture@personal@itemautomata{\@ifstar\lecture@personal@itemautomata@star\lecture@personal@itemautomata@nostar}
 \newcommand*\lecture@personal@itemautomata@star[3][]{%
     [\thinspace\lecture@personal@itemautomata@nostar[#1]{#2}{#3}\thinspace]%

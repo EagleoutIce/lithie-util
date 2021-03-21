@@ -2,9 +2,7 @@
 %% Author: Florian Sihler, 8.10.2020
 
 %% Makeindex control
-
 \ProvidesPackage{lecture-index}[2020/10/08 v1.0 Index control]
-
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{family=LECIDX,prefix=LECIDX@}
 \DeclareStringOption[true]{automatic}[false]
@@ -24,9 +22,7 @@
 \def\sindex#1{\lecidx@index{\leci@index@h\lecidx@idxsub #1}}
 
 \def\setIndexLinker#1{\gdef\lecidx@@linker##1##2{#1}}
-\def\lecidx@idxactual{?}
-\def\lecidx@idxsub{!}
-\def\lecidx@idxpage{|}
+\def\lecidx@idxactual{?} \def\lecidx@idxsub{!} \def\lecidx@idxpage{|}
 \setIndexLinker{\hyperref[#1]{#2}}
 
 % sloppy for now, i don't have time :D
@@ -48,7 +44,6 @@
 \let\lecidxsanitize\lecidx@sanitize
 \def\lecidx@sanitize@custom{}
 \def\lecidxaddsanitize#1{\g@addto@macro\lecidx@sanitize@custom{#1}}
-
 
 \def\lecidxindex{\jobname}
 \def\lecidx@index#1{\index[\lecidxindex]{#1}}
@@ -88,9 +83,9 @@
 \def\lecidx@slindex#1#2{\lindex*[\leci@index@h]{#1}{#2}}
 \def\lecidx@@slindex#1{\lindex[\leci@index@h]{#1}}
 % old for compat
-\DeclareRobustCommand{\kw}[1]{\textbf{#1}\lecidx@index{#1}}
-\DeclareRobustCommand{\sw}[2][Gruppenname]{#2\lecidx@index{#1\lecidx@idxsub #2}}
-\DeclareRobustCommand{\sr}[3][Gruppenname]{#3\lecidx@index{#1\lecidx@idxsub #2\lecidx@idxsub #3}}
+\DeclareRobustCommand*\kw[1]{\textbf{#1}\lecidx@index{#1}}
+\DeclareRobustCommand*\sw[2][Gruppenname]{#2\lecidx@index{#1\lecidx@idxsub #2}}
+\DeclareRobustCommand*\sr[3][Gruppenname]{#3\lecidx@index{#1\lecidx@idxsub #2\lecidx@idxsub #3}}
 
 % note for '.ist' (\\lecidx@@maysub):
 % This is a weird bugfix. To be honest, i do not know why it is required using ( and ) as index guards on different pages, the 1-hierarch fails to establish according to the item_12 rule and jumps to item_2 this guards item_2 with the setup-routine which has to be present only on an already established 2-hierarchy

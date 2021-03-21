@@ -95,14 +95,6 @@
 }
 
 % note: to allow correct line starts we set the inner nodes extra using their auto width
-
-% #1: heap or stack
-% \def\lhns@render@#1{%
-%     \ifnum\value{lhns@#1}>0 % at least one element => draw
-%         \@nameuse{lhns@render@#1@}%
-%     \fi
-% }
-
 \def\lhns@render@heap{%
     \lhns@renderheaptrue
     % render root element:

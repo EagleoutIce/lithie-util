@@ -84,11 +84,11 @@
 \def\selectcoverpage#1{\gdef\lecturecp@activecoverpage{#1}}
 \selectcoverpage{}
 
-\AtEndPreamble{\ifx\lecturecp@activecoverpage\@empty%
-    \else\ifcsname lecturecp@style@\lecturecp@activecoverpage @\endcsname
-        \@nameuse{lecturecp@style@\lecturecp@activecoverpage @}%
-    \else\PackageError{lecture-coverpage}{The desired coverpage style '\lecturecp@activecoverpage' is unknown. Choose one of: '\lecture@allcoverpages'}
-    \fi\fi}
+\AtEndPreamble{\ifx\lecturecp@activecoverpage\@empty
+\else\ifcsname lecturecp@style@\lecturecp@activecoverpage @\endcsname
+    \@nameuse{lecturecp@style@\lecturecp@activecoverpage @}%
+\else\PackageError{lecture-coverpage}{The desired coverpage style '\lecturecp@activecoverpage' is unknown. Choose one of: '\lecture@allcoverpages'}
+\fi\fi}
 
 % .########..##..........###....####.##....##
 % .##.....##.##.........##.##....##..###...##
@@ -147,8 +147,7 @@
 \vfill
 \parbox[c]{\linewidth}{%
 \fontsize{15pt}{15pt}\selectfont\sffamily\color{gray}\lecture@r{brief}%
-}%
-\end{titlepage}%
+}\end{titlepage}%
 \restoregeometry{}\clearpage\endgroup}%
 }
 
@@ -179,8 +178,7 @@
 \begin{tikzpicture}[line join=round]%
 \filldraw[\lecturecp@emblemcolor@symbol]
     (0,0) -- ++(0,-.4) -- ++(.4cm,.3)
-    -- ++(\paperwidth-.8cm,0) -- ++(.4cm,-.3)
-    |- cycle;%
+    -- ++(\paperwidth-.8cm,0) -- ++(.4cm,-.3) |- cycle;%
 \end{tikzpicture}\\*[.1\paperheight]%
 % title:
 \hspace*{\lecturecp@leftwidth}\parbox{.925\linewidth}{%

@@ -11,13 +11,8 @@
 \DeclareOption{nopatchurl}{\leclink@patchurl@false}
 \ProcessOptions*
 
-\ifleclink@defaults@
-    \AtBeginDocument{\hypersetup{pdfborder={0 0 0}}}%
-\fi
-
-\ifleclink@patchurl@
-    \AtBeginDocument{\urlstyle{same}}%
-\fi
+\ifleclink@defaults@ \AtBeginDocument{\hypersetup{pdfborder={0 0 0}}} \fi
+\ifleclink@patchurl@ \AtBeginDocument{\urlstyle{same}} \fi
 
 \RequirePackage{etoolbox,letltxmacro}
 % no linebreaks in footnotes:

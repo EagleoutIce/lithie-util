@@ -18,9 +18,7 @@
 \fi
 }
 
-\def\lip@AppendToProfile#1#2{%
-\expandafter\g@addto@macro\csname lip@profile@#1\endcsname{#2}%
-}
+\def\lip@AppendToProfile#1#2{\expandafter\g@addto@macro\csname lip@profile@#1\endcsname{#2}}
 
 \def\lip@UseProfile#1{%
 \ifcsname lip@profile@#1\endcsname
