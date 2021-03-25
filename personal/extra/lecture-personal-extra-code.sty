@@ -3,7 +3,6 @@
 \ProvidesPackage{lecture-personal-extra-code}[2020/12/08 v1.0 Personal code]
 \PassOptionsToPackage{chapterlistsgap=\medskipamount}{newfloat}
 \RequirePackage{newfloat}
-
 \DeclareFloatingEnvironment[fileext=loc,listname={Alle Listings},name=Listing,placement=tbp,within=none]{code}
 
 % patch to bridge for lithie boxe
@@ -11,20 +10,16 @@
 \def\contentsname{Alle Listings}% may?
 \libx@listof@heading{\contentsname}%
 \let\numberline\libx@list@numberformat% right align by boxes
-\libx@starttoc{loc}%
-\endgroup}
+\libx@starttoc{loc}\endgroup}
 % modifx code styles to match box
-
 \newlength\cftcodenumwidth
 \cftcodenumwidth=\dimexpr\libx@numwidth+\libx@numwidth@offset\relax
-
 \gdef\l@code#1#2{\@dottedtocline{1}{\cftcodenumwidth}{\cftcodenumwidth}{#1}{#2}}%
 
 \AppendToProfile{print}{%
 \AtBeginEnvironment{code}{\lstfs{10}}%
 \AtBeginEnvironment{code*}{\lstfs{10}}%
-\@ifpackageloaded{sopra-listings}{\lstset{lineskip=3pt}}{}%
-}
+\@ifpackageloaded{sopra-listings}{\lstset{lineskip=3pt}}{}}
 
 \AppendToProfile{mobile}{%
 \AtBeginEnvironment{code}{\lstfs{11}}%
@@ -32,7 +27,6 @@
 \@ifpackageloaded{sopra-listings}{%
   \colorlet{sol@colors@border}{sol@colors@background}%
   \lstset{lineskip=3.25pt}%
-}{}%
-}
+}{}}
 
 \endinput

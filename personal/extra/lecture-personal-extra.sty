@@ -4,10 +4,8 @@
 \RequirePackage{kvoptions,etoolbox}
 \SetupKeyvalOptions{family=LPE,prefix=LPE@}
 \def\@l@persex@no{L@PERS@NO}
-
 \DeclareStringOption[\@l@persex@no]{load}[\@l@persex@no]
 \ProcessKeyvalOptions*
-
 \def\@l@persex@load#1{\RequirePackage{lecture-personal-extra-#1}}
 \newcommand*\LoadPersonalExtras[1]{\ifx!#1!\else\forcsvlist\@l@persex@load{#1}\fi}
 

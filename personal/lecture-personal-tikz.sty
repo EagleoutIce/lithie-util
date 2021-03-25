@@ -2,7 +2,6 @@
 %% Author: Florian Sihler, 3.11.2020
 \ProvidesPackage{lecture-personal-tikz}[2020/11/03 v1.0 Personal tikz]
 \RequirePackage{forest}
-
 \def\fillfont{\def\mdseries@sf{medium}\sffamily}
 \colorlet{lec@descgray}{lightgray!32!white}
 \AtEndPreamble{%
@@ -12,7 +11,7 @@
   \fi
   \tikzset{%
     every node/.append style={font=\sffamily},%
-    lblock/.style={block,#1,writ,font=\fillfont}, %
+    lblock/.style={block,#1,writ,font=\fillfont},%
     lblock/.default={tikzA},
     block/.style={rectangle,draw, align=center, minimum height=1.9em,rounded corners=1.55pt}%
   }

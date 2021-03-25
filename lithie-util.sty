@@ -1,24 +1,21 @@
 %% lithie-util.sty
 %% Author: Florian Sihler, 20.09.2020
-
 %% Collection of all the other packages i have, which are requsted as needed.
 \ProvidesPackage{lithie-util}[2020/09/20 v1.0 the lithie util collector]
 \RequirePackage{kvoptions,etoolbox,lithie-profiles}
 \SetupKeyvalOptions{family=LITU,prefix=LITU@}
-
 \def\@litu@none{LIT@NO}
 % hooks
 \def\@litu@hook@PackageRequire{} \def\@litu@hook@GroupRequire{} \def\@litu@hook@RequirePackages{}
 \def\@litu@all@groups{}
-
 % add to list
 \let\@litu@atl\listadd
 
 % #1 group id
 \def\lu@Definendgroup#1{%
-    \expandafter\def\csname @litu@@group@#1\endcsname{}%
-    \@litu@atl\@litu@all@groups{#1}%
-    \DeclareVoidOption{#1}{\listadd\@litu@hook@GroupRequire{#1}}%
+  \expandafter\def\csname @litu@@group@#1\endcsname{}%
+  \@litu@atl\@litu@all@groups{#1}%
+  \DeclareVoidOption{#1}{\listadd\@litu@hook@GroupRequire{#1}}%
 }
 
 \def\lu@AddToGroup#1#2{\expandafter\def\expandafter\@litu@tmp@listnam\expandafter{\csname @litu@@group@#1\endcsname}%
@@ -28,15 +25,14 @@
 \@litu@tmp@groupload}
 
 \def\@@lu@atgs#1#2{\lu@AddToGroup{#2}{#1}}
-
 \def\lu@AddToGroups#1#2{\edef\@litu@tmp{#2}%
-    \protected@edef\@litu@tmp@curcsv{\noexpand\forcsvlist{\noexpand\@@lu@atgs{\@litu@tmp}}{#1}}\@litu@tmp@curcsv
+  \protected@edef\@litu@tmp@curcsv{\noexpand\forcsvlist{\noexpand\@@lu@atgs{\@litu@tmp}}{#1}}\@litu@tmp@curcsv
 }
 
 \def\lu@Get#1#2{\csname @lu@mu@map@#2@#1\endcsname}
 
 \def\@litu@resolve@module@args#1#2#3{%
-\edef\@litu@name{\lu@Get{#1}{name}}% todo only expand once
+\edef\@litu@name{\lu@Get{#1}{name}}%
 \edef\@litu@cur{\csname LITU@\@litu@name\endcsname}%
 \ifx\@litu@cur\@litu@none#2\else#3\fi}
 
@@ -97,7 +93,7 @@
 }
 
 % define the groups
-\forcsvlist{\lu@Definendgroup}{all,util,color,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics,index}
+\@for\@gr:=all,util,color,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics,index\do{\lu@Definendgroup{\@gr}}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
 \lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,boxes}
@@ -145,6 +141,6 @@
 
 % Load individuals first to allow options
 \@litu@hook@PackageRequire
-\forlistloop{\lu@LoadGroup}{\@litu@hook@GroupRequire}
+\forlistloop\lu@LoadGroup{\@litu@hook@GroupRequire}
 \@litu@hook@RequirePackages\relax
 \endinput

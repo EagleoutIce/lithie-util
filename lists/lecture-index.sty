@@ -106,22 +106,18 @@
 {\def\"{\lecidx@tick}\protected@xdef\lecidx@sort{\ifx!#1!\else#1\lecidx@idxsub\fi#2}}%
 \lecidx@index{\lecidx@sort\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@root @hi@\lecidx@tmpl @}{#3}}}
 \newcommand*\lecidx@@rindex[2][]{\lecidx@rindex[#1]{#2}{#2}}
-
 % sub link index
 \DeclareRobustCommand*\slindex{\@ifstar\lecidx@slindex\lecidx@@slindex}
 \def\lecidx@slindex#1#2{\lindex*[\leci@index@h]{#1}{#2}}
 \def\lecidx@@slindex#1{\lindex[\leci@index@h]{#1}}
-
 % sub ref index
 \DeclareRobustCommand*\rlindex{\@ifstar\lecidx@rlindex\lecidx@@rlindex}
 \def\lecidx@rlindex#1#2{\rindex*[\leci@index@h]{#1}{#2}}
 \def\lecidx@@rlindex#1{\rindex[\leci@index@h]{#1}}
-
 % old for compat
 \DeclareRobustCommand*\kw[1]{\textbf{#1}\lecidx@index{#1}}
 \DeclareRobustCommand*\sw[2][Gruppenname]{#2\lecidx@index{#1\lecidx@idxsub #2}}
 \DeclareRobustCommand*\sr[3][Gruppenname]{#3\lecidx@index{#1\lecidx@idxsub #2\lecidx@idxsub #3}}
-
 % note for '.ist' (\\lecidx@@maysub):
 % This is a weird bugfix. To be honest, i do not know why it is required using ( and ) as index guards on different pages, the 1-hierarch fails to establish according to the item_12 rule and jumps to item_2 this guards item_2 with the setup-routine which has to be present only on an already established 2-hierarchy
 \endinput

@@ -3,7 +3,6 @@
 
 %% stuff i use in my item-automata scripts
 \ProvidesPackage{lecture-personal-extra-item-automata}[2020/12/08 v1.0 Personal item-automata]
-
 \usetikzlibrary{matrix}
 
 % state diagram
@@ -20,8 +19,7 @@
   final/.style={double,double distance=1.33pt,outer ysep=\p@,outer xsep=1.65pt},%
   mark state/.style={thick},%
   initial/.style={},%
-  % transitions
-  % arrow to be used in transitions
+  % transitions arrow to be used in transitions
   t/.tip={Kite},%
   % normal: transition=(
   transition/.style={edge node={node[auto,sloped]{\statetransitionfont$#1$}},postaction={arrows={-Kite}}},%
@@ -35,7 +33,7 @@
 % end symbol for word
 \def\endsymbol{\text{\#}}
 
-\let\lecture@personal@to\to%
+\let\lecture@personal@to\to
 % will be enabled inside of all states
 % [#1] possible suffix #2 left side of production #3 right side of production
 \def\lecture@personal@itemautomata{\@ifstar\lecture@personal@itemautomata@star\lecture@personal@itemautomata@nostar}
@@ -68,12 +66,8 @@
 \newlength\lecture@personal@tikz@a
 
 \pgfdeclareshape{wstate shape}{%
-\savedmacro\westarc{%
-\edef\westarc{\pgfkeysvalueof{/pgf/wstate shape west arc}}%
-}%
-\savedmacro\eastarc{%
-\edef\eastarc{\pgfkeysvalueof{/pgf/wstate shape east arc}}%
-}%
+\savedmacro\westarc{\edef\westarc{\pgfkeysvalueof{/pgf/wstate shape west arc}}}%
+\savedmacro\eastarc{\edef\eastarc{\pgfkeysvalueof{/pgf/wstate shape east arc}}}%
 \savedmacro\roundedrectanglepoints{%
 %
 % Get half the arc angle, a.
@@ -161,11 +155,9 @@
   \divide\pgfutil@tempdimb by2\relax
   \edef\xoffset{\the\pgfutil@tempdimb}%
 \else
-  \let\xoffset=\innerxsep%
+  \let\xoffset=\innerxsep
 \fi
-%
 % The node is made wider if convex arcs overlap.
-%
 \pgf@x=\halftextwidth\relax
 \advance\pgf@x by\xoffset\relax
 \pgf@xc=\pgf@ya
@@ -210,7 +202,7 @@
   \pgf@x=\pgfmathresult\pgf@x
   \edef\concavexshift{\the\pgf@x}%
 \fi
-\addtosavedmacro\concavexshift%
+\addtosavedmacro\concavexshift
 %
 \ifdim\halfarcangle pt=90pt\relax% Avoid division by zero.
   \def\convexxshift{\z@}%
@@ -380,8 +372,7 @@
     \fi
   \fi
   \pgfpathclose
-}%
-}%
+}}%
 \anchorborder{%
 \pgfextract@process\externalpoint{%
 \pgfextract@process\externalpoint{}%
@@ -448,7 +439,7 @@
       \pgfmathpointintersectionoflineandarc{\externalpoint}{\centerpoint}%
         {\arccenter}{360-\halfarcangle}{360}{\xradius+\outerxsep and \yradius+\outerysep}%
     \else
-      \pgfpointintersectionoflines%
+      \pgfpointintersectionoflines
         {\csname pgf@anchor@wstate shape@north east\endcsname}%
         {\csname pgf@anchor@wstate shape@south east\endcsname}%
         {\externalpoint}{\centerpoint}%

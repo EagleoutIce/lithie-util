@@ -22,7 +22,7 @@
     plain legend/.style={%
         legend style={draw=none, inner sep=\z@, rounded corners=\p@}%
     },%
-    plain axis/.style={%e
+    plain axis/.style={%
         axis line style={draw=none},xtick pos=left,ytick pos=left%
     },%
     no x/.style={xticklabels={,,}},no y/.style={yticklabels={,,}},%
@@ -58,13 +58,11 @@
 }
 
 \pgfkeys{%
-    /libpp@keys/.is family, /libpp@keys,%
-    pre code/.store in=\libpp@box@PreCode, pre code={},%
-    post code/.store in=\libpp@box@PostCode, post code={},%
-    */.code={\libpp@autotikz@true\def\libpp@autotikz@{#1}},
-    */.initial={}%
+/libpp@keys/.is family, /libpp@keys,%
+pre code/.store in=\libpp@box@PreCode, pre code={},%
+post code/.store in=\libpp@box@PostCode, post code={},%
+*/.code={\libpp@autotikz@true\def\libpp@autotikz@{#1}},*/.initial={}%
 }
-
 \def\libpp@@A{tikzA}\def\libpp@@B{tikzB}
 \def\libpp@@C{tikzC}\def\libpp@@D{tikzD}
 
@@ -77,7 +75,6 @@
 }
 
 \def\libpp@@resetcolor{\def\libpp@@c{tikzA}}
-
 \iflibpp@tpalette@
 \let\libpp@cyclecolor\libpp@@cyclecolor
 \let\libpp@resetcolor\libpp@@resetcolor
@@ -115,8 +112,7 @@
 (\def\libpp@barsymtype{x}\def\libpp@barftype{y}%
 \libpp@init{#1}%
 \iflibpp@autotikz@\tikzpicture[\libpp@autotikz@]\fi
-\axis[libpp@default,libpp@default@plots,#2]%
-)%
+\axis[libpp@default,libpp@default@plots,#2])%
 (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
 
 \def\libpp@bar{\@ifnextchar[{\libpp@bar@opt{}}{\libpp@bar@noopt{}}}
@@ -134,7 +130,6 @@
 
 \def\SetDefaultPlots#1{\pgfplotsset{libpp@default@plots/.style={#1}}}
 \def\AppendDefaultPlots#1{\pgfplotsset{libpp@default@plots/.append style={#1}}}
-
 \def\SetDefaultBars#1{\pgfplotsset{libpp@default@bars/.style={#1}}}
 \def\AppendDefaultBars#1{\pgfplotsset{libpp@default@bars/.append style={#1}}}
 
