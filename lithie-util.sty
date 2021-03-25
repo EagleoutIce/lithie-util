@@ -93,7 +93,7 @@
 }
 
 % define the groups
-\@for\@gr:=all,util,color,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics,index\do{\lu@Definendgroup{\@gr}}
+\forcsvlist{\lu@Definendgroup}{all,util,color,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics,index}
 
 % TODO: configurations or profiles which will setup some general options like add them to packages
 \lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,boxes}
