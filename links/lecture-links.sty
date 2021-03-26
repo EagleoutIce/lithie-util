@@ -35,11 +35,11 @@
 \newcommand*\SetUrlLinkStyle[1]{\def\leclink@url@linkstyle##1##2##3{#1}}
 \newcommand*\SetHrefLinkStyle[1]{\def\leclink@href@linkstyle##1##2##3{#1}}
 \newcommand*\SetFootnoteLinkStyle[1]{\def\leclink@footnote@linkstyle##1##2##3{#1}}
-\newcommand*\SetCiteColor[1]{\ifx!#1!\def\leclink@cite@color{}\else\def\leclink@cite@color{\hypersetup{citecolor=#1}}\fi}
+\newcommand*\SetCiteColor[1]{\ifx!#1!\def\leclink@cite@color{}\else\def\leclink@cite@color{\hypersetup{citecolor=#1}}\fi\let\leclink@cite@bcolor\leclink@cite@color}
 
 \newif\ifleclink@enabled@
-\newcommand*\DisableLinkStyle{\leclink@enabled@false}
-\newcommand*\EnableLinkStyle{\leclink@enabled@true}
+\newcommand*\DisableLinkStyle{\hypersetup{allcolors=.}\def\leclink@cite@color{}\leclink@enabled@false}
+\newcommand*\EnableLinkStyle{\let\leclink@cite@color\leclink@cite@bcolor\leclink@enabled@true}
 
 \providecommand\disablehyper{\DisableLinkStyle}
 \providecommand\nohyper[1]{\begingroup\disablehyper #1\endgroup}
