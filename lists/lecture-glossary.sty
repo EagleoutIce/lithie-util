@@ -1,9 +1,8 @@
-%% lecture-glossary.sty
-%% Author: Florian Sihler, 22.09.2020
-%% Basically a styling for the glossary setting i like,
-%% maybe more styles will be added in the future
+% lecture-glossary.sty
+% Author: Florian Sihler, 22.09.2020
+% Basically a styling for the glossary setting i like,
+% maybe more styles will be added in the future
 \ProvidesPackage{lecture-glossary}[2020/09/22 v1.0 Glossary Styling]
-
 % enumitem support
 \newif\iflglos@setup@enumitem@
 \DeclareOption{enumitem}{\lglos@setup@enumitem@true}
@@ -16,7 +15,6 @@
 \RequirePackage[acronym,nopostdot,numberedsection=nameref,section,noglossaryindex,translate=babel]{glossaries-accsupp}%
 % \noist % disable index style file
 \RequirePackage{glossary-longragged}
-
 \iflglos@setup@enumitem@ \RequirePackage{enumitem} \fi
 
 \newif\ifatinitglossary
@@ -28,7 +26,6 @@
 \def\lglos@spage{Seite}\def\lglos@ppage{Seiten}
 
 \newif\iflglos@thispage@issingle@
-
 \let\lglos@legacy@delimN\delimN \let\lglos@legacy@delimR\delimR
 \def\lglos@delimN{\global\lglos@thispage@issingle@false\lglos@legacy@delimN} \def\lglos@delimR{\global\lglos@thispage@issingle@false\lglos@legacy@delimN}
 
@@ -42,15 +39,11 @@
 \@lglos@printpages{#1}}
 
 \def\LithieSetGlossaryStyle#1{\gdef\lglos@headingstyle##1{#1{##1}}}
-
 \def\lglos@default@headingstyle#1{\begin{center}\strut\emph{#1}\end{center}}
 \def\lglos@default@headingstyle@short#1{\medskip}
 
-\iflglos@setup@short@
-\LithieSetGlossaryStyle{\lglos@default@headingstyle@short}
-\else
-\LithieSetGlossaryStyle{\lglos@default@headingstyle}
-\fi
+\iflglos@setup@short@\LithieSetGlossaryStyle{\lglos@default@headingstyle@short}
+\else\LithieSetGlossaryStyle{\lglos@default@headingstyle}\fi
 
 \def\LithieSetGlossaryOpts#1{\gdef\lglos@desc@options{#1}}
 \LithieSetGlossaryOpts{}
@@ -65,10 +58,10 @@
     \begin{description}\fi}%
 \renewenvironment{theglossary}{%
     \parindent=\z@ \parskip=\z@ plus .3pt%
-    \global\atinitglossarytrue\relax
+    \global\atinitglossarytrue
     }{\end{description}}%#
-\renewcommand{\glossentry}[2]{%reset of tree to pad pagenumbers
-    \hangindent\z@\relax \parindent\z@\relax
+\renewcommand\glossentry[2]{%reset of tree to pad pagenumbers
+    \hangindent=\z@ \parindent=\z@
     \item[\glsentryitem{##1}\glstreenamefmt{\glstarget{##1}{\glossentryname{##1}}}]%
     \ifglshassymbol{##1}{\space(\glossentrysymbol{##1})}{}%
     \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\lglos@printpages{##2}\par
@@ -83,20 +76,18 @@
     \begin{description}\fi}%
 \renewenvironment{theglossary}{%
     \parindent=\z@ \parskip=\z@ plus .3pt\relax
-    \global\atinitglossarytrue\relax
+    \global\atinitglossarytrue
     }{\end{description}}%#
 \renewcommand\glossentry[2]{%reset of tree to pad pagenumbers
-    \hangindent\z@\relax \parindent\z@\relax
+    \hangindent=\z@ \parindent=\z@
     \item[\glsentryitem{##1}\glstreenamefmt{\glstarget{##1}{\glossentryname{##1}}}]%
     \ifglshassymbol{##1}{\space(\glossentrysymbol{##1})}{}%
     \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\par
-}%
-}
+}}
 \iflglos@setup@short@\setglossarystyle{lecture@glossary@short}%
 \else\setglossarystyle{lecture@glossary}\fi
 
 \makeglossaries
-
 \preto\printglossaries{\begingroup\interlinepenalty1000}
 \g@addto@macro\printglossaries{\endgroup}
 
@@ -104,7 +95,6 @@
 \def\glspllong#1{{\glsreset{#1}\glspl{#1}}}
 \def\glsshort#1{{\glsunset{#1}\gls{#1}}}
 \def\glsplshort#1{{\glsunset{#1}\glspl{#1}}}
-
 \def\Glslong#1{{\glsreset{#1}\Gls{#1}}}
 \def\Glspllong#1{{\glsreset{#1}\Glspl{#1}}}
 \def\Glsshort#1{{\glsunset{#1}\Gls{#1}}}

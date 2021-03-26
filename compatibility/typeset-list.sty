@@ -1,7 +1,7 @@
-%% typeset-list.sty
-%% Author: Florian Sihler, 1.12.2020
+% typeset-list.sty
+% Author: Florian Sihler, 1.12.2020
 
-%% More customizeable typeset-list command; purely for comaptibility reasons
+% More customizeable typeset-list command; purely for comaptibility reasons
 \ProvidesPackage{typeset-list}[2020/10/12 v1.0 typeset-lists]
 \RequirePackage{pgffor}
 
@@ -20,7 +20,7 @@
     \protected@edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
 }
 
-%% this will typeset a List in German List-Notation
+% this will typeset a List in German List-Notation
 \newcommand*\@@typesetList[2][typesetVoid]{%
     \def\@tmpl{#2}%
     \getListLength{#2}%
@@ -52,7 +52,7 @@
 }\fi
 }
 
-%% Routine to highlight the First Character in Acronyms
+% Routine to highlight the First Character in Acronyms
 % \Acronym{Hallo Welt} will yield '\textbf{H}allo \textbf{W}elt'
 \def\Acronym#1{% Not Nested
     \def\@ltu@ttl@formatter@current{\@ltu@ttl@TextBfFormat}%

@@ -1,6 +1,6 @@
-%% lecture-index.sty
-%% Author: Florian Sihler, 8.10.2020
-%% Makeindex control
+% lecture-index.sty
+% Author: Florian Sihler, 8.10.2020
+% Makeindex control
 \ProvidesPackage{lecture-index}[2020/10/08 v1.0 Index control]
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{family=LECIDX,prefix=LECIDX@}
@@ -89,7 +89,6 @@
 \label{lecidx@\lecidx@root @hi@\lecidx@tmpl @}%
 {\def\"{\lecidx@tick}\protected@xdef\lecidx@sort{\ifx!#1!\else#1\lecidx@idxsub\fi#2}}%
 \lecidx@index{\lecidx@sort\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@root @hi@\lecidx@tmpl @}{#3}}}
-
 \newcommand*\lecidx@@lindex[2][]{\lecidx@lindex[#1]{#2}{#2}}
 
 \newcommand*\lecidx@guardidx[2][\jobname]{\begingroup
@@ -97,8 +96,7 @@
     \def\lecidxindex{#1}%
     \lecidx@index{\lecidx@sort\lecidx@idxactual#2}%
 \endgroup}
-\let\guardidx\lecidx@guardidx
-% ref index
+\let\guardidx\lecidx@guardidx% ref index
 \DeclareRobustCommand*\rindex{\@ifstar\lecidx@rindex\lecidx@@rindex}
 
 \newcommand*\lecidx@rindex[3][]{%

@@ -1,13 +1,13 @@
-%% lecture-format.sty
-%% Author: Florian Sihler, 8.10.2020
-%% Allows multiple styling variants for e.g. multicols, which allows hints
-%% for different environments.
+% lecture-format.sty
+% Author: Florian Sihler, 8.10.2020
+% Allows multiple styling variants for e.g. multicols, which allows hints
+% for different environments.
 \ProvidesPackage{lecture-format}[2020/10/08 v1.0 Format and Environment hints]
 \RequirePackage{multicol}
 \newenvironment{multicolshint}[1]{}{}
 \def\libf@DisableMulticolHint{\renewenvironment{multicolshint}[1]{}{}}
 \def\libf@EnableMulticolHint{%
-    \renewenvironment{multicolshint}[1]{\begin{multicols}{##1}}{\end{multicols}}%
+\renewenvironment{multicolshint}[1]{\begin{multicols}{##1}}{\end{multicols}}%
 }
 \libf@EnableMulticolHint
 \let\DisableMulticolHint\libf@DisableMulticolHint

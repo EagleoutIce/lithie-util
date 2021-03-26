@@ -37,12 +37,12 @@ delim_0 "\\thinspace\\dotfill\\thinspace {"
 delim_1 "\:~~{"
 delim_2 "\\ledx@lb@encap{\\relax "
 
-item_0 "\n\n  \\item\\ledx@@s\\color{black}\\idxfsize "
-item_01 "\n     \\subitem\\ledx@@s\\color{black}\\small "
-item_x1 "\n     \\subitem\\ledx@@sl\\color{black}\\small "
-item_1 "\n     \\subitem\\ledx@@sl\\color{black}\\small "
-item_12 "\n         \\subsubitem\\ledx@@d\\color{gray}\\footnotesize "
-item_x2 "\n         \\subsubitem\\ledx@@d\\color{gray}\\footnotesize "
+item_0 "\n\n \\item\\ledx@@s\\color{black}\\idxfsize "
+item_01 "\n    \\subitem\\ledx@@s\\color{black}\\small "
+item_x1 "\n    \\subitem\\ledx@@sl\\color{black}\\small "
+item_1 "\n    \\subitem\\ledx@@sl\\color{black}\\small "
+item_12 "\n        \\subsubitem\\ledx@@d\\color{gray}\\footnotesize "
+item_x2 "\n        \\subsubitem\\ledx@@d\\color{gray}\\footnotesize "
 item_2  "\\ledx@@msub "
 
 encap_prefix "\\"
@@ -54,8 +54,6 @@ actual '?'
 
 delim_t "}\\relax "
 delim_n ", "
-% delim_n "}, \\hyperpage{"
-% \\hyperpage{"
 
 indent_space "\t\t"
 indent_length 16

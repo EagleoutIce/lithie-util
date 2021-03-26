@@ -1,10 +1,8 @@
-%% lecture-bibliography.sty
-%% Author: Florian Sihler, 25.09.2020
-
-%% Basically a styling for the bibliography setting i like,
-%% maybe more styles will be added in the future
+% lecture-bibliography.sty
+% Author: Florian Sihler, 25.09.2020
+% Basically a styling for the bibliography setting i like,
+% maybe more styles will be added in the future
 \ProvidesPackage{lecture-bibliography}[2020/09/22 v1.0 Bibliography Styling]
-
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{family=LBI,prefix=LBI@}
 
@@ -12,17 +10,11 @@
 \DeclareBoolOption{biber}
 \DeclareBoolOption{backref}
 \ProcessKeyvalOptions*
-
 \RequirePackage{csquotes}
 
 \ifLBI@backref \PassOptionsToPackage{backref=true}{biblatex} \fi
-
-\ifLBI@biber
-\RequirePackage[backend=biber,style=\LBI@style]{biblatex}
-\else
-\RequirePackage[backend=bibtex8,style=\LBI@style]{biblatex}
-\fi
-
+\ifLBI@biber\RequirePackage[backend=biber,style=\LBI@style]{biblatex}
+\else\RequirePackage[backend=bibtex8,style=\LBI@style]{biblatex}\fi
 \defbibheading{bibliography}[\bibname]{\section{#1}}
 
 \ifLBI@backref

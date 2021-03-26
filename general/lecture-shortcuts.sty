@@ -1,13 +1,12 @@
-%% lecture-shortcuts.sty
-%% Author: Florian Sihler, 19.09.2020
-%%
-%% Commands i use oftenly and that speedup typing. They do not offer
-%% "new features". Furthermore commands in here will not modify styles
-%% like the appearance of the sqrt. Those modifications will be handeled by the
-%% generic-lib
-
+% lecture-shortcuts.sty
+% Author: Florian Sihler, 19.09.2020
+% Commands i use oftenly and that speedup typing. They do not offer
+% "new features". Furthermore commands in here will not modify styles
+% like the appearance of the sqrt. Those modifications will be handeled by the
+% generic-lib
 \ProvidesPackage{lecture-shortcuts}[2020/09/19 v1.0 shortcuts]
-\RequirePackage{xspace,mathtools,amssymb,datetime2}
+\RequirePackage[en-US]{datetime2}
+\RequirePackage{xspace,mathtools,amssymb}
 
 \AtEndPreamble{%
 \ifcsname enquote\endcsname
@@ -15,16 +14,12 @@
 \providecommand\say[1]{\glqq#1\grqq{}}
 \fi\robustify\say}
 
-\providecommand*\engl[2][]{#1(engl. \textit{#2})#1}
-\robustify\engl
-
+\providerobustcmd*\engl[2][]{#1(engl. \textit{#2})#1}
 \newcommand*\obda{\text{o.B.d.A}\xspace}
 \newcommand*\Obda{\text{O.B.d.A}\xspace}
-
 \newcommand*\ceil[1]{\ensuremath{\left\lceil#1\right\rceil}}
 \newcommand*\floor[1]{\ensuremath{\left\lfloor#1\right\rfloor}}
 \newcommand*\abs[1]{\ensuremath{\left|\mskip\thinmuskip#1\mskip\thinmuskip\right|}}
-
 \newcommand*\limn{\ensuremath{\lim_{n\to\infty}}}
 \newcommand*\sumn[1][0]{\ensuremath{\sum_{n=#1}^\infty}}
 \newcommand*\limk{\ensuremath{\lim_{k\to\infty}}}

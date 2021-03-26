@@ -1,16 +1,11 @@
-%% lecture-coverpage.sty
-%% Author: Florian Sihler, 21.10.2020
-
-%% Coverpage generation based on the lilly-philosopher generation
+% lecture-coverpage.sty
+% Author: Florian Sihler, 21.10.2020
+% Coverpage generation based on the lilly-philosopher generation
 \ProvidesPackage{lecture-coverpage}[2020/10/21 v1.0 coverpages]
-
 \RequirePackage{lecture-registers}
 % ghost requires: tikz & geometry & pbox & tikz-palettes <- this should be optional
-\AtEndPreamble{%
-\RequirePackage{tikz,geometry,tikz-palettes,pbox}%
-\usetikzlibrary{decorations.text,shadings}%
-}
-
+\AtEndPreamble{\RequirePackage{tikz,geometry,tikz-palettes,pbox}%
+\usetikzlibrary{decorations.text,shadings}}
 \def\lecturecp@emblemcolor{gray}
 \def\lecturecp@emblemcolor@symbol{gray}
 \def\lecture@emblem{}
@@ -20,9 +15,8 @@
  \gdef\lecture@emblem{\lecture@generate@emblem{#2}{\hspace*{-.025em}#3}{\lecturecp@emblemcolor}{\lecturecp@emblemcolor@symbol}{\lecturecp@emblemcolor}{51pt}{\lecture@font@eulerSmall}{.125}{.05}}%
 }
 
-\DeclareFixedFont{\lecture@font@eulerNormal}{U}{eur}{b}{n}{\f@size}
-\DeclareFixedFont{\lecture@font@eulerSmall}{U}{eur}{b}{n}{9}
-
+\DeclareFixedFont\lecture@font@eulerNormal{U}{eur}{b}{n}{\f@size}
+\DeclareFixedFont\lecture@font@eulerSmall{U}{eur}{b}{n}{9}
 \def\@@university@name{ulm university}
 
 % The code is based on the emblem generation algorithm of lilly
@@ -55,7 +49,7 @@
  \path[draw,thin, color=#3] circle (1.2);
  % Draw the dots on the inner 'dot' circle in #3
  \foreach \r in {0,24,...,360} {
-     \filldraw[#3] (\r:1.2) circle (.01) node[circle,inner sep=.222em] (\r) {};
+     \path[fill,draw,#3] (\r:1.2) circle (.01) node[circle,inner sep=.222em] (\r) {};
  }
  % Draw the connection-lines in the main color of the tikzpicture
  \foreach \r in {0,24,...,360}  {
@@ -80,8 +74,8 @@
     \else\g@addto@macro\lecture@allcoverpages{,#1}\fi
 }
 % maybe insert guards if not found?
-\def\selectcoverpage#1{\gdef\lecturecp@activecoverpage{#1}}
-\selectcoverpage{}
+\def\lecturecp@activecoverpage{}
+\def\selectcoverpage#1{\def\lecturecp@activecoverpage{#1}}
 
 \AtEndPreamble{\ifx\lecturecp@activecoverpage\@empty
 \else\ifcsname lecturecp@style@\lecturecp@activecoverpage @\endcsname
@@ -90,7 +84,6 @@
 
 \lecturecp@coverpagestyle{plain}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
-
 \renewcommand\maketitle{\begingroup
 \parindent=\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
@@ -113,7 +106,6 @@
 \end{titlepage}%
 \restoregeometry{}\clearpage\endgroup}
 }
-
 \lecturecp@coverpagestyle{plain-small}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
@@ -137,19 +129,15 @@
 
 \lecturecp@coverpagestyle{fancy}{%
 \def\lecture@coverpage@geometry{\newgeometry{margin=\z@}}
-
 \def\lecturecp@emblemcolor{white}
 \def\lecturecp@emblemcolor@symbol{paletteA}
 \def\lecturecp@height{3}
 \def\lecturecp@leftwidth{1.5cm}
-
-\newsavebox{\lecturecp@title@widthbox}
-\newlength{\lecture@tmp@titlewidth}
+\newsavebox\lecturecp@title@widthbox
+\newlength\lecture@tmp@titlewidth
 \renewcommand\maketitle{\begingroup\parindent=\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
-%
 \lecture@coverpage@geometry
-%
 \begin{titlepage}%
 % upper fancies
 \begin{tikzpicture}[line join=round]%
@@ -160,7 +148,7 @@
 % title:
 \hspace*{\lecturecp@leftwidth}\parbox{.925\linewidth}{%
     \raggedright\fontsize{39pt}{39pt}\selectfont\sffamily
-    \savebox{\lecturecp@title@widthbox}{\pbox{\linewidth}{\raggedright\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}~~\null}}%
+    \savebox\lecturecp@title@widthbox{\pbox{\linewidth}{\raggedright\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}~~\null}}%
     \usebox{\lecturecp@title@widthbox}\strut\medskip
     \global\lecture@tmp@titlewidth=\wd\lecturecp@title@widthbox}%
     \leavevmode\\*[.125cm]%
@@ -177,24 +165,24 @@
 \begin{tikzpicture}[line join=round,rounded corners=.25pt]%
 \path[draw,semithick,\lecturecp@emblemcolor@symbol]
     (0,\lecturecp@height+.15) -- ++(.6\paperwidth-.175,0)
-    -- ++(.1\paperwidth,1)    -- ++(.1\paperwidth+.175,0)
-    -- ++(.1\paperwidth,-1)   -- ++(.1\paperwidth,0);
+    -- ++(.1\paperwidth,1)   -- ++(.1\paperwidth+.175,0)
+    -- ++(.1\paperwidth,-1)  -- ++(.1\paperwidth,0);
 \path[draw,thick,\lecturecp@emblemcolor@symbol]
     (0,\lecturecp@height+.075) -- ++(.6\paperwidth-.1,0)
-    -- ++(.1\paperwidth, 1)  -- ++(.1\paperwidth+.1,0)
-    -- ++(.1\paperwidth,-1)  -- ++(.1\paperwidth,0);
+    -- ++(.1\paperwidth, 1) -- ++(.1\paperwidth+.1,0)
+    -- ++(.1\paperwidth,-1) -- ++(.1\paperwidth,0);
 \filldraw[\lecturecp@emblemcolor@symbol]
     (0,0) -- ++(\paperwidth,0) -- ++(0,\lecturecp@height)
-    -- ++(-.1\paperwidth,0)   -- ++(-.1\paperwidth,1)
-    -- ++(-.1\paperwidth,0)   -- ++(-.1\paperwidth,-1)
-    -- ++(-.6\paperwidth,0)   -- cycle;%
+    -- ++(-.1\paperwidth,0) -- ++(-.1\paperwidth,1)
+    -- ++(-.1\paperwidth,0) -- ++(-.1\paperwidth,-1)
+    -- ++(-.6\paperwidth,0) -- cycle;%
 \begin{scope}[every node/.style={color=\lecturecp@emblemcolor}]%
     \node[scale=.89] at(.75\paperwidth,\lecturecp@height/2+.5) {\lecture@emblem};
     \node[right,text width=.6\paperwidth-\lecturecp@leftwidth] at(\lecturecp@leftwidth,\lecturecp@height/2)
-        {\parbox[t]{\linewidth}{%
-            \fontsize{15pt}{15pt}\selectfont\sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
-            \par
-        }};
+    {\parbox[t]{\linewidth}{%
+        \fontsize{15pt}{15pt}\selectfont\sffamily\textcolor{\lecturecp@emblemcolor}{\lecture@r{brief}}%
+        \par
+    }};
     \node[align=left,right=\z@,outer sep=\z@,font=\normalsize\sffamily] at(.9*\paperwidth,\lecturecp@height/2) {\Lithie\smallskip\\\resizebox{\widthof{\Lithie}}{!}{\textsf{Ver. \lithie@version}}};%
 \end{scope}%
 \end{tikzpicture}%
@@ -210,14 +198,12 @@
 \def\lecturecp@height{2}
 \def\lecturecp@leftwidth{1cm}
 
-\newsavebox{\lecturecp@title@widthbox}
-\newlength{\lecture@tmp@titlewidth}
+\newsavebox\lecturecp@title@widthbox
+\newlength\lecture@tmp@titlewidth
 \renewcommand\maketitle{\begingroup
 \parindent=\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
-%
 \lecture@coverpage@geometry
-%
 \begin{titlepage}%
 % upper fancies
 \vspace*{-.95cm}\begin{tikzpicture}[line join=round]%
@@ -242,7 +228,7 @@
     \lecture@r{titleimage}%
 \vfill\hbox{}}\leavevmode\\%
 % At last we place the bannerblock%
-\vfill%
+\vfill
 \noindent\hspace*{-2pt}\begin{tikzpicture}[line join=round]%
 \path[draw,semithick,\lecturecp@emblemcolor@symbol]
     (0,\lecturecp@height+.15) -- ++(\paperwidth+2pt,0);
@@ -291,11 +277,9 @@
     \sffamily{\bfseries\Huge\lecture@r{title}}\medskip\leavevmode\\
     \normalsize\lecture@r{subtitle}\vspace*{3em}%
 \end{center}%
-\endgroup}%
-}
+\endgroup}}
 
 \newlength\lecture@coverpage@lsmg
-
 \lecturecp@coverpagestyle{compact-upper}{%
 \def\lecture@coverpage@geometry{}
 \renewcommand\maketitle{%
@@ -316,5 +300,4 @@
 \ifdim\dimexpr\ht0+\dp0<2cm \dp0\dimexpr2cm-\ht0\fi\usebox0%
 \vspace*{2.5em}\par
 }]}{}}
-
 \endinput
