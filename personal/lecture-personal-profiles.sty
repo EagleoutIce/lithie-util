@@ -4,7 +4,6 @@
 \ProvidesPackage{lecture-personal-profiles}[2020/11/03 v1.0 Personal profiles]
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{family=LPP,prefix=LPP@}
-
 \DeclareStringOption{imgprefix}
 \DeclareStringOption{command}
 \ProcessKeyvalOptions*
@@ -25,7 +24,6 @@
 }
 
 \def\lecture@personal@printsuffix{ (Druckversion)}
-
 \newif\ifscol%
 \AppendToProfile{print}{%
   \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{-print}{1}{}}\@mkcommands
@@ -46,7 +44,6 @@
 }
 
 \def\lecture@personal@defaultsuffix{ (Digitalversion)}
-
 \AppendToProfile{default}{%
   \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{1}{}}\@mkcommands
   \DisableMulticolHint
@@ -85,5 +82,4 @@
     \hypersetup{pdftitle={\lecture@r{title}\lecture@personal@mobilsuffix}}%
   }%
 }
-
 \endinput
