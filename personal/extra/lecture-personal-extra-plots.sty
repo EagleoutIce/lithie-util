@@ -120,9 +120,8 @@ post code/.store in=\libpp@box@PostCode, post code={},%
 
 \def\libpp@bar@opt#1[#2]#3{\addplot[blockbar={#2},#1] coordinates {#3};}
 \def\libpp@bar@@noopt#1#2{%
+\protected@edef\@tmp{\noexpand\addplot[blockbar={\libpp@@c},#1] coordinates {\unexpanded{#2}};}\@tmp
 \libpp@cyclecolor
-\let\@tmpa\libpp@@c
-\protected@edef\@tmp{\noexpand\addplot[blockbar={\@tmpa},#1] coordinates {\unexpanded{#2}};}\@tmp
 }
 
 \iflibpp@tpalette@\let\libpp@bar@noopt\libpp@bar@@noopt
