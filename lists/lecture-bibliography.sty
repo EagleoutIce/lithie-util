@@ -10,12 +10,10 @@
 \DeclareBoolOption{backref}
 \ProcessKeyvalOptions*
 \RequirePackage{csquotes}
-
 \ifLBI@backref \PassOptionsToPackage{backref=true}{biblatex} \fi
 \ifLBI@biber\RequirePackage[backend=biber,style=\LBI@style]{biblatex}
 \else\RequirePackage[backend=bibtex8,style=\LBI@style]{biblatex}\fi
 \defbibheading{bibliography}[\bibname]{\section{#1}}
-
 \ifLBI@backref
 \DefineBibliographyStrings{english}{backrefpage={on page}, backrefpages={on pages}}
 \DefineBibliographyStrings{german}{backrefpage={Seite:}, backrefpages={Seiten:}}

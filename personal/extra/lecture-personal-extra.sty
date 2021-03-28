@@ -8,7 +8,6 @@
 \ProcessKeyvalOptions*
 \def\@l@persex@load#1{\RequirePackage{lecture-personal-extra-#1}}
 \newcommand*\LoadPersonalExtras[1]{\ifx!#1!\else\forcsvlist\@l@persex@load{#1}\fi}
-
 \protected@edef\@l@persex@{\LPE@load}
 \ifx\@l@persex@\@l@persex@no\else
     \expandafter\LoadPersonalExtras\expandafter{\@l@persex@}%

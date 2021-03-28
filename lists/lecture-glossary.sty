@@ -3,7 +3,6 @@
 % Basically a styling for the glossary setting i like,
 % maybe more styles will be added in the future
 \ProvidesPackage{lecture-glossary}[2020/09/22 v1.0 Glossary Styling]
-% enumitem support
 \newif\iflglos@setup@enumitem@
 \DeclareOption{enumitem}{\lglos@setup@enumitem@true}
 \DeclareOption{noenumitem}{\lglos@setup@enumitem@false}
@@ -11,7 +10,6 @@
 \DeclareOption{short}{\lglos@setup@short@true}
 \DeclareOption{long}{\lglos@setup@short@false}
 \ProcessOptions*
-
 \RequirePackage[acronym,nopostdot,numberedsection=nameref,section,noglossaryindex,translate=babel]{glossaries-accsupp}%
 % \noist % disable index style file
 \RequirePackage{glossary-longragged}
@@ -22,7 +20,7 @@
 % this is a hack. i check if 'delimN' or 'delimR' are in the page def
 % therefore i execute the page-commands but gobble all of their outputs
 \newsavebox\@lglos@la@void
-\def\@lglos@hide@in@da@void#1{\sbox{\@lglos@la@void}{#1}}
+\def\@lglos@hide@in@da@void#1{\sbox\@lglos@la@void{#1}}
 \def\lglos@spage{Seite}\def\lglos@ppage{Seiten}
 
 \newif\iflglos@thispage@issingle@
@@ -57,7 +55,7 @@
     \else% no enumitem
     \begin{description}\fi}%
 \renewenvironment{theglossary}{%
-    \parindent=\z@ \parskip=\z@ plus .3pt%
+    \parindent=\z@ \parskip=\z@
     \global\atinitglossarytrue
     }{\end{description}}%#
 \renewcommand\glossentry[2]{%reset of tree to pad pagenumbers
@@ -75,7 +73,7 @@
     \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc\else% no enumitem
     \begin{description}\fi}%
 \renewenvironment{theglossary}{%
-    \parindent=\z@ \parskip=\z@ plus .3pt\relax
+    \parindent=\z@ \parskip=\z@
     \global\atinitglossarytrue
     }{\end{description}}%#
 \renewcommand\glossentry[2]{%reset of tree to pad pagenumbers
@@ -99,5 +97,4 @@
 \def\Glspllong#1{{\glsreset{#1}\Glspl{#1}}}
 \def\Glsshort#1{{\glsunset{#1}\Gls{#1}}}
 \def\Glsplshort#1{{\glsunset{#1}\Glspl{#1}}}
-
 \endinput

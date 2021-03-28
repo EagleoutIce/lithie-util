@@ -1,29 +1,24 @@
 % lecture-t-diagrams.sty
 % Author: Florian Sihler, 25.10.2020
-
 % tikz extension for t-diagrams
 \ProvidesPackage{lecture-t-diagrams}[2020/11/06 v1.0 t-diagrams]
-
 % two hours wasted to do it with shapes. Lets do it simpler
 \newlength\tblocksize \tblocksize=.9cm
 \newlength\tblockoffset \tblockoffset=.33em
-
 \tikzset{%
   tblock/.style={text width=\tblocksize,inner sep=\z@,align=center,minimum height=\tblocksize},%
   tborder/.style={semithick},%
   every picture/.append style={line join=round,line cap=round}%
 }
-
 \def\tblockfont#1{\textit{#1}}
 % #1 name #2 position #3 left #4 right #5 down
 \newcommand*\tblock[5][]{%
-  \draw[tborder] (#2) -| ++(3*\tblocksize,-\tblocksize) -| ++(-\tblocksize,-\tblocksize) -| ++(-\tblocksize,\tblocksize) -- ++(-\tblocksize,0) -- cycle;
+  \path[draw,tborder] (#2) -| ++(3*\tblocksize,-\tblocksize) -| ++(-\tblocksize,-\tblocksize) -| ++(-\tblocksize,\tblocksize) -- ++(-\tblocksize,0) -- cycle;
   \path (#2)++(\tblocksize/2,-\tblocksize/2) node[tblock] (#1-left) {\tblockfont{#3}};
   \path (#2)++(\tblocksize/2+\tblocksize,-\tblocksize/2-\p@) node[tblock] (#1-mid) {\(\longrightarrow\)};
   \path (#2)++(\tblocksize/2+2*\tblocksize,-\tblocksize/2) node[tblock] (#1-right) {\tblockfont{#4}};
   \path (#2)++(\tblocksize/2+\tblocksize,-\tblocksize/2-\tblocksize) node[tblock] (#1-down) {\tblockfont{#5}};
 }
-
 \def\tdiagramdefaultscale{.9}
 \newenvironment{t-diagram}[1][]{\tikzpicture[yscale=\tdiagramdefaultscale,#1]}{\endtikzpicture}
 \endinput

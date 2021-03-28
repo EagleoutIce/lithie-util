@@ -1,6 +1,5 @@
 % lecture-cancel.sty
 % Author: Florian Sihler, 03.03.2021
-
 \ProvidesPackage{lecture-personal-extra-plots}[2021/03/03 v1.0 my plotstyle :)]
 \newif\iflibpp@tpalette@ \libpp@tpalette@true
 \DeclareOption{tpalette}{\libpp@tpalette@true}
@@ -90,7 +89,6 @@ post code/.store in=\libpp@box@PostCode, post code={},%
     {\libpp@box@PostCode#5\endgroup}%
 }
 
-
 \libpp@newbar@env{ybar}[:*]%
 (\def\libpp@barsymtype{x}\def\libpp@barftype{y}%
 \libpp@init{#1}%
@@ -106,7 +104,6 @@ post code/.store in=\libpp@box@PostCode, post code={},%
 \axis[libpp@default,libpp@default@bars,xbar=\libpp@barspace,bar plot=\libpp@barwidth,#2]%
 \let\bar\libpp@bar\let\sbar\libpp@sbar)%
 (\endaxis\iflibpp@autotikz@\endtikzpicture\fi)
-
 
 \libpp@newbar@env{plot}[:*]%
 (\def\libpp@barsymtype{x}\def\libpp@barftype{y}%

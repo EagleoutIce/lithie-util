@@ -1,16 +1,12 @@
 % lecture-registers.sty
 % Author: Florian Sihler, 21.10.2020
-
 % Register Support for lectures
 \ProvidesPackage{lecture-registers}[2020/10/21 v1.0 registers]
-
 \newif\iflecture@registers@disable@
 \DeclareOption{disable}{\lecture@registers@disable@true}
 \DeclareOption{enable}{\lecture@registers@disable@false}
 \ProcessOptions*
-
 \iflecture@registers@disable@\expandafter\endinput\fi
-
 \RequirePackage{etoolbox}
 
 \def\@lecture@definereg#1{%
@@ -39,7 +35,6 @@
 \def\lecture@@mail@unknown{??}
 \def\lecture@@parse@author#1 (#2)#3\@nil{%
     \def\@tmpa{#2}\ifx\@tmpa\lecture@@mail@unknown#1\else\href{mailto:#2}{#1}\fi}
-
 \def\LinkAuthor#1{\protected@edef\@tmp{#1}\expandafter\lecture@@parse@author\@tmp{} (??)??\@nil}
 
 \newcounter{lecture@counter@tmp@a}
@@ -72,7 +67,6 @@
 \def\iflecture@er#1{\protected@edef\@@lecture@tmp{\lecture@r{#1}}\lecture@@chkempty}
 \def\lecture@rs#1{\csname lecture@register@short@#1\endcsname}
 \def\iflecture@ers#1{\protected@edef\@@lecture@tmp{\lecture@rs{#1}}\lecture@@chkempty}
-
 % public register access
 \let\lectureGetRegister\lecture@r
 \let\lectureGetRegisterShort\lecture@rs
@@ -83,8 +77,7 @@
     pdfsubject={\lecture@r{subtitle}},%
     pdfauthor={\lecture@r{author}},%
     pdfkeywords={\lecture@r{keywords}}}%
-}{}%
-}
+}{}}
 
 % link the defaults:
 \def\@title{\lecture@r{title}}

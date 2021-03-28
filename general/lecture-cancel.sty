@@ -1,7 +1,6 @@
 % lecture-cancel.sty
 % Author: Florian Sihler, 1.12.2020
 % More customizeable cancel command
-
 \ProvidesPackage{lecture-cancel}[2020/10/12 v1.0 cancel out text]
 
 % #1 text #2 shift start h #3 shift start v #4 shift end h #5 shift end v
@@ -12,7 +11,6 @@
         \path[draw] ($(cancel-node.south west)+(#2,#3)$) -- ($(cancel-node.north east)+(#4,#5)$);
     }%
 }%
-
 \DeclareRobustCommand*\cancel[1]{\lecture@cancel{#1}{-1.33pt}{1.75pt}{1.33pt}{-1.75pt}}
 \DeclareRobustCommand*\mcancel[1]{\lecture@cancel{\ensuremath{#1}}{-1.33pt}{1.75pt}{1.33pt}{-1.75pt}}
 \endinput

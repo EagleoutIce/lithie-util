@@ -10,8 +10,7 @@
 
 \RequirePackage{lettrine}
 \setcounter{DefaultLines}{3}
-\LettrineOnGridfalse
-\LettrineRealHeighttrue
+\LettrineOnGridfalse\LettrineRealHeighttrue
 \DefaultSlope=\z@
 \def\LettrineTextFont{}
 
@@ -24,11 +23,9 @@
 }
 
 \def\lecture@personal@printsuffix{ (Druckversion)}
-\newif\ifscol%
+\newif\ifscol
 \AppendToProfile{print}{%
-  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{-print}{1}{}}\@mkcommands
-  \DisableMulticolHint
-  \scolfalse
+  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{-print}{1}{}}\@mkcommands\DisableMulticolHint\scolfalse
   \newenvironment{ltabular}%
     {\@nameuse{tabular}}%
     {\@nameuse{endtabular}}%
@@ -64,7 +61,7 @@
 \def\lecture@personal@mobilsuffix{ (Mobilversion)}
 \RegisterProfile{mobile}{%
   \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{.925}{height=.8\noexpand\textheight,keepaspectratio}}\@mkcommands
-  \DisableMulticolHint%\EnableMulticolHint%
+  \DisableMulticolHint
   \scoltrue\makeatletter
   \def\fps@figure{tbp}\def\fps@table{tbp}%
   \def\floatpagefraction{.5}\def\topfraction{.7}%

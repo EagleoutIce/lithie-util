@@ -1,11 +1,9 @@
 % lithie-profiles.sty
 % Author: Florian Sihler, 7.10.2020
-
 % This package allows to setup combined profiles for all packages that
 % live in lithie-util.
 \ProvidesPackage{lithie-profiles}[2020/10/07 v1.0 profiles]
 \RequirePackage{lithie-version}
-
 % #1 name #2 commands
 \def\lip@RegisterProfile#1#2{%
 \ifcsname lip@profile@#1\endcsname
@@ -15,8 +13,7 @@
 \expandafter\def\csname lip@profile@#1\endcsname{}%
 \xdef\lip@allprofiles{\@ifundefined{lip@allprofiles}{}{\lip@allprofiles,}#1}%
 \lip@AppendToProfile{#1}{#2}%
-\fi
-}
+\fi}
 
 \def\lip@AppendToProfile#1#2{\expandafter\g@addto@macro\csname lip@profile@#1\endcsname{#2}}
 
@@ -28,7 +25,6 @@
 \fi}
 
 \providecommand*\lithieprofile{default}
-
 \long\def\lip@firstoftwo#1#2{#1}
 \long\def\lip@secondoftwo#1#2{#2}
 
@@ -46,7 +42,6 @@
 
 \lip@RegisterProfile{default}{}
 \lip@RegisterProfile{print}{}
-
 \let\RegisterProfile\lip@RegisterProfile
 \let\AppendToProfile\lip@AppendToProfile
 \endinput

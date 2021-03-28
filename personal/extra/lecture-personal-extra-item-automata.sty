@@ -1,10 +1,8 @@
 % lecture-personal-extra-item-automata.sty
 % Author: Florian Sihler, 3.11.2020
-
 % stuff i use in my item-automata scripts
 \ProvidesPackage{lecture-personal-extra-item-automata}[2020/12/08 v1.0 Personal item-automata]
 \usetikzlibrary{matrix}
-
 % state diagram
 \def\statetransitionfont{\large}
 \tikzset{
@@ -32,7 +30,6 @@
 \def\readpointer{\ensuremath{\mskip\thinmuskip\centerdot\mskip\thinmuskip}}
 % end symbol for word
 \def\endsymbol{\text{\#}}
-
 \let\lecture@personal@to\to
 % will be enabled inside of all states
 % [#1] possible suffix #2 left side of production #3 right side of production
@@ -40,7 +37,6 @@
 \newcommand*\lecture@personal@itemautomata@star[3][]{%
     [\thinspace\lecture@personal@itemautomata@nostar[#1]{#2}{#3}\thinspace]%
 }
-
 \newcommand*\lecture@personal@itemautomata@nostar[3][]{%
 \begingroup
 \let\e\endsymbol
@@ -50,12 +46,9 @@
 \ifx!#1!\else~\hfill\textcolor{darkgray}{\mbox{#1}}\fi
 \endgroup
 }
-
 \newcommand*\automata[2][]{\graph[math nodes,grow right=1.5cm,edges={-Kite},#1]{#2};}
-
 % Rounded rectangle => wstate shape
 % based on pgf
-
 \pgfkeys{/pgf/.cd,
   wstate shape west arc/.initial=convex,wstate shape east arc/.initial=convex,%
   wstate shape left arc/.style={/pgf/wstate shape west arc=#1},%
@@ -69,16 +62,12 @@
 \savedmacro\westarc{\edef\westarc{\pgfkeysvalueof{/pgf/wstate shape west arc}}}%
 \savedmacro\eastarc{\edef\eastarc{\pgfkeysvalueof{/pgf/wstate shape east arc}}}%
 \savedmacro\roundedrectanglepoints{%
-%
 % Get half the arc angle, a.
-%
 \pgfmathsetlength\pgf@x{\pgfkeysvalueof{/pgf/wstate shape arc length}}%
 \pgf@x=.5\pgf@x
 \edef\halfarcangle{\pgfmath@tonumber{\pgf@x}}%
 \addtosavedmacro\halfarcangle
-%
 % Get the (half) node dimensions x & y.
-%
 \pgfmathsetlength\pgf@x{\pgfkeysvalueof{/pgf/inner xsep}}%
 \edef\innerxsep{\the\pgf@x}%
 \pgf@xa=.5\wd\pgfnodeparttextbox
@@ -93,16 +82,12 @@
 \edef\halftextheight{\the\pgf@ya}%
 \addtosavedmacro\halftextheight
 \advance\pgf@y by\pgf@ya
-%
 % Adjust for minimum height
-%
 \pgfmathsetlength\pgf@yb{\pgfkeysvalueof{/pgf/minimum height}}%
 \ifdim\pgf@y<.5\pgf@yb \pgf@y=.5\pgf@yb \fi
 \edef\halfheight{\the\pgf@y}%
 \addtosavedmacro\halfheight
-%
 % Calculate the radius of the arc ends.
-%
 \pgfmathcosec@{\halfarcangle}%
 \pgf@ya=\pgfmathresult\pgf@y
 \edef\yradius{\the\pgf@ya}%
@@ -111,24 +96,18 @@
 \edef\xradius{\the\lecture@personal@tikz@a}%
 \addtosavedmacro\yradius
 \addtosavedmacro\xradius
-%
 % Arc width = r - r*cos(a/2).
-%
 \pgfmathcos@{\halfarcangle}%
 \pgf@xa=\lecture@personal@tikz@a
 \advance\pgf@xa by-\pgfmathresult\lecture@personal@tikz@a
-%
 % When the node contents are pushed inside a convex arc,
 % the resulting chord has a height r - r*cos(asin(0.5*h/r)).
-%
 \pgfmathdivide{\halftextheight}{\yradius}%
 \pgfmathasin@{\pgfmathresult}%
 \pgfmathcos@{\pgfmathresult}%
 \pgf@xb=\lecture@personal@tikz@a
 \advance\pgf@xb by-\pgfmathresult\lecture@personal@tikz@a
-%
 % Adjust for minimum width.
-%
 \edef\westarc{\pgfkeysvalueof{/pgf/wstate shape west arc}}%
 \edef\eastarc{\pgfkeysvalueof{/pgf/wstate shape east arc}}%
 %
@@ -168,7 +147,6 @@
   \edef\xoffset{\the\pgf@xc}%
 \fi
 \addtosavedmacro\xoffset
-%
 \pgf@x=\halftextwidth\relax
 \advance\pgf@x by\xoffset\relax
 \edef\halfwidth{\the\pgf@x}%
@@ -176,7 +154,6 @@
 %
 \edef\arcwidth{\the\pgf@xa}%
 \addtosavedmacro\arcwidth
-%
 \edef\chordwidth{\the\pgf@xb}%
 \addtosavedmacro\chordwidth
 %
@@ -184,10 +161,8 @@
 \pgfmathsetlengthmacro\outerysep{\pgfkeysvalueof{/pgf/outer ysep}}%
 \addtosavedmacro\outerxsep
 \addtosavedmacro\outerysep
-%
 % calculate some horizontal adjustments made for the default miter
 % drawn when an arc meets the north or south side of the node path.
-%
 \ifdim\halfarcangle pt=90pt\relax% Avoid division by zero.
   \def\concavexshift{\z@}%
 \else
@@ -203,7 +178,6 @@
   \edef\concavexshift{\the\pgf@x}%
 \fi
 \addtosavedmacro\concavexshift
-%
 \ifdim\halfarcangle pt=90pt\relax% Avoid division by zero.
   \def\convexxshift{\z@}%
 \else
@@ -281,8 +255,7 @@
       \pgfpoint{-\halfwidth-\outerxsep}{\z@}%
     \fi
   \fi
-}%
-}%
+}}%
 \anchor{north west}{%
 \roundedrectanglepoints
 \ifx\westarc\pgf@lib@sh@misc@rr@text@convex
@@ -317,8 +290,7 @@
       \pgfpoint{\halfwidth+\outerxsep}{\z@}%
     \fi
   \fi
-}%
-}%
+}}%
 \anchor{north east}{%
 \roundedrectanglepoints
 \ifx\eastarc\pgf@lib@sh@misc@rr@text@convex

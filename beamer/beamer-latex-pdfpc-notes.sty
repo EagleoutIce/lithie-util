@@ -1,10 +1,7 @@
 % beamer-latex-pdfpc-notes.sty
 % Author: Florian Sihler, 07.02.2021
-
-% note with pdfpc support
-% based on the pdfpc package of 2020
+% note with pdfpc support based on the pdfpc package of 2020
 \ProvidesPackage{beamer-latex-pdfpc-notes}[2021/02/07 v1.0.0 Compile and pdfpc-notes LaTeX2e-Codes in LaTeX-Beamer]
-
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{family=PDFPC, prefix=PDFPC@}
 \DeclareStringOption{duration}
@@ -17,22 +14,18 @@
 \DeclareBoolOption[false]{disable}
 \ProcessKeyvalOptions*
 \ifPDFPC@disable\expandafter\endinput\fi
-
 % Some guards to begin
 \ifx\PDFPC@duration\@empty
 \else
   \IfInteger{\PDFPC@duration}{}
     {\PackageWarningNoLine{beamer-pdfpc-notes}{'duration' should be an integer}}
 \fi
-
 \ifx\PDFPC@lastminutes\@empty
 \else
   \IfInteger{\PDFPC@lastminutes}{}
     {\PackageWarningNoLine{beamer-pdfpc-notes}{'lastminutes' should be an integer}}
 \fi
-
 \RequirePackage{letltxmacro,xstring,hyperxmp}
-
 % Our schema
 \newcommand*\PDFPC@schema{%
   \hyxmp@add@to@xml{%
@@ -54,7 +47,6 @@ ______</rdf:Description>^^J%
 }
 % add PDFPC@schema
 \appto\hyxmp@pdf@schema\PDFPC@schema
-
 % write pdfpc file for fontsize
 \newwrite\PDFPC@fileout
 \AtBeginDocument{%
@@ -62,22 +54,17 @@ ______</rdf:Description>^^J%
   \immediate\write\PDFPC@fileout{{"noteFontSize": \PDFPC@fontsize}}
   \immediate\closeout\PDFPC@fileout
 }
-
 \LetLtxMacro\PDFPC@orig@note\note
-
 \def\note{\@ifnextchar[{\PDFPC@note}{\PDFPC@note[]}}
 \def\PDFPC@note[#1]{\@ifnextchar<{\PDFPC@@note@overlay[#1]}{\PDFPC@@note[#1]}}
-
 \long\def\PDFPC@@note@overlay[#1]<#2>#3{
   \PDFPC@orig@note[#1]<#2>{#3}%
   \PDFPC@writenote[#1]{#2}%
 }
-
 \long\def\PDFPC@@note[#1]#2{
   \PDFPC@orig@note[#1]{#2}%
   \PDFPC@writenote[#1]{#2}%
 }
-
 \long\def\PDFPC@writenote[#1]#2{%
 \begingroup
 \PDFPC@redefinition
@@ -98,14 +85,11 @@ ______</rdf:Description>^^J%
   \relax
 \endgroup
 }
-
 \def\PDFPC@redefinition{%
   \let\,\space \let\;\space
   \def\\{\string\n}\def\par{\string\n\string\n}%
   \def\textit##1{_##1_}\def\textbf##1{**##1**}%
 }
-
 \def\PDFPC@@option@enumerate{enumerate}
 \def\PDFPC@@option@itemize{itemize}
-
 \endinput
