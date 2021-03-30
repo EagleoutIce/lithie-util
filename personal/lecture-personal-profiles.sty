@@ -26,8 +26,8 @@
 \AppendToProfile{print}{%
   \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{-print}{1}{}}\@mkcommands\DisableMulticolHint\scolfalse
   \newenvironment{ltabular}%
-    {\@nameuse{tabular}}%
-    {\@nameuse{endtabular}}%
+    {\csname tabular\endcsname}%
+    {\csname endtabular\endcsname}%
   \RequirePackage{Romantik}% Romantik for cfr initials?
   \DefaultFindent=5.15pt%
   \DefaultNindent=.489pt% compensate for offsets
@@ -45,8 +45,8 @@
   \DisableMulticolHint
   \scolfalse
   \newenvironment{ltabular}%
-    {\@nameuse{tabular}}%
-    {\@nameuse{endtabular}}%
+    {\csname tabular\endcsname}%
+    {\csname endtabular\endcsname}%
   % we color it
   \def\LettrineFontHook{\color{paletteA}}%
   \DefaultFindent=1.85pt%
@@ -67,8 +67,8 @@
   \def\bottomfraction{0}\setcounter{topnumber}{3}%2
   \setcounter{bottomnumber}{0}\setcounter{totalnumber}{3}%
   \newenvironment{ltabular}%
-    {\begingroup\small\@nameuse{xtabular}}%
-    {\@nameuse{endxtabular}\endgroup}%
+    {\begingroup\small\csname xtabular\endcsname}%
+    {\csname endxtabular\endcsname\endgroup}%
   \setcounter{DefaultLines}{2}%
   % we color it
   \def\LettrineFontHook{\color{paletteA}}%
