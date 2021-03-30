@@ -12,21 +12,14 @@
     lecture-personal-tikz,lecture-personal-glossary,%
     lecture-personal-tabular,lecture-personal-resize}
 \RequirePackage[imgprefix=\LPM@imgprefix,command=\LPM@command]{lecture-personal-profiles}
-% if supertabular is loaded, they would conflict :)))
-\let\tablehead\undefined \let\tablefirsthead\undefined
-\let\tabletail\undefined \let\tablelasttail\undefined
-\let\sttraceon\undefined \let\sttraceoff\undefined
-\let\ST@trace\undefined  \let\shrinkheight\undefined
-\let\setSTheight\undefined
-\RequirePackage{subcaption,xtab}
-\appto\captionsngerman{\def\equationautorefname{Formel}}
-\appto\captionsenglish{\def\equationautorefname{Equation}}
+
 \protected@edef\@lecture@personal@tmp{\LPM@extras}
 \ifx\@lecture@personal@tmp\@lecture@personal@noextra\else
     \RequirePackage[load={\@lecture@personal@tmp}]{lecture-personal-extra}
 \fi
-\AtEndPreamble{%
-\ifcsname setIndexLinker\endcsname
+\appto\captionsngerman{\def\equationautorefname{Formel}}
+\appto\captionsenglish{\def\equationautorefname{Equation}}
+\AtEndPreamble{\ifcsname setIndexLinker\endcsname
 \ifcsname nohyper\endcsname
 \setIndexLinker{\nohyper{\hyperref[#1]{#2}}}%
 \fi\fi}

@@ -1,7 +1,13 @@
 % lecture-personal-tabular.sty
 % Author: Florian Sihler, 3.11.2020
 \ProvidesPackage{lecture-personal-tabular}[2020/11/03 v1.0 Personal tabular stuff]
-\RequirePackage{multirow}
+% if supertabular is loaded, they would conflict :)))
+\let\tablehead\undefined \let\tablefirsthead\undefined
+\let\tabletail\undefined \let\tablelasttail\undefined
+\let\sttraceon\undefined \let\sttraceoff\undefined
+\let\ST@trace\undefined  \let\shrinkheight\undefined
+\let\setSTheight\undefined
+\RequirePackage{subcaption,xtab,multirow}
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash}p{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash}p{#1}}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
