@@ -7,13 +7,11 @@
 \DeclareStringOption{imgprefix}
 \DeclareStringOption{command}
 \ProcessKeyvalOptions*
-
 \RequirePackage{lettrine}
 \setcounter{DefaultLines}{3}
 \LettrineOnGridfalse\LettrineRealHeighttrue
-\DefaultSlope=\z@
+\DefaultSlope\z@
 \def\LettrineTextFont{}
-
 % #1 name #2 prefix #3 print #4 default scale #5 ex args
 \def\lecture@profiles@MakeImageCommands#1#2#3#4#5{%
 \expandafter\newcommand\expandafter*\csname Get#1\endcsname[2][#4]{\centering\includegraphics[width=##1\linewidth,#5]{#2##2#3-compressed}}% -compressed

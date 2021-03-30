@@ -1,10 +1,8 @@
 % lecture-personal-extra-symbolboxes.sty
 % Author: Florian Sihler, 18.3.2021
 \ProvidesPackage{lecture-personal-extra-symbolboxes}[2021/03/18 v1.0 symbolboxes]
-
 \RequirePackage{tikz}
 \def\lec@pexsym@#1{\tikz{\node[draw=black,#1]{};}}
-
 \newsavebox\symCircle
 \sbox\symCircle{\lec@pexsym@{circle,fill=paletteA,scale=.6,minimum width=1em,minimum height=1em}}
 \newsavebox\symSquare
