@@ -7,7 +7,6 @@
 \DeclareStringOption[true]{automatic}[false]
 \DeclareBoolOption{dosplit}
 \ProcessKeyvalOptions*
-
 \ifLECIDX@dosplit\PassOptionsToPackage{splitindex}{imakeidx}\fi
 \RequirePackage[quiet]{imakeidx}
 \RequirePackage{letltxmacro,etoolbox,xstring}
@@ -46,13 +45,11 @@
 \StrSubstitute{\lecidx@tmpl}{~}{:nbsp:}[\lecidx@tmpl]%
 \protected@xdef\lecidx@tmpl{\lecidx@tmpl}%
 }
-
 \def\lecidx@sanitize@@#1{%
 % currently this one remains as i do not want to use the usual active trick
 \StrSubstitute{#1}{\lecidx@idxsub}{:sub:}[\lecidx@tmpl]%
 \protected@xdef\lecidx@tmpl{\lecidx@tmpl}\endgroup
 }
-
 \def\lecidx@sanitize@definitions@extra@unicode{% umlauts
 \lecidx@repl@uc{^^c3^^a4}{:ae:}\lecidx@repl@uc{^^c3^^b6}{:oe:}%
 \lecidx@repl@uc{^^c3^^bc}{:ue:}\lecidx@repl@uc{^^c3^^84}{:Ae:}%
@@ -91,7 +88,7 @@
 \lecidx@index{\lecidx@sort\lecidx@idxactual\protect\lecidx@@linker{lecidx@\lecidx@root @hi@\lecidx@tmpl @}{#3}}}
 \newcommand*\lecidx@@lindex[2][]{\lecidx@lindex[#1]{#2}{#2}}
 
-\newcommand*\lecidx@guardidx[2][\jobname]{\begingroup
+\newcommand*\lecidx@guardidx[2][\lecidxindex]{\begingroup
     {\def\"{\lecidx@tick}\protected@xdef\lecidx@sort{#2}}%
     \def\lecidxindex{#1}%
     \lecidx@index{\lecidx@sort\lecidx@idxactual#2}%
