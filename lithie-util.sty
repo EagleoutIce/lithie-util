@@ -5,10 +5,8 @@
 \RequirePackage{kvoptions,etoolbox,lithie-profiles}
 \SetupKeyvalOptions{family=LITU,prefix=LITU@}
 \def\@litu@none{LIT@NO}
-% hooks
 \def\@litu@hook@PackageRequire{} \def\@litu@hook@GroupRequire{} \def\@litu@hook@RequirePackages{}
 \def\@litu@all@groups{}
-% add to list
 \let\@litu@atl\listadd
 
 % #1 group id
@@ -38,9 +36,9 @@
 
 \def\@@litu@util{:}
 \def\@@litu@load@consume@arg@ifcmd#1#2->#3#4{%
-    \ifstrempty{#1#2}{}{\def\@@litu@first@chk{#1}%
-    \ifx\@@litu@first@chk\@@litu@util% is command
-        #3{#2}\else#4{#2}\fi
+  \ifstrempty{#1#2}{}{\def\@@litu@first@chk{#1}%
+  \ifx\@@litu@first@chk\@@litu@util% is command
+      #3{#2}\else#4{#2}\fi
 }}
 
 \def\@litu@cmd@defaults{defaults}
@@ -81,12 +79,12 @@
 \@litu@load@curargs{#1}\@lu@RequirePackage{#1}% inside, execute only if
 }}
 
-% #1 id, #2 module, #3 package-name, #4 defaults, #5 groups (all is forced)
-\def\lu@DefineModule#1#2#3#4#5{%
+% #1 id, #2 module, #3 defaults, #4 groups (all is forced)
+\def\lu@DefineModule#1#2#3#4{% NOTE: dup is kept in case of need in the future
   \expandafter\def\csname @lu@mu@map@name@#1\endcsname{#2}%
-  \expandafter\def\csname @lu@mu@map@package@#1\endcsname{#3}%
-  \expandafter\def\csname @lu@mu@map@defaults@#1\endcsname{#4}%
-  \expandafter\def\csname @lu@mu@map@groups@#1\endcsname{all,#5}%
+  \expandafter\def\csname @lu@mu@map@package@#1\endcsname{#2}%
+  \expandafter\def\csname @lu@mu@map@defaults@#1\endcsname{#3}%
+  \expandafter\def\csname @lu@mu@map@groups@#1\endcsname{all,#4}%
   \protected@edef\@litu@tmp{\noexpand\DeclareStringOption[\@litu@none]{\lu@Get{#1}{name}}[\lu@Get{#1}{defaults}]}\@litu@tmp
   \g@addto@macro\@litu@hook@PackageRequire{\lu@LoadModuleIfGiven{#1}}%
   \lu@AddToGroups{\lu@Get{#1}{groups}}{#1}%
@@ -95,46 +93,46 @@
 % define the groups
 \forcsvlist{\lu@Definendgroup}{all,util,color,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics,index}
 
-\lu@DefineModule{cps}{color-palettes}{color-palettes}{}{color,util,boxes}
-\lu@DefineModule{tps}{tikz-palettes}{tikz-palettes}{}{color,util}
+\lu@DefineModule{cps}{color-palettes}{}{color,util,boxes}
+\lu@DefineModule{tps}{tikz-palettes}{}{color,util}
 
-\lu@DefineModule{lsc}{lecture-shortcuts}{lecture-shortcuts}{}{util,lecture,lecture-base}
-\lu@DefineModule{lgs}{lecture-glossary}{lecture-glossary}{enumitem}{lecture,lecture-base}
-\lu@DefineModule{lbg}{lecture-bibliography}{lecture-bibliography}{}{lecture,lecture-base}
-\lu@DefineModule{lfr}{lecture-format}{lecture-format}{}{lecture,util,lecture-base}
-\lu@DefineModule{lli}{lecture-links}{lecture-links}{}{lecture,lecture-base}
-\lu@DefineModule{lcp}{lecture-coverpage}{lecture-coverpage}{}{lecture,lecture-base}
-\lu@DefineModule{lre}{lecture-registers}{lecture-registers}{}{lecture,util,lecture-base}
-\lu@DefineModule{lar}{lecture-algorithms}{lecture-algorithms}{}{lecture,util}
-\lu@DefineModule{lre}{lecture-runtimes}{lecture-runtimes}{}{lecture}
-\lu@DefineModule{lca}{lecture-cancel}{lecture-cancel}{}{lecture,util,lecture-base}
-\lu@DefineModule{lhs}{lecture-heap-n-stack}{lecture-heap-n-stack}{}{lecture,util}
+\lu@DefineModule{lsc}{lecture-shortcuts}{}{util,lecture,lecture-base}
+\lu@DefineModule{lgs}{lecture-glossary}{enumitem}{lecture,lecture-base}
+\lu@DefineModule{lbg}{lecture-bibliography}{}{lecture,lecture-base}
+\lu@DefineModule{lfr}{lecture-format}{}{lecture,util,lecture-base}
+\lu@DefineModule{lli}{lecture-links}{}{lecture,lecture-base}
+\lu@DefineModule{lcp}{lecture-coverpage}{}{lecture,lecture-base}
+\lu@DefineModule{lre}{lecture-registers}{}{lecture,util,lecture-base}
+\lu@DefineModule{lar}{lecture-algorithms}{}{lecture,util}
+\lu@DefineModule{lre}{lecture-runtimes}{}{lecture}
+\lu@DefineModule{lca}{lecture-cancel}{}{lecture,util,lecture-base}
+\lu@DefineModule{lhs}{lecture-heap-n-stack}{}{lecture,util}
 
-\lu@DefineModule{lbx}{lithie-boxes}{lithie-boxes}{autoenv}{lecture,util,boxes}
-\lu@DefineModule{lts}{lithie-task-boxes}{lithie-task-boxes}{}{lecture,util,boxes}
-\lu@DefineModule{srs}{lecture-remaining-space}{lecture-remaining-space}{}{lecture,util}
+\lu@DefineModule{lbx}{lithie-boxes}{autoenv}{lecture,util,boxes}
+\lu@DefineModule{lts}{lithie-task-boxes}{}{lecture,util,boxes}
+\lu@DefineModule{srs}{lecture-remaining-space}{}{lecture,util}
 
-\lu@DefineModule{blp}{beamer-latex-preview}{beamer-latex-preview}{}{beamer-extra}
-\lu@DefineModule{bls}{beamer-latex-shortcuts}{beamer-latex-shortcuts}{}{beamer-extra}
-\lu@DefineModule{bpc}{beamer-latex-pdfpc-notes}{beamer-latex-pdfpc-notes}{}{beamer-extra}
+\lu@DefineModule{blp}{beamer-latex-preview}{}{beamer-extra}
+\lu@DefineModule{bls}{beamer-latex-shortcuts}{}{beamer-extra}
+\lu@DefineModule{bpc}{beamer-latex-pdfpc-notes}{}{beamer-extra}
 
-\lu@DefineModule{lib}{lithie-birb}{lithie-birb}{}{util}
+\lu@DefineModule{lib}{lithie-birb}{}{util}
 
-\lu@DefineModule{sot}{sopra-tables}{sopra-tables}{}{sopra}
-\lu@DefineModule{sor}{sopra-requirements}{sopra-requirements}{}{sopra}
-\lu@DefineModule{som}{sopra-models}{sopra-models}{}{sopra,graphics}
-\lu@DefineModule{sol}{sopra-listings}{sopra-listings}{noloadlangs}{sopra}
-\lu@DefineModule{sod}{sopra-documentation}{sopra-documentation}{}{sopra}
-\lu@DefineModule{soc}{sopra-changelog}{sopra-changelog}{}{sopra}
-\lu@DefineModule{soa}{sopra-attachments}{sopra-attachments}{}{sopra}
+\lu@DefineModule{sot}{sopra-tables}{}{sopra}
+\lu@DefineModule{sor}{sopra-requirements}{}{sopra}
+\lu@DefineModule{som}{sopra-models}{}{sopra,graphics}
+\lu@DefineModule{sol}{sopra-listings}{noloadlangs}{sopra}
+\lu@DefineModule{sod}{sopra-documentation}{}{sopra}
+\lu@DefineModule{soc}{sopra-changelog}{}{sopra}
+\lu@DefineModule{soa}{sopra-attachments}{}{sopra}
 
-\lu@DefineModule{ltd}{lecture-t-diagrams}{lecture-t-diagrams}{}{lecture,graphics}
-\lu@DefineModule{lid}{lecture-index}{lecture-index}{}{index}
+\lu@DefineModule{ltd}{lecture-t-diagrams}{}{lecture,graphics}
+\lu@DefineModule{lid}{lecture-index}{}{index}
 
-\lu@DefineModule{emps}{eagle-maps}{eagle-maps}{}{graphics}
-\lu@DefineModule{ttl}{typeset-list}{typeset-list}{}{}
+\lu@DefineModule{emps}{eagle-maps}{}{graphics}
+\lu@DefineModule{ttl}{typeset-list}{}{}
 % personal
-\lu@DefineModule{lper}{lecture-personal}{lecture-personal}{}{personal}
+\lu@DefineModule{lper}{lecture-personal}{}{personal}
 \ProcessKeyvalOptions*
 
 % Load individuals first to allow options
