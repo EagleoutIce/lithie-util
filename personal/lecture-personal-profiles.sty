@@ -12,11 +12,12 @@
 \LettrineOnGridfalse\LettrineRealHeighttrue
 \DefaultSlope\z@
 \def\LettrineTextFont{}
+\def\lecture@fig@compressed@suffix{-compressed}
 % #1 name #2 prefix #3 print #4 default scale #5 ex args
 \def\lecture@profiles@MakeImageCommands#1#2#3#4#5{%
-\expandafter\newcommand\expandafter*\csname Get#1\endcsname[2][#4]{\centering\includegraphics[width=##1\linewidth,#5]{#2##2#3-compressed}}% -compressed
-\expandafter\newcommand\expandafter*\csname Get#1Raw\endcsname[2][]{\includegraphics[##1]{#2##2#3-compressed}}%
-\expandafter\newcommand\expandafter*\csname GetUncompressed#1\endcsname[2][#4]{\centering\includegraphics[width=##1\linewidth,#5]{#2##2#3}}% -compressed
+\expandafter\newcommand\expandafter*\csname Get#1\endcsname[2][#4]{\centering\includegraphics[width=##1\linewidth,#5]{#2##2#3\lecture@fig@compressed@suffix}}%
+\expandafter\newcommand\expandafter*\csname Get#1Raw\endcsname[2][]{\includegraphics[##1]{#2##2#3\lecture@fig@compressed@suffix}}%
+\expandafter\newcommand\expandafter*\csname GetUncompressed#1\endcsname[2][#4]{\centering\includegraphics[width=##1\linewidth,#5]{#2##2#3}}%
 \expandafter\newcommand\expandafter*\csname GetUncompressed#1Raw\endcsname[2][]{\includegraphics[##1]{#2##2#3}}%
 }
 
