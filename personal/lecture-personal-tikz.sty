@@ -9,17 +9,18 @@
     \tikzumlset{fill usecase=white, fill template=white, fill package=white,fill system=white, fill state=white,fill object=white, fill class=white,
     fill port=white, fill component=white,fill note=lec@descgray, font=\small\ttfamily}%
   \fi
-  \tikzset{%
-    every node/.append style={font=\sffamily},%
-    lblock/.style={block,#1,writ,font=\fillfont},%
-    lblock/.default={tikzA},
-    block/.style={rectangle,draw, align=center, minimum height=1.9em,rounded corners=1.55pt}%
-  }
   \ifprofile{print}{%
     \tikzset{desc/.style={scale=.85,font=\itshape\sffamily\sbfamily,fill=white,text=gray!70!black,inner sep=1.15ex,align=left}}%
   }{%
     \tikzset{desc/.style={scale=.85,font=\itshape\sffamily,fill=lec@descgray,inner sep=1.15ex,align=left}}
   }
+}
+
+\tikzset{%
+every node/.append style={font=\sffamily},%
+lblock/.style={block,#1,writ,font=\fillfont},%
+lblock/.default={tikzA},
+block/.style={rectangle,draw, align=center, minimum height=1.9em,rounded corners=1.55pt}%
 }
 % mindmap and trees for overview
 \usetikzlibrary{graphs,arrows.meta,calc}
