@@ -106,9 +106,9 @@
 \def\lecidx@slindex#1#2{\lindex*[\leci@index@h]{#1}{#2}}
 \def\lecidx@@slindex#1{\lindex[\leci@index@h]{#1}}
 % sub ref index
-\DeclareRobustCommand*\rlindex{\@ifstar\lecidx@rlindex\lecidx@@rlindex}
-\def\lecidx@rlindex#1#2{\rindex*[\leci@index@h]{#1}{#2}}
-\def\lecidx@@rlindex#1{\rindex[\leci@index@h]{#1}}
+\DeclareRobustCommand*\srindex{\@ifstar\lecidx@srindex\lecidx@@srindex}
+\def\lecidx@srindex#1#2{\rindex*[\leci@index@h]{#1}{#2}}
+\def\lecidx@@srindex#1{\rindex[\leci@index@h]{#1}}
 % old for compat
 \DeclareRobustCommand*\kw[1]{\textbf{#1}\lecidx@index{#1}}
 \DeclareRobustCommand*\sw[2][Gruppenname]{#2\lecidx@index{#1\lecidx@idxsub #2}}
