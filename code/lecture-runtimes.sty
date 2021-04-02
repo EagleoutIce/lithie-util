@@ -9,19 +9,19 @@
   \expandafter\endinput
 }
 \lstdefinestyle{lecture@BashOutput}{%
-  basicstyle      = \sol@style@get{basic},%
-  frame           = single,%
-  breaklines      = true,%
-  extendedchars   = true,%
-  prebreak        = {\sol@lst@prebreak{}},
-  framerule       = \sol@length@lst@famerule,%
-  numbers         = none,%
-  keepspaces      = false,%
-  xleftmargin     = 3pt,%
-  xrightmargin    = 3pt,% detached as no numbers
-  backgroundcolor = \color{black!0},
-  rulecolor       = \color{sol@colors@border},%
-  add to literate = {0x}{{\solGet{comments}{0x}}}2 {0b}{{\solGet{comments}{0b}}}2%
+basicstyle      = \sol@style@get{basic},%
+frame           = single,%
+breaklines      = true,%
+extendedchars   = true,%
+prebreak        = {\sol@lst@prebreak{}},
+framerule       = \sol@length@lst@famerule,%
+numbers         = none,%
+keepspaces      = false,%
+xleftmargin     = 3pt,%
+xrightmargin    = 3pt,% detached as no numbers
+backgroundcolor = \color{black!0},
+rulecolor       = \@declaredcolor{sol@colors@border},%
+add to literate = {0x}{{\solGet{comments}{0x}}}2 {0b}{{\solGet{comments}{0b}}}2%
 }
 \def\rbash{\@ifnextchar[{\rbash@opt}{\rbash@opt[\thinspace:]}}
 \def\rbash@opt[#1]#2{%

@@ -2,16 +2,13 @@
 % Author: Florian Sihler, 22.09.2020
 % Basic library to typeset heap and stacks. Needs Tikz
 \ProvidesPackage{lecture-heap-n-stack}[2020/09/22 v1.0 heap-n-stack Styling]
-
 \newif\iflhns@debug@
 \DeclareOption{debug}{\lhns@debug@true}
 \DeclareOption{nodebug}{\lhns@debug@false}
 \ProcessOptions*
-
 \iflhns@debug@\let\lhns@debug\typeout\else\let\lhns@debug\@gobble\fi
 \RequirePackage{pbox,tikz}
 \usetikzlibrary{fit,arrows.meta}
-
 \newcounter{lhns@heap} \newcounter{lhns@stack}
 \newif\iflhns@renderheap
 \newif\iflhns@renderstack
@@ -105,8 +102,7 @@
 \node[lhns@border,fit={([yshift=-\lhns@minborderheight]\lhns@heaproot) (\lhns@heaproot)},inner sep=\lhns@borderbuff,minimum width=\lhns@borderbuff+\lhns@elemwidth] (heap-border) {}; % last fit node is min height
 % label "heap"
 \node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (heap-label) at (heap-border.south) {Heap};
-\fi
-}
+\fi}
 
 \def\lhns@render@stack{
 \lhns@renderstacktrue
@@ -129,8 +125,7 @@
 \node[lhns@border,fit={([yshift=-\lhns@minborderheight]\lhns@stackroot) (\lhns@stackroot)},inner sep=\lhns@borderbuff,minimum width=2*\lhns@borderbuff+\lhns@elemwidth] (stack-border) {}; % last fit node is min height
 % label "stack"
 \node[outer sep=\z@,inner sep=\z@,above=\lhns@captionsep,minimum height=\baselineskip] (stack-label) at (stack-border.south) {Stack};
-\fi
-}
+\fi}
 
 % #1 => number on top
 \newenvironment{heap-n-stack}[1]{\begingroup
@@ -152,6 +147,5 @@
 \fi\else\iflhns@renderstack% only stack
 \node[above=\lhns@innersep] at (stack-border.north) {\lhns@thisnumber};
 % other else case dropped as no heap or stack => no number
-\fi\fi
-\endgroup}
+\fi\fi\endgroup}
 \endinput

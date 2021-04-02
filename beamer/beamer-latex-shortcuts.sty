@@ -4,7 +4,7 @@
 % to compile and present latex-files. Used to be with beamer.
 \ProvidesPackage{beamer-latex-shortcuts}[2019/10/30 v1.0.0 Extra shortcuts for beamer]
 \RequirePackage{etoolbox,csquotes}
-\newcommand\lstshowcmd[2][]{\edef\@tmp@@b{\noexpand\lstinline[#1]!#2!}\@tmp@@b}
+\newcommand\lstshowcmd[2][]{\protected@edef\@tmp@@b{\noexpand\lstinline[#1]!#2!}\@tmp@@b}
 \def\previewColor#1{\emph{#1} \tikz[baseline=-.6ex]{\draw[fill=#1] circle (4.5pt);}}
 \let\T\texttt
 \def\info#1{\begingroup\scriptsize\textcolor{gray}{(#1)}\endgroup}

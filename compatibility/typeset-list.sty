@@ -4,25 +4,25 @@
 \ProvidesPackage{typeset-list}[2020/10/12 v1.0 typeset-lists]
 \RequirePackage{pgffor}
 \newcommand*\getListLength[1]{%
-    \def\@tmpl{#1}\gdef\@c@tmp{0}%
-    \foreach \@tmp[count=\@@c@tmp] in \@tmpl {\xdef\@c@tmp{\@@c@tmp}}%
+\def\@tmpl{#1}\gdef\@c@tmp{0}%
+\foreach \@tmp[count=\@@c@tmp] in \@tmpl {\xdef\@c@tmp{\@@c@tmp}}%
 }
 \newcommand*\TypesetList[3][typesetVoid]{\begingroup
-    \protected@edef\@typeset@list@and{#3}\protected@edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
-    \endgroup
+\protected@edef\@typeset@list@and{#3}\protected@edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
+\endgroup
 }
 \newcommand*\typesetList[2][typesetVoid]{%
-    \protected@edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
+\protected@edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
 }
 % this will typeset a List in German List-Notation
 \newcommand*\@@typesetList[2][typesetVoid]{%
-    \def\@tmpl{#2}%
-    \getListLength{#2}%
-    \foreach \x[count=\i] in \@tmpl {%
-        \ifnum\i>1 \ifnum\i=\@c@tmp
-        ~und \else,\space\fi\fi
-        \csname#1\endcsname{\x}%
-    }\ignorespaces
+\def\@tmpl{#2}%
+\getListLength{#2}%
+\foreach \x[count=\i] in \@tmpl {%
+    \ifnum\i>1 \ifnum\i=\@c@tmp
+    ~und \else,\space\fi\fi
+    \csname#1\endcsname{\x}%
+}\ignorespaces
 }
 \let\@ltu@ttl@TextBfFormat\textbf
 \def\NoFormatChar{|}
@@ -39,12 +39,11 @@
 \ifx!#2!\else
 \@ltu@ttl@jump@fi{%
     \space\@ltu@ttl@format@iter#2\@nil
-}\fi
-}
+}\fi}
 % Routine to highlight the First Character in Acronyms
 % \Acronym{Hallo Welt} will yield '\textbf{H}allo \textbf{W}elt'
 \def\Acronym#1{% Not Nested
-    \def\@ltu@ttl@formatter@current{\@ltu@ttl@TextBfFormat}%
-    \def\@Acronym{\@ltu@ttl@format@iter#1 \@nil}{\ignorespaces\@Acronym}%
+\def\@ltu@ttl@formatter@current{\@ltu@ttl@TextBfFormat}%
+\def\@Acronym{\@ltu@ttl@format@iter#1 \@nil}{\ignorespaces\@Acronym}%
 }
 \endinput

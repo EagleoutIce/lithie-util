@@ -7,39 +7,33 @@
 % #1 name #2 commands
 \def\lip@RegisterProfile#1#2{%
 \ifcsname lip@profile@#1\endcsname
-    \PackageWarning{lithie-profiles}{Profile '#1' already exists. Appending.}%
-    \lip@AppendToProfile{#1}{#2}%
+\PackageWarning{lithie-profiles}{Profile '#1' already exists. Appending.}%
+\lip@AppendToProfile{#1}{#2}%
 \else
 \expandafter\def\csname lip@profile@#1\endcsname{}%
 \xdef\lip@allprofiles{\@ifundefined{lip@allprofiles}{}{\lip@allprofiles,}#1}%
 \lip@AppendToProfile{#1}{#2}%
 \fi}
-
 \def\lip@AppendToProfile#1#2{\expandafter\g@addto@macro\csname lip@profile@#1\endcsname{#2}}
-
 \def\lip@UseProfile#1{%
 \ifcsname lip@profile@#1\endcsname
-    \csname lip@profile@#1\endcsname
+\csname lip@profile@#1\endcsname
 \else
-    \PackageError{lithie-profiles}{The Profile '#1' is unknown. Choose one of: \lip@allprofiles}%
+\PackageError{lithie-profiles}{The Profile '#1' is unknown. Choose one of: \lip@allprofiles}%
 \fi}
-
 \providecommand*\lithieprofile{default}
 \long\def\lip@firstoftwo#1#2{#1}
 \long\def\lip@secondoftwo#1#2{#2}
-
 \long\def\ifprofile#1{%
 \def\@tmpa{#1}%
 \ifx\@tmpa\lithieprofile
     \expandafter\lip@firstoftwo
 \else\expandafter\lip@secondoftwo\fi
 }
-
 \AtEndPreamble{%
 \ifx\lithieprofile\@empty\else
     \lip@UseProfile{\lithieprofile}%
 \fi}
-
 \lip@RegisterProfile{default}{}
 \lip@RegisterProfile{print}{}
 \let\RegisterProfile\lip@RegisterProfile

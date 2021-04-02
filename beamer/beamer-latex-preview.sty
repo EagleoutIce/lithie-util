@@ -4,10 +4,8 @@
 % to compile and present latex-files. Used to be with beamer.
 \ProvidesPackage{beamer-latex-preview}[2019/10/25 v1.0.0 Compile and Preview LaTeX2e-Codes in LaTeX-Beamer]
 \tcbuselibrary{listings,xparse,raster}
-
 \definecolor{MudWhite}{RGB}{245,245,243}
 \definecolor{Charcoal}{RGB}{54,69,79}
-
 \tcbset{
   lstpresenterstyle/.style={%
     colback=MudWhite!5, boxrule=\p@,enhanced jigsaw, listing only,
@@ -15,7 +13,6 @@
     top=.11mm, bottom=.11mm, colframe=Charcoal,
   }
 }
-
 \lstdefinestyle{LSTADVANCED}{
     style=sol@SOPRA,backgroundcolor={},rulecolor={},
     numberstyle=\color{gray}\footnotesize\sffamily,
@@ -25,7 +22,6 @@
 }
 % #1 Name
 \def\ltxpreview#1{\tcbset{listing file=helper-\jobname-#1-slidelst}}
-
 \def\eblLoadLtx#1#2#3{\begingroup
 \tcbset{listing file=helper-\jobname-#1-slidelst}% <-- Use a unique name
 \tcbinputlisting{
@@ -34,7 +30,6 @@
     listing options={style=sol@SOPRA,style=LSTADVANCED,language=lLatex,morekeywords={[5]{\\Dieter,\\borange,\\bgreen,\\bred,\\bcolor,\\bteal}},morekeywords={[3]{episch}}},#3,
     sidebyside,sidebyside gap=6mm,raster columns=1,comment style={#2, width=.5\linewidth}
 }\endgroup}
-
 \DeclareTCBListing{sclatex}{% preview latex code
     O{} % Listing Args
     O{} % TCB Args
@@ -45,7 +40,6 @@
     language=lLatex,#1},#2, after={\\[-.25\baselineskip]},
 }{}
 \DeclareDocumentEnvironment{slatex}{}{\presentlst{lLatex}}{\endpresentlst}
-
 \DeclareTCBListing{presentlst}{%
     O{} % Listing Args
     O{} % TCB Args

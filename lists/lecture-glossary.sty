@@ -14,7 +14,6 @@
 % \noist % disable index style file
 \RequirePackage{glossary-longragged}
 \iflglos@setup@enumitem@ \RequirePackage{enumitem} \fi
-
 \newif\if@lglos@atinit@glossary@
 % single- and plural-page
 % this is a hack. i check if 'delimN' or 'delimR' are in the page def
@@ -22,11 +21,9 @@
 \newsavebox\@lglos@la@void
 \def\@lglos@hide@in@da@void#1{\sbox\@lglos@la@void{#1}}
 \def\lglos@spage{Seite}\def\lglos@ppage{Seiten}
-
 \newif\iflglos@thispage@issingle@
 \let\lglos@legacy@delimN\delimN \let\lglos@legacy@delimR\delimR
 \def\lglos@delimN{\global\lglos@thispage@issingle@false\lglos@legacy@delimN} \def\lglos@delimR{\global\lglos@thispage@issingle@false\lglos@legacy@delimN}
-
 \def\@lglos@printpages#1{%
     \quad\textit{\iflglos@thispage@issingle@\lglos@spage\else\lglos@ppage\fi:~#1}%
 }
@@ -35,11 +32,9 @@
 % think it is single (like me; :cry:)
 \lglos@thispage@issingle@true\@lglos@hide@in@da@void{#1}%
 \@lglos@printpages{#1}}
-
 \def\LithieSetGlossaryStyle#1{\gdef\lglos@headingstyle##1{#1{##1}}}
 \def\lglos@default@headingstyle#1{\begin{center}\strut\emph{#1}\end{center}}
 \def\lglos@default@headingstyle@short#1{\medskip}
-
 \iflglos@setup@short@\LithieSetGlossaryStyle{\lglos@default@headingstyle@short}
 \else\LithieSetGlossaryStyle{\lglos@default@headingstyle}\fi
 

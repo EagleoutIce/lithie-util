@@ -8,7 +8,6 @@
 \ProcessOptions*
 \iflecture@registers@disable@\expandafter\endinput\fi
 \RequirePackage{etoolbox}
-
 \def\@lecture@definereg#1{%
 \expandafter\gdef\csname#1\endcsname{\expandafter\@dblarg\csname @#1@@\endcsname}
 \expandafter\xdef\csname @#1@@\endcsname[##1]##2%
@@ -17,9 +16,7 @@
 \expandafter\gdef\csname lecture@register@#1\endcsname{}
 \expandafter\gdef\csname lecture@register@short@#1\endcsname{}
 }
-
 \forcsvlist{\@lecture@definereg}{title,subtitle,subject,brief,author,date,duedate,supervisor,keywords,titleimage,authority,copyright}
-
 % iterators for handling and parsing author information.
 \def\lecture@@add@author#1{%
 \let\lecture@@tmp@old@author\lecture@register@author
@@ -28,15 +25,12 @@
 \xdef\lecture@register@author{\lecture@@tmp@old@author,#1}\fi
 }
 \let\addAuthor\lecture@@add@author
-
 \def\lecture@mail#1{\href{mailto:#1}{#1}}
 \let\mail\lecture@mail
-
 \def\lecture@@mail@unknown{??}
 \def\lecture@@parse@author#1 (#2)#3\@nil{%
     \def\@tmpa{#2}\ifx\@tmpa\lecture@@mail@unknown#1\else\href{mailto:#2}{#1}\fi}
 \def\LinkAuthor#1{\protected@edef\@tmp{#1}\expandafter\lecture@@parse@author\@tmp{} (??)??\@nil}
-
 \newcounter{lecture@counter@tmp@a}
 \def\lecture@@typeset@author#1{%
 \setcounter{lecture@counter@tmp@a}{0}% start with an offset
@@ -51,16 +45,12 @@
     \ifnum\thelecture@counter@tmp@a=\lecture@author@totallength\relax
         ~und \else,\space\fi\fi
     \expandafter\lecture@@parse@author\lecture@@tmp@curauthor{} (??)??\@nil
-\fi
-}}
-
+\fi}}
 \newcommand*\lecture@typeset@authors{\protected@edef\@tmp{\noexpand\lecture@@typeset@author{\lecture@register@author}}\@tmp}
 \let\typesetAuthor\lecture@typeset@authors
 \let\typesetAuthors\lecture@typeset@authors
-
 \def\lecture@firstoftwo#1#2{#1}
 \def\lecture@secondoftwo#1#2{#2}
-
 \def\lecture@r#1{\csname lecture@register@#1\endcsname}
 \def\lecture@@chkempty{\ifx\@@lecture@tmp\@empty\expandafter\lecture@firstoftwo\else\expandafter\lecture@secondoftwo\fi}
 \def\iflecture@e#1{\protected@edef\@@lecture@tmp{#1}\lecture@@chkempty}
@@ -70,7 +60,6 @@
 % public register access
 \let\lectureGetRegister\lecture@r
 \let\lectureGetRegisterShort\lecture@rs
-
 \AtBeginDocument{%
 \@ifpackageloaded{hyperref}{%
 \hypersetup{pdftitle={\lecture@r{title}},%
@@ -78,7 +67,6 @@
     pdfauthor={\lecture@r{author}},%
     pdfkeywords={\lecture@r{keywords}}}%
 }{}}
-
 % link the defaults:
 \def\@title{\lecture@r{title}}
 \def\@author{\lecture@r{author}}
