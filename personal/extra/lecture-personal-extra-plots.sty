@@ -62,7 +62,9 @@ lue/.style={legend style={at={(1,1)},anchor=south east}},
 luw/.style={legend style={at={(0,1)},anchor=south west}},
 lscale/.style={legend style={nodes={scale=#1,transform shape}},legend image post style={scale=#1}},
 lscale*/.style={legend style={nodes={scale=#1,transform shape}},legend image post style={scale=#1,rounded corners=\p@*#1}},
-lc/.style={legend columns=#1},lr/.style={legend image post style={rounded corners=#1}},
+lc/.style={legend columns=#1},
+lc*/.style args={#1:#2}{legend columns=#1,legend style={/tikz/column 2/.style={column sep=#2}}},
+lr/.style={legend image post style={rounded corners=#1}},
 libpp@default/.style={},libpp@default@bars/.style={},%
 libpp@default@plots/.style={},%
 striped/.style={postaction={pattern=north east lines},pattern color=white}%
