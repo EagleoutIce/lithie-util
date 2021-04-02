@@ -9,15 +9,12 @@
 \newlength\libpp@barspace \libpp@barspace=\p@
 \newlength\libpp@barwidth \libpp@barwidth=11pt
 \newif\iflibpp@autotikz@
-\def\libpp@barsymtype{x}
-\def\libpp@barftype{y}
-
+\def\libpp@barsymtype{x}\def\libpp@barftype{y}
 \def\libpp@percent#1{#1\%}
-
-\pgfplotsset{
-compat=1.16,%
+\pgfplotsset{compat=1.16,%
 every axis/.append style={legend cell align={left}},%
 dim/.style args={#1:#2}{width=#1,height=#2},%
+strut/.style={typeset ticklabels with strut},
 plain legend/.style={%
     legend style={draw=none, inner sep=\z@, rounded corners=\p@}%
 },%
@@ -79,15 +76,12 @@ post code/.store in=\libpp@box@PostCode, post code={},%
 }
 \def\libpp@@A{tikzA}\def\libpp@@B{tikzB}
 \def\libpp@@C{tikzC}\def\libpp@@D{tikzD}
-
 \def\libpp@@cyclecolor{%
 \ifx\libpp@@c\libpp@@A \let\libpp@@c\libpp@@B\else
 \ifx\libpp@@c\libpp@@B \let\libpp@@c\libpp@@C\else
 \ifx\libpp@@c\libpp@@C \let\libpp@@c\libpp@@D\else
 \ifx\libpp@@c\libpp@@D \let\libpp@@c\libpp@@A\else
-\fi\fi\fi\fi
-}
-
+\fi\fi\fi\fi}
 \def\libpp@@resetcolor{\def\libpp@@c{tikzA}}
 \iflibpp@tpalette@
 \let\libpp@cyclecolor\libpp@@cyclecolor
