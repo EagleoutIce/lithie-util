@@ -15,7 +15,7 @@
 \RequirePackage{glossary-longragged}
 \iflglos@setup@enumitem@ \RequirePackage{enumitem} \fi
 
-\newif\ifatinitglossary
+\newif\if@lglos@atinit@glossary@
 % single- and plural-page
 % this is a hack. i check if 'delimN' or 'delimR' are in the page def
 % therefore i execute the page-commands but gobble all of their outputs
@@ -48,7 +48,7 @@
 
 \newglossarystyle{lecture@glossary}{%
 \setglossarystyle{tree}%
-\renewcommand\glsgroupheading[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse
+\renewcommand\glsgroupheading[1]{\if@lglos@atinit@glossary@\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\@lglos@atinit@glossary@false
     \lglos@headingstyle{\glsgetgrouptitle{##1}}%
     \iflglos@setup@enumitem@
     \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc
@@ -56,7 +56,7 @@
     \begin{description}\fi}%
 \renewenvironment{theglossary}{%
     \parindent=\z@ \parskip=\z@
-    \global\atinitglossarytrue
+    \global\@lglos@atinit@glossary@true
     }{\end{description}}%#
 \renewcommand\glossentry[2]{%reset of tree to pad pagenumbers
     \hangindent=\z@ \parindent=\z@
@@ -67,14 +67,14 @@
 }
 \newglossarystyle{lecture@glossary@short}{%
 \setglossarystyle{tree}%
-\renewcommand\glsgroupheading[1]{\ifatinitglossary\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\atinitglossaryfalse
+\renewcommand\glsgroupheading[1]{\if@lglos@atinit@glossary@\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\@lglos@atinit@glossary@false
     \lglos@headingstyle{\glsgetgrouptitle{##1}}%
     \iflglos@setup@enumitem@
     \protected@edef\lglos@curdesc{\noexpand\begin{description}[\lglos@desc@options]}\expandafter\lglos@curdesc\else% no enumitem
     \begin{description}\fi}%
 \renewenvironment{theglossary}{%
     \parindent=\z@ \parskip=\z@
-    \global\atinitglossarytrue
+    \global\@lglos@atinit@glossary@true
     }{\end{description}}%#
 \renewcommand\glossentry[2]{%reset of tree to pad pagenumbers
     \hangindent=\z@ \parindent=\z@
