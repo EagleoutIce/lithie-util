@@ -26,7 +26,7 @@
 \def\lhnselementalign{\centering}
 \long\def\lhnselementbox#1#2{\pbox{#1}{#2}}
 % width calculated in render routine
-\def\@lhns@format@elem#1{\lhnselementbox{\lhns@elemtextwidth pt}{\lhnselementalign#1}}
+\def\@lhns@format@elem#1{\lhnselementbox{\lhns@elemtextwidth}{\lhnselementalign#1}}
 
 \tikzset{%
     lhns@impstyle/.style={thick},%
@@ -85,10 +85,10 @@
 \lhns@renderheaptrue
 % render root element:
 \ifnum\value{lhns@heap}>0\relax % at least one element => draw
-\pgfmathsetmacro\lhns@elemtextwidth{\lhns@elemwidth-\lhns@innersep}%
+\edef\lhns@elemtextwidth{\the\dimexpr\lhns@elemwidth-\lhns@innersep\relax}%
 \lhns@render@elem@from{heap}{0}{\lhns@heaproot};
 % number for iteration
-\pgfmathsetmacro\lhns@heapemax{int(\value{lhns@heap}-1)}%
+\edef\lhns@heapemax{\the\numexpr\value{lhns@heap}-1\relax}%
 \ifnum\lhns@heapemax>0\relax % at least one element left => draw
     \foreach[remember=\i as \li (initially 0)] \i in {1,...,\lhns@heapemax} {
         \lhns@render@elem@from{heap}{\i}{heap-\li-box.south};
@@ -108,10 +108,10 @@
 \lhns@renderstacktrue
 % render root element:
 \ifnum\c@lhns@stack>0\relax % at least one element => draw
-\pgfmathsetmacro\lhns@elemtextwidth{\lhns@elemwidth-\lhns@innersep}%
+\edef\lhns@elemtextwidth{\the\dimexpr\lhns@elemwidth-\lhns@innersep\relax}%
 \lhns@render@elem@from{stack}{0}{\lhns@stackroot};
 % number for iteration
-\pgfmathsetmacro\lhns@stackemax{int(\c@lhns@stack-1)}%
+\edef\lhns@stackemax{\the\numexpr\c@lhns@stack-1\relax}%
 \ifnum\lhns@stackemax>0\relax % at least one element left => draw
     \foreach[remember=\i as \li (initially 0)] \i in {1,...,\lhns@stackemax} {
         \lhns@render@elem@from{stack}{\i}{stack-\li-box.south};
