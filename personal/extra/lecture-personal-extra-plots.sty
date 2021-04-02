@@ -39,9 +39,10 @@ xyt/.style args={#1:#2}{xt={#1},yt={#2}},
 t/.style={\libpp@barftype t={#1}}, t'/.style={\libpp@barsymtype t={#1}},
 sym/.style={symbolic \libpp@barsymtype\space coords={#1}, \libpp@barsymtype tick=data},%
 bar plot/.style={enlarge \libpp@barsymtype\space limits={auto,abs=1.25*\libpp@barwidth},bar width={#1}},%
-ex/.style={enlarge x limits={#1}},
-ey/.style={enlarge y limits={#1}},
+ex/.style={enlarge x limits={#1}},ey/.style={enlarge y limits={#1}},
 e/.style={e\libpp@barsymtype={#1}},
+exa/.style={enlarge x limits={abs={#1}}},eya/.style={enlarge y limits={abs={#1}}},
+ea/.style={e\libpp@barsymtype a={#1}},
 x percent/.style={xticklabel={\pgfmathparse{\tick*100}\libpp@percent{\pgfmathprintnumber{\pgfmathresult}}}},
 y percent/.style={yticklabel={\pgfmathparse{\tick*100}\libpp@percent{\pgfmathprintnumber{\pgfmathresult}}}},
 percent/.style={\libpp@barftype\space percent},
@@ -62,6 +63,9 @@ lse/.style={legend pos={south east}}, lsw/.style={legend pos={south west}},
 lu/.style={legend style={at={(.5,1)},anchor=south}},
 lue/.style={legend style={at={(1,1)},anchor=south east}},
 luw/.style={legend style={at={(0,1)},anchor=south west}},
+lscale/.style={legend style={nodes={scale=#1,transform shape}},legend image post style={scale=#1}},
+lscale*/.style={legend style={nodes={scale=#1,transform shape}},legend image post style={scale=#1,rounded corners=\p@*#1}},
+lc/.style={legend columns=#1},lr/.style={legend image post style={rounded corners=#1}},
 libpp@default/.style={},libpp@default@bars/.style={},%
 libpp@default@plots/.style={},%
 striped/.style={postaction={pattern=north east lines},pattern color=white}%
