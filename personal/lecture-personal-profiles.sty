@@ -65,7 +65,7 @@
   \def\fps@figure{tbp}\def\fps@table{tbp}%
   \def\floatpagefraction{.5}\def\topfraction{.7}%
   \def\bottomfraction{0}\setcounter{topnumber}{3}%2
-  \setcounter{bottomnumber}{0}\setcounter{totalnumber}{3}%
+  \setcounter{bottomnumber}\z@\setcounter{totalnumber}{3}%
   \newenvironment{ltabular}%
     {\begingroup\small\csname xtabular\endcsname}%
     {\csname endxtabular\endcsname\endgroup}%

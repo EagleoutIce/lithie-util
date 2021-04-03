@@ -129,7 +129,7 @@
 
 % #1 => number on top
 \newenvironment{heap-n-stack}[1]{\begingroup
-\setcounter{lhns@heap}{0}\setcounter{lhns@stack}{0}%
+\setcounter{lhns@heap}\z@\setcounter{lhns@stack}\z@
 \edef\lhns@thisnumber{#1}%
 \lhns@renderstackfalse\lhns@renderheapfalse
 \let\stack\lhns@stack@element
