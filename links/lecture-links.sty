@@ -1,6 +1,5 @@
 % lecture-links.sty
 % Author: Florian Sihler, 8.10.2020
-
 % Controls the styling cross references. This Package requires hyperref.
 \ProvidesPackage{lecture-links}[2020/10/08 v1.0 Cross-References]
 \newif\ifleclink@defaults@
@@ -120,15 +119,12 @@
 \ifcsname cite\endcsname
 \LetLtxMacro\leclink@cite@\cite
 \DeclareRobustCommand\cite{\leclink@cite@color\leclink@cite@}
-\fi
-}
+\fi}
 
-\begingroup
-\catcode`\$=6 \catcode`\#=12 %
+\begingroup\catcode`\$=6 \catcode`\#=12
 \gdef\leclink@overwrite@hrefsplit{%
 \def\href@split$$1#$$2#$$3\\$$4{%
     \def\lecmrk{$$1}\leclink@pnextlinkstyle{\leclink@href@linkstyle}\hyper@@link{$$1}{$$2}{$$4}%
   \endgroup
-}}
-\endgroup
+}}\endgroup
 \endinput

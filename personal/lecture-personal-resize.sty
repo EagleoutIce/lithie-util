@@ -31,41 +31,41 @@
 % height | width | content
 % TODO: this might be reduced to use one/two dimens less
 \newcommand\downsizeBoth[3]{%
-  \savebox{\lecture@personal@downsize@box}{#3}%
-  \lecture@personal@downsize@box@height=\ht\lecture@personal@downsize@box\relax
-  \advance\lecture@personal@downsize@box@height by \dp\lecture@personal@downsize@box\relax
-  \lecture@personal@downsize@box@width=\wd\lecture@personal@downsize@box\relax
-  \ifdim\lecture@personal@downsize@box@width>#2 %
-    \ifdim\lecture@personal@downsize@box@height>#1 %
-      % both -> we want to keep aspect ratio!
-      % box data: r_box = w_box/h_box
-      \pgfmathqparse{\lecture@personal@downsize@box@width/\lecture@personal@downsize@box@height}
+\savebox\lecture@personal@downsize@box{#3}%
+\lecture@personal@downsize@box@height=\ht\lecture@personal@downsize@box\relax
+\advance\lecture@personal@downsize@box@height by \dp\lecture@personal@downsize@box\relax
+\lecture@personal@downsize@box@width=\wd\lecture@personal@downsize@box\relax
+\ifdim\lecture@personal@downsize@box@width>#2 %
+  \ifdim\lecture@personal@downsize@box@height>#1 %
+    % both -> we want to keep aspect ratio!
+    % box data: r_box = w_box/h_box
+    \pgfmathqparse{\lecture@personal@downsize@box@width/\lecture@personal@downsize@box@height}
+    \lecpd@downsize@a=\pgfmathresult pt\relax
+    % target data: r_target = w_target/h_target
+    \pgfmathqparse{#2/#1}
+    \lecpd@downsize@b=\pgfmathresult pt\relax
+    % r_target > r_box  ?
+    \ifdim\lecpd@downsize@b>\lecpd@downsize@a
+      % then scale to w: w_box * h_target/h_box, h: htarget
+      \pgfmathqparse{\lecture@personal@downsize@box@width * (#1/\lecture@personal@downsize@box@height)}
       \lecpd@downsize@a=\pgfmathresult pt\relax
-      % target data: r_target = w_target/h_target
-      \pgfmathqparse{#2/#1}
-      \lecpd@downsize@b=\pgfmathresult pt\relax
-      % r_target > r_box  ?
-      \ifdim\lecpd@downsize@b>\lecpd@downsize@a
-        % then scale to w: w_box * h_target/h_box, h: htarget
-        \pgfmathqparse{\lecture@personal@downsize@box@width * (#1/\lecture@personal@downsize@box@height)}
-        \lecpd@downsize@a=\pgfmathresult pt\relax
-        \resizebox*{\lecpd@downsize@a}{#1}{\usebox\lecture@personal@downsize@box}%
-      \else % r_target <= r_box
-        % then scale to w: w_target, h: h_box * w_target/w_box
-        \pgfmathqparse{\lecture@personal@downsize@box@height * (#2/\lecture@personal@downsize@box@width)}
-        \lecpd@downsize@a=\pgfmathresult pt\relax
-        \resizebox*{#2}{\lecpd@downsize@a}{\usebox\lecture@personal@downsize@box}%
-      \fi
-    \else
-      % only width
-      \resizebox{#2}{!}{\usebox\lecture@personal@downsize@box}%
+      \resizebox*{\lecpd@downsize@a}{#1}{\usebox\lecture@personal@downsize@box}%
+    \else % r_target <= r_box
+      % then scale to w: w_target, h: h_box * w_target/w_box
+      \pgfmathqparse{\lecture@personal@downsize@box@height * (#2/\lecture@personal@downsize@box@width)}
+      \lecpd@downsize@a=\pgfmathresult pt\relax
+      \resizebox*{#2}{\lecpd@downsize@a}{\usebox\lecture@personal@downsize@box}%
     \fi
-  \else\ifdim\lecture@personal@downsize@box@height>#1 %
-    % only height
-    \resizebox*{!}{#1}{\usebox\lecture@personal@downsize@box}%
-  \else% none
-    \usebox\lecture@personal@downsize@box\fi
+  \else
+    % only width
+    \resizebox{#2}{!}{\usebox\lecture@personal@downsize@box}%
   \fi
+\else\ifdim\lecture@personal@downsize@box@height>#1 %
+  % only height
+  \resizebox*{!}{#1}{\usebox\lecture@personal@downsize@box}%
+\else% none
+  \usebox\lecture@personal@downsize@box\fi
+\fi
 }
 
 \endinput

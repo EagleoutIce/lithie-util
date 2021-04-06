@@ -40,14 +40,10 @@
     language=lLatex,#1},#2, after={\\[-.25\baselineskip]},
 }{}
 \DeclareDocumentEnvironment{slatex}{}{\presentlst{lLatex}}{\endpresentlst}
-\DeclareTCBListing{presentlst}{%
-    O{} % Listing Args
-    O{} % TCB Args
-    m   % Language
-}{%
-  lstpresenterstyle, enlarge top by=3pt,enlarge bottom by=3pt,
-  listing options={%
-    style=sol@SOPRA,style=LSTADVANCED,
-    language=#3,#1},#2%
-}{}
+% Listing Args | TCB Args | Language
+\DeclareTCBListing{presentlst}{O{} O{} m}{%
+lstpresenterstyle, enlarge top by=3pt,enlarge bottom by=3pt,
+listing options={%
+  style=sol@SOPRA,style=LSTADVANCED,
+  language=#3,#1},#2}{}
 \endinput

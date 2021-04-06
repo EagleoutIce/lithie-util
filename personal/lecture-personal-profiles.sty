@@ -2,12 +2,11 @@
 % Author: Florian Sihler, 3.11.2020
 % Profiles i use in my scripts
 \ProvidesPackage{lecture-personal-profiles}[2020/11/03 v1.0 Personal profiles]
-\RequirePackage{kvoptions}
+\RequirePackage{kvoptions,lettrine}
 \SetupKeyvalOptions{family=LPP,prefix=LPP@}
 \DeclareStringOption{imgprefix}
 \DeclareStringOption{command}
 \ProcessKeyvalOptions*
-\RequirePackage{lettrine}
 \setcounter{DefaultLines}{3}
 \LettrineOnGridfalse\LettrineRealHeighttrue
 \DefaultSlope\z@

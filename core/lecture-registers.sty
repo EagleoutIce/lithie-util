@@ -33,11 +33,11 @@
 \def\LinkAuthor#1{\protected@edef\@tmp{#1}\expandafter\lecture@@parse@author\@tmp{} (??)??\@nil}
 \newcounter{lecture@counter@tmp@a}
 \def\lecture@@typeset@author#1{%
-\setcounter{lecture@counter@tmp@a}{0}% start with an offset
+\setcounter{lecture@counter@tmp@a}\z@% start with an offset
 \foreach \@tmp in {#1}%
     {\ifx\@tmp\@empty\else\addtocounter{lecture@counter@tmp@a}\@ne\fi}%
 \edef\lecture@author@totallength{\arabic{lecture@counter@tmp@a}}%
-\setcounter{lecture@counter@tmp@a}{0}% stored the length of the list
+\setcounter{lecture@counter@tmp@a}\z@% stored the length of the list
 \foreach \lecture@@tmp@curauthor in {#1} {%
 \ifx\lecture@@tmp@curauthor\@empty
 \else\addtocounter{lecture@counter@tmp@a}\@ne
