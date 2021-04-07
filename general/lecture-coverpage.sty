@@ -282,10 +282,10 @@
 \newlength\lecture@coverpage@lsmg
 \lecturecp@coverpagestyle{compact-upper}{%
 \def\lecture@coverpage@geometry{}
+\providecommand\lecturecoverpagefs{}
 \renewcommand\maketitle{%
 \lecture@coverpage@lsmg=\dimexpr1in+\oddsidemargin\relax
-\twocolumn[{%
-\parindent\z@ \parskip\z@
+\twocolumn[{\parindent\z@ \parskip\z@
 \sffamily\fontsize{42}{42}%
 \vspace*{1.33em}%
 \parbox[b][\z@]{\linewidth}{%
@@ -295,7 +295,7 @@
     \begin{scope}[xshift=.69\paperwidth,yshift=.5cm,opacity=.8,scale=.75]
         \lithiebirb
     \end{scope}
-\end{tikzpicture}\sbox\z@{\parbox{.925\linewidth}{\raggedright\textbf{\lecture@r{title}}}}%
+\end{tikzpicture}\sbox\z@{\parbox{.925\linewidth}{\raggedright\lecturecoverpagefs\textbf{\lecture@r{title}}}}%
 % set min ht to 4em
 \ifdim\dimexpr\ht\z@+\dp\z@<2cm \dp\z@\dimexpr2cm-\ht\z@\fi\usebox\z@
 \vspace*{2.5em}\par
