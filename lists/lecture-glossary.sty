@@ -13,7 +13,7 @@
 \RequirePackage[acronym,nopostdot,numberedsection=nameref,section,noglossaryindex,translate=babel]{glossaries-accsupp}%
 % \noist % disable index style file
 \RequirePackage{glossary-longragged}
-\iflglos@setup@enumitem@ \RequirePackage{enumitem} \fi
+\iflglos@setup@enumitem@\RequirePackage{enumitem}\fi
 \newif\if@lglos@atinit@glossary@
 % single- and plural-page
 % this is a hack. i check if 'delimN' or 'delimR' are in the page def
@@ -60,8 +60,7 @@
     \glstreepredesc\glossentrydesc{##1}\glspostdescription{}\lglos@printpages{##2}\par
 }%
 }
-\newglossarystyle{lecture@glossary@short}{%
-\setglossarystyle{tree}%
+\newglossarystyle{lecture@glossary@short}{\setglossarystyle{tree}%
 \renewcommand\glsgroupheading[1]{\if@lglos@atinit@glossary@\else\def\lglos@enddesc{\end{description}}\expandafter\lglos@enddesc\fi\global\@lglos@atinit@glossary@false
     \lglos@headingstyle{\glsgetgrouptitle{##1}}%
     \iflglos@setup@enumitem@
@@ -84,12 +83,8 @@
 \preto\printglossaries{\begingroup\interlinepenalty1000}
 \g@addto@macro\printglossaries{\endgroup}
 
-\def\glslong#1{{\glsreset{#1}\gls{#1}}}
-\def\glspllong#1{{\glsreset{#1}\glspl{#1}}}
-\def\glsshort#1{{\glsunset{#1}\gls{#1}}}
-\def\glsplshort#1{{\glsunset{#1}\glspl{#1}}}
-\def\Glslong#1{{\glsreset{#1}\Gls{#1}}}
-\def\Glspllong#1{{\glsreset{#1}\Glspl{#1}}}
-\def\Glsshort#1{{\glsunset{#1}\Gls{#1}}}
-\def\Glsplshort#1{{\glsunset{#1}\Glspl{#1}}}
+\def\glslong#1{{\glsreset{#1}\gls{#1}}}\def\glspllong#1{{\glsreset{#1}\glspl{#1}}}
+\def\glsshort#1{{\glsunset{#1}\gls{#1}}}\def\glsplshort#1{{\glsunset{#1}\glspl{#1}}}
+\def\Glslong#1{{\glsreset{#1}\Gls{#1}}}\def\Glspllong#1{{\glsreset{#1}\Glspl{#1}}}
+\def\Glsshort#1{{\glsunset{#1}\Gls{#1}}}\def\Glsplshort#1{{\glsunset{#1}\Glspl{#1}}}
 \endinput

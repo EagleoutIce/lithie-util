@@ -23,20 +23,17 @@ preamble "\\begin{theindex}%
 \\else\\def\\ledx@@s{}\\def\\ledx@@d{}\\fi
 \\ifcsname libidx@@sbox\\endcsname\\else\\newsavebox\\libidx@@sbox\\fi
 \\def\\ledx@@msub{\\ifx\\ledx@fs\\@empty,\\space\\else\\subsubitem\\ledx@@d\\color{gray}\\footnotesize\\fi}%
-\\def\\ledx@lb@encap#1{\\gdef\\ledx@cpb{}\\sbox\\libidx@@sbox{#1}\\ifx\\ledx@@u\\ledx@cpb\\else\\textsuperscript{(#1)\\!}\\fi}
+\\def\\ledx@lb@encap#1{\\gdef\\ledx@cpb{}\\sbox\\libidx@@sbox{#1}\\ifx\\ledx@@u\\ledx@cpb\\else\\textsuperscript{(#1)\\kern-\\thinmuskip}\\fi}
 "
 postamble "\n\n\\end{theindex}\n"
 group_skip "%\n\\indexspace\n"
-
 numhead_positive "\\small Numbers"
 numhead_negative "\\small Numbers"
 symhead_positive "\\small Symbole"
 symhead_negative "\\small Symbole"
-
 delim_0 "\\thinspace\\dotfill\\thinspace {"
 delim_1 "\:~~{"
 delim_2 "\\ledx@lb@encap{\\relax "
-
 item_0 "\n\n \\item\\ledx@@s\\color{black}\\idxfsize "
 item_01 "\n    \\subitem\\ledx@@s\\color{black}\\small "
 item_x1 "\n    \\subitem\\ledx@@sl\\color{black}\\small "
@@ -44,14 +41,11 @@ item_1 "\n    \\subitem\\ledx@@sl\\color{black}\\small "
 item_12 "\n        \\subsubitem\\ledx@@d\\color{gray}\\footnotesize "
 item_x2 "\n        \\subsubitem\\ledx@@d\\color{gray}\\footnotesize "
 item_2  "\\ledx@@msub "
-
 encap_prefix "\\"
 encap_infix "{"
 encap_suffix "}"
-
 quote '#'
 actual '?'
-
 delim_t "}\\relax "
 delim_n ", "
 indent_space "\t\t"

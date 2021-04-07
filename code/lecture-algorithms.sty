@@ -4,13 +4,11 @@
 \ProvidesPackage{lecture-algorithms}[2020/10/25 v1.0 algorithms2e]
 \RequirePackage{etoolbox}
 \RequirePackage[linesnumbered,algoruled]{algorithm2e}
-\algoheightrule=1.15pt
-\algotitleheightrule=.8pt
+\algoheightrule=1.15pt \algotitleheightrule=.8pt
 \let\Comment\tcp
 \long\def\@lithie@algo@cmtfrmt#1{\color{gray!90!black}\T{#1}}
 \SetCommentSty{@lithie@algo@cmtfrmt}
-\SetNoFillComment
-\algoskipindent=.5em
+\SetNoFillComment \algoskipindent=.5em
 \def\PreCode{\Indm}\def\StartCode{\Indp}\def\EndCode{\Indm}
 \SetKw{KwOr}{or}\SetKw{KwAnd}{and}
 \SetKw{KwBreak}{break}\SetKw{KwNot}{not}
