@@ -85,7 +85,7 @@
 \lecturecp@coverpagestyle{plain}{%
 \def\lecture@coverpage@geometry{\newgeometry{width=.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 \renewcommand\maketitle{\begingroup
-\parindent=\z@
+\parindent\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry
 \begin{titlepage}%
@@ -110,7 +110,7 @@
 \def\lecture@coverpage@geometry{\newgeometry{width=.85\paperwidth,top=.15\paperheight,bottom=.07\paperheight,centering}}
 
 \renewcommand\maketitle{\begingroup
-\parindent=\z@
+\parindent\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry
 \begin{titlepage}%
@@ -135,7 +135,7 @@
 \def\lecturecp@leftwidth{1.5cm}
 \newsavebox\lecturecp@title@widthbox
 \newlength\lecture@tmp@titlewidth
-\renewcommand\maketitle{\begingroup\parindent=\z@
+\renewcommand\maketitle{\begingroup\parindent\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry
 \begin{titlepage}%
@@ -201,7 +201,7 @@
 \newsavebox\lecturecp@title@widthbox
 \newlength\lecture@tmp@titlewidth
 \renewcommand\maketitle{\begingroup
-\parindent=\z@
+\parindent\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry
 \begin{titlepage}%
@@ -252,7 +252,7 @@
 
 \renewcommand\maketitle{%
 \twocolumn[{%
-\parindent=\z@ \parskip=\z@\vspace*{3em}\par\sffamily\fontsize{32}{32}%
+\parindent\z@ \parskip\z@\vspace*{3em}\par\sffamily\fontsize{32}{32}%
 \textbf{\paletteA{\lecture@r{title}}}\bigskip\leavevmode\\*
 \normalsize\strut\hfill\parbox[t]{.85\linewidth}{\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*}\color{gray}\lecture@r{brief}}%
 \vspace*{6.25em}\leavevmode\par
@@ -262,7 +262,7 @@
 \def\lecture@coverpage@geometry{}%
 \renewcommand\maketitle{\begingroup
 \ifcsname microtypesetup\endcsname\microtypesetup{protrusion=false}\fi
-\parindent=\z@ \parskip=\z@\par
+\parindent\z@ \parskip\z@\par
 \thispagestyle{plain}%
 \parbox{\linewidth}{\sffamily\fontsize{27}{27}\raggedleft\sbox\z@{\pbox{\linewidth}{\raggedleft\textbf{\paletteA{\lecture@r{title}}}}}\usebox\z@\\*
 \large\hfill\parbox[t]{\wd\z@}{\color{gray}\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*\normalsize\color{lightgray}\nohyper{\typesetAuthors},~\lecture@r{subject}\\*}\color{gray}\lecture@r{brief}}%
@@ -272,7 +272,7 @@
 \lecturecp@coverpagestyle{simple}{%
 \def\lecture@coverpage@geometry{}
 \renewcommand\maketitle{\begingroup
-\parindent=\z@
+\parindent\z@
 \begin{center}%
     \sffamily{\bfseries\Huge\lecture@r{title}}\medskip\leavevmode\\
     \normalsize\lecture@r{subtitle}\vspace*{3em}%
@@ -285,7 +285,7 @@
 \renewcommand\maketitle{%
 \lecture@coverpage@lsmg=\dimexpr1in+\oddsidemargin\relax
 \twocolumn[{%
-\parindent=\z@ \parskip=\z@
+\parindent\z@ \parskip\z@
 \sffamily\fontsize{42}{42}%
 \vspace*{1.33em}%
 \parbox[b][\z@]{\linewidth}{%
