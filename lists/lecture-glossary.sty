@@ -80,7 +80,7 @@
 \else\setglossarystyle{lecture@glossary}\fi
 
 \makeglossaries
-\preto\printglossaries{\begingroup\interlinepenalty1000}
+\preto\printglossaries{\begingroup\interlinepenalty\@M}
 \g@addto@macro\printglossaries{\endgroup}
 
 \def\glslong#1{{\glsreset{#1}\gls{#1}}}\def\glspllong#1{{\glsreset{#1}\glspl{#1}}}
