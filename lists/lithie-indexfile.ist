@@ -21,9 +21,8 @@ preamble "\\begin{theindex}%
   \\def\\ledx@fs{}%
   \\def\\hyperpage##1{\\g@addto@macro\\ledx@cpb{##1}\\ledx@h{##1}}}%
 \\else\\def\\ledx@@s{}\\def\\ledx@@d{}\\fi
-\\ifcsname libidx@@sbox\\endcsname\\else\\newsavebox\\libidx@@sbox\\fi
 \\def\\ledx@@msub{\\ifx\\ledx@fs\\@empty,\\space\\else\\subsubitem\\ledx@@d\\color{gray}\\footnotesize\\fi}%
-\\def\\ledx@lb@encap#1{\\gdef\\ledx@cpb{}\\sbox\\libidx@@sbox{#1}\\ifx\\ledx@@u\\ledx@cpb\\else\\textsuperscript{(#1)\\kern-\\thinmuskip}\\fi}
+\\def\\ledx@lb@encap#1{\\gdef\\ledx@cpb{}\\ifx\\ledx@@u\\ledx@cpb\\else\\textsuperscript{(#1)\\kern-\\thinmuskip}\\fi}
 "
 postamble "\n\n\\end{theindex}\n"
 group_skip "%\n\\indexspace\n"
