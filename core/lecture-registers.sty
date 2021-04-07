@@ -9,20 +9,20 @@
 \iflecture@registers@disable@\expandafter\endinput\fi
 \RequirePackage{etoolbox}
 \def\@lecture@definereg#1{%
-\expandafter\gdef\csname#1\endcsname{\expandafter\@dblarg\csname @#1@@\endcsname}
-\expandafter\xdef\csname @#1@@\endcsname[##1]##2%
-    {\expandafter\noexpand\gdef\csname lecture@register@#1\endcsname{##2}%
-        \expandafter\noexpand\gdef\csname lecture@register@short@#1\endcsname{##1}}
-\expandafter\gdef\csname lecture@register@#1\endcsname{}
-\expandafter\gdef\csname lecture@register@short@#1\endcsname{}
+\expandafter\edef\csname#1\endcsname{\noexpand\@dblarg\expandafter\noexpand\csname @#1@@\endcsname}
+\expandafter\edef\csname @#1@@\endcsname[##1]##2%
+    {\noexpand\def\expandafter\noexpand\csname lecture@register@#1\endcsname{##2}%
+        \noexpand\def\expandafter\noexpand\csname lecture@register@short@#1\endcsname{##1}}
+\expandafter\let\csname lecture@register@#1\endcsname\@empty
+\expandafter\let\csname lecture@register@short@#1\endcsname\@empty
 }
-\forcsvlist{\@lecture@definereg}{title,subtitle,subject,brief,author,date,duedate,supervisor,keywords,titleimage,authority,copyright}
+\@for\it:={title,subtitle,subject,brief,author,date,duedate,supervisor,keywords,titleimage,authority,copyright}\do{\expandafter\@lecture@definereg\expandafter{\it}}
 % iterators for handling and parsing author information.
 \def\lecture@@add@author#1{%
 \let\lecture@@tmp@old@author\lecture@register@author
 \ifx\lecture@@tmp@old@author\@empty
-\xdef\lecture@register@author{#1}\else
-\xdef\lecture@register@author{\lecture@@tmp@old@author,#1}\fi
+\g@addto@macro\lecture@register@author{#1}\else
+\g@addto@macro\lecture@register@author{,#1}\fi
 }
 \let\addAuthor\lecture@@add@author
 \def\lecture@mail#1{\href{mailto:#1}{#1}}
@@ -31,26 +31,24 @@
 \def\lecture@@parse@author#1 (#2)#3\@nil{%
     \def\@tmpa{#2}\ifx\@tmpa\lecture@@mail@unknown#1\else\href{mailto:#2}{#1}\fi}
 \def\LinkAuthor#1{\protected@edef\@tmp{#1}\expandafter\lecture@@parse@author\@tmp{} (??)??\@nil}
-\newcounter{lecture@counter@tmp@a}
+\newcount\c@lecture@counter@tmp@a
+\def\lecture@@and{~und }\def\lecture@@comma{,\space}
 \def\lecture@@typeset@author#1{%
 \setcounter{lecture@counter@tmp@a}\z@% start with an offset
-\foreach \@tmp in {#1}%
-    {\ifx\@tmp\@empty\else\addtocounter{lecture@counter@tmp@a}\@ne\fi}%
-\edef\lecture@author@totallength{\arabic{lecture@counter@tmp@a}}%
+\@for\@tmp:={#1}\do{\ifx\@tmp\@empty\else\advance\c@lecture@counter@tmp@a\@ne\relax\fi}%
+\edef\lecture@author@totallength{\number\c@lecture@counter@tmp@a}%
 \setcounter{lecture@counter@tmp@a}\z@% stored the length of the list
-\foreach \lecture@@tmp@curauthor in {#1} {%
-\ifx\lecture@@tmp@curauthor\@empty
-\else\addtocounter{lecture@counter@tmp@a}\@ne
-    \ifnum\thelecture@counter@tmp@a>1 %
-    \ifnum\thelecture@counter@tmp@a=\lecture@author@totallength\relax
-        ~und \else,\space\fi\fi
+\@for\lecture@@tmp@curauthor:={#1}\do{%
+\ifx\lecture@@tmp@curauthor\@empty\else\advance\c@lecture@counter@tmp@a\@ne\relax
+    \ifnum\c@lecture@counter@tmp@a>1 %
+    \ifnum\c@lecture@counter@tmp@a=\lecture@author@totallength\relax
+        \lecture@@and\else\lecture@@comma\fi\fi
     \expandafter\lecture@@parse@author\lecture@@tmp@curauthor{} (??)??\@nil
 \fi}}
-\newcommand*\lecture@typeset@authors{\protected@edef\@tmp{\noexpand\lecture@@typeset@author{\lecture@register@author}}\@tmp}
+\newcommand*\lecture@typeset@authors{\expandafter\lecture@@typeset@author\expandafter{\lecture@register@author}}
 \let\typesetAuthor\lecture@typeset@authors
 \let\typesetAuthors\lecture@typeset@authors
-\def\lecture@firstoftwo#1#2{#1}
-\def\lecture@secondoftwo#1#2{#2}
+\def\lecture@firstoftwo#1#2{#1}\def\lecture@secondoftwo#1#2{#2}
 \def\lecture@r#1{\csname lecture@register@#1\endcsname}
 \def\lecture@@chkempty{\ifx\@@lecture@tmp\@empty\expandafter\lecture@firstoftwo\else\expandafter\lecture@secondoftwo\fi}
 \def\iflecture@e#1{\protected@edef\@@lecture@tmp{#1}\lecture@@chkempty}

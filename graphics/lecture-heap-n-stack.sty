@@ -34,18 +34,18 @@
     lhns/.style={{Circle[length=4.5pt]}-Kite}%
 }
 
-\def\lhns@heap@element@#1#2#3{%
+\def\lhns@heap@elm@#1#2#3{%
     \lhns@debug{Reg heap element [\thelhns@heap] text: '#1', extras: '#2', style: '#3'}
     \@namedef{lhn@heap@elem@i@\thelhns@heap}{{#1}{#2}{#3}}%
 \stepcounter{lhns@heap}}
 
-\def\lhns@heap@element{\@ifnextchar[\lhns@heap@element@opt\lhns@heap@element@noopt}
-\def\lhns@heap@element@opt[#1]#2{\lhns@heap@element@{#2}{#1}{normal}}
-\def\lhns@heap@element@noopt#1{\lhns@heap@element@{#1}{}{normal}}
+\def\lhns@heap@elm{\@ifnextchar[\lhns@heap@elm@opt\lhns@heap@elm@noopt}
+\def\lhns@heap@elm@opt[#1]#2{\lhns@heap@elm@{#2}{#1}{normal}}
+\def\lhns@heap@elm@noopt#1{\lhns@heap@elm@{#1}{}{normal}}
 
-\def\lhns@heap@element@imp{\@ifnextchar[\lhns@heap@element@imp@opt\lhns@heap@element@imp@noopt}
-\def\lhns@heap@element@imp@opt[#1]#2{\lhns@heap@element@{#2}{#1}{important}}
-\def\lhns@heap@element@imp@noopt#1{\lhns@heap@element@{#1}{}{important}}
+\def\lhns@heap@elm@imp{\@ifnextchar[\lhns@heap@elm@imp@opt\lhns@heap@elm@imp@noopt}
+\def\lhns@heap@elm@imp@opt[#1]#2{\lhns@heap@elm@{#2}{#1}{important}}
+\def\lhns@heap@elm@imp@noopt#1{\lhns@heap@elm@{#1}{}{important}}
 
 \def\lhns@stack@element@#1#2#3{%
     \lhns@debug{Reg stack elem [\thelhns@stack] text: '#1', extras: '#2', style: '#3'}
@@ -62,8 +62,8 @@
 
 % heap/stack | number | position
 \def\lhns@render@elem@from#1#2#3{%
-    \lhns@debug{Render elem [#2] from #1 at #3}
-    \protected@edef\@lhns@tmp{\noexpand\lhns@render@elem@\@nameuse{lhn@#1@elem@i@#2}{#3}{#1-#2}}\@lhns@tmp%
+    \lhns@debug{Render elem [#2] from #1 at #3}%
+    \protected@edef\@lhns@tmp{\noexpand\lhns@render@elem@\@nameuse{lhn@#1@elem@i@#2}{#3}{#1-#2}}\@lhns@tmp
 }
 % #1 text #2 extra format #3 style #4 position #5 name
 \def\lhns@render@elem@#1#2#3#4#5{\@nameuse{lhns@render@elem@#3}{#5}{#1}{#2}{#4}}
@@ -133,8 +133,8 @@
 \lhns@renderstackfalse\lhns@renderheapfalse
 \let\stack\lhns@stack@element
 \let\istack\lhns@stack@element@imp
-\let\heap\lhns@heap@element
-\let\iheap\lhns@heap@element@imp
+\let\heap\lhns@heap@elm
+\let\iheap\lhns@heap@elm@imp
 \let\renderheap\lhns@render@heap
 \let\renderstack\lhns@render@stack
 }{%
