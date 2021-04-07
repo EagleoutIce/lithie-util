@@ -149,7 +149,7 @@
 \hspace*{\lecturecp@leftwidth}\parbox{.925\linewidth}{%
     \raggedright\fontsize{39pt}{39pt}\selectfont\sffamily
     \savebox\lecturecp@title@widthbox{\pbox{\linewidth}{\raggedright\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}~~\null}}%
-    \usebox{\lecturecp@title@widthbox}\strut\medskip
+    \usebox\lecturecp@title@widthbox\strut\medskip
     \global\lecture@tmp@titlewidth=\wd\lecturecp@title@widthbox}%
     \leavevmode\\*[.125cm]%
     \paletteA{\rule{\lecture@eff@titlewidth+\lecturecp@leftwidth}{1.33pt}}%
@@ -216,7 +216,7 @@
 \hspace*{\lecturecp@leftwidth}\parbox{.65\linewidth}{%
     \raggedright\fontsize{30pt}{30pt}\selectfont\sffamily%
     \savebox{\lecturecp@title@widthbox}{\pbox{\linewidth}{\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}~~\null}}%
-    \usebox{\lecturecp@title@widthbox}\strut%
+    \usebox\lecturecp@title@widthbox\strut
     \global\lecture@tmp@titlewidth=\wd\lecturecp@title@widthbox}%
     \leavevmode\\*[.125cm]%
     \paletteA{\rule{\lecture@eff@titlewidth+\lecturecp@leftwidth}{1.33pt}}%
@@ -264,8 +264,8 @@
 \ifcsname microtypesetup\endcsname\microtypesetup{protrusion=false}\fi
 \parindent=\z@ \parskip=\z@\par
 \thispagestyle{plain}%
-\parbox{\linewidth}{\sffamily\fontsize{27}{27}\raggedleft\sbox0{\pbox{\linewidth}{\raggedleft\textbf{\paletteA{\lecture@r{title}}}}}\usebox0\\*
-\large\hfill\parbox[t]{\wd0}{\color{gray}\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*\normalsize\color{lightgray}\nohyper{\typesetAuthors},~\lecture@r{subject}\\*}\color{gray}\lecture@r{brief}}%
+\parbox{\linewidth}{\sffamily\fontsize{27}{27}\raggedleft\sbox\z@{\pbox{\linewidth}{\raggedleft\textbf{\paletteA{\lecture@r{title}}}}}\usebox\z@\\*
+\large\hfill\parbox[t]{\wd\z@}{\color{gray}\raggedleft\iflecture@er{subtitle}{}{\lecture@r{subtitle}\\*\normalsize\color{lightgray}\nohyper{\typesetAuthors},~\lecture@r{subject}\\*}\color{gray}\lecture@r{brief}}%
 \vspace*{2.25em}\leavevmode\par}
 \endgroup}}
 
@@ -295,9 +295,9 @@
     \begin{scope}[xshift=.69\paperwidth,yshift=.5cm,opacity=.8,scale=.75]
         \lithiebirb
     \end{scope}
-\end{tikzpicture}\sbox0{\parbox{.925\linewidth}{\raggedright\textbf{\lecture@r{title}}}}%
+\end{tikzpicture}\sbox\z@{\parbox{.925\linewidth}{\raggedright\textbf{\lecture@r{title}}}}%
 % set min ht to 4em
-\ifdim\dimexpr\ht0+\dp0<2cm \dp0\dimexpr2cm-\ht0\fi\usebox0%
+\ifdim\dimexpr\ht\z@+\dp\z@<2cm \dp\z@\dimexpr2cm-\ht\z@\fi\usebox\z@
 \vspace*{2.5em}\par
 }]}{}}
 \endinput
