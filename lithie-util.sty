@@ -11,7 +11,7 @@
 
 % #1 group id
 \def\lu@Definendgroup#1{%
-  \expandafter\def\csname @litu@@group@#1\endcsname{}%
+  \expandafter\let\csname @litu@@group@#1\endcsname\@empty
   \@litu@atl\@litu@all@groups{#1}%
   \DeclareVoidOption{#1}{\listadd\@litu@hook@GroupRequire{#1}}%
 }
@@ -30,8 +30,7 @@
 \def\lu@Get#1#2{\csname @lu@mu@map@#2@#1\endcsname}
 
 \def\@litu@resolve@module@args#1#2#3{%
-\edef\@litu@name{\lu@Get{#1}{name}}%
-\edef\@litu@cur{\csname LITU@\@litu@name\endcsname}%
+\edef\@litu@cur{\csname LITU@\lu@Get{#1}{name}\endcsname}%
 \ifx\@litu@cur\@litu@none#2\else#3\fi}
 
 \def\@@litu@util{:}
@@ -47,17 +46,15 @@
 \def\@litu@execute@command#1#2{%
 \def\@@litu@cmd@chk{#2}%
 \ifx\@@litu@cmd@chk\@litu@cmd@defaults
-\protected@edef\@litu@tmp{\noexpand\@@litu@passopt@fp{\lu@Get{#1}{defaults}}{\lu@Get{#1}{package}}}%
-\@litu@tmp\fi}
+\protected@edef\@litu@tmp{\noexpand\@@litu@passopt@fp{\lu@Get{#1}{defaults}}{\lu@Get{#1}{package}}}\@litu@tmp\fi}
 
-\def\@litu@gobble#1{}
+\let\@litu@gobble\@gobble
 % allow ':defaults' to be used for defaults
 \def\@@litu@load@consume@arg#1#2#3{%
 \@@litu@load@consume@arg@ifcmd#3->{%
 \@litu@execute@command{#2}% is command
 }{ % is no command
-\PassOptionsToPackage{#3}{#1}\@litu@gobble
-}}
+\PassOptionsToPackage{#3}{#1}\@litu@gobble}}
 
 \def\@litu@load@curargs#1{%
 \protected@edef\@litu@tmp{\noexpand\forcsvlist{\noexpand\@@litu@load@consume@arg{%
@@ -66,7 +63,7 @@
 
 \def\@lu@RequirePackage#1{%
 % allow others PassOptionsToPackage to be called by other hooks:
-\g@addto@macro\@litu@hook@RequirePackages{\typeout{L \lu@Get{#1}{package} (#1)}%
+\g@addto@macro\@litu@hook@RequirePackages{\typeout{L #1}%
 \RequirePackage{\lu@Get{#1}{package}}}}
 
 \def\lu@LoadModule#1{%
@@ -91,7 +88,7 @@
 }
 
 % define the groups
-\forcsvlist{\lu@Definendgroup}{all,util,color,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics,index}
+\@for\@it:={all,util,color,sopra,lecture,lecture-base,listings,boxes,personal,beamer-extra,graphics,index}\do{\expandafter\lu@Definendgroup\expandafter{\@it}}
 
 \lu@DefineModule{cps}{color-palettes}{}{color,util,boxes}
 \lu@DefineModule{tps}{tikz-palettes}{}{color,util}
