@@ -22,7 +22,7 @@ preamble "\\begin{theindex}%
   \\def\\hyperpage##1{\\g@addto@macro\\ledx@cpb{##1}\\ledx@h{##1}}}%
 \\else\\def\\ledx@@s{}\\def\\ledx@@d{}\\fi
 \\def\\ledx@@msub{\\ifx\\ledx@fs\\@empty,\\space\\else\\subsubitem\\ledx@@d\\color{gray}\\footnotesize\\fi}%
-\\def\\ledx@lb@encap#1{\\gdef\\ledx@cpb{}\\ifx\\ledx@@u\\ledx@cpb\\else\\textsuperscript{(#1\kern-.1em}\\fi}
+\\def\\ledx@lb@encap#1{\\gdef\\ledx@cpb{}\\ifx\\ledx@@u\\ledx@cpb\\else\\textsuperscript{(#1)\\kern-.1em}\\fi}
 "
 postamble "\n\n\\end{theindex}\n"
 group_skip "%\n\\indexspace\n"
