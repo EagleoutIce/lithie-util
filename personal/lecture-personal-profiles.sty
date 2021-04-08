@@ -7,7 +7,7 @@
 \DeclareStringOption{imgprefix}
 \DeclareStringOption{command}
 \ProcessKeyvalOptions*
-\setcounter{DefaultLines}{3}
+\c@DefaultLines\thr@@
 \LettrineOnGridfalse\LettrineRealHeighttrue
 \DefaultSlope\z@
 \def\LettrineTextFont{}
@@ -23,13 +23,12 @@
 \def\lecture@personal@printsuffix{ (Druckversion)}
 \newif\ifscol
 \AppendToProfile{print}{%
-  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{-print}{1}{}}\@mkcommands\DisableMulticolHint\scolfalse
-  \newenvironment{ltabular}%
-    {\csname tabular\endcsname}%
-    {\csname endtabular\endcsname}%
+  \edef\@mkcommands{{\LPP@command}{\LPP@imgprefix}}%
+  \expandafter\lecture@profiles@MakeImageCommands\@mkcommands{-print}{1}{}%
+  \DisableMulticolHint\scolfalse
+  \newenvironment{ltabular}{\tabular}{\endtabular}%
   \RequirePackage{Romantik}% Romantik for cfr initials?
-  \DefaultFindent=5.15pt%
-  \DefaultNindent=.489pt% compensate for offsets
+  \DefaultFindent5.15pt \DefaultNindent.489pt% compensate for offsets
   \def\LettrineFontHook{\Romantik}%
   \AtBeginDocument{%
     \hypersetup{pdftitle={\lecture@r{title}\lecture@personal@printsuffix}}%
@@ -40,16 +39,13 @@
 
 \def\lecture@personal@defaultsuffix{ (Digitalversion)}
 \AppendToProfile{default}{%
-  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{1}{}}\@mkcommands
-  \DisableMulticolHint
-  \scolfalse
-  \newenvironment{ltabular}%
-    {\csname tabular\endcsname}%
-    {\csname endtabular\endcsname}%
+  \edef\@mkcommands{{\LPP@command}{\LPP@imgprefix}}%
+  \expandafter\lecture@profiles@MakeImageCommands\@mkcommands{}{1}{}%
+  \DisableMulticolHint \scolfalse
+  \newenvironment{ltabular}{\tabular}{\endtabular}%
   % we color it
   \def\LettrineFontHook{\color{paletteA}}%
-  \DefaultFindent=1.85pt%
-  \DefaultNindent=.25em%
+  \DefaultFindent1.85pt \DefaultNindent.25em%
   \def\DefaultLoversize{.05}%
   \AtBeginDocument{%
     \hypersetup{pdftitle={\lecture@r{title}\lecture@personal@defaultsuffix}}%
@@ -58,21 +54,20 @@
 
 \def\lecture@personal@mobilsuffix{ (Mobilversion)}
 \RegisterProfile{mobile}{%
-  \edef\@mkcommands{\noexpand\lecture@profiles@MakeImageCommands{\LPP@command}{\LPP@imgprefix}{}{.925}{height=.8\noexpand\textheight,keepaspectratio}}\@mkcommands
-  \DisableMulticolHint
-  \scoltrue\makeatletter
-  \def\fps@figure{tbp}\def\fps@table{tbp}%
+  \edef\@mkcommands{{\LPP@command}{\LPP@imgprefix}}%
+  \expandafter\lecture@profiles@MakeImageCommands\@mkcommands{}{.925}{height=.8\textheight,keepaspectratio}
+  \DisableMulticolHint \scoltrue
+  \def\fps@figure{tbp}\let\fps@table\fps@figure
   \def\floatpagefraction{.5}\def\topfraction{.7}%
-  \def\bottomfraction{0}\setcounter{topnumber}{3}%2
-  \setcounter{bottomnumber}\z@\setcounter{totalnumber}{3}%
+  \def\bottomfraction{0}\setcounter{topnumber}\thr@@
+  \setcounter{bottomnumber}\z@\setcounter{totalnumber}\thr@@
   \newenvironment{ltabular}%
-    {\begingroup\small\csname xtabular\endcsname}%
-    {\csname endxtabular\endcsname\endgroup}%
-  \setcounter{DefaultLines}{2}%
+    {\begingroup\small\xtabular}%
+    {\endxtabular\endgroup}%
+  \setcounter{DefaultLines}\tw@
   % we color it
   \def\LettrineFontHook{\color{paletteA}}%
-  \DefaultFindent=1.85pt%
-  \DefaultNindent=.25em%
+  \DefaultFindent1.85pt \DefaultNindent.25em%
   \AtBeginDocument{%
     \hypersetup{pdftitle={\lecture@r{title}\lecture@personal@mobilsuffix}}%
   }%

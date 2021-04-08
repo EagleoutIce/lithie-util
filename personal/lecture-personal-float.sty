@@ -3,20 +3,16 @@
 % Float modifications i use in my scripts
 \ProvidesPackage{lecture-personal-float}[2020/11/03 v1.0 Personal float hacks]
 \RequirePackage{wrapfig}
-\def\fps@figure{tbp}
-\def\fps@table{tbp}
-\setcounter{topnumber}{2}%2
-\setcounter{bottomnumber}{1}%
-\setcounter{totalnumber}{3}%
+\def\fps@figure{tbp} \let\fps@table\fps@figure
+\c@topnumber\tw@
+\c@bottomnumber\@ne
+\c@totalnumber\thr@@
 \def\floatpagefraction{.56}%0.2
 \def\topfraction{.5}% 0.7
 \g@addto@macro\end@float{%
 \ifnum\@floatpenalty<\z@
 \ifnum\@floatpenalty<-\@Mii
 \else\ifhmode
-  \if@ignore
-    \penalty\@M
-    \hskip\z@skip
-  \fi\fi
+  \if@ignore \penalty\@M \hskip\z@skip \fi\fi
 \fi\fi}
 \endinput
