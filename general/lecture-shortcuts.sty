@@ -56,7 +56,7 @@
 \DeclareMathOperator\grad{Grad}
 \DeclareMathOperator\arccot{arccot}
 
-\def\timestamp{\DTMToday, \DTMcurrenttime}
+\def\timestamp{\DTMToday, \@ifstar\DTMcurrenttime{\DTMtwodigits\@dtm@currenthour\dtm@hourminsep\DTMtwodigits\@dtm@currentminute}}
 \def\tasksplit{\medskip\par\needspace{2\baselineskip}\textbf{Lösung:}\par}
 \let\oldepsilon\epsilon \let\epsilon\varepsilon
 \let\oldphi\phi \let\phi\varphi
