@@ -46,8 +46,8 @@
     \expandafter\lecture@@parse@author\lecture@@tmp@curauthor{} (??)??\@nil
 \fi}}
 \newcommand*\lecture@typeset@authors{\expandafter\lecture@@typeset@author\expandafter{\lecture@register@author}}
-\let\typesetAuthor\lecture@typeset@authors
-\let\typesetAuthors\lecture@typeset@authors
+\let\typesetAuthor\lecture@typeset@authors \robustify\typesetAuthor
+\let\typesetAuthors\lecture@typeset@authors \robustify\typesetAuthors
 \def\lecture@firstoftwo#1#2{#1}\def\lecture@secondoftwo#1#2{#2}
 \def\lecture@r#1{\csname lecture@register@#1\endcsname}
 \def\lecture@@chkempty{\ifx\@@lecture@tmp\@empty\expandafter\lecture@firstoftwo\else\expandafter\lecture@secondoftwo\fi}
