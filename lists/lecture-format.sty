@@ -6,9 +6,7 @@
 \RequirePackage{multicol}
 \newenvironment{multicolshint}[1]{}{}
 \def\libf@DisableMulticolHint{\renewenvironment{multicolshint}[1]{}{}}
-\def\libf@EnableMulticolHint{%
-\renewenvironment{multicolshint}[1]{\begin{multicols}{##1}}{\end{multicols}}%
-}
+\def\libf@EnableMulticolHint{\renewenvironment{multicolshint}[1]{\begin{multicols}{##1}}{\end{multicols}}}
 \libf@EnableMulticolHint
 \let\DisableMulticolHint\libf@DisableMulticolHint
 \let\EnableMulticolHint\libf@EnableMulticolHint

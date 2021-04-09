@@ -3,11 +3,9 @@
 % Controls the styling cross references. This Package requires hyperref.
 \ProvidesPackage{lecture-links}[2020/10/08 v1.0 Cross-References]
 \newif\ifleclink@defaults@
-\DeclareOption{defaults}{\leclink@defaults@true}
-\DeclareOption{nodefaults}{\leclink@defaults@false}
+\DeclareOption{defaults}{\leclink@defaults@true}\DeclareOption{nodefaults}{\leclink@defaults@false}
 \newif\ifleclink@patchurl@
-\DeclareOption{patchurl}{\leclink@patchurl@true}
-\DeclareOption{nopatchurl}{\leclink@patchurl@false}
+\DeclareOption{patchurl}{\leclink@patchurl@true}\DeclareOption{nopatchurl}{\leclink@patchurl@false}
 \ProcessOptions*
 
 \ifleclink@defaults@ \AtBeginDocument{\hypersetup{pdfborder={0 0 0}}} \fi

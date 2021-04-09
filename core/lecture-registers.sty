@@ -34,10 +34,10 @@
 \newcount\c@lecture@counter@tmp@a
 \def\lecture@@and{~und }\def\lecture@@comma{,\space}
 \def\lecture@@typeset@author#1{%
-\setcounter{lecture@counter@tmp@a}\z@% start with an offset
+\c@lecture@counter@tmp@a\z@% start with an offset
 \@for\@tmp:={#1}\do{\ifx\@tmp\@empty\else\advance\c@lecture@counter@tmp@a\@ne\relax\fi}%
 \edef\lecture@author@totallength{\number\c@lecture@counter@tmp@a}%
-\setcounter{lecture@counter@tmp@a}\z@% stored the length of the list
+\c@lecture@counter@tmp@a\z@% stored the length of the list
 \@for\lecture@@tmp@curauthor:={#1}\do{%
 \ifx\lecture@@tmp@curauthor\@empty\else\advance\c@lecture@counter@tmp@a\@ne\relax
     \ifnum\c@lecture@counter@tmp@a>1 %

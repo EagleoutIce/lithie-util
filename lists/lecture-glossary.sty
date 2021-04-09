@@ -4,11 +4,9 @@
 % maybe more styles will be added in the future
 \ProvidesPackage{lecture-glossary}[2020/09/22 v1.0 Glossary Styling]
 \newif\iflglos@setup@enumitem@
-\DeclareOption{enumitem}{\lglos@setup@enumitem@true}
-\DeclareOption{noenumitem}{\lglos@setup@enumitem@false}
+\DeclareOption{enumitem}{\lglos@setup@enumitem@true}\DeclareOption{noenumitem}{\lglos@setup@enumitem@false}
 \newif\iflglos@setup@short@
-\DeclareOption{short}{\lglos@setup@short@true}
-\DeclareOption{long}{\lglos@setup@short@false}
+\DeclareOption{short}{\lglos@setup@short@true}\DeclareOption{long}{\lglos@setup@short@false}
 \ProcessOptions*
 \RequirePackage[acronym,nopostdot,numberedsection=nameref,section,noglossaryindex,translate=babel]{glossaries-accsupp}%
 % \noist % disable index style file
