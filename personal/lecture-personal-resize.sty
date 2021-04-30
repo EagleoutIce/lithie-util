@@ -58,11 +58,11 @@
     \fi
   \else
     % only width
-    \resizebox{#2}{!}{\usebox\lecture@personal@downsize@box}%
+    \resizebox{#2}!{\usebox\lecture@personal@downsize@box}%
   \fi
 \else\ifdim\lecture@personal@downsize@box@height>#1 %
   % only height
-  \resizebox*{!}{#1}{\usebox\lecture@personal@downsize@box}%
+  \resizebox*!{#1}{\usebox\lecture@personal@downsize@box}%
 \else% none
   \usebox\lecture@personal@downsize@box\fi
 \fi

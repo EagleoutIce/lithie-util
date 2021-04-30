@@ -7,10 +7,10 @@
 \c@topnumber\tw@
 \c@bottomnumber\@ne
 \c@totalnumber\thr@@
-\def\floatpagefraction{.56}%0.2
+\def\floatpagefraction{.56}% 0.2
 \def\topfraction{.5}% 0.7
 \g@addto@macro\end@float{%
-\ifnum\@floatpenalty<\z@ \ifnum\@floatpenalty<-\@Mii
+\ifnum\@floatpenalty<0 \ifnum\@floatpenalty<-\@Mii
 \else\ifhmode \if@ignore \penalty\@M \hskip\z@skip \fi\fi
 \fi\fi}
 \endinput
