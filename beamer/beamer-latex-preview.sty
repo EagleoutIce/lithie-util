@@ -18,7 +18,7 @@
     numberstyle=\color{gray}\footnotesize\sffamily,
     xleftmargin=12pt,xrightmargin=3pt,frame=l,numbers=left,
     numbersep=12pt,framexleftmargin=3pt,rulecolor=\color{Charcoal},
-    framerule=.5pt,
+    framerule=.5\p@,
 }
 % #1 Name
 \def\ltxpreview#1{\tcbset{listing file=helper-\jobname-#1-slidelst}}
@@ -34,7 +34,7 @@
     O{} % Listing Args
     O{} % TCB Args
 }{%
-  enhanced jigsaw,breakable,blankest,enlarge top by=3pt,enlarge bottom by=3pt,listing side text,righthand width=3.5cm,before lower={\vspace*{-.75\baselineskip}},
+  enhanced jigsaw,breakable,blankest,enlarge top by=3\p@,enlarge bottom by=3\p@,listing side text,righthand width=3.5cm,before lower={\vspace*{-.75\baselineskip}},
   listing options={%
     style=sol@SOPRA,
     language=lLatex,#1},#2, after={\\[-.25\baselineskip]},
