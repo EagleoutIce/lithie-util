@@ -13,4 +13,13 @@
 \ifnum\@floatpenalty<0 \ifnum\@floatpenalty<-\@Mii
 \else\ifhmode \if@ignore \penalty\@M \hskip\z@skip \fi\fi
 \fi\fi}
+\def\lecture@personal@pswf@r{r}%
+\newcommand{parshapewrapfig}[3][r]{\par
+    \def\@tmpa{#1}\ifx\@tmpa\lecture@personal@pswf@r\null\hfill\fi
+    \smash{%
+\raisebox{\dimexpr-\height+\baselineskip}{%
+    #2}%
+\par\vspace*{\dimexpr-\baselineskip-\parskip}
+    }#3\relax
+}
 \endinput
