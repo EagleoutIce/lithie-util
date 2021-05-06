@@ -88,7 +88,6 @@
 \parindent\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry
-\begin{titlepage}%
 \begin{center}
     \hyphenpenalty\@M \exhyphenpenalty\@M
     \fontsize{46pt}{46pt}\selectfont\sffamily\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}\leavevmode\medskip\par
@@ -103,7 +102,6 @@
 \parbox[c]{.75\linewidth}{%
 \fontsize{17pt}{17pt}\selectfont\sffamily\color{gray}\lecture@r{brief}%
 }\hfill\parbox[c]{.2\linewidth}{\lecture@emblem}%
-\end{titlepage}%
 \restoregeometry{}\clearpage\endgroup}
 }
 \lecturecp@coverpagestyle{plain-small}{%
@@ -113,7 +111,6 @@
 \parindent\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry
-\begin{titlepage}%
 \parbox{.99\linewidth}{\raggedright\fontsize{39pt}{39pt}\selectfont\sffamily\iflecture@er{title}{Title missing. Set with \texttt{\textbackslash title\{hey\}}}{\lecture@r{title}}\leavevmode\bigskip\\*}\par
 \parbox{.99\linewidth}{\fontsize{15pt}{15pt}\selectfont\sffamily\lecture@r{subtitle}}\leavevmode\\*%
 \vfill% set the titleimage
@@ -123,7 +120,7 @@
 \vfill
 \parbox[c]{\linewidth}{%
 \fontsize{15pt}{15pt}\selectfont\sffamily\color{gray}\lecture@r{brief}%
-}\end{titlepage}%
+}%
 \restoregeometry{}\clearpage\endgroup}%
 }
 
@@ -138,7 +135,6 @@
 \renewcommand\maketitle{\begingroup\parindent\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry
-\begin{titlepage}%
 % upper fancies
 \begin{tikzpicture}[line join=round]%
 \filldraw[\lecturecp@emblemcolor@symbol]
@@ -186,7 +182,6 @@
     \node[align=left,right=\z@,outer sep=\z@,font=\normalsize\sffamily] at(.9*\paperwidth,\lecturecp@height/2) {\Lithie\smallskip\\\resizebox{\widthof{\Lithie}}{!}{\textsf{Ver. \lithie@version}}};%
 \end{scope}%
 \end{tikzpicture}%
-\end{titlepage}%
 \restoregeometry{}\clearpage\endgroup}
 }
 
@@ -204,7 +199,6 @@
 \parindent\z@
 \thispagestyle{empty}\thispdfpagelabel{Cover}%
 \lecture@coverpage@geometry
-\begin{titlepage}%
 % upper fancies
 \vspace*{-.95cm}\begin{tikzpicture}[line join=round]%
     \filldraw[\lecturecp@emblemcolor@symbol]
@@ -243,7 +237,6 @@
     }};
 \end{scope}%
 \end{tikzpicture}%
-\end{titlepage}%
 \restoregeometry{}\clearpage\endgroup}
 }
 
