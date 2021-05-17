@@ -19,7 +19,10 @@
 \newcommand*\Obda{\text{O.B.d.A}\xspace}
 \newcommand*\ceil[1]{\ensuremath{\left\lceil#1\right\rceil}}
 \newcommand*\floor[1]{\ensuremath{\left\lfloor#1\right\rfloor}}
-\newcommand*\abs[1]{\ensuremath{\left|\mskip\thinmuskip#1\mskip\thinmuskip\right|}}
+\newcommand*\abs{\@ifstar\lec@abs@s\lec@abs@l}
+\def\lec@abs@l#1{\ensuremath{\left|
+\mskip\thinmuskip#1\mskip\thinmuskip\right|}}
+\def\lec@abs@s#1{\ensuremath{|\mskip\thinmuskip#1\mskip\thinmuskip|}}
 \newcommand*\limn{\ensuremath{\lim_{n\to\infty}}}
 \newcommand*\sumn[1][0]{\ensuremath{\sum_{n=#1}^\infty}}
 \newcommand*\limk{\ensuremath{\lim_{k\to\infty}}}
