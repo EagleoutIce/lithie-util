@@ -36,7 +36,7 @@
          text={|\footnotesize\lecture@font@eulerNormal\color{#3}#7|#1}}]% Upper text
      (-1.275-#8,0) arc [start angle=180, end angle=00, radius=1.275+#8];% Offset #8
    % Draw the two bullets in the main color of the tikzpicture
-   \draw(-1.5,0) node {{\textbullet}} ++ (3,0) node {{\textbullet}};
+   \path[draw](-1.5,0) node {\textbullet} ++ (3,0) node {\textbullet};
  % Draw the lower text (\@@university@name) in color #3
  \path[draw,decorate,decoration={text along path,text align=center,
          text={|\footnotesize\lecture@font@eulerNormal\color{#3}|\@@university@name}}]
@@ -54,7 +54,7 @@
  % Draw the connection-lines in the main color of the tikzpicture
  \foreach \r in {0,24,...,360}  {
      \foreach \rr in {0,24,...,\r}{
-         \path[draw,very thin] (\r) -- (\rr);
+         \path[draw,very thin] (\r)--(\rr);
      }
  }
  % Draw the symbol #2 shading with an offset of #9 and a size of #6
@@ -69,9 +69,9 @@
 
 \def\lecture@allcoverpages{}
 \long\def\lecturecp@coverpagestyle#1#2{%
-    \expandafter\gdef\csname lecturecp@style@#1@\endcsname{#2}%
-    \ifx\lecture@allcoverpages\@empty \def\lecture@allcoverpages{#1}%
-    \else\g@addto@macro\lecture@allcoverpages{,#1}\fi
+  \expandafter\gdef\csname lecturecp@style@#1@\endcsname{#2}%
+  \ifx\lecture@allcoverpages\@empty \def\lecture@allcoverpages{#1}%
+  \else\g@addto@macro\lecture@allcoverpages{,#1}\fi
 }
 % maybe insert guards if not found?
 \def\lecturecp@activecoverpage{}
@@ -165,17 +165,17 @@
 \begin{tikzpicture}[line join=round,rounded corners=.25pt]%
 \path[draw,semithick,\lecturecp@emblemcolor@symbol]
     (0,\lecturecp@height+.15) -- ++(.6\paperwidth-.175,0)
-    -- ++(.1\paperwidth,1)   -- ++(.1\paperwidth+.175,0)
-    -- ++(.1\paperwidth,-1)  -- ++(.1\paperwidth,0);
+    -- ++(.1\paperwidth,1) -- ++(.1\paperwidth+.175,0)
+    -- ++(.1\paperwidth,-1)-- ++(.1\paperwidth,0);
 \path[draw,thick,\lecturecp@emblemcolor@symbol]
     (0,\lecturecp@height+.075) -- ++(.6\paperwidth-.1,0)
-    -- ++(.1\paperwidth, 1) -- ++(.1\paperwidth+.1,0)
-    -- ++(.1\paperwidth,-1) -- ++(.1\paperwidth,0);
+    -- ++(.1\paperwidth, 1)-- ++(.1\paperwidth+.1,0)
+    -- ++(.1\paperwidth,-1)-- ++(.1\paperwidth,0);
 \filldraw[\lecturecp@emblemcolor@symbol]
     (0,0) -- ++(\paperwidth,0) -- ++(0,\lecturecp@height)
-    -- ++(-.1\paperwidth,0) -- ++(-.1\paperwidth,1)
-    -- ++(-.1\paperwidth,0) -- ++(-.1\paperwidth,-1)
-    -- ++(-.6\paperwidth,0) -- cycle;%
+    -- ++(-.1\paperwidth,0)-- ++(-.1\paperwidth,1)
+    -- ++(-.1\paperwidth,0)-- ++(-.1\paperwidth,-1)
+    -- ++(-.6\paperwidth,0)-- cycle;%
 \begin{scope}[every node/.style={color=\lecturecp@emblemcolor}]%
     \node[scale=.89] at(.75\paperwidth,\lecturecp@height/2+.5) {\lecture@emblem};
     \node[right,text width=.6\paperwidth-\lecturecp@leftwidth] at(\lecturecp@leftwidth,\lecturecp@height/2)

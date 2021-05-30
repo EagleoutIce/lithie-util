@@ -7,7 +7,7 @@
     % clear out styles to avoid conflicting defs
     \tikz[baseline=(cancel-node.base),every node/.style={},every path/.style={}]{%
         \node[inner sep=\z@,outer sep=\z@] (cancel-node) {#1};
-        \path[draw] ($(cancel-node.south west)+(#2,#3)$) -- ($(cancel-node.north east)+(#4,#5)$);
+        \path[draw] ($(cancel-node.south west)+(#2,#3)$)--($(cancel-node.north east)+(#4,#5)$);
     }%
 }%
 \DeclareRobustCommand*\cancel[1]{\lecture@cancel{#1}{-1.33pt}{1.75pt}{1.33pt}{-1.75pt}}

@@ -28,10 +28,10 @@
 \def\@lhns@format@elem#1{\lhnselementbox{\lhns@elemtextwidth}{\lhnselementalign#1}}
 
 \tikzset{%
-    lhns@impstyle/.style={thick},%
-    lhns@basestyle/.style={rectangle,outer sep=\z@,inner sep=\lhns@innersep},
-    lhns@border/.style={rectangle,rounded corners=2pt,dashed,draw},%
-    lhns/.style={{Circle[length=4.5pt]}-Kite}%
+  lhns@impstyle/.style={thick},%
+  lhns@basestyle/.style={rectangle,outer sep=\z@,inner sep=\lhns@innersep},
+  lhns@border/.style={rectangle,rounded corners=2pt,dashed,draw},%
+  lhns/.style={{Circle[length=4.5pt]}-Kite}%
 }
 
 \def\lhns@heap@elm@#1#2#3{%
@@ -62,8 +62,8 @@
 
 % heap/stack | number | position
 \def\lhns@render@elem@from#1#2#3{%
-    \lhns@debug{Render elem [#2] from #1 at #3}%
-    \protected@edef\@lhns@tmp{\noexpand\lhns@render@elem@\@nameuse{lhn@#1@elem@i@#2}{#3}{#1-#2}}\@lhns@tmp
+  \lhns@debug{Render elem [#2] from #1 at #3}%
+  \protected@edef\@lhns@tmp{\noexpand\lhns@render@elem@\@nameuse{lhn@#1@elem@i@#2}{#3}{#1-#2}}\@lhns@tmp
 }
 % #1 text #2 extra format #3 style #4 position #5 name
 \def\lhns@render@elem@#1#2#3#4#5{\@nameuse{lhns@render@elem@#3}{#5}{#1}{#2}{#4}}
