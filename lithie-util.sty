@@ -134,7 +134,7 @@
 \DeclareDefaultOption{%
   \typeout{Option '\CurrentOption' unknown. Using default load behavior.}%
   \ifx\CurrentOptionValue\relax\else\PassOptionsToPackage{\CurrentOptionValue}{\CurrentOptionKey}\fi
-  \g@addto@macro\@litu@hook@PackageRequire{\RequirePackage{\CurrentOptionKey}}%
+ \expandafter\g@addto@macro\expandafter\@litu@hook@PackageRequire\expandafter{\expandafter\RequirePackage\expandafter{\CurrentOptionKey}}%
 }
 \ProcessKeyvalOptions*
 
