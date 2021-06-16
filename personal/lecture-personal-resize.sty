@@ -11,7 +11,15 @@
 \newdimen\lecpd@downsize@b
 
 % [height] | width | content
-\newcommand\downsize[3][!]{%
+\newcommand\downsize{\@ifstar\@downsize\@@downsize}
+\newdimen\originalboxwidth
+\newcommand\@downsize[3][!]{%
+  \originalboxwidth\z@
+  \savebox\lecture@personal@downsize@box{#3}%
+  \originalboxwidth=\wd\lecture@personal@downsize@box\relax
+  \ifdim\originalboxwidth>#2 \resizebox*{#2}{#1}{#3}\else#3\fi
+}
+\newcommand\@@downsize[3][!]{%
   \savebox\lecture@personal@downsize@box{#3}%
   \ifdim\wd\lecture@personal@downsize@box>#2 %
     \resizebox*{#2}{#1}{\usebox\lecture@personal@downsize@box}%
