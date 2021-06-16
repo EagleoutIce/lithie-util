@@ -130,6 +130,12 @@
 \lu@DefineModule{ttl}{typeset-list}{}{}
 % personal
 \lu@DefineModule{lper}{lecture-personal}{}{personal}
+
+\DeclareDefaultOption{%
+  \typeout{Option '\CurrentOption' unknown. Using default load behavior.}%
+  \ifx\CurrentOptionValue\relax\else\PassOptionsToPackage{\CurrentOptionValue}{\CurrentOptionKey}\fi
+  \g@addto@macro\@litu@hook@PackageRequire{\RequirePackage{\CurrentOptionKey}}%
+}
 \ProcessKeyvalOptions*
 
 % Load individuals first to allow options
