@@ -11,7 +11,7 @@
 \ifLBI@backref\PassOptionsToPackage{backref=true}{biblatex}\fi
 \ifLBI@biber\PassOptionsToPackage{backend=biber}{biblatex}
 \else\PassOptionsToPackage{backend=bibtex8}{biblatex}\fi
-\RequirePackage[style=\LBI@style]{biblatex}
+\RequirePackage[style=\LBI@style,sorting=nyvt]{biblatex}
 \defbibheading{bibliography}[\bibname]{\section{#1}}
 \ifLBI@backref
 \DefineBibliographyStrings{english}{backrefpage={on page}, backrefpages={on pages}}
