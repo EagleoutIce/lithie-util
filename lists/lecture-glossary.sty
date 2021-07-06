@@ -30,7 +30,7 @@
 % think it is single (like me; :cry:)
 \lglos@thispage@issingle@true\@lglos@hide@in@da@void{#1}%
 \@lglos@printpages{#1}}
-\def\LithieSetGlossaryStyle#1{\gdef\lglos@headingstyle##1{#1{##1}}}
+\long\def\LithieSetGlossaryStyle#1{\long\gdef\lglos@headingstyle##1{#1{##1}}}
 \def\lglos@default@headingstyle#1{\begin{center}\strut\emph{#1}\end{center}}
 \def\lglos@default@headingstyle@short#1{\medskip}
 \iflglos@setup@short@\LithieSetGlossaryStyle{\lglos@default@headingstyle@short}
