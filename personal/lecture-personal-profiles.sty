@@ -20,7 +20,6 @@
 \expandafter\newcommand\expandafter*\csname GetUncompressed#1\endcsname[2][#4]{\lecture@profile@getprefix\includegraphics[width=##1\linewidth,#5]{#2##2#3}}%
 \expandafter\newcommand\expandafter*\csname GetUncompressed#1Raw\endcsname[2][]{\includegraphics[##1]{#2##2#3}}%
 }
-
 \def\lecture@personal@printsuffix{ (Druckversion)}
 \newif\ifscol
 \AppendToProfile{print}{%
@@ -37,7 +36,6 @@
   \colorlet{libx@limerence@box@backcolor}{gray!5!white}%
   \def\LettrineTextFont{\scshape}%
 }
-
 \def\lecture@personal@defaultsuffix{ (Digitalversion)}
 \AppendToProfile{default}{%
   \edef\@mkcommands{{\LPP@command}{\LPP@imgprefix}}%
@@ -52,7 +50,6 @@
     \hypersetup{pdftitle={\lecture@r{title}\lecture@personal@defaultsuffix}}%
   }%
 }
-
 \def\lecture@personal@mobilsuffix{ (Mobilversion)}
 \RegisterProfile{mobile}{%
   \edef\@mkcommands{{\LPP@command}{\LPP@imgprefix}}%
