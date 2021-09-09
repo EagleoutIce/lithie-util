@@ -19,9 +19,11 @@
 lblock/.style={block,font=\fillfont,#1,writ},%
 lblock/.default={tikzA},
 block/.style={rectangle,draw, align=center, minimum height=1.9em,rounded corners=1.55pt},%
-blob/.style={circle,draw, minimum size=1.9em,align=center},
+blob/.style={circle,draw,minimum size=1.9em,align=center},
 lblob/.style={blob,font=\fillfont,#1,writ},%
-lblob/.default={tikzA}
+lblob/.default={tikzA},
+align-base/.style={baseline={([yshift={-\ht\strutbox}]current bounding box.center)}},
+align-center/.style={baseline=(current bounding box.center)}
 }
 % mindmap and trees for overview
 \usetikzlibrary{graphs,arrows.meta,calc}
