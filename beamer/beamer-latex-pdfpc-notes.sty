@@ -66,9 +66,9 @@ ______</rdf:Description>^^J%
   \PDFPC@orig@note[#1]{#2}%
   \PDFPC@writenote[#1]{#2}%
 }
-
+% TODO: collector shipout?
 \newlength\PDFPC@annotdim
-\ifPDFPC@showannot\PDFPC@annotdim1cm
+\ifPDFPC@showannot\PDFPC@annotdim1cm%
 \else\PDFPC@annotdim\z@\fi
 
 \long\def\PDFPC@writenote[#1]#2{%
@@ -82,7 +82,7 @@ ______</rdf:Description>^^J%
   \StrSubstitute{\PDFPC@tcontentexpanded}{>}{&gt;}[\PDFPC@@tcontentexpanded]%
   \pdfannot\@width\PDFPC@annotdim\@height\PDFPC@annotdim\@depth\PDFPC@annotdim{%
     /Subtype /Text\space
-    /T \@author\space
+    /T (\@author)\space
     /CA \ifPDFPC@showannot1\else0\fi\space
     /Name Comment\space
     /Contents (\PDFPC@@tcontentexpanded)\space
