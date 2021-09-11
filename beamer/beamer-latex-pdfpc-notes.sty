@@ -12,6 +12,7 @@
 \DeclareStringOption{defaulttransition}
 \DeclareBoolOption[false]{disablemarkdown}
 \DeclareBoolOption[false]{disable}
+\DeclareBoolOption[false]{showannot}
 \ProcessKeyvalOptions*
 \ifPDFPC@disable\expandafter\endinput\fi
 % Some guards to begin
@@ -57,14 +58,19 @@ ______</rdf:Description>^^J%
 \LetLtxMacro\PDFPC@orig@note\note
 \def\note{\@ifnextchar[{\PDFPC@note}{\PDFPC@note[]}}
 \def\PDFPC@note[#1]{\@ifnextchar<{\PDFPC@@note@overlay[#1]}{\PDFPC@@note[#1]}}
-\long\def\PDFPC@@note@overlay[#1]<#2>#3{
+\long\def\PDFPC@@note@overlay[#1]<#2>#3{%
   \PDFPC@orig@note[#1]<#2>{#3}%
   \PDFPC@writenote[#1]{#2}%
 }
-\long\def\PDFPC@@note[#1]#2{
+\long\def\PDFPC@@note[#1]#2{%
   \PDFPC@orig@note[#1]{#2}%
   \PDFPC@writenote[#1]{#2}%
 }
+
+\newlength\PDFPC@annotdim
+\ifPDFPC@showannot\PDFPC@annotdim1cm
+\else\PDFPC@annotdim\z@\fi
+
 \long\def\PDFPC@writenote[#1]#2{%
 \begingroup
 \PDFPC@redefinition
@@ -72,19 +78,17 @@ ______</rdf:Description>^^J%
   \ifx\@tmpa\PDFPC@@option@itemize
     \def\item{\\- }%
   \fi
-  \StrSubstitute{#2}{<}{&lt;}[\PDFPC@tcontentexpanded]
-  \StrSubstitute{\PDFPC@tcontentexpanded}{>}{&gt;}[\PDFPC@@tcontentexpanded]
-  \pdfannot \@width \z@ \@height \z@ \@depth \z@ {%
+  \StrSubstitute{#2}{<}{&lt;}[\PDFPC@tcontentexpanded]%
+  \StrSubstitute{\PDFPC@tcontentexpanded}{>}{&gt;}[\PDFPC@@tcontentexpanded]%
+  \pdfannot\@width\PDFPC@annotdim\@height\PDFPC@annotdim\@depth\PDFPC@annotdim{%
     /Subtype /Text\space
     /T \@author\space
-    /CA 0\space
+    /CA \ifPDFPC@showannot1\else0\fi\space
     /Name Comment\space
     /Contents (\PDFPC@@tcontentexpanded)\space
     /F 4\space
-  }%
-  \relax
-\endgroup
-}
+  }\relax
+\endgroup}
 \def\PDFPC@redefinition{%
   \let\,\space \let\;\space
   \def\\{\string\n}\def\par{\string\n\string\n}%

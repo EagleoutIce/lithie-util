@@ -11,6 +11,7 @@
 \newdimen\lecpd@downsize@b
 
 % [height] | width | content
+% starred variant does not print the boxed content, but reprints
 \newcommand\downsize{\@ifstar\@downsize\@@downsize}
 \newdimen\originalboxwidth
 \newcommand\@downsize[3][!]{%
