@@ -83,7 +83,7 @@ ______</rdf:Description>^^J%
   % resolve Minutes
   \def\@tmpb{#3}\ifx\@tmpb\@empty\else
     \IfStrEq{#3}{?}{\preto\PDFPC@@tcontentexpanded{\textbf{? Minutes}\\\\}}{%
-      \ifnum\@tmpb=1 \preto\PDFPC@@tcontentexpanded{\textbf{\@tmpb\space Minute}\\\\}
+      \ifdim\@tmpb\p@=\p@ \preto\PDFPC@@tcontentexpanded{\textbf{\@tmpb\space Minute}\\\\}
       \else \preto\PDFPC@@tcontentexpanded{\textbf{\@tmpb\space Minutes}\\\\}\fi
     }
   \fi
