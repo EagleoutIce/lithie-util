@@ -57,21 +57,21 @@ ______</rdf:Description>^^J%
 }
 \LetLtxMacro\PDFPC@orig@note\note
 \def\note{\@ifnextchar[{\PDFPC@note}{\PDFPC@note[]}}
-\def\PDFPC@note[#1]{\@ifnextchar<{\PDFPC@@note@overlay[#1]}{\PDFPC@@note[#1]}}
-\long\def\PDFPC@@note@overlay[#1]<#2>#3{%
-  \PDFPC@orig@note[#1]<#2>{#3}%
-  \PDFPC@writenote[#1]{#2}%
+\def\PDFPC@note[#1]{\@ifnextchar<{\PDFPC@@note@overlay{#1}}{\PDFPC@@note@overlay{#1}<1->}}
+\long\def\PDFPC@@note@overlay#1<#2>#3{\@ifnextchar(%
+  {\PDFPC@@note@overlay@{#1}{#2}{#3}}%
+  {\PDFPC@@note@overlay@{#1}{#2}{#3}()}
 }
-\long\def\PDFPC@@note[#1]#2{%
-  \PDFPC@orig@note[#1]{#2}%
-  \PDFPC@writenote[#1]{#2}%
+\def\PDFPC@@note@overlay@#1#2#3(#4){
+  \PDFPC@orig@note[#1]<#2>{#3}% TODO: support minutes
+  \only<#2>{\PDFPC@writenote[#1]{#3}{#4}}%
 }
 % TODO: collector shipout?
 \newlength\PDFPC@annotdim
 \ifPDFPC@showannot\PDFPC@annotdim1cm%
 \else\PDFPC@annotdim\z@\fi
 
-\long\def\PDFPC@writenote[#1]#2{%
+\long\def\PDFPC@writenote[#1]#2#3{%
 \begingroup
 \PDFPC@redefinition
   \def\@tmpa{#1}%
@@ -80,6 +80,13 @@ ______</rdf:Description>^^J%
   \fi
   \StrSubstitute{#2}{<}{&lt;}[\PDFPC@tcontentexpanded]%
   \StrSubstitute{\PDFPC@tcontentexpanded}{>}{&gt;}[\PDFPC@@tcontentexpanded]%
+  % resolve Minutes
+  \def\@tmpb{#3}\ifx\@tmpb\@empty\else
+    \IfStrEq{#3}{?}{\preto\PDFPC@@tcontentexpanded{\textbf{? Minutes}\\\\}}{%
+      \ifnum\@tmpb=1 \preto\PDFPC@@tcontentexpanded{\textbf{\@tmpb\space Minute}\\\\}
+      \else \preto\PDFPC@@tcontentexpanded{\textbf{\@tmpb\space Minutes}\\\\}\fi
+    }
+  \fi
   \pdfannot\@width\PDFPC@annotdim\@height\PDFPC@annotdim\@depth\PDFPC@annotdim{%
     /Subtype /Text\space
     /T (\@author)\space
