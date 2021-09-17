@@ -6,13 +6,14 @@
 \RequirePackage{kvoptions,csquotes}
 \SetupKeyvalOptions{family=LBI,prefix=LBI@}
 \DeclareStringOption[alphabetic]{style}[alphabetic]
+\DeclareStringOption[nyvt]{sorting}[nyvt]
 \DeclareBoolOption{biber}\DeclareBoolOption{backref}
 \DeclareDefaultOption{\PassOptionsToPackage{\CurrentOption}{biblatex}}
 \ProcessKeyvalOptions*
 \ifLBI@backref\PassOptionsToPackage{backref=true}{biblatex}\fi
 \ifLBI@biber\PassOptionsToPackage{backend=biber}{biblatex}
 \else\PassOptionsToPackage{backend=bibtex8}{biblatex}\fi
-\RequirePackage[style=\LBI@style,sorting=nyvt]{biblatex}
+\RequirePackage[style=\LBI@style,sorting=\LBI@sorting]{biblatex}
 \defbibheading{bibliography}[\bibname]{\section{#1}}
 \ifLBI@backref
 \DefineBibliographyStrings{english}{backrefpage={on page}, backrefpages={on pages}}
