@@ -77,7 +77,7 @@
 \iflglos@setup@short@\setglossarystyle{lecture@glossary@short}%
 \else\setglossarystyle{lecture@glossary}\fi
 
-\makeglossaries
+\AtEndPreamble{\makeglossaries}% so we can have new types etc.
 \preto\printglossaries{\begingroup\interlinepenalty\@M}
 \appto\printglossaries{\endgroup}
 
