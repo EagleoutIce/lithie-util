@@ -6,6 +6,7 @@
 \SetupKeyvalOptions{family=LECIDX,prefix=LECIDX@}
 \DeclareStringOption[true]{automatic}[false]
 \DeclareBoolOption{dosplit}
+\DeclareBoolOption[true]{sanitize}[true]
 \ProcessKeyvalOptions*
 \ifLECIDX@dosplit\PassOptionsToPackage{splitindex}{imakeidx}\fi
 \RequirePackage[quiet]{imakeidx}
@@ -23,15 +24,18 @@
 
 % NOTE: this method expects utf8 encoding
 \def\lecidx@expected@ienc@{utf8}
+\LECIDX@sanitize
 \AtBeginDocument{%
 \ifx\inputencodingname\lecidx@expected@ienc@
     \let\lecidx@sanitize@definitions@extra\lecidx@sanitize@definitions@extra@unicode
 \else\let\lecidx@sanitize@@\lecidx@sanitize@@compat\fi}
-
+\def\lecidx@sanitize{\begingroup\lecidx@sanitize@definitions\lecidx@sanitize@@}
+\else
+\let\lecidx@sanitize\@firstofone
+\fi
 \def\lecidx@repl@uc#1#2{%
   \expandafter\def\csname u8:\detokenize{#1}\endcsname{#2}%
 }
-\def\lecidx@sanitize{\begingroup\lecidx@sanitize@definitions\lecidx@sanitize@@}
 
 \def\lecidx@sanitize@@compat#1{%
 \StrSubstitute{#1}{\lecidx@idxsub}{:sub:}[\lecidx@tmpl]%
