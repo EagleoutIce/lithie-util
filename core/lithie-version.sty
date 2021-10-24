@@ -2,14 +2,15 @@
 % Author: Florian Sihler, 21.10.2020
 % Just holds the version number
 \ProvidesPackage{lithie-version}[2020/10/21 v1.0 version of lithie]
-\def\lithie@version{1.0.12}
-\def\Lithie{{\sffamily L\thinspace i\thinspace t\thinspace h\thinspace i\thinspace e}}
-\def\lithieVersion{v\thinspace\lithie@version}
+\def\lithie@version{1.0.13}
+\def\lithie@sp@dim{\kern.16667em}
+\def\Lithie{{\sffamily L\lithie@sp@dim i\lithie@sp@dim t\lithie@sp@dim h\lithie@sp@dim i\lithie@sp@dim e}}
+\def\lithieVersion{v\lithie@sp@dim\lithie@version}
 \AtEndPreamble{%
 \ifcsname hyperref\endcsname\ifcsname nohyper\endcsname
-\def\LithieFull{\nohyper{\href{https://github.com/EagleoutIce/lithie-util}{\Lithie\thinspace\textsuperscript{\color{lightgray}\lithieVersion}}}}%
+\def\LithieFull{\nohyper{\href{https://github.com/EagleoutIce/lithie-util}{\Lithie\lithie@sp@dim\textsuperscript{\color{lightgray}\lithieVersion}}}}%
 \else
-\def\LithieFull{\href{https://github.com/EagleoutIce/lithie-util}{\Lithie\thinspace\textsuperscript{\color{lightgray}\lithieVersion}}}%
+\def\LithieFull{\href{https://github.com/EagleoutIce/lithie-util}{\Lithie\lithie@sp@dim\textsuperscript{\color{lightgray}\lithieVersion}}}%
 \fi\else
-\def\LithieFull{\Lithie\thinspace\textsuperscript{\color{lightgray}\lithieVersion}}\fi}
+\def\LithieFull{\Lithie\lithie@sp@dim\textsuperscript{\color{lightgray}\lithieVersion}}\fi}
 \endinput

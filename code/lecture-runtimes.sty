@@ -52,7 +52,7 @@ add to literate = {0x}{{\solGet{comments}{0x}}}2 {0b}{{\solGet{comments}{0b}}}2%
 % Definiere die Befehle mit einer entsprechenden Fehlermeldung
 % overwrite 'lecture@runtimes@getBashFileExecutionOutput':
 \def\lecture@runtimes@getBashFileExecutionOutput#1{\lecture@runtimes@error}%
-% overwrite other so that usercomamnd works too
+% overwrite other so that user command works too
 \def\lecture@runtimes@Execute#1{\lecture@runtimes@error}%
 \fi
 \let\rExecute\lecture@runtimes@Execute
