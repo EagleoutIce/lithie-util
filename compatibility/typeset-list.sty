@@ -14,13 +14,14 @@
 \newcommand*\typesetList[2][typesetVoid]{%
 \protected@edef\@@tmp{\noexpand\@@typesetList[\unexpanded{#1}]{#2}}\@@tmp
 }
+\def\typsetlistand{~und}%
 % this will typeset a List in German List-Notation
 \newcommand*\@@typesetList[2][typesetVoid]{%
 \def\@tmpl{#2}%
 \getListLength{#2}%
 \foreach \x[count=\i] in \@tmpl {%
     \ifnum\i>1 \ifnum\i=\@c@tmp
-    ~und \else,\space\fi\fi
+    \typsetlistand\ \else,\space\fi\fi
     \csname#1\endcsname{\x}%
 }\ignorespaces
 }
