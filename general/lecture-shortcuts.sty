@@ -8,8 +8,7 @@
 \RequirePackage[en-US]{datetime2}
 \RequirePackage{xspace,mathtools,amssymb}
 
-\AtEndPreamble{%
-\ifcsname enquote\endcsname
+\AtEndPreamble{\ifcsname enquote\endcsname
 \let\say\enquote\else% use legacy
 \providecommand\say[1]{\glqq#1\grqq{}}
 \fi\robustify\say}
