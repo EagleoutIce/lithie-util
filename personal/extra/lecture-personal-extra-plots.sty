@@ -11,7 +11,9 @@
 \newif\iflibpp@autotikz@
 \def\libpp@barsymtype{x}\def\libpp@barftype{y}
 \def\libpp@percent#1{#1\%}
-\def\@autox@scl@format#1#2{\pgfmathparse{int(-#1)}~$\bigl[#2 \cdot 10^{\pgfmathresult}\bigr]$}
+\def\SetPlotScaleFormat#1{\def\@autox@scl@format@##1##2{#1}}
+\SetPlotScaleFormat{~$[#2 \cdot 10^{#1}]$}
+\def\@autox@scl@format#1#2{\pgfmathparse{int(-#1)}\@autox@scl@format@{\pgfmathresult}{#2}}
 \pgfplotsset{compat=1.16,%
 every axis/.append style={legend cell align={left}},%
 dim/.style args={#1:#2}{width=#1,height=#2},%
