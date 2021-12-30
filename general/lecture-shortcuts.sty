@@ -79,12 +79,11 @@
 }{}}
 
 \let\uc\textsc \robustify\uc
-\newenvironment{erkenntnis}{\medskip\par\begingroup\itshape\parskip\z@\parindent\z@\leftskip=\z@ \@plus .5fil\relax \rightskip=\z@ \@plus -.5fil\relax
-\parfillskip=\z@ \@plus 1fil\relax}{\par\endgroup\medskip\par}
+\def\lecture@centerlast{\leftskip=\z@ \@plus .5fil\relax \rightskip=\z@ \@plus -.5fil\relax
+\parfillskip=\z@ \@plus 1fil\relax}
+\newenvironment{erkenntnis}{\medskip\par\begingroup\itshape\parskip\z@\parindent\z@\lecture@centerlast}{\par\endgroup\medskip\par}
 \def\capaddon#1{\medskip\par\parbox\linewidth{% only center last line
-\leftskip=0cm plus .5fil\relax \rightskip=0cm plus -.5fil\relax
-\parfillskip=0cm plus 1fil\relax
-\itshape\footnotesize#1}\par}
+\lecture@centerlast\itshape\footnotesize#1}\par}
 \let\rom\@roman \let\Rom\@Roman
 \def\InputFrom#1{\def\input@path{#1}}
 \endinput
