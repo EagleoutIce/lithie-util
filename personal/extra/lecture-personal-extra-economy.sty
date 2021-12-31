@@ -29,10 +29,10 @@
 
 \AtEndPreamble{% kill sep
 \sisetup{output-decimal-marker={,},round-mode=places, round-precision=2, round-pad=false}}
-\def\SaveEval#1{{\def\num##1{##1}\def\frac##1##2{(##1)/(##2)}\def\cdot{*}\xdef\tmp{\fpeval{#1}}}\num{\tmp}}
-\def\SaveEvalPercent#1{{\def\num##1{##1}\def\frac##1##2{(##1)/(##2)}\def\cdot{*}\xdef\tmp{\fpeval{#1}}}\SI{\tmp}{\percent}}
-\newcommand\mathshow[2][]{\ensuremath{#2{}={}\SaveEval{#2}}\ifx!#1!\else\xdef#1{\tmp}\fi}
-\newcommand\mathshowpercent[2][]{\ensuremath{#2{}={}\SaveEvalPercent{#2}}\ifx!#1!\else\xdef#1{\tmp}\fi}
+\def\SaveEval#1{{\def\num##1{##1}\def\frac##1##2{(##1)/(##2)}\def\cdot{*}\xdef\tmp{\fpeval{#1}}}}
+\newcommand\mathshow[2][]{\ensuremath{#2{}={}\SaveEval{#2}\num{\tmp}}\ifx!#1!\else\xdef#1{\tmp}\fi}
+% value | unit
+\newcommand\mathshowunit[3][]{\ensuremath{#2{}={}\SaveEval{#2}\SI{\tmp}{#3}}\ifx!#1!\else\xdef#1{\tmp}\fi}
 \def\numtag#1{\num{\STtag{#1}}}
 
 \DeclareSIUnit\euro{\text{\texteuro}}
