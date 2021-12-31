@@ -29,7 +29,13 @@
 
 \AtEndPreamble{% kill sep
 \sisetup{output-decimal-marker={,},round-mode=places, round-precision=2, round-pad=false}}
-\def\SaveEval#1{{\def\num##1{##1}\def\frac##1##2{(##1)/(##2)}\def\cdot{*}\xdef\tmp{\fpeval{#1}}}}
+\def\SaveEval#1{\bgroup
+\def\num##1{##1}%
+\def\frac##1##2{(##1)/(##2)}%
+\def\SI##1##2{##1}%
+\def\cdot{*}%
+\xdef\tmp{\fpeval{#1}}
+\egroup}
 \newcommand\mathshow[2][]{\ensuremath{#2{}={}\SaveEval{#2}\num{\tmp}}\ifx!#1!\else\xdef#1{\tmp}\fi}
 % value | unit
 \newcommand\mathshowunit[3][]{\ensuremath{#2{}={}\SaveEval{#2}\SI{\tmp}{#3}}\ifx!#1!\else\xdef#1{\tmp}\fi}
