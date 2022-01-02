@@ -141,12 +141,10 @@ post code/.store in=\libpp@box@PostCode, post code={},%
 
 \iflibpp@tpalette@\let\libpp@bar@noopt\libpp@bar@@noopt
 \else\def\libpp@bar@@noopt#1{\libpp@bar@opt#1[]}\fi
-
 \def\SetDefaultPlots#1{\pgfplotsset{libpp@default@plots/.style={#1}}}
 \def\AppendDefaultPlots#1{\pgfplotsset{libpp@default@plots/.append style={#1}}}
 \def\SetDefaultBars#1{\pgfplotsset{libpp@default@bars/.style={#1}}}
 \def\AppendDefaultBars#1{\pgfplotsset{libpp@default@bars/.append style={#1}}}
-
 \SetDefaultBars{plain,fancy}
 \SetDefaultPlots{plain,fancy}
 \endinput
