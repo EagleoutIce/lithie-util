@@ -1,0 +1,12 @@
+\ProvidesPackage{lecture-personal-extra-economy-model}[2022/03/02 v1.0 Personal economy models]
+% Liste aller Modelle
+\libx@RegisterNewDefaultStyle{Model}{}
+\libx@RegisterBoxPair% List definition and emblem:
+{models}{lmods}{Alle Modelle}{\faBook}%
+% color, style, id:
+{paletteA}{Model}{mdl}%
+% environment name and Prefix:
+{model}{Modell}
+\libx@RefreshBoxStyle
+\newcommand*\mdlref[1]{\label{#1}\lectureref{m#1}{\faBook}\space\thinspace\ignorespaces}
+\endinput
