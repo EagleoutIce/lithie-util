@@ -22,5 +22,5 @@
 \ifcsname nohyper\endcsname
 \setIndexLinker{\nohyper{\hyperref[#1]{#2}}}%
 \fi\fi}
-\LoadBoxStyle{limerence}
+\@ifundefined{LoadBoxStyle}{}{\LoadBoxStyle{limerence}}
 \endinput
