@@ -8,6 +8,7 @@
     The 'sopra-listings'-package wasn't loaded. Please load it before this package as it is necessary for this package.}%
   \expandafter\endinput
 }
+\colorlet{lecture@BashOutput@background}{black!0}
 \lstdefinestyle{lecture@BashOutput}{%
 basicstyle      = \sol@style@get{basic},%
 frame           = single,%
@@ -19,7 +20,7 @@ numbers         = none,%
 keepspaces      = false,%
 xleftmargin     = 3pt,%
 xrightmargin    = 3pt,% detached as no numbers
-backgroundcolor = \color{black!0},
+backgroundcolor = \color{lecture@BashOutput@background},
 rulecolor       = \@declaredcolor{sol@colors@border},%
 add to literate = {0x}{{\solGet{comments}{0x}}}2 {0b}{{\solGet{comments}{0b}}}2%
 }
