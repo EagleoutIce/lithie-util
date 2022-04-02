@@ -7,12 +7,13 @@
 \newcommand\lstshowcmd[2][]{\protected@edef\@tmp@@b{\noexpand\lstinline[#1]!#2!}\@tmp@@b}
 \def\previewColor#1{\emph{#1} \tikz[baseline=-.6ex]{\draw[fill=#1] circle (4.5pt);}}
 \let\T\texttt
-\def\info#1{\begingroup\scriptsize\textcolor{gray}{(#1)}\endgroup}
+\long\def\info#1{\textcolor{gray}{\scriptsize(#1)}}
+\long\def\infoblock#1{\par{\scriptsize\textcolor{gray}{(#1)}\par}}
+
 \let\say\enquote
-\long\def\parallelcontent#1#2{%
-\begin{columns}%
-  \column{.48\textwidth} #1%
-  \column{.48\textwidth} #2%
-\end{columns}%
-}
+\newcommand\parallelcontent[3][t]{%
+\begin{columns}[#1,onlytextwidth]
+\column{.5\linewidth}#2\relax
+\column{.5\linewidth}#3\relax
+\end{columns}}
 \endinput
