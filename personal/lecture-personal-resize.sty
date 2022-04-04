@@ -16,34 +16,34 @@
 \newdimen\originalboxwidth
 \newcommand\@downsize[3][!]{%
   \originalboxwidth\z@
-  \setbox\lecture@personal@downsize@box=\hbox{#3}%
-  \originalboxwidth=\wd\lecture@personal@downsize@box\relax% available in sub
+  \setbox\z@=\hbox{#3}%
+  \originalboxwidth=\wd\z@\relax% available in sub
   \ifdim\originalboxwidth>#2 \resizebox*{#2}{#1}{#3}\else#3\fi
 }
 \newcommand\@@downsize[3][!]{%
-  \setbox\lecture@personal@downsize@box=\hbox{#3}%
-  \ifdim\wd\lecture@personal@downsize@box>#2 %
-    \resizebox*{#2}{#1}{\leavevmode\box\lecture@personal@downsize@box}%
-  \else\leavevmode\box\lecture@personal@downsize@box\fi
+  \setbox\z@=\hbox{#3}%
+  \ifdim\wd\z@>#2 %
+    \resizebox*{#2}{#1}{\leavevmode\box\z@}%
+  \else\leavevmode\box\z@\fi
 }
 
 % [width] | height | content
 \newcommand\downsizeHeight[3][!]{%
-  \setbox\lecture@personal@downsize@box=\hbox{#3}%
-  \lecture@personal@downsize@box@height=\ht\lecture@personal@downsize@box
-  \advance\lecture@personal@downsize@box@height by \dp\lecture@personal@downsize@box\relax
+  \setbox\z@=\hbox{#3}%
+  \lecture@personal@downsize@box@height=\ht\z@
+  \advance\lecture@personal@downsize@box@height by \dp\z@\relax
   \ifdim\lecture@personal@downsize@box@height>#2 %
-    \resizebox*{#1}{#2}{\leavevmode\box\lecture@personal@downsize@box}%
-  \else\leavevmode\box\lecture@personal@downsize@box\fi
+    \resizebox*{#1}{#2}{\leavevmode\box\z@}%
+  \else\leavevmode\box\z@\fi
 }
 
 % height | width | content
 % TODO: this might be reduced to use one/two dimens less
 \newcommand\downsizeBoth[3]{%
-\setbox\lecture@personal@downsize@box=\hbox{#3}%
-\lecture@personal@downsize@box@height=\ht\lecture@personal@downsize@box\relax
-\advance\lecture@personal@downsize@box@height by \dp\lecture@personal@downsize@box\relax
-\lecture@personal@downsize@box@width=\wd\lecture@personal@downsize@box\relax
+\setbox\z@=\hbox{#3}%
+\lecture@personal@downsize@box@height=\ht\z@\relax
+\advance\lecture@personal@downsize@box@height by \dp\z@\relax
+\lecture@personal@downsize@box@width=\wd\z@\relax
 \ifdim\lecture@personal@downsize@box@width>#2 %
   \ifdim\lecture@personal@downsize@box@height>#1 %
     % both -> we want to keep aspect ratio!
@@ -58,21 +58,21 @@
       % then scale to w: w_box * h_target/h_box, h: htarget
       \pgfmathqparse{\lecture@personal@downsize@box@width * (#1/\lecture@personal@downsize@box@height)}
       \lecpd@downsize@a=\pgfmathresult pt\relax
-      \resizebox*{\lecpd@downsize@a}{#1}{\leavevmode\box\lecture@personal@downsize@box}%
+      \resizebox*{\lecpd@downsize@a}{#1}{\leavevmode\box\z@}%
     \else % r_target <= r_box
       % then scale to w: w_target, h: h_box * w_target/w_box
       \pgfmathqparse{\lecture@personal@downsize@box@height * (#2/\lecture@personal@downsize@box@width)}
       \lecpd@downsize@a=\pgfmathresult pt\relax
-      \resizebox*{#2}{\lecpd@downsize@a}{\leavevmode\box\lecture@personal@downsize@box}%
+      \resizebox*{#2}{\lecpd@downsize@a}{\leavevmode\box\z@}%
     \fi
   \else
     % only width
-    \resizebox{#2}!{\leavevmode\box\lecture@personal@downsize@box}%
+    \resizebox{#2}!{\leavevmode\box\z@}%
   \fi
 \else\ifdim\lecture@personal@downsize@box@height>#1 %
   % only height
-  \resizebox*!{#1}{\leavevmode\box\lecture@personal@downsize@box}%
+  \resizebox*!{#1}{\leavevmode\box\z@}%
 \else% none
-  \leavevmode\box\lecture@personal@downsize@box\fi
+  \leavevmode\box\z@\fi
 \fi}
 \endinput
