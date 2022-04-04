@@ -4,7 +4,6 @@
 \ProvidesPackage{lecture-personal-resize}[2020/11/12 v1.0 Downsize hack]
 \RequirePackage{pgfmath}
 
-\newsavebox\lecture@personal@downsize@box
 \newdimen\lecture@personal@downsize@box@height
 \newdimen\lecture@personal@downsize@box@width
 \newdimen\lecpd@downsize@a
@@ -48,10 +47,10 @@
   \ifdim\lecture@personal@downsize@box@height>#1 %
     % both -> we want to keep aspect ratio!
     % box data: r_box = w_box/h_box
-    \pgfmathqparse{\lecture@personal@downsize@box@width/\lecture@personal@downsize@box@height}
+    \pgfmathqparse{\lecture@personal@downsize@box@width/\lecture@personal@downsize@box@height}%
     \lecpd@downsize@a=\pgfmathresult pt\relax
     % target data: r_target = w_target/h_target
-    \pgfmathqparse{#2/#1}
+    \pgfmathqparse{#2/#1}%
     \lecpd@downsize@b=\pgfmathresult pt\relax
     % r_target > r_box  ?
     \ifdim\lecpd@downsize@b>\lecpd@downsize@a
@@ -61,7 +60,7 @@
       \resizebox*{\lecpd@downsize@a}{#1}{\leavevmode\box\z@}%
     \else % r_target <= r_box
       % then scale to w: w_target, h: h_box * w_target/w_box
-      \pgfmathqparse{\lecture@personal@downsize@box@height * (#2/\lecture@personal@downsize@box@width)}
+      \pgfmathqparse{\lecture@personal@downsize@box@height * (#2/\lecture@personal@downsize@box@width)}%
       \lecpd@downsize@a=\pgfmathresult pt\relax
       \resizebox*{#2}{\lecpd@downsize@a}{\leavevmode\box\z@}%
     \fi
