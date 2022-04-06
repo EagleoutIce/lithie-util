@@ -20,10 +20,12 @@
     xleftmargin=12pt,xrightmargin=3pt,numbers=left,
     numbersep=12pt,frame=none
 }
+\def\eblprefix#1{\def\ebl@prefix{#1}}
+\eblprefix{helper-}
 % #1 Name
-\def\ltxpreview#1{\tcbset{listing file=helper-\jobname-#1-slidelst.tex,freeze pdf}}
+\def\ltxpreview#1{\tcbset{listing file=\ebl@prefix\jobname-#1-slidelst.tex,freeze pdf}}
 \def\eblLoadLtx#1#2#3{\begingroup
-\tcbset{listing file=helper-\jobname-#1-slidelst.tex, freeze pdf}% <-- Use a unique name
+\tcbset{listing file=\ebl@prefix\jobname-#1-slidelst.tex, freeze pdf}% <-- Use a unique name
 \tcbinputlisting{
     lstpresenterstyle,listing outside comment,pdf comment,run pdflatex,
     lower separated=false,
