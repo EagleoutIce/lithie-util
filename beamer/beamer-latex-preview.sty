@@ -22,10 +22,11 @@
 }
 \def\eblprefix#1{\def\ebl@prefix{#1}}
 \eblprefix{helper-}
+\tcbset{ebl@listing@other@out/.style={}}
 % #1 Name
-\def\ltxpreview#1{\tcbset{listing file=\ebl@prefix\jobname-#1-slidelst.tex,freeze pdf}}
+\def\ltxpreview#1{\tcbset{listing file=\ebl@prefix\jobname-#1-slidelst.tex,freeze pdf,ebl@listing@other@out}}
 \def\eblLoadLtx#1#2#3{\begingroup
-\tcbset{listing file=\ebl@prefix\jobname-#1-slidelst.tex, freeze pdf}% <-- Use a unique name
+\tcbset{listing file=\ebl@prefix\jobname-#1-slidelst.tex, freeze pdf,ebl@listing@other@out}% <-- Use a unique name
 \tcbinputlisting{
     lstpresenterstyle,listing outside comment,pdf comment,run pdflatex,
     lower separated=false,
