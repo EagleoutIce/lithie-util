@@ -3,9 +3,11 @@
 \ProvidesPackage{lecture-personal-extra-code}[2020/12/08 v1.0 Personal code]
 \PassOptionsToPackage{chapterlistsgap=\medskipamount}{newfloat}
 \RequirePackage{newfloat}
-\DeclareFloatingEnvironment[fileext=loc,listname={Alle Listings},name=Listing,placement=tbp,within=none]{code}
+\def\codeenvname{Listing}
+\def\codeenvlistname{Alle Listings}
+\DeclareFloatingEnvironment[fileext=loc,listname={\codeenvlistname},name=\codeenvname,placement=tbp,within=none]{code}
 % patch to bridge for lithie boxes
-\def\listofcodes{\begingroup\def\contentsname{Alle Listings}% may?
+\def\listofcodes{\begingroup\def\contentsname{\codeenvlistname}% may?
 \libx@listof@heading{\contentsname}%
 \let\numberline\libx@list@numberformat% right align by boxes
 \libx@starttoc{loc}\endgroup}
