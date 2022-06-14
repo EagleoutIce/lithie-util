@@ -20,12 +20,12 @@
 \def\lhns@stackroot{0,0}
 \def\lhns@heaproot{\lhns@elemwidth+4*\lhns@borderbuff,0}
 
-\def\lhnselementformat#1{#1}
-\def\lhnsielementformat#1{#1}
+\long\def\lhnselementformat#1{#1}
+\long\def\lhnsielementformat#1{#1}
 \def\lhnselementalign{\centering}
 \long\def\lhnselementbox#1#2{\pbox{#1}{#2}}
 % width calculated in render routine
-\def\@lhns@format@elem#1{\lhnselementbox{\lhns@elemtextwidth}{\lhnselementalign#1}}
+\long\def\@lhns@format@elem#1{\lhnselementbox{\lhns@elemtextwidth}{\lhnselementalign#1}}
 
 \tikzset{%
   lhns@impstyle/.style={thick},%
@@ -34,47 +34,47 @@
   lhns/.style={{Circle[length=4.5pt]}-Kite}%
 }
 
-\def\lhns@heap@elm@#1#2#3{%
+\long\def\lhns@heap@elm@#1#2#3{%
     \lhns@debug{Reg heap element [\thelhns@heap] text: '#1', extras: '#2', style: '#3'}
     \@namedef{lhn@heap@elem@i@\thelhns@heap}{{#1}{#2}{#3}}%
 \stepcounter{lhns@heap}}
 
-\def\lhns@heap@elm{\@ifnextchar[\lhns@heap@elm@opt\lhns@heap@elm@noopt}
-\def\lhns@heap@elm@opt[#1]#2{\lhns@heap@elm@{#2}{#1}{normal}}
-\def\lhns@heap@elm@noopt#1{\lhns@heap@elm@{#1}{}{normal}}
+\long\def\lhns@heap@elm{\@ifnextchar[\lhns@heap@elm@opt\lhns@heap@elm@noopt}
+\long\def\lhns@heap@elm@opt[#1]#2{\lhns@heap@elm@{#2}{#1}{normal}}
+\long\def\lhns@heap@elm@noopt#1{\lhns@heap@elm@{#1}{}{normal}}
 
-\def\lhns@heap@elm@imp{\@ifnextchar[\lhns@heap@elm@imp@opt\lhns@heap@elm@imp@noopt}
-\def\lhns@heap@elm@imp@opt[#1]#2{\lhns@heap@elm@{#2}{#1}{important}}
-\def\lhns@heap@elm@imp@noopt#1{\lhns@heap@elm@{#1}{}{important}}
+\long\def\lhns@heap@elm@imp{\@ifnextchar[\lhns@heap@elm@imp@opt\lhns@heap@elm@imp@noopt}
+\long\def\lhns@heap@elm@imp@opt[#1]#2{\lhns@heap@elm@{#2}{#1}{important}}
+\long\def\lhns@heap@elm@imp@noopt#1{\lhns@heap@elm@{#1}{}{important}}
 
-\def\lhns@stack@element@#1#2#3{%
+\long\def\lhns@stack@element@#1#2#3{%
     \lhns@debug{Reg stack elem [\thelhns@stack] text: '#1', extras: '#2', style: '#3'}
     \@namedef{lhn@stack@elem@i@\thelhns@stack}{{#1}{#2}{#3}} %
 \stepcounter{lhns@stack}}
 
-\def\lhns@stack@element{\@ifnextchar[\lhns@stack@element@opt\lhns@stack@element@noopt}
-\def\lhns@stack@element@opt[#1]#2{\lhns@stack@element@{#2}{#1}{normal}}
-\def\lhns@stack@element@noopt#1{\lhns@stack@element@{#1}{}{normal}}
+\long\def\lhns@stack@element{\@ifnextchar[\lhns@stack@element@opt\lhns@stack@element@noopt}
+\long\def\lhns@stack@element@opt[#1]#2{\lhns@stack@element@{#2}{#1}{normal}}
+\long\def\lhns@stack@element@noopt#1{\lhns@stack@element@{#1}{}{normal}}
 
-\def\lhns@stack@element@imp{\@ifnextchar[\lhns@stack@element@imp@opt\lhns@stack@element@imp@noopt}
-\def\lhns@stack@element@imp@opt[#1]#2{\lhns@stack@element@{#2}{#1}{important}}
-\def\lhns@stack@element@imp@noopt#1{\lhns@stack@element@{#1}{}{important}}
+\long\def\lhns@stack@element@imp{\@ifnextchar[\lhns@stack@element@imp@opt\lhns@stack@element@imp@noopt}
+\long\def\lhns@stack@element@imp@opt[#1]#2{\lhns@stack@element@{#2}{#1}{important}}
+\long\def\lhns@stack@element@imp@noopt#1{\lhns@stack@element@{#1}{}{important}}
 
 % heap/stack | number | position
-\def\lhns@render@elem@from#1#2#3{%
+\long\def\lhns@render@elem@from#1#2#3{%
   \lhns@debug{Render elem [#2] from #1 at #3}%
   \protected@edef\@lhns@tmp{\noexpand\lhns@render@elem@\@nameuse{lhn@#1@elem@i@#2}{#3}{#1-#2}}\@lhns@tmp
 }
 % #1 text #2 extra format #3 style #4 position #5 name
-\def\lhns@render@elem@#1#2#3#4#5{\@nameuse{lhns@render@elem@#3}{#5}{#1}{#2}{#4}}
+\long\def\lhns@render@elem@#1#2#3#4#5{\@nameuse{lhns@render@elem@#3}{#5}{#1}{#2}{#4}}
 % name | text | extras | position
-\def\lhns@render@elem@normal#1#2#3#4{%
+\long\def\lhns@render@elem@normal#1#2#3#4{%
 \lhns@debug{ -[#1,n]> '#2'}%
 \node[lhns@basestyle,below=\lhns@innersep,#3] (#1) at(#4) {\@lhns@format@elem{\lhnselementformat{#2}}}; % content
 \node[lhns@basestyle,draw,minimum width=\lhns@elemwidth,fit={(#1.north) (#1.south)}] (#1-box) {};% box
 }
 % name | text | extras | position
-\def\lhns@render@elem@important#1#2#3#4{%
+\long\def\lhns@render@elem@important#1#2#3#4{%
 \lhns@debug{ -[#1,i]> '#2'}%
 \node[lhns@basestyle,below=\lhns@innersep,#3] (#1) at(#4) {\@lhns@format@elem{\lhnsielementformat{#2}}}; % content
 \node[lhns@basestyle,draw,minimum width=\lhns@elemwidth,fit={(#1.north) (#1.south)},lhns@impstyle] (#1-box) {};% box
