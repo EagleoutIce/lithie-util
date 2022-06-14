@@ -80,6 +80,7 @@
 \node[lhns@basestyle,draw,minimum width=\lhns@elemwidth,fit={(#1.north) (#1.south)},lhns@impstyle] (#1-box) {};% box
 }
 % note: to allow correct line starts we set the inner nodes extra using their auto width
+\def\lhns@render@heap@jitter{}
 \def\lhns@render@heap{%
 \lhns@renderheaptrue
 % render root element:
@@ -90,7 +91,7 @@
 \edef\lhns@heapemax{\the\numexpr\value{lhns@heap}-1}%
 \ifnum\lhns@heapemax>0 % at least one element left => draw
     \foreach[remember=\i as \li (initially 0)] \i in {1,...,\lhns@heapemax} {
-        \lhns@render@elem@from{heap}{\i}{heap-\li-box.south};
+        \lhns@render@elem@from{heap}{\i}{[yshift=\lhns@render@heap@jitter]heap-\li-box.south};
     }
 \fi
 % render boundaries
