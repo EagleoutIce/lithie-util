@@ -80,7 +80,7 @@
 \node[lhns@basestyle,draw,minimum width=\lhns@elemwidth,fit={(#1.north) (#1.south)},lhns@impstyle] (#1-box) {};% box
 }
 % note: to allow correct line starts we set the inner nodes extra using their auto width
-\def\lhns@render@heap@jitter{}
+\def\lhns@render@heap@jitter{0pt}
 \def\lhns@render@heap{%
 \lhns@renderheaptrue
 % render root element:
