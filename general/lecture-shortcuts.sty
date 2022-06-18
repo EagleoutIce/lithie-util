@@ -78,7 +78,7 @@
 \setlist[aufgaben,3]{label=(\arabic*)}%
 }{}}
 
-\let\uc\textsc \robustify\uc
+\def\uc#1{\protect\texorpdfstring{\textsc{#1}}{\MakeUppercase{#1}}} \robustify\uc
 \def\lecture@centerlast{\leftskip=\z@ \@plus .5fil\relax \rightskip=\z@ \@plus -.5fil\relax
 \parfillskip=\z@ \@plus 1fil\relax}
 \newenvironment{erkenntnis}{\medskip\par\begingroup\itshape\parskip\z@\parindent\z@\lecture@centerlast}{\par\endgroup\medskip\par}
