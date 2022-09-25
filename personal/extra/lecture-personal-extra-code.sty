@@ -15,12 +15,10 @@
 \newlength\cftcodenumwidth
 \cftcodenumwidth=\dimexpr\libx@numwidth+\libx@numwidth@offset\relax
 \gdef\l@code#1#2{\@dottedtocline{1}{\cftcodenumwidth}{\cftcodenumwidth}{#1}{#2}}%
-
 \AppendToProfile{print}{%
 \AtBeginEnvironment{code}{\lstfs{10}}%
 \AtBeginEnvironment{code*}{\lstfs{10}}%
 \@ifpackageloaded{sopra-listings}{\lstset{lineskip=3pt}}{}}
-
 \AppendToProfile{mobile}{%
 \AtBeginEnvironment{code}{\lstfs{11}}%
 \AtBeginEnvironment{code*}{\lstfs{11}}%
