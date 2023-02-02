@@ -97,7 +97,7 @@
     \def\lecidxindex{#1}%
     \lecidx@index{\lecidx@sort\lecidx@idxactual#2}%
 \endgroup}
-\let\guardidx\lecidx@guardidx% ref index
+\let\guardidx\lecidx@guardidx
 \DeclareRobustCommand*\rindex{\@ifstar\lecidx@rindex\lecidx@@rindex}
 
 \newcommand*\lecidx@rindex[3][]{%
