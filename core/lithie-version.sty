@@ -6,11 +6,11 @@
 \def\lithie@sp@dim{\kern.16667em}
 \def\Lithie{{\sffamily L\lithie@sp@dim i\lithie@sp@dim t\lithie@sp@dim h\lithie@sp@dim i\lithie@sp@dim e}}
 \def\lithieVersion{v\lithie@sp@dim\lithie@version}
-\AtEndPreamble{%
+\AtEndPreamble{
 \ifcsname hyperref\endcsname\ifcsname nohyper\endcsname
-\def\LithieFull{\nohyper{\href{https://github.com/EagleoutIce/lithie-util}{\Lithie\lithie@sp@dim\textsuperscript{\@declaredcolor{lightgray}\lithieVersion}}}}%
+\def\LithieFull{\nohyper{\href{https://github.com/EagleoutIce/lithie-util}{\Lithie\lithie@sp@dim\textsuperscript{\@declaredcolor{lightgray}\lithieVersion}}}}
 \else
-\def\LithieFull{\href{https://github.com/EagleoutIce/lithie-util}{\Lithie\lithie@sp@dim\textsuperscript{\@declaredcolor{lightgray}\lithieVersion}}}%
+\def\LithieFull{\href{https://github.com/EagleoutIce/lithie-util}{\Lithie\lithie@sp@dim\textsuperscript{\@declaredcolor{lightgray}\lithieVersion}}}
 \fi\else
 \def\LithieFull{\Lithie\lithie@sp@dim\textsuperscript{\@declaredcolor{lightgray}\lithieVersion}}\fi}
 \endinput
