@@ -14,7 +14,18 @@
 \DeclareBoolOption[false]{disable}
 \DeclareBoolOption[false]{showannot}
 \ProcessKeyvalOptions*
-\ifPDFPC@disable\expandafter\endinput\fi % TODO: mock 'minutes'
+\ifPDFPC@disable
+\LetLtxMacro\PDFPC@orig@note\note
+\def\note{\@ifnextchar[{\PDFPC@note}{\PDFPC@note[]}}
+\def\PDFPC@note[#1]{\@ifnextchar<{\PDFPC@@note@overlay{#1}}{\PDFPC@@note@overlay{#1}<1->}}
+\long\def\PDFPC@@note@overlay#1<#2>#3{\@ifnextchar(%
+  {\PDFPC@@note@overlay@{#1}{#2}{#3}}%
+  {\PDFPC@@note@overlay@{#1}{#2}{#3}()}%
+}
+\def\PDFPC@@note@overlay@#1#2#3(#4){%
+  %simply ignore
+}
+\expandafter\endinput\fi
 % Some guards to begin
 \ifx\PDFPC@duration\@empty
 \else
