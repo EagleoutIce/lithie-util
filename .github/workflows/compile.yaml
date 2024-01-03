@@ -20,10 +20,10 @@ jobs:
     - name: Setup and run sltx-install
       run: |
         pip install sltx
-        echo "tx-default" | sltx docker
+        echo "tx-full" | sltx docker
     - name: Compile the Documents
       run: |
-        sltx compile --root --profile "tx-default" "examples/showcase-shortcuts.tex" "examples/showcase-glossary.tex" "examples/showcase-bibliography.tex" "examples/showcase-profiles.tex" "examples/showcase-heap-n-stack.tex" "examples/showcase-resize.tex" "examples/showcase-index.tex" "examples/showcase-plots.tex"
+        sltx compile --root --profile "tx-full" "examples/showcase-shortcuts.tex" "examples/showcase-glossary.tex" "examples/showcase-bibliography.tex" "examples/showcase-profiles.tex" "examples/showcase-heap-n-stack.tex" "examples/showcase-resize.tex" "examples/showcase-index.tex" "examples/showcase-plots.tex"
     - name: Commit
       run: |
         git config --local user.email "action@github.com"
