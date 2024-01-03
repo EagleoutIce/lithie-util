@@ -74,7 +74,7 @@ ______</rdf:Description>^^J%
   {\PDFPC@@note@overlay@{#1}{#2}{#3}()}%
 }
 \def\PDFPC@@note@overlay@#1#2#3(#4){%
-  \PDFPC@orig@note[#1]<#2>{#3}% TODO: support minutes
+  % \PDFPC@orig@note[#1]<#2>{#3}% TODO: support minutes
   \only<#2>{\PDFPC@writenote[#1]{#3}{#4}}%
 }
 % TODO: collector shipout?
